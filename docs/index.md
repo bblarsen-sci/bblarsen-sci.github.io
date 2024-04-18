@@ -4,22 +4,16 @@ layout: home
 
 hero:
   name: "Brendan Larsen"
-  text: "Brendan Larsen's Personal Website"
-  tagline: My great project tagline
+  tagline: My personal website
   actions:
     - theme: brand
-      text: Markdown Examples
-      link: /markdown-examples
-    - theme: alt
-      text: API Examples
-      link: /api-examples
+      text: About me
+      link: /about
+    - theme: brand
+      text: Publications
+      link: /publications
 
-features:
-  - title: Feature A
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature B
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
-  - title: Feature C
-    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+
 ---
 
+In progress...
