@@ -27,7 +27,6 @@ export default {
     drawChart() {
     d3.select(this.$el).select("svg").remove();
     const filteredData = this.data.filter(d => Number(d.site) === this.currentSite);
-    //console.log(this.data);
     const width = 640; 
     const height = 400;
     const marginTop = 50;

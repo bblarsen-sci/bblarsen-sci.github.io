@@ -1,3 +1,10 @@
 # About me
 
-In progress...
+<script setup>
+import HeatmapTest from "./components/HeatmapTest.vue";
+</script>
+
+
+
+
+<HeatmapTest/>
