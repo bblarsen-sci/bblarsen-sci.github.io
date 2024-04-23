@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "Brendan Larsen"
-  tagline: My personal website
+  tagline: My personal website...In progress
   actions:
     - theme: brand
       text: About me
@@ -16,10 +16,4 @@ hero:
 ---
 
 
-
-<script setup>
-import VueRandomTest from "./components/VueRandomTest.vue";
-</script>
-
-<VueRandomTest/>
 

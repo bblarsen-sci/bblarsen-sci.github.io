@@ -7,9 +7,19 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
+      
       { text: 'Home', link: '/' },
       { text: 'About', link: '/about' },
-      { text: 'Publications', link: '/publications' }
+      { text: 'Publications', link: '/publications' },
+      {
+      text: 'Code',
+      items: [
+        { text: 'Python', link: '/python' },
+        { text: 'D3', link: '/d3' },
+        { text: 'Chimera', link: '/chimera' },
+        
+      ]
+    }
 
     ],
 

@@ -1,16 +1,25 @@
 <template>
+  <div class="flex flex-col justify-center items-center ">
+    <h1>
+      <a href="https://github.com/bblarsen-sci/bblarsen-sci.github.io/blob/main/docs/components/PhylogeneticTree.vue" target="_self">
+        Nipah phylogeny visualization
+      </a>
+    </h1>
     <div ref="svgContainer"></div>
+  </div>
 </template>
 
+
 <script>
+//some code based on example here: https://observablehq.com/@d3/tree-of-life?intent=fork
 import * as d3 from 'd3'; 
 
 export default {
   name: 'TreeVisualization',
   data() {
     return {
-      dataset: [],
-      treeData: null,  // Store the parsed tree data here
+      //dataset: [],
+      //treeData: null,  
     };
   },
   mounted() {
@@ -38,22 +47,23 @@ export default {
           case ":":
             break;
           default:
-            var h = s[t - 1];
-            if (h === ")" || h === "(" || h === ",") {
-              r.name = n;
-            } else if (h === ":") {
-              r.length = parseFloat(n);
-            }
+          var h = s[t - 1];
+    if (h === ")" || h === "(" || h === ",") {
+      const nameAndCountry = n.split(/\[|\]/);
+      r.name = nameAndCountry[0];
+      r.country = nameAndCountry[1]; // Extract the country information
+    } else if (h === ":") {
+      r.length = parseFloat(n);
+    }
         }
       }
       return r;
     },
-    
     async loadTreeData() {
       try {
-        const response = await fetch('https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/data/custom_analyses_data/alignments/phylo/nipah_whole_genome_phylo.tre');
+        const response = await fetch('/data/nipah_whole_genome_phylo.tre');
         const data = await response.text();
-        const parsedData = this.parseNewick(data);
+        const parsedData = this.parseNewick(data); // Parse the newick tree data
         this.treeData = parsedData;  // Store the parsed data in treeData
         this.drawChart(this.treeData);  // Pass the data to drawChart
       } catch (error) {
@@ -61,29 +71,26 @@ export default {
       }
     },
     drawChart(parsedData) {
-    const width = 954;
+    const width = 800;
     const outerRadius = width / 2;
-    const innerRadius = outerRadius - 170;
+    const innerRadius = outerRadius - 120;
+    
     const root = d3.hierarchy(parsedData, d => d.branchset)
         .sum(d => d.branchset ? 0 : 1)
         .sort((a, b) => (a.value - b.value) || d3.ascending(a.data.length, b.data.length));
     
-    console.log(root);
-    const cluster = d3.cluster()
+    var cluster = d3.cluster()
         .size([360, innerRadius])
         .separation((a, b) => 1);
-    
-    console.log(cluster);
-
+  
+    // tree building functions
     function maxLength(d) {
         return d.data.length + (d.children ? d3.max(d.children, maxLength) : 0);
     }
-    console.log(d3.max(root.children, maxLength));
     function setRadius(d, y0, k) {
         d.radius = (y0 += d.data.length) * k;
         if (d.children) d.children.forEach(d => setRadius(d, y0, k));
     }
-
     function linkStep(startAngle, startRadius, endAngle, endRadius) {
         const c0 = Math.cos(startAngle = (startAngle - 90) / 180 * Math.PI);
         const s0 = Math.sin(startAngle);
@@ -93,52 +100,84 @@ export default {
             + (endAngle === startAngle ? "" : "A" + startRadius + "," + startRadius + " 0 0 " + (endAngle > startAngle ? 1 : 0) + " " + startRadius * c1 + "," + startRadius * s1)
             + "L" + endRadius * c1 + "," + endRadius * s1;
     }
+    
+    function linkConstant(d) {
+      return linkStep(d.source.x, d.source.y, d.target.x, d.target.y);
+    }
 
     cluster(root);
     setRadius(root, root.data.length = 0, innerRadius / maxLength(root));
     
     // Initialize SVG properly
     const svg = d3.select(this.$refs.svgContainer)
-        .append('svg')
-        .attr('width', width)
-        .attr('height', width)
-        .attr("viewBox", [-outerRadius, -outerRadius, width, width])
-        .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+      .append('svg')
+      .attr('width', width)
+      .attr('height', width)
+      .attr("viewBox", [-outerRadius, -outerRadius, width, width])
+      .attr("class", "max-w-full h-auto");
 
-    const linkExtension = svg.append("g")
+    svg.append("g")
         .attr("fill", "none")
-        .attr("stroke", "#000")
-        .attr("stroke-opacity", 0.25)
-        .selectAll("path")
-        .data(root.links().filter(d => !d.target.children))
-        .join("path")
-        .attr("d", linkStep);
-
-    const link = svg.append("g")
-        .attr("fill", "none")
-        .attr("stroke", "#000")
+        .attr("stroke", "currentColor")
         .selectAll("path")
         .data(root.links())
         .join("path")
-        .attr("d", linkStep);
-
+        .attr("d", linkConstant)
+        .attr("stroke-width", 1);
+    
     svg.append("g")
-        .selectAll("text")
-        .data(root.leaves())
-        .join("text")
-        .attr("dy", ".31em")
-        .attr("transform", d => `rotate(${d.x - 90}) translate(${innerRadius + 4},0)${d.x < 180 ? "" : " rotate(180)"}`)
-        .attr("text-anchor", d => d.x < 180 ? "start" : "end")
-        .text(d => d.data.name.replace(/_/g, " "));
+      .selectAll("circle")
+      .data(root.leaves())
+      .join("circle")
+        .attr("transform", d => `rotate(${d.x - 90}) translate(${innerRadius + 4},0)`)
+        .attr("r", 6)
+        .attr("stroke", "currentColor") // Set the initial stroke color.
+        .attr("stroke-width", 2)
+        .attr("fill", d=> {
+          const countryColors = {
+            "India": "#ff7f0e",
+            "Bangladesh": "#1f77b4",
+            "Malaysia": "#2ca02c",
+            "Cambodia": "#d62728",
+            "Thailand": "#9467bd",
+          };
+          return countryColors[d.data.country] || "black";
+        })
+        const countryColors = {
+    "India": "#ff7f0e",
+    "Bangladesh": "#1f77b4",
+    "Malaysia": "#2ca02c",
+    "Cambodia": "#d62728",
+    "Thailand": "#9467bd",
+  };
+
+  // Create a legend group
+  const legend = svg.append("g")
+    .attr("class", "legend")
+    .attr("transform", `translate(${outerRadius - 750}, ${-outerRadius + 90})`);
+
+  // Add legend items
+  const legendItems = legend.selectAll(".legend-item")
+    .data(Object.entries(countryColors))
+    .enter()
+    .append("g")
+    .attr("class", "legend-item")
+    .attr("transform", (d, i) => `translate(0, ${i * 20})`);
+
+  // Add circles to legend items
+  legendItems.append("circle")
+    .attr("r", 6)
+    .attr("fill", d => d[1]);
+
+  // Add country labels to legend items
+  legendItems.append("text")
+    .attr("x", 10)
+    .style("fill","currentColor")
+    .attr("y", 6)
+    .attr("dy", "0em")
+    .text(d => d[0]);
 }
   }
 };
 </script>
 
-<style scoped>
-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-</style>

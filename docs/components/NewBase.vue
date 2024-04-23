@@ -1,19 +1,9 @@
 <template>
-  <div class="flex flex-col justify-center items-center">
-    <h1 class="text-2xl font-bold text-center text-slate-700">
-      <a href="https://github.com/bblarsen-sci/bblarsen-sci.github.io/blob/main/docs/components/BaseChart.vue" target="_self">
-      Mean effect of mutations on entry in CHO-bEFNB3 cells
-    </a>
-    </h1>
     <div ref="svgContainer"></div>
-  </div>
 </template>
 
-
-
-
 <script>
-import * as d3 from 'd3';
+import * as d3 from "d3";
 
 export default {
   name: 'MeanEffectPlot',
@@ -102,9 +92,21 @@ export default {
           .attr("cx", d => x(d.site))
           .attr("cy", d => y(d.meanEffect))
           .attr("r", 3)
-          .attr("fill", "currentColor")
+          //.attr("fill", "indianred");
     }
   }
 };
 </script>
   
+<style scoped>
+div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+div:deep(.mean-effect-dot) {
+  fill: cornflowerblue;
+  stroke: black;
+}
+</style>
+

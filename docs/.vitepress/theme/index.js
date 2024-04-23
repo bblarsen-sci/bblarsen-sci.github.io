@@ -1,5 +1,4 @@
 import { h } from "vue";
-//import './tailwind.postcss';
 import DefaultTheme from "vitepress/theme";
 import Altair from "./Altair.vue";
 import Figure from "./Figure.vue";
@@ -16,5 +15,6 @@ export default {
   enhanceApp({ app, router, siteData }) {
     app.component("Altair", Altair);
     app.component("Figure", Figure);
+
   },
 };

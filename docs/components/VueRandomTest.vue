@@ -1,9 +1,5 @@
 <template>
     <div>
-    <h1 class="bg-green-700 text-slate-50 bg-blue font-bold underline">
-    Hello world!
-    </h1>
-    <br></br>
       <select v-model="selectedDataset" @change="updateChart" 
           class=" bg-blue-500 text-white px-6 py-4 rounded cursor-pointer focus:outline-none hover:bg-red-600">
         <option value="dataset1">Dataset 1</option>

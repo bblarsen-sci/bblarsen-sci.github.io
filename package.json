@@ -14,6 +14,7 @@
     "vega-lite": "^5.16.3",
     "vitepress": "^1.0.0-rc.35",
     "vue": "^3.4.5"
+
   },
   "postcss": {
     "plugins": {
