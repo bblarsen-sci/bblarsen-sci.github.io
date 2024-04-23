@@ -1,49 +1,49 @@
 {
-  "hash": "341f5042",
-  "configHash": "1e2cb65f",
-  "lockfileHash": "64321eb3",
-  "browserHash": "84bdcb9c",
+  "hash": "919b6b29",
+  "configHash": "2f267fac",
+  "lockfileHash": "ce5618f3",
+  "browserHash": "0ed76a7e",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "438823f1",
+      "fileHash": "2f805773",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "e3caeb22",
+      "fileHash": "01a257d6",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "171a7627",
+      "fileHash": "33ccd2fe",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "b73aa4d9",
+      "fileHash": "8fdce848",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "fc94bdd4",
+      "fileHash": "108ab45a",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "ab189997",
+      "fileHash": "f15dec9a",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "dbc1ab79",
+      "fileHash": "0b766642",
       "needsInterop": false
     }
   },

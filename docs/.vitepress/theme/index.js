@@ -1,4 +1,5 @@
 import { h } from "vue";
+//import './tailwind.postcss';
 import DefaultTheme from "vitepress/theme";
 import Altair from "./Altair.vue";
 import Figure from "./Figure.vue";

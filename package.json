@@ -7,12 +7,23 @@
     "remote:docs:dev": "vitepress dev docs --host 0.0.0.0 --port $(fhfreeport)"
   },
   "dependencies": {
-    "d3": "^7.8.5",
     "bootstrap-icons": "^1.11.3",
+    "d3": "^7.8.5",
     "vega": "^5.27.0",
     "vega-embed": "^6.24.0",
     "vega-lite": "^5.16.3",
     "vitepress": "^1.0.0-rc.35",
     "vue": "^3.4.5"
+  },
+  "postcss": {
+    "plugins": {
+      "tailwindcss": {},
+      "autoprefixer": {}
+    }
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3"
   }
 }

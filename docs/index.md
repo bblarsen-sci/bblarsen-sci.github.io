@@ -13,25 +13,13 @@ hero:
       text: Publications
       link: /publications
 
-
 ---
 
 
 
-<template>
-  <div id="app">
-    <bar-chart :data="[5, 10, 15, 20, 25]"></bar-chart>
-  </div>
-</template>
-
-<script>
-import BarChart from './components/BarChart.vue';
-
-export default {
-  name: 'App',
-  components: {
-    BarChart
-  }
-}
+<script setup>
+import VueRandomTest from "./components/VueRandomTest.vue";
 </script>
+
+<VueRandomTest/>
 
