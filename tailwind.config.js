@@ -5,10 +5,10 @@ export default {
     './docs/components/**/*.vue',
     './docs/**.md',
   ],
+  darkMode: 'selector',
   theme: {
     extend: {},
   },
   plugins: [],
 }
 
-//npx tailwindcss -i ./docs/.vitepress/theme/tailwind.postcss -o ./docs/.vitepress/theme/output.css --watch

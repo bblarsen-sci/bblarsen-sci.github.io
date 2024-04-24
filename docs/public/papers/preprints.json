@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Functional and antigenic landscape of the Nipah virus receptor binding protein",
+        "journal": "BioRxiv",
+        "year": "2024",
+        "image": "./papers/images/Nipah_RBP-01.png",
+        "link": "https://www.biorxiv.org/content/10.1101/2024.04.17.589977v1",
+        "abstract": "Nipah virus recurrently spills over to humans, causing fatal infections. The viral receptor-binding protein (RBP or G) attaches to host receptors and is a major target of neutralizing antibodies. Here we use deep mutational scanning to measure how all amino-acid mutations to the RBP affect cell entry, receptor binding, and escape from neutralizing antibodies. We identify functionally constrained regions of the RBP, including sites involved in oligomerization, along with mutations that differentially modulate RBP binding to its two ephrin receptors. We map escape mutations for six anti-RBP antibodies, and find that few antigenic mutations are present in natural Nipah strains. Our findings offer insights into the potential for functional and antigenic evolution of the RBP that can inform the development of antibody therapies and vaccines."
+    },
+    {
+        "title": "Isolation and Divergence of Peromyscus melanotis Populations Across the Madrean Sky Islands in Arizona",
+        "journal": "BioRxiv",
+        "year": "2022",
+        "image": "./papers/images/peromyscus.png",
+        "link": "https://www.biorxiv.org/content/10.1101/2022.04.11.487881v1",
+        "abstract": "The Madrean sky islands have been studied for decades due to their high biodiversity, which results from the intersection of biomes and their role as refugia for populations isolated on mountain tops during the last ice age. There has been controversy and confusion about the identification of Peromyscus sp. found in the montane forests on these sky islands, which is often assumed to be the widespread and ubiquitous P. maniculatus. Here, we provide mitochondrial phylogenetic data suggesting that all individuals of Peromyscus captured on three isolated mountains in southern Arizona are Peromyscus melanotis, a species previously thought endemic to Mexico. Furthermore, with molecular clock analyses on two mitochondrial loci we show these populations have been isolated from each other for ∼11,000-50,000 years, corresponding to the transition from the last ice age. These isolated populations represent important conservation targets due to habitat loss. In addition, we suggest that future genomic and ecological research is warranted to better understand these unique populations.."
+    },
+    {
+        "title": "Phylogenetic evidence that B.1.1.7 has been circulating in the United States since early- to mid-November",
+        "journal": "Virological",
+        "year": "2021",
+        "image": "./papers/images/Larsen_virological.png",
+        "link": "https://virological.org/t/phylogenetic-evidence-that-b-1-1-7-has-been-circulating-in-the-united-states-since-early-to-mid-november/598",
+        "abstract": "When SARS-CoV-2 emerged in China late December 2019 and early January 2020, there was little circulating genetic variation as it was exported across the world. This made estimating the number and timing of introductions difficult. Since then, the virus has accumulated mutations (as all RNA viruses do) in a (largely) clock-like manner, diversifying into a myriad of lineages. One of these lineages, ‘B.1.1.7’, first arose in the UK in September after an episode of heightened mutation, likely within a single host3. This lineage has continued to evolve over the last several months while rapidly increasing in frequency across southeast England and elsewhere. Estimates of its increased transmissibility and a suite of mutations in the spike gene have made this variant a top focus of the scientific community since it was first reported in December 20204,5. The rapid increase in the UK has made export increasingly likely, and, as of 1/17/2021, the lineage has been detected in 55 countries, including the United States."
+    }
+]

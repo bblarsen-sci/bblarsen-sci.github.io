@@ -3,10 +3,10 @@ layout: page
 ---
 
 <script setup>
-import PublicationsFirst from "./.vitepress/theme/PublicationsFirst.vue";
-import PublicationsSecond from "./.vitepress/theme/PublicationsSecond.vue";
+import Publications from "./.vitepress/theme/Publications.vue";
 </script>
 
-<PublicationsFirst />
 
-<PublicationsSecond />
+<Publications />
+
+
