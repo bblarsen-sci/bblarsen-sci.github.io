@@ -1,0 +1,47 @@
+[
+    {
+        "title": "Evolution and Diversity of Bat and Rodent Paramyxoviruses from North America",
+        "journal": "Journal of Virology",
+        "year": "2022",
+        "authors": "Brendan B Larsen, Sophie Gryseels, Hans W Otto, Michael Worobey",
+        "abstract": "Paramyxoviruses are a diverse group of negative-sense, single-stranded RNA viruses of which several species cause significant mortality and morbidity. In recent years the collection of paramyxovirus sequences detected in wild mammals has substantially grown; however, little is known about paramyxovirus diversity in North American mammals. To better understand natural paramyxovirus diversity, host range, and host specificity, we sought to comprehensively characterize paramyxoviruses across a range of diverse cooccurring wild small mammals in southern Arizona. We used highly degenerate primers to screen fecal and urine samples and obtained a total of 55 paramyxovirus sequences from 12 rodent species and 6 bat species. We also performed Illumina transcriptome sequencing (RNA-seq) and de novo assembly on 14 of the positive samples to recover a total of 5 near-full-length viral genomes. We show there are at least two clades of rodent-borne paramyxoviruses in Arizona, while bat-associated paramyxoviruses formed a putative single clade. Using structural homology modeling of the viral attachment protein, we infer that three of the five novel viruses likely bind sialic acid in a manner similar to other respiroviruses, while the other two viruses from heteromyid rodents likely bind a novel host receptor. We find no evidence for cross-species transmission, even among closely related sympatric host species. Taken together, these data suggest paramyxoviruses are a common viral infection in some bat and rodent species present in North America and illuminate the evolution of these viruses.",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/34668771/",
+        "image": "./papers/images/Larsen2022.png"
+    },
+    {
+        "title": "An early pandemic analysis of SARS-CoV-2 population structure and dynamics in Arizona",
+        "journal": "MBio",
+        "year": "2020",
+        "authors": "Jason T Ladner, Brendan B Larsen, Jolene R Bowers, Crystal M Hepp, Evan Bolyen, Megan Folkerts, et al.",
+        "abstract": "In December of 2019, a novel coronavirus, SARS-CoV-2, emerged in the city of Wuhan, China, causing severe morbidity and mortality. Since then, the virus has swept across the globe, causing millions of confirmed infections and hundreds of thousands of deaths. To better understand the nature of the pandemic and the introduction and spread of the virus in Arizona, we sequenced viral genomes from clinical samples tested at the TGen North Clinical Laboratory, the Arizona Department of Health Services, and those collected as part of community surveillance projects at Arizona State University and the University of Arizona. Phylogenetic analysis of 84 genomes from across Arizona revealed a minimum of 11 distinct introductions inferred to have occurred during February and March. We show that >80% of our sequences descend from strains that were initially circulating widely in Europe but have since dominated the outbreak in the United States. In addition, we show that the first reported case of community transmission in Arizona descended from the Washington state outbreak that was discovered in late February. Notably, none of the observed transmission clusters are epidemiologically linked to the original travel-related case in the state, suggesting successful early isolation and quarantine. Finally, we use molecular clock analyses to demonstrate a lack of identifiable, widespread cryptic transmission in Arizona prior to the middle of February 2020.",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/32887735/",
+        "image": "./papers/images/LadnerLarsen2020_Fig1.png"
+    },
+    {
+        "title": "Ancient DNA provides evidence of 27,000-year-old papillomavirus infection and long-term codivergence with rodents",
+        "journal": "Virus Evolution",
+        "year": "2018",
+        "authors": "Brendan B Larsen, Kenneth L Cole, Michael Worobey",
+        "abstract": "The long-term evolutionary history of many viral lineages is poorly understood. Novel sources of ancient DNA combined with phylogenetic analyses can provide insight into the time scale of virus evolution. Here we report viral sequences from ancient North American packrat middens. We screened samples up to 27,000-years old and found evidence of papillomavirus (PV) infection in Neotoma cinerea (Bushy-tailed packrat). Phylogenetic analysis placed the PV sequences in a clade with other previously published PV sequences isolated from rodents. Concordance between the host and virus tree topologies along with a correlation in branch lengths suggests a shared evolutionary history between rodents and PVs. Based on host divergence times, PVs have likely been circulating in rodents for at least 17 million years. These results have implications for our understanding of PV evolution and for further research with ancient DNA from Neotoma middens.",
+        "link": "https://pubmed.ncbi.nlm.nih.gov/29977605/",
+        "image": "./papers/images/Larsen2018.png"
+    },
+    {
+        "title": "Inordinate fondness multiplied and redistributed: the number of species on earth and the new pie of life",
+        "journal": "The Quarterly Review of Biology",
+        "year": "2017",
+        "authors": "Brendan B Larsen, Elizabeth C Miller, Matthew K Rhodes, John J Wiens",
+        "abstract": "The number of species on Earth is one of the most fundamental numbers in science, but one that remains highly uncertain. Clearly, more species exist than the present number of formally described species (approximately 1.5 million), but projected species numbers differ dramatically among studies. Recent estimates range from about 2 million species to approximately 1 trillion, but most project around 11 million species or fewer. Numerous studies have focused on insects as a major component of overall richness, and many have excluded other groups, especially non-eukaryotes. Here, we re-estimate global biodiversity. We also estimate the relative richness of the major clades of living organisms, summarized as a “Pie of Life.” Unlike many previous estimates, we incorporate morphologically cryptic arthropod species from molecular-based species delimitation. We also include numerous groups of organisms that have not been simultaneously included in previous estimates, especially those often associated with particular insect host species (including mites, nematodes, apicomplexan protists, microsporidian fungi, and bacteria). Our estimates suggest that there are likely to be at least 1 to 6 billion species on Earth. Furthermore, in contrast to previous estimates, the new Pie of Life is dominated by bacteria (approximately 70–90% of species) and insects are only one of many hyperdiverse groups.",
+        "link": "https://www.journals.uchicago.edu/doi/abs/10.1086/693564",
+        "image": "./papers/images/Larsen2017.png"
+    },
+    {
+        "title": "Improved detection of rare HIV-1 variants using 454 pyrosequencing",
+        "journal": "PLoS One",
+        "year": "2013",
+        "authors": "Brendan B. Larsen, Lennie Chen, Brandon S Maust, Moon Kim, Hong Zhao, Wenjie Deng, et al.",
+        "abstract": "454 pyrosequencing, a massively parallel sequencing (MPS) technology, is often used to study HIV genetic variation. However, the substantial mismatch error rate of the PCR required to prepare HIV-containing samples for pyrosequencing has limited the detection of rare variants within viral populations to those present above ~1%. To improve detection of rare variants, we varied PCR enzymes and conditions to identify those that combined high sensitivity with a low error rate. Substitution errors were found to vary up to 3-fold between the different enzymes tested. The sensitivity of each enzyme, which impacts the number of templates amplified for pyrosequencing, was shown to vary, although not consistently across genes and different samples. We also describe an amplicon-based method to improve the consistency of read coverage over stretches of the HIV-1 genome. Twenty-two primers were designed to amplify 11 overlapping amplicons in the HIV-1 clade B gag-pol and env gp120 coding regions to encompass 4.7 kb of the viral genome per sample at sensitivities as low as 0.01-0.2%.",
+        "link": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3788733/",
+        "image": "./papers/images/Larsen2013.png"
+    }
+]

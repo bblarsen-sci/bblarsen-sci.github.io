@@ -6,7 +6,7 @@ export default {
     };
   },
   mounted() {
-    fetch('/papersFirst.json')
+    fetch('/papers/papersFirst.json')
       .then(response => response.json())
       .then(data => {
         this.publications = data;
@@ -16,18 +16,21 @@ export default {
 </script>
 
 <template>
-  <h2 class="text-2xl font-bold mt-6 text-center">First author publications</h2>
-  <div class="grid grid-rows-4 grid-flow-col gap-x-8 gap-y-10 px-6 py-6 flex-wrap content-center">
-    <div v-for="paper in publications" :key="paper.title" class="bg-white rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out p-6 flex flex-col justify-center items-center">
-        <div class="text-lg font-semibold text-center mb-2">{{ paper.title }}</div>
-        <div class="text-md text-gray-600 text-center mb-2">{{ paper.journal }}</div>
-        <!-- <div class="text-sm text-gray-500 text-center mb-4">{{ paper.authors }}</div> -->
-        <a :href="paper.link || '#' " class="text-sm text-center mb-4 text-blue-500 hover:text-blue-700 transition-colors duration-300 ">Link</a>
+  <h2 class="text-2xl font-light font-sans text-left mx-2 pb-6 pt-5 ">First author publications</h2>
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 m-2 gap-4 font-sans font-light">
+    <div v-for="paper in publications" :key="paper.title" class=" text-white relative bg-gradient-to-t from-blue-400 to-red-400 shadow-md shadow-blue-400 max-h-lg max-w-md mx-auto rounded-md shadow-md transition duration-200 ease-in-out hover:shadow-xl hover:shadow-blue-600 hover:-translate-y-2 pb-10">
+        <img :src="paper.image" class="object-bottom w-full h-48 p-4 object-cover rounded-lg" alt="paper image">
+        <div class="text-left font-bold m-4">{{ paper.title }}</div>
+        <div class="text-left m-4">{{ paper.journal}}, {{ paper.year }}</div>
+        <p class="line-clamp-4 m-4">{{ paper.abstract }}</p>
+        <a :href="paper.link || '#' " class=" absolute bottom-0 left-2 m-2 text-left hover:underline underline-offset-4 decoration-2 underline-transition hover:text-red-400">Read more</a>
     </div>
   </div>
 </template>
 
   
 <style>
-
+.underline-transition {
+    transition: text-decoration-color 0.7s, text-decoration-thickness 0.7s;
+}
 </style>
