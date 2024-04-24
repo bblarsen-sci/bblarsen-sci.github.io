@@ -1,10 +1,5 @@
 <template>
   <div class="flex flex-col justify-center items-center ">
-    <h1>
-      <a href="https://github.com/bblarsen-sci/bblarsen-sci.github.io/blob/main/docs/components/PhylogeneticTree.vue" target="_self">
-        Nipah phylogeny visualization
-      </a>
-    </h1>
     <div ref="svgContainer"></div>
   </div>
 </template>
@@ -17,9 +12,7 @@ import * as d3 from 'd3';
 export default {
   name: 'TreeVisualization',
   data() {
-    return {
-      //dataset: [],
-      //treeData: null,  
+    return { 
     };
   },
   mounted() {

@@ -7,26 +7,26 @@ export default defineConfig({
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
-      
+
       { text: 'Home', link: '/' },
       { text: 'About', link: '/about' },
       { text: 'Publications', link: '/publications' },
       {
-      text: 'Code',
-      items: [
-        { text: 'Python', link: '/python' },
-        { text: 'D3', link: '/d3' },
-        { text: 'Chimera', link: '/chimera' },
-        
-      ]
-    }
+        text: 'Code',
+        items: [
+          { text: 'Altair', link: '/python' },
+          { text: 'D3', link: '/d3' },
+          { text: 'Chimera', link: '/chimera' },
+
+        ]
+      }
 
     ],
 
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/bblarsen-sci' },
-      { icon: 'twitter', link: 'https://twitter.com/bblarsen1'}
+      { icon: 'twitter', link: 'https://twitter.com/bblarsen1' }
     ],
     footer: {
       message: "Built by Brendan Larsen",
