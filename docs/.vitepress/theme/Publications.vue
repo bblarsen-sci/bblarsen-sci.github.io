@@ -28,7 +28,7 @@ export default {
 </script>
 
 <template>
-  <html class="bg-white text-slate-500 dark:bg-slate-900 dark:text-slate-400 font-normal">
+  <html class="bg-white text-slate-600 dark:bg-slate-900 dark:text-slate-400 font-normal">
     <div class="mx-6 text-xs md:text-base">
     <h2 class="container mx-auto text-2xl font-extrabold py-12">Preprints</h2>
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">

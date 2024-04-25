@@ -29,10 +29,10 @@ export default {
 </script>
 
 <template>
-  <html class="bg-white text-slate-500 dark:bg-slate-900 dark:text-slate-400 font-normal">
+  <html class="bg-white text-slate-600 dark:bg-slate-900 dark:text-slate-400 ">
     <div class="p-4 bg-no-repeat bg-center" style="background-image: url('/images/Testing.png');">
       <div class="flex flex-col items-center justify-center h-96 mx-auto">
-        <div class="text-center mb-4 text-6xl text-white">
+        <div class="text-center mb-4 text-6xl font-bold text-white">
             <p>About</p>
         </div>
       </div>
