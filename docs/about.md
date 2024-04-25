@@ -4,8 +4,8 @@ layout: page
 
 
 <script setup>
-import Test from "./.vitepress/theme/Test.vue";
+import About from "./.vitepress/theme/About.vue";
 </script>
 
 
-<Test />
+<About />

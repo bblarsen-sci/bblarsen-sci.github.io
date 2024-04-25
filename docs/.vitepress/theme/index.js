@@ -5,6 +5,7 @@ import Figure from "./Figure.vue";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "./style.css";
 
+
 export default {
   extends: DefaultTheme,
   Layout: () => {
@@ -15,6 +16,7 @@ export default {
   enhanceApp({ app, router, siteData }) {
     app.component("Altair", Altair);
     app.component("Figure", Figure);
+    
 
   },
 };
