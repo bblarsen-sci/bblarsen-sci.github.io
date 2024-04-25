@@ -28,8 +28,5 @@ export default defineConfig({
       { icon: 'github', link: 'https://github.com/bblarsen-sci' },
       { icon: 'twitter', link: 'https://twitter.com/bblarsen1' }
     ],
-    footer: {
-      message: "Built by Brendan Larsen",
-    },
   }
 })
