@@ -3,6 +3,9 @@ layout: page
 ---
 
 
-# About me
+<script setup>
+import Test from "./.vitepress/theme/Test.vue";
+</script>
 
-In progress...
+
+<Test />
