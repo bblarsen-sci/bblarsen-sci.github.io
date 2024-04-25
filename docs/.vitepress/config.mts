@@ -4,6 +4,20 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Brendan Larsen",
   description: "Brendan Larsen's Personal Website",
+  head: [
+    [
+      'script',
+      { async: '', src: 'https://www.googletagmanager.com/gtag/js?id=G-0M6M62QRZW' }
+    ],
+    [
+      'script',
+      {},
+      `window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-0M6M62QRZW');`
+    ]
+  ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
