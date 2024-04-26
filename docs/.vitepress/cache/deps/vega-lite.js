@@ -42,9 +42,8 @@ import {
   vals,
   varName,
   version
-} from "./chunk-5UV7SUN4.js";
-import "./chunk-XJDZ4BQV.js";
-import "./chunk-AVDKQJKK.js";
+} from "./chunk-DGOXWUQV.js";
+import "./chunk-PV3VD5LM.js";
 import "./chunk-ZS7NZCD4.js";
 export {
   accessPathDepth,
