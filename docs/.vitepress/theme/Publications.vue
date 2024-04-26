@@ -28,13 +28,13 @@ export default {
 </script>
 
 <template>
-  <html class="bg-white text-slate-600 dark:bg-slate-900 dark:text-slate-400 font-roboto text-xs md:text-base ">
+  <html class="bg-white text-slate-600 dark:bg-slate-900 dark:text-slate-400 text-xs md:text-base ">
     <header>
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     </header>
-    <div class="flex flex-col  items-left  justify-center h-48 md:h-60 mx-auto bg-sky-light dark:bg-sky-dark ">
+    <div class="flex flex-col  items-left font-roboto  justify-center h-60 md:h-96 mx-auto bg-opacity-40 bg-waves dark:bg-sky-dark ">
       <div class="text-left text-4xl font-extrabold container mx-6 md:mx-auto drop-shadow-sm">
           <p>Publications</p>
         </div>

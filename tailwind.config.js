@@ -13,7 +13,7 @@ export default {
         'sky-dark': 'linear-gradient(300deg, #000C40, #607D8B)',
         'pastel': "url('/images/pastel.svg')",
         'virus': "url('/images/Virus.svg')",
-        'waves': "url('/images/layered-waves.svg')"
+        'waves': "url('/images/layered-peaks.svg')"
 
       },
       fontFamily: {

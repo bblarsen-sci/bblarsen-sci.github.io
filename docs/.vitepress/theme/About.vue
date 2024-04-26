@@ -29,11 +29,11 @@ export default {
 </script>
 
 <template>
-  <html class="bg-sky-light dark:bg-sky-dark text-slate-600 dark:bg-slate-900 dark:text-slate-400 ">
+  <html class=" text-slate-600 dark:bg-slate-900 dark:text-slate-400 ">
     <div class="p-4">
-      <div class="flex flex-col items-center justify-center h-96 mx-auto">
+      <div class="flex flex-col items-center justify-center h-96 mx-auto bg-waves">
         <div class="text-center mb-4 text-6xl font-bold text-white">
-            <p>About</p>
+            <p class="text-slate-500">About</p>
         </div>
       </div>
     </div>
