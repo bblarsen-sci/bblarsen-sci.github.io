@@ -64,7 +64,9 @@ export default {
           </p>
         </div>
       </section>
+
       <div class="h-1 bg-slate-600"></div>
+      
       <section class="bg-white/90 dark:bg-slate-700 backdrop-blur backdrop-filter p-6">
         <nav class="flex items-center space-x-4 justify-between text-slate-500 dark:text-slate-400 tracking-widest">
           <a class="inline-flex flex-1 justify-center hover:text-sky-500 hover:font-bold" href="#section-1">Current</a>
@@ -74,22 +76,31 @@ export default {
       </section>
       
       <section> 
-        <div class="px-0 lg:px-4 overflow-hidden">
-          <div class="rounded-md lg:rounded-2xl px-6 py-24 lg:p-12 relative z-0 bg-virus">
-            <div class="absolute top-2 left-2 text-white text-4xl font-extrabold">Current Projects</div>
-            <div class="container">
-              <div class="grid grid-flow-col grid-rows-2 grid-cols-2 gap-8 lg:gap-20 mt-4 md:mt-8 text-slate-600 dark:text-slate-400 text-md">
-                <div class="bg-white element-hidden rounded-xl">
-                  <p class="">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ultricies lacus sed turpis tincidunt. Suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Proin sed libero enim sed.</p>
+        <div class="lg:px-4 overflow-hidden">
+          <div class="rounded-md lg:rounded-2xl px-6 py-24 lg:p-12 relative bg-slate-800">
+            <div class="absolute top-2 left-2 lg:top-6 lg:left-6 text-white text-4xl font-extrabold">Current Projects</div>
+            <div class="absolute top-12 left-2 lg:top-20 lg:left-6 text-slate-400 text-lg lg:text-2xl">Deep Mutational Scanning of the Nipah Receptor Binding Protein</div>
+            <div class="container pt-6 lg:pt-20 ">
+              <div class="grid grid-cols-2 gap-8  text-slate-600 dark:text-slate-400 text-sm">
+                
+                <a class="flex items-center justify-center h-full text-center text-md lg:text-2xl text-slate-400" href="https://dms-vep.org/Nipah_Malaysia_RBP_DMS/">
+                  <p class="m-2 leading-loose font-light element-hidden">Nipah is a bat-borne virus that occasionally spills over into humans. The Nipah receptor binding protein attaches to cells to mediate entry into cells. I used deep mutational scanning to map the effects of nearly every mutation on cell entry and receptor binding.</p>
+                </a>
+                
+                <div class="flex justify-center items-center element-hidden">
+                  <img src="/images/entry_tetramer_better.png" class="max-w-full max-h-96">
                 </div>
-                <div class="bg-white element-hidden rounded-xl">
-                  <p class="">Tempor orci eu lobortis elementum nibh tellus molestie. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit. Erat nam at lectus urna duis. Enim facilisis gravida neque convallis a cras. Volutpat lacus laoreet non curabitur gravida arcu ac tortor dignissim. Volutpat maecenas volutpat blandit aliquam etiam erat. Sit amet mauris commodo quis imperdiet massa. Fermentum dui faucibus in ornare.</p>
+                
+                <div class="flex justify-center items-center element-hidden">
+                  <img src="/images/escape.png" class="max-w-full max-h-96">
                 </div>
-                <div class="bg-white element-hidden rounded-xl">
-                  <p class="">Tempor orci eu lobortis elementum nibh tellus molestie. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit. Erat nam at lectus urna duis. Enim facilisis gravida neque convallis a cras. Volutpat lacus laoreet non curabitur gravida arcu ac tortor dignissim. Volutpat maecenas volutpat blandit aliquam etiam erat. Sit amet mauris commodo quis imperdiet massa. Fermentum dui faucibus in ornare.</p>
+                
+                <div class="flex items-center justify-center h-full font-light text-center text-md lg:text-2xl text-slate-400">
+                  <p class="m-2 leading-loose element-hidden">The receptor binding protein is also an important target of neutralizing antibodies, which can prevent disease. I mapped mutations that escape different monoclonal antibodies.</p>
                 </div>
-                <div class="bg-white element-hidden rounded-xl">
-                  <p class="">Tempor orci eu lobortis elementum nibh tellus molestie. Enim blandit volutpat maecenas volutpat blandit aliquam etiam erat velit. Erat nam at lectus urna duis. Enim facilisis gravida neque convallis a cras. Volutpat lacus laoreet non curabitur gravida arcu ac tortor dignissim. Volutpat maecenas volutpat blandit aliquam etiam erat. Sit amet mauris commodo quis imperdiet massa. Fermentum dui faucibus in ornare.</p>
+                
+                <div class="mt-12 flex col-span-2   items-center justify-center h-full text-center  ">
+                  <div class="leading-tight tracking-tight z-10 text-2xl lg:text-4xl pb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#AAABB8] to-red-500 font-semibold relative drop-shadow-xl element-hidden">These data aid in the development of vaccines and antibody therapies prospectively by mapping which mutations are tolerated. </div>
                 </div>
               </div>
             </div>
