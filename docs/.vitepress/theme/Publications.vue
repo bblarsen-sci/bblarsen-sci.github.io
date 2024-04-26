@@ -40,7 +40,9 @@ export default {
         </div>
         </div>
     <div class=" mx-6">
-    <h2 class="container mx-auto text-2xl font-extrabold py-12">Preprints</h2>
+    <h2 class="container mx-auto text-2xl font-extrabold py-2">Preprints</h2>
+    <div class="h-1 bg-slate-600 mb-8"></div>
+
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
       <div v-for="paper in preprints" :key="paper.title" class=" relative shadow-lg shadow-slate-400 dark:bg-slate-700 dark:shadow-sky-400/50 rounded-xl transition duration-200 ease-in-out hover:shadow-xl hover:shadow-slate-500 hover:dark:shadow-sky-400 hover:-translate-y-2">
         <div class="text-center font-semibold mx-6 my-6">{{ paper.title }}</div>
@@ -50,7 +52,9 @@ export default {
         <a :href="paper.link || '#'" class="absolute bottom-2 right-2 text-sky-500 after:content-['_↗']  hover:underline underline-offset-4 decoration-2 transition duration-200 hover:text-sky-600">Read more</a>
       </div>
     </div>
-    <h2 id="section-1" class="container mx-auto text-2xl font-extrabold py-12">First author publications</h2>
+    <h2 id="section-1" class="container mx-auto text-2xl font-extrabold py-8">First author publications</h2>
+    <div class="h-1 bg-slate-600 mb-8"></div>
+
     <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
       <div v-for="paper in publications" :key="paper.title" class=" dark:bg-slate-700 relative shadow-lg shadow-slate-500 dark:shadow-sky-500/50 rounded-xl transition duration-200 ease-in-out hover:shadow-xl hover:shadow-slate-500 hover:dark:shadow-sky-500 hover:-translate-y-2">
         <div class="text-center font-semibold mx-6 my-6">{{ paper.title }}</div>
