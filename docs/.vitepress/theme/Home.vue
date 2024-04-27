@@ -1,46 +1,57 @@
 <script>
-export default {
-  data() {
-    return {
-      observer: null,  // Store the intersection observer instance here
-    };
-  },
-  mounted() {
-    this.initObserver();
-  },
-  mounted() {
-    this.initObserver();
-  },
-  methods: {
-    initObserver() {
-      const options = {
-        root: null, // observing relative to viewport
-        threshold: 0.1, // trigger when 10% of the element is visible
-        rootMargin: '0px'
+  export default {
+    data() {
+      return {
+        visibleElements: new Set(), // This will keep track of which elements are visible
       };
-
-      this.observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('element-visible');
-            entry.target.classList.remove('element-hidden');
-          }
-        });
-      }, options);
-
-      // Select elements and start observing them
-      const elements = document.querySelectorAll('.element-hidden');
-      elements.forEach(element => this.observer.observe(element));
+    },
+    mounted() {
+      this.initObserver();
+    },
+    methods: {
+      initObserver() {
+        const options = {
+          root: null,
+          threshold: 0.1,
+          rootMargin: '0px'
+        };
+  
+        this.observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            const id = entry.target.dataset.id;
+            if (entry.isIntersecting) {
+              this.visibleElements.add(id);
+            } else {
+              this.visibleElements.delete(id);
+            }
+            this.$forceUpdate(); // Ensure Vue reacts to Set changes
+          });
+        }, options);
+  
+        this.observeElements();
+      },
+      observeElements() {
+        const elements = document.querySelectorAll('[data-id]');
+        elements.forEach(element => this.observer.observe(element));
+      }
+    },
+    beforeDestroy() {
+      if (this.observer) {
+        this.observer.disconnect();
+      }
+    },
+    computed: {
+      isVisible() {
+        // This computed property will help in checking visibility in the template
+        return (id) => this.visibleElements.has(id);
+      }
     }
-  },
-  beforeDestroy() {
-    if (this.observer) {
-      // Stop observing all elements
-      this.observer.disconnect();
-    }
-  }
-};
-</script>
+  };
+  </script>
+  
+  
+  
+  
 
 
 <template>
@@ -64,7 +75,7 @@ export default {
           </p>
         </div>
       </section>
-
+      
       <div class="h-1 bg-slate-600"></div>
       
       <section class="bg-white/90 dark:bg-slate-700 backdrop-blur backdrop-filter p-6">
@@ -84,23 +95,25 @@ export default {
               <div class="grid grid-cols-2 gap-8  text-slate-600 dark:text-slate-400 text-sm">
                 
                 <a class="flex items-center justify-center h-full text-center text-md lg:text-2xl text-slate-400" href="https://dms-vep.org/Nipah_Malaysia_RBP_DMS/">
-                  <p class="m-2 leading-loose font-light element-hidden">Nipah is a bat-borne virus that occasionally spills over into humans. The Nipah receptor binding protein attaches to cells to mediate entry into cells. I used deep mutational scanning to map the effects of nearly every mutation on cell entry and receptor binding.</p>
+                  <p class="m-2 leading-loose font-light ">Nipah is a bat-borne virus that occasionally spills over into humans. The Nipah receptor binding protein attaches to cells to mediate entry into cells. I used deep mutational scanning to map the effects of nearly every mutation on cell entry and receptor binding.</p>
                 </a>
                 
-                <div class="flex justify-center items-center element-hidden">
+                <div class="flex justify-center items-center ">
                   <img src="/images/entry_tetramer_better.png" class="max-w-full max-h-96">
                 </div>
                 
-                <div class="flex justify-center items-center element-hidden">
+                <div class="flex justify-center items-center ">
                   <img src="/images/escape.png" class="max-w-full max-h-96">
                 </div>
                 
                 <div class="flex items-center justify-center h-full font-light text-center text-md lg:text-2xl text-slate-400">
-                  <p class="m-2 leading-loose element-hidden">The receptor binding protein is also an important target of neutralizing antibodies, which can prevent disease. I mapped mutations that escape different monoclonal antibodies.</p>
+                  <template v-if="isVisible('element-id')">
+                    <p class="m-2 leading-loose ">The receptor binding protein is also an important target of neutralizing antibodies, which can prevent disease. I mapped mutations that escape different monoclonal antibodies.</p>
+                  </template>
                 </div>
                 
                 <div class="mt-12 flex col-span-2   items-center justify-center h-full text-center  ">
-                  <div class="leading-tight tracking-tight z-10 text-2xl lg:text-4xl pb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#AAABB8] to-red-500 font-semibold relative drop-shadow-xl element-hidden">These data aid in the development of vaccines and antibody therapies prospectively by mapping which mutations are tolerated. </div>
+                  <div class="leading-tight tracking-tight z-10 text-2xl lg:text-4xl pb-6 bg-clip-text text-transparent bg-gradient-to-r from-[#AAABB8] to-red-500 font-semibold relative drop-shadow-xl">These data aid in the development of vaccines and antibody therapies prospectively by mapping which mutations are tolerated. </div>
                 </div>
               </div>
             </div>
