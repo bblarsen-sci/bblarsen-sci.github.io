@@ -1,43 +1,49 @@
 {
-  "hash": "919b6b29",
-  "configHash": "2f267fac",
+  "hash": "e188ac40",
+  "configHash": "1e2cb65f",
   "lockfileHash": "ce5618f3",
-  "browserHash": "382d6698",
+  "browserHash": "278786f6",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "1053ba9a",
+      "fileHash": "725ccc3e",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "3dfd9c15",
+      "fileHash": "ee1825e5",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "8e057a8e",
+      "fileHash": "3585a5c3",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "d75fca27",
+      "fileHash": "fdee6d1f",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "f08c2477",
+      "fileHash": "3557d98d",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "630d5519",
+      "fileHash": "678c9bb6",
+      "needsInterop": false
+    },
+    "d3": {
+      "src": "../../../../node_modules/d3/src/index.js",
+      "file": "d3.js",
+      "fileHash": "57fbb378",
       "needsInterop": false
     }
   },
@@ -45,11 +51,14 @@
     "chunk-O4XWQMLZ": {
       "file": "chunk-O4XWQMLZ.js"
     },
-    "chunk-DGOXWUQV": {
-      "file": "chunk-DGOXWUQV.js"
+    "chunk-5UV7SUN4": {
+      "file": "chunk-5UV7SUN4.js"
     },
-    "chunk-PV3VD5LM": {
-      "file": "chunk-PV3VD5LM.js"
+    "chunk-XJDZ4BQV": {
+      "file": "chunk-XJDZ4BQV.js"
+    },
+    "chunk-AVDKQJKK": {
+      "file": "chunk-AVDKQJKK.js"
     },
     "chunk-ZS7NZCD4": {
       "file": "chunk-ZS7NZCD4.js"
