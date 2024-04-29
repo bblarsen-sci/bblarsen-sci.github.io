@@ -4,45 +4,43 @@ layout: page
 ---
 
 <html>
-<head>
-</head>
 <body>
 <div class=" m-4 text-xl font-semibold">Effect of mutations on cell entry of RBP in CHO-bEFNB2 cells</div>
-<div class="flex flex-col justify-center items-center">
-  <div class="my-6">
-    <label for="wildtypeSelect" class="mr-2">Select Wildtype Amino Acid:</label>
-    <select id="wildtypeSelect" class="px-2 py-2 rounded-md ring-2 ring-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
-      <option value="">All</option>
-      <option value="R">R</option>
-      <option value="K">K</option>
-      <option value="H">H</option>
-      <option value="D">D</option>
-      <option value="E">E</option>
-      <option value="Q">Q</option>
-      <option value="N">N</option>
-      <option value="S">S</option>
-      <option value="T">T</option>
-      <option value="Y">Y</option>
-      <option value="W">W</option>
-      <option value="F">F</option>
-      <option value="A">A</option>
-      <option value="I">I</option>
-      <option value="L">L</option>
-      <option value="M">M</option>
-      <option value="V">V</option>
-      <option value="G">G</option>
-      <option value="P">P</option>
-      <option value="C">C</option>
-    </select>
-  </div>
-  <div class="mb-4 text-xs">
-    <label class="mr-2">Color Scheme:</label>
-    <button id="interpolateRdBu" class="px-2 mx-2 py-2 rounded-md bg-gradient-to-r from-red-500/50 via-white/50 to-blue-500/50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">Red-Blue</button>
-    <button id="interpolateBrBG" class="px-2 mx-2 py-2 rounded-md bg-gradient-to-r from-yellow-950/50 via-white/50 to-green-500/50  text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">Brown-Green</button>
-    <button id="interpolatePRGn" class="px-2 mx-2 py-2 rounded-md bg-gradient-to-r from-purple-500/50 via-white/50 to-green-500/50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">Purple-Green</button>
-    <button id="interpolatePiYG" class="px-2 mx-2 py-2 rounded-md bg-gradient-to-r from-pink-500/50 to-green-500/50 via-yellow-500/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">Pink-Yellow-Green</button>
-  </div>
-  <div ref="svgContainer" id="svgContainer"></div>
+<div class="flex flex-col justify-left items-left">
+    <div class="m-6 text-xs">
+        <label for="wildtypeSelect" class="mr-2">Select Wildtype Amino Acid:</label>
+        <select id="wildtypeSelect" class="px-2 py-2 rounded-md ring-2 ring-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <option value="">All</option>
+            <option value="R">R</option>
+            <option value="K">K</option>
+            <option value="H">H</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="Q">Q</option>
+            <option value="N">N</option>
+            <option value="S">S</option>
+            <option value="T">T</option>
+            <option value="Y">Y</option>
+            <option value="W">W</option>
+            <option value="F">F</option>
+            <option value="A">A</option>
+            <option value="I">I</option>
+            <option value="L">L</option>
+            <option value="M">M</option>
+            <option value="V">V</option>
+            <option value="G">G</option>
+            <option value="P">P</option>
+            <option value="C">C</option>
+        </select>
+    </div>
+    <div class="m-6 text-xs">
+        <label class="mr-2">Color Scheme:</label>
+        <button id="interpolateRdBu" class="px-2 mx-2 py-2 rounded-md bg-gradient-to-r from-red-500/50 via-white/50 to-blue-500/50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">Red-Blue</button>
+        <button id="interpolateBrBG" class="px-2 mx-2 py-2 rounded-md bg-gradient-to-r from-yellow-950/50 via-white/50 to-green-500/50  text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">Brown-Green</button>
+        <button id="interpolatePRGn" class="px-2 mx-2 py-2 rounded-md bg-gradient-to-r from-purple-500/50 via-white/50 to-green-500/50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">Purple-Green</button>
+        <button id="interpolatePiYG" class="px-2 mx-2 py-2 rounded-md bg-gradient-to-r from-pink-500/50 to-green-500/50 via-yellow-500/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">Pink-Yellow-Green</button>
+    </div>
+    <div ref="svgContainer" id="svgContainer"></div>
 </div>
 <div ref="tooltip" id="tooltip" class="tooltip"></div>
 </body>
