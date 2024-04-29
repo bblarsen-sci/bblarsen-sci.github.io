@@ -9,7 +9,7 @@ layout: page
 <body>
 <div class=" m-4 text-xl font-semibold">Effect of mutations on cell entry of RBP in CHO-bEFNB2 cells</div>
 <div class="flex flex-col justify-center items-center">
-  <div class="my-6 text-xs">
+  <div class="my-6">
     <label for="wildtypeSelect" class="mr-2">Select Wildtype Amino Acid:</label>
     <select id="wildtypeSelect" class="px-2 py-2 rounded-md ring-2 ring-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500">
       <option value="">All</option>
@@ -41,21 +41,21 @@ layout: page
     <button id="interpolateBrBG" class="px-2 mx-2 py-2 rounded-md bg-gradient-to-r from-yellow-950/50 via-white/50 to-green-500/50  text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">Brown-Green</button>
     <button id="interpolatePRGn" class="px-2 mx-2 py-2 rounded-md bg-gradient-to-r from-purple-500/50 via-white/50 to-green-500/50 text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500">Purple-Green</button>
     <button id="interpolatePiYG" class="px-2 mx-2 py-2 rounded-md bg-gradient-to-r from-pink-500/50 to-green-500/50 via-yellow-500/50 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">Pink-Yellow-Green</button>
-</div>
-
-  <div class="svg-container">
-    <div id="svgContainer"></div>
   </div>
+  <div ref="svgContainer" id="svgContainer"></div>
 </div>
-<div id="tooltip" class="tooltip"></div>
-
+<div ref="tooltip" id="tooltip" class="tooltip"></div>
 </body>
 </html>
 
-<script>
+<script setup>
+import { ref, onMounted } from 'vue';
 import * as d3 from 'd3';
 
-(async function() {
+const svgContainer = ref(null);
+const tooltip = ref(null);
+
+onMounted(async () => {
 const response = await fetch('https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB2.csv');
 const data = await response.text();
 const parsedData = d3.csvParse(data);
@@ -79,9 +79,10 @@ const yScale = d3.scaleBand()
 let colorScale = d3.scaleDiverging(d3.interpolateRdBu)
   .domain([-4, 0, 4]);
 
-const svg = d3.select('#svgContainer');
 
 function updateHeatmap() {
+  const svg = d3.select('#svgContainer');
+
   const sites = [...new Set(filteredData.map(d => +d.site))];
   const squareSize = Math.min(innerHeight / amino_acids.length, 20);
   const innerWidth = squareSize * sites.length;
@@ -215,5 +216,5 @@ d3.select('#interpolatePiYG').on('click', function() {
 });
 
 updateHeatmap();
-})();
+});
 </script>
