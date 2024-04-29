@@ -124,7 +124,7 @@ export default {
       .join("circle")
         .attr("transform", d => `rotate(${d.x - 90}) translate(${innerRadius + 4},0)`)
         .attr("r", 6)
-        .attr("stroke", "currentColor") // Set the initial stroke color.
+        .attr("stroke", "currentColor") 
         .attr("stroke-width", 2)
         .attr("fill", d=> {
           const countryColors = {

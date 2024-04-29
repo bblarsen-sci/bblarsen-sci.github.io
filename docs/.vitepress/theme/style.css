@@ -22,7 +22,22 @@
     border-radius: 5px;
 
 }
+.svg-container {
+    width: 100%;
+    overflow-x: scroll;
+  }
 
+.tooltip {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
 /*
 :root {
     --vp-home-hero-name-color: transparent;

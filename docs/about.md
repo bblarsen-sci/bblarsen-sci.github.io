@@ -6,13 +6,13 @@ layout: page
 <html class=" text-slate-800 dark:bg-slate-900 dark:text-slate-400 ">
     <div class="p-4">
         <div class="flex flex-col items-center justify-center h-96 mx-auto bg-waves">
-        <div class="text-center mb-4 text-6xl font-bold text-white">
-            <p class="text-slate-500">About</p>
-        </div>
+            <div class="text-center mb-4 text-6xl font-bold text-white">
+                <p class="text-slate-500">About</p>
+            </div>
         </div>
     </div>
     <div class="mt-8 mx-10">
-        <img src="/images/pallid.jpg" alt="Descriptive Alt Text" class="float-right ml-6 mb-4 w-36 h-36 lg:w-60 lg:h-60 object-cover">
+        <img src="/images/pallid.jpg" alt="Descriptive Alt Text" class="float-right ml-6 mb-4 w-36 lg:w-60 object-cover"></img>
         <p class="text-left">
             I am broadly interested in how viruses evolve in wild mammals. My research spans field work, experimental approaches using pseudotyped lentiviruses, and computational biology. I am currently a postdoctoral fellow at the Fred Hutch Cancer Center, in Seattle, Washington, where I study the evolution of Nipah virus in the Bloom lab.
         </p>
