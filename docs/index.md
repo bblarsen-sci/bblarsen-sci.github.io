@@ -44,7 +44,6 @@ export default {
 };
 </script>
 
-<html>
 <section class="absolute top-0 left-0 right-0 h-72 z-[-1] opacity-80">
   <div style="animation-delay:0.8s; animation-duration:2s" class="fade-in bg-waves"></div>
 </section>
@@ -127,7 +126,6 @@ export default {
     </div>
   </div>
 </section>
-</html>
 
 <style scoped>
 .fade-in {
