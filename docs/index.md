@@ -44,6 +44,7 @@ export default {
 };
 </script>
 
+<html>
 <section class="absolute top-0 left-0 right-0 h-72 z-[-1] opacity-80">
   <div style="animation-delay:0.8s; animation-duration:2s" class="fade-in bg-waves"></div>
 </section>
@@ -104,7 +105,7 @@ export default {
 </section>
 
 <section id="section-2" class="lg:px-4 overflow-hidden">
-  <div class="rounded-md lg:rounded-2xl px-6 py-24 lg:p-12 relative bg-gradient-animated">
+  <div class="rounded-md lg:rounded-2xl px-6 py-24 lg:p-12 relative ">
     <div class="absolute top-2 left-2 lg:top-4 lg:left-6 text-slate-600 text-2xl lg:text-4xl font-extrabold">Past Projects</div>
     <div class="absolute top-8 lg:top-16 left-2 lg:left-6 text-slate-600 text-lg lg:text-xl">Evolution and Diversity of Paramyxoviruses in Bats and Rodents</div>
     <div class="container pt-16 lg:pt-20 grid grid-cols-2 gap-8 text-slate-600 dark:text-slate-600 text-sm lg:text-base element-hidden">
@@ -114,7 +115,7 @@ export default {
       <div class="flex justify-center items-center">
         <img src="/images/entry_tetramer_better.png" class="max-w-full max-h-64 lg:max-h-96" alt="Entry Tetramer">
       </div>
-      <div v-tooltip="'Nipah is a bat-borne virus that occasionally spills over into humans.'" class="flex justify-center items-center">
+      <div class="flex justify-center items-center">
         <img src="/images/escape.png" class="max-w-full max-h-64 lg:max-h-96" alt="Escape">
       </div>
       <div class="flex items-center justify-center text-center">
@@ -126,7 +127,7 @@ export default {
     </div>
   </div>
 </section>
-
+</html>
 
 <style scoped>
 .fade-in {
@@ -155,21 +156,5 @@ export default {
   transform: translateY(0);
   transition: all 2.5s ease-out;
 }
-.bg-gradient-animated {
-  background: linear-gradient(45deg, #AAABB8, #2E9CCA);
-  background-size: 400% 400%;
-  animation: gradientAnimation 5s ease infinite;
-}
 
-@keyframes gradientAnimation {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
 </style>

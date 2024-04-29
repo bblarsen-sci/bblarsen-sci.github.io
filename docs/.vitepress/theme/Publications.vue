@@ -28,7 +28,7 @@ export default {
 </script>
 
 <template>
-  <html class="bg-white text-slate-600 dark:bg-slate-900 dark:text-slate-400 text-xs md:text-base font-roboto">
+  <html class="bg-white text-slate-600 dark:bg-slate-900 dark:text-slate-400 text-xs md:text-base ">
 
     <section>
       <div class="flex flex-col justify-center h-80 md:h-96 mx-auto bg-opacity-20 bg-waves">
