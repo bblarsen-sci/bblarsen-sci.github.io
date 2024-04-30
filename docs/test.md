@@ -130,11 +130,11 @@ function downloadSVG() {
     const url = URL.createObjectURL(svgBlob);
     const downloadLink = document.createElement('a');
     downloadLink.href = url;
-    downloadLink.download = 'heatmap.svg'; // Name of the file to be downloaded
+    downloadLink.download = 'heatmap.svg'; 
     document.body.appendChild(downloadLink);
     downloadLink.click();
-    document.body.removeChild(downloadLink); // Clean up
-    URL.revokeObjectURL(url); // Free up memory
+    document.body.removeChild(downloadLink); 
+    URL.revokeObjectURL(url); 
 }
 
 d3.select('#downloadSVG').on('click', function() {
@@ -143,8 +143,8 @@ d3.select('#downloadSVG').on('click', function() {
 
 function updateHeatmap() {
   const svg = d3.select('#svgContainer');
-  const height = 400;
-  const margin = { top: 20, right: 20, bottom: 90, left: 60 };
+  const height = 300;
+  const margin = { top: 20, right: 20, bottom: 40, left: 60 };
   const innerHeight = height - margin.top - margin.bottom;
   
 
@@ -199,19 +199,30 @@ function updateHeatmap() {
     .attr('stroke-width', strokeWidth.value)
     .on('mouseover', function(event, d) {
       const dataPoint = filteredData.find(dp => +dp.site === d.site && dp.mutant === d.mutant);
-      let tooltipText = '';
+      let tooltipHtml = '';
       if (dataPoint) {
-        tooltipText = `Site: ${d.site}, Mutant: ${d.mutant}, Value: ${dataPoint.entry_CHO_bEFNB2}`;
+        tooltipHtml = `<table style="text-align: center; width: 100%;">
+                        <tr><td>Site:</td><td>${d.site}</td></tr>
+                        <tr><td>Mutant:</td><td>${d.mutant}</td></tr>
+                        <tr><td>Value:</td><td>${parseFloat(dataPoint.entry_CHO_bEFNB2).toFixed(2)}</td></tr>
+                      </table>`;
       } else {
         const wildtypePoint = filteredData.find(dp => +dp.site === d.site && dp.wildtype === d.mutant);
         if (wildtypePoint) {
-          tooltipText = `Site: ${d.site}, Wildtype: ${d.mutant}`;
+          tooltipHtml = `<table style="text-align: center; width: 100%;">
+                          <tr><td>Site:</td><td>${d.site}</td></tr>
+                          <tr><td>Wildtype:</td><td>${d.mutant}</td></tr>
+                        </table>`;
         } else {
-          tooltipText = `Site: ${d.site}, Mutant: ${d.mutant}, Value: Missing`;
+          tooltipHtml = `<table style="text-align: center; width: 100%;">
+                          <tr><td>Site:</td><td>${d.site}</td></tr>
+                          <tr><td>Mutant:</td><td>${d.mutant}</td></tr>
+                          <tr><td>Value:</td><td>Missing</td></tr>
+                        </table>`;
         }
       }
       const tooltip = d3.select('#tooltip');
-      tooltip.text(tooltipText)
+      tooltip.html(tooltipHtml)
         .style('left', (event.pageX + 10) + 'px')
         .style('top', (event.pageY - 90) + 'px')
         .style('opacity', 1);
@@ -256,53 +267,6 @@ function updateHeatmap() {
     .attr('class', 'y-axis')
     .call(d3.axisLeft(yScale).tickSizeOuter(0));
     const defs = svgElement.append('defs');
-  
-  
-
-  const gradient = defs.append('linearGradient')
-    .attr('id', 'gradient')
-    .attr('x1', '0%')
-    .attr('x2', '100%')
-    .attr('y1', '0%')
-    .attr('y2', '0%');
-
-  // Create gradient stops based on the color scale domain dynamically
-  const numStops = 10;
-  const domain = colorScale.domain();
-  const range = d3.range(domain[0], domain[2], (domain[2] - domain[0]) / numStops);
-  range.push(domain[2]); // Ensure the last value is included
-
-  range.forEach((point, i) => {
-    gradient.append('stop')
-      .attr('offset', `${(i / numStops) * 100}%`)
-      .attr('stop-color', colorScale(point))
-      .attr('stop-opacity', 1);
-  });
-
-  // Draw the color legend
-  const legendWidth = 200;
-  const legendHeight = 10;
-
-  svgElement.append('rect')
-    .attr('x', 0)
-    .attr('y', innerHeight + 40)
-    .attr('width', legendWidth)
-    .attr('height', legendHeight)
-    .style('fill', 'url(#gradient)');
-
-  // Add legend labels
-  const legendScale = d3.scaleLinear()
-    .domain([domain[0], domain[2]])
-    .range([0, legendWidth]);
-
-  const legendAxis = d3.axisBottom(legendScale)
-    .tickValues(colorScale.domain())  // Use exact domain values for ticks
-    .tickFormat(d3.format(".0f"));
-
-  svgElement.append('g')
-    .attr('class', 'legend axis')
-    .attr('transform', `translate(0, ${innerHeight + 50})`)
-    .call(legendAxis);
 }
 updateHeatmap();
 });
