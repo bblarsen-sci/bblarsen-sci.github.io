@@ -1,53 +1,56 @@
 {
-  "hash": "919b6b29",
-  "configHash": "2f267fac",
+  "hash": "e188ac40",
+  "configHash": "1e2cb65f",
   "lockfileHash": "ce5618f3",
-  "browserHash": "0ed76a7e",
+  "browserHash": "278786f6",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "7a13aefb",
+      "fileHash": "e8118455",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "72e345f7",
+      "fileHash": "e0079884",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "ffea8176",
+      "fileHash": "e8e3da9d",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "c0df589f",
+      "fileHash": "cb85cca0",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "20ee0e3d",
+      "fileHash": "7ee12eda",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "b89277ec",
+      "fileHash": "7865b1bd",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "9fee92fd",
+      "fileHash": "27e0b730",
       "needsInterop": false
     }
   },
   "chunks": {
+    "chunk-O4XWQMLZ": {
+      "file": "chunk-O4XWQMLZ.js"
+    },
     "chunk-5UV7SUN4": {
       "file": "chunk-5UV7SUN4.js"
     },
@@ -56,9 +59,6 @@
     },
     "chunk-AVDKQJKK": {
       "file": "chunk-AVDKQJKK.js"
-    },
-    "chunk-O4XWQMLZ": {
-      "file": "chunk-O4XWQMLZ.js"
     },
     "chunk-ZS7NZCD4": {
       "file": "chunk-ZS7NZCD4.js"

@@ -7,100 +7,88 @@ layout: page
 import { ref, onMounted } from 'vue';
 import * as d3 from 'd3';
 
-const jsondata = ref(null);
 const treeContainer = ref(null);
 
-function renderTree() {
-  const width = 2000;
-  const height = 1000;
-  const tree = d3.tree().size([height, width - 100]);
+async function fetchData() {
+  const response = await fetch(`/data/CHO_bEFNB2_entry.csv`);
+  const data = await response.text();
+  const parsedData = d3.csvParse(data);
+  const group = d3.group(parsedData, d => d.site, d => d.mutant);
+  const root = d3.hierarchy(group);
 
-  const root = d3.hierarchy(jsondata.value);
+  const width = 800;
+  const dx = 10;
+  const dy = width / (root.height + 1);
+
+  // Create a tree layout.
+  const tree = d3.tree().nodeSize([dx, dy]);
+
+  // Sort the tree and apply the layout.
+  root.sort((a, b) => d3.ascending(a.data.name, b.data.name));
   tree(root);
+
+  let x0 = Infinity;
+  let x1 = -x0;
+  root.each(d => {
+    if (d.x > x1) x1 = d.x;
+    if (d.x < x0) x0 = d.x;
+  });
+
+  // Compute the adjusted height of the tree.
+  const height = x1 - x0 + dx * 2;
 
   const svg = d3.select(treeContainer.value)
     .append('svg')
     .attr('width', width)
     .attr('height', height)
-    .append('g')
-    .attr('transform', 'translate(40,0)');
+    .attr("viewBox", [-dy / 3, x0 - dx, width, height])
+    .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
 
-  const link = svg.selectAll('.link')
-    .data(root.descendants().slice(1))
-    .enter()
-    .append('path')
-    .attr('class', 'link')
-    .attr('d', d => `M${d.y},${d.x}C${d.y + 5},${d.x} ${d.parent.y + 5},${d.parent.x} ${d.parent.y},${d.parent.x}`);
+  const link = svg.append("g")
+      .attr("fill", "none")
+      .attr("stroke", "#555")
+      .attr("stroke-opacity", 0.3)
+      .attr("stroke-width", 1.5)
+    .selectAll()
+      .data(root.links())
+      .join("path")
+        .attr("d", d3.linkHorizontal()
+            .x(d => d.y)
+            .y(d => d.x));
 
-  const node = svg.selectAll('.node')
-    .data(root.descendants())
-    .enter()
-    .append('g')
-    .attr('class', 'node')
-    .attr('transform', d => `translate(${d.y},${d.x})`);
+  const node = svg.append("g")
+    .attr("stroke-linejoin", "round")
+    .attr("stroke-width", 3)
+    .selectAll()
+    .data(root.descendants()) // Change to root.descendants() to include all nodes
+    .join("g")
+    .attr("transform", d => `translate(${d.y},${d.x})`);
 
-  node.append('circle')
-    .attr('r', 4);
+  node.append("circle")
+    .attr("fill", d => d.children ? "#555" : "#999")
+    .attr("r", 3);
 
-  node.append('text')
-    .attr('dx', d => d.children ? -2 : 2)
-    .attr('dy', 3)
-    .style('text-anchor', d => d.children ? 'end' : 'start')
-    .text(d => d.data.name);
-}
-
-async function fetchData() {
-  const response = await fetch(`https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB2.csv`);
-  const data = await response.text();
-  const parsedData = d3.csvParse(data);
-
-  function transformData(data) {
-    const siteNodes = {};
-
-    data.forEach(item => {
-      const { site, mutant, entry_CHO_bEFNB2 } = item;
-
-      if (!siteNodes[site]) {
-        siteNodes[site] = {
-          name: site,
-          parent: 'root',
-          children: []
-        };
+  node.append("text")
+    .attr("dy", "0.31em")
+    .attr("x", d => d.children ? -5 : 5)
+    .attr("text-anchor", d => d.children ? "end" : "start")
+    .text(d => {
+      // Assuming depth 0 = root, depth 1 = site, depth 2 = mutant, depth 3 = entry_CHO_bEFNB2
+      if (d.depth === 0) {
+        return "Root"; // Label for root node
+      } else if (d.depth === 1) {
+        return d.data[0]; // Label for site
+      } else if (d.depth === 2) {
+        return d.data[0]; // Label for mutant
+      } else if (d.depth === 3) {
+        return d.data.entry_CHO_bEFNB2; // Label for entry_CHO_bEFNB2
       }
-
-      const parentNode = siteNodes[site];
-      const childNode = {
-        name: mutant,
-        parent: site,
-        children: [
-          {
-            name: "entry",
-            parent: mutant,
-            value: entry_CHO_bEFNB2
-          }
-        ]
-      };
-
-      parentNode.children.push(childNode);
     });
-
-    const rootNode = {
-      name: 'root',
-      parent: null,
-      children: Object.values(siteNodes)
-    };
-
-    return rootNode;
-  }
-
-  const transformedData = transformData(parsedData);
-  jsondata.value = transformedData;
+  
 }
 
 onMounted(() => {
-  fetchData().then(() => {
-    renderTree();
-  });
+  fetchData()
 });
 </script>
 
