@@ -22,10 +22,7 @@
     border-radius: 5px;
 
 }
-.svg-container {
-    width: 100%;
-    overflow-x: scroll;
-  }
+
 
 .tooltip {
     position: absolute;
@@ -36,38 +33,4 @@
     font-size: 12px;
     pointer-events: none;
     opacity: 0;
-    transition: opacity 0.2s ease-in-out;
 }
-/*
-:root {
-    --vp-home-hero-name-color: transparent;
-    --vp-home-hero-name-background: -webkit-linear-gradient(120deg, #eeb028, #41d1ff); 
-    
-    --vp-button-brand-bg: rgb(8, 210, 45);
-    --vp-button-brand-hover-bg: rgb(168, 198, 33);
-    --vp-c-brand-1: rgb(106, 19, 228);
-    /*--vp-c-text-1: rgb(0, 0, 0); 
-    
-    --vp-button-brand-border: rgb(0,0,0);
-
-}
-.main {
-    align-items: center;
-    justify-content: center;
-    background-color: antiquewhite;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-    border-top: 0px;
-    border-bottom: 0px;
-    border-color: transparent;
-    border-style: solid;
-    border-width: 0px;
-}
-.name {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-}
-*/
