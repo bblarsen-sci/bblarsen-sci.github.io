@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col justify-center items-center ">
-    <div ref="svgContainer"></div>
+  <div class="flex flex-col justify-center items-center">
+    <div class="" ref="svgContainer"></div>
   </div>
 </template>
 
@@ -110,13 +110,15 @@ export default {
       .attr("class", "max-w-full h-auto");
 
     svg.append("g")
+        .attr("class", "stroke")
         .attr("fill", "none")
-        .attr("stroke", "currentColor")
+        //.attr("stroke", "currentColor")
         .selectAll("path")
         .data(root.links())
         .join("path")
         .attr("d", linkConstant)
-        .attr("stroke-width", 1);
+        .attr("stroke-width", 1.5)
+        
     
     svg.append("g")
       .selectAll("circle")
@@ -124,8 +126,9 @@ export default {
       .join("circle")
         .attr("transform", d => `rotate(${d.x - 90}) translate(${innerRadius + 4},0)`)
         .attr("r", 6)
-        .attr("stroke", "currentColor") 
-        .attr("stroke-width", 2)
+        //.attr("stroke", "currentColor") 
+        //.attr("stroke-width", 2)
+        .attr("class", "circle")
         .attr("fill", d=> {
           const countryColors = {
             "India": "#ff7f0e",
@@ -160,10 +163,14 @@ export default {
   // Add circles to legend items
   legendItems.append("circle")
     .attr("r", 6)
-    .attr("fill", d => d[1]);
+    .attr("fill", d => d[1])
+    .attr("class", "circle")
+    //.attr("stroke", "currentColor") 
+    //.attr("stroke-width", 2);
 
   // Add country labels to legend items
   legendItems.append("text")
+    .attr("class", "legend-text")
     .attr("x", 10)
     .style("fill","currentColor")
     .attr("y", 6)
@@ -174,3 +181,14 @@ export default {
 };
 </script>
 
+<style>
+.circle {
+  @apply stroke-slate-800 dark:stroke-slate-200 stroke-1;
+}
+.stroke {
+  @apply stroke-current bg-cyan-500;
+}
+.legend-text {
+  @apply text-slate-800 dark:text-slate-200;
+}
+</style>

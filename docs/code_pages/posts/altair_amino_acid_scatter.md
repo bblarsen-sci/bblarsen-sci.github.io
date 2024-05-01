@@ -1,14 +1,24 @@
-# Altair code and figures
+---
+title: Altair Letter Scatter
+aside: false
+date: 2024-04-26
+keywords:
+    - Altair
+    - Interactive
+subtext: How to make a simple interactive plot with Altair
+---
 
-[Altair](https://altair-viz.github.io/){target="_self"} is a python package for making interactive plots. This page will cover how to make a few different examples of interactive plots, with a focus on deep mutational scanning data. 
+# {{$frontmatter.title}}
+{{$frontmatter.subtext}}
 
 
 ## Interactive plot with slider to move between sites.
-For example, here is an interactive plot of the effects of receptor binding protein mutations on the entry of pseudotyped Nipah virus into either of two cell types. The plot is interactive, and you can hover over each point to see the effect of the mutation at that site.
+For the Nipah receptor binding protein deep mutational scanning project, it was sometimes necessary to plot the effects of mutations between two conditions. For example, entry in CHO-bEFNB2 or CHO-bEFNB3 cells. 
 
 
-<Altair :showShadow="false" :spec-url="'htmls/entry_letter_plot_slider.html'"></Altair>
+<Altair :showShadow="false" :spec-url="'/htmls/entry_letter_plot_slider.html'"></Altair>
 
+## Making plot
 Say we have some data in a pandas dataframe that has the effect of mutations at each site for two different cell types. In this case, we have the data on the effect of mutations in cells expressing bat ephrin-B2 (effect_E2) and bat ephrin-B3 (effect_E3).
 
 |     site      |    mutant     | effect_E2 | effect_E3 | mutant_type |
@@ -59,7 +69,7 @@ chart = (alt.Chart(df)
     )
 )
 ```
-Finally, we want to add a vertical and horizontal line at x=0 and y=0, respectively. Finally, we combine the chart with the vertical and horizontal lines.
+We want to add a vertical and horizontal line at x=0 and y=0, respectively. Finally, we combine the chart with the vertical and horizontal lines.
 ```python
 # Vertical line at x=0
 vline = alt.Chart(pd.DataFrame({'x': [0]})).mark_rule(color='gray',opacity=0.5,strokeDash=[2,4]).encode(x='x:Q')
@@ -74,7 +84,7 @@ final_chart.display()
 Because deep mutational scanning generates so much data, it is difficult to visualize effectively. Heatmaps are an excellent way to show everything at once, and is especially useful when tooltips are enabled (as in Altair) which allows users to see the exact value of each point.
 
 Click the button in the upper right to view the full size plot.
-<Altair :showShadow="true" :spec-url="'htmls/E3_entry_heatmap.html'"></Altair>
+<Altair :showShadow="true" :spec-url="'/htmls/E3_entry_heatmap.html'"></Altair>
 
 These plots are complicated and require layering multiple different heatmaps (one for mutational effects, one for missing data, one for the wildtype, etc.)
 

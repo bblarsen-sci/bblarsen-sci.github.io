@@ -57,7 +57,7 @@ export default {
       Scientist / Biologist
     </div>
     <p class="text-xl  leading-tight tracking-tight font-light text-slate-400 dark:text-slate-400">
-      Studying the evolution of viruses through experimental and computational approaches.
+      Studying the evolution of viruses.
     </p>
   </div>
 </section>
@@ -81,7 +81,7 @@ export default {
       <div class="container pt-6 lg:pt-20 ">
         <div class="grid grid-cols-2 gap-8 font-light leading-loose tracking-wide text-md md:text-lg lg:text-2xl">
           <div class=" lg:pt-12 flex col-span-2 items-center justify-center text-center">
-            <img src="/images/nipah_phylogeny.png" class="pb-6 relative element-hidden max-w-full max-h-96 lg:max-h-screen"></img>
+            <img src="/images/nipah_phylogeny.png" class="pb-6 relative element-hidden max-w-full max-h-96 lg:max-h-[600px]"></img>
           </div>
           <div class="-mt-8 flex col-span-2 items-center justify-center text-center element-hidden">Phylogeny of Nipah sequences from nature, with receptor binding protein mutations mapped on. </div>
           <div class="flex items-center justify-center text-center">
@@ -97,9 +97,9 @@ export default {
             <p class="element-hidden">The receptor binding protein is an important target for neutralizing antibodies, which have shown effectiveness in preventing disease in animal models. Using deep mutational scanning, I have identified mutations that allow the virus to evade these antibodies. Understanding these escape mutations helps us pinpoint which changes impact antibody neutralization and whether these mutations are functionally tolerated. </p>
           </div>
           <div class="mt-12 flex col-span-2 items-center justify-center h-full text-center">
-            <div class="leading-tight tracking-tight text-2xl lg:text-4xl pb-4 bg-clip-text text-transparent bg-gradient-to-r from-[#AAABB8] to-red-500 font-semibold relative drop-shadow-xl element-hidden">These data aid in the development of vaccines and antibody therapies, in addition to improving basic understanding of the function of the receptor binding protein.</div>
+            <div class="leading-tight tracking-tight text-2xl lg:text-4xl pb-10 bg-clip-text text-transparent bg-gradient-to-r from-[#AAABB8] to-red-500 font-semibold relative drop-shadow-xl element-hidden">These data aid in the development of vaccines and antibody therapies, in addition to improving basic understanding of the function of the receptor binding protein.</div>
           </div>
-          <nav class="flex items-center col-span-2 px-10 -space-x-2 justify-between text-slate-500 dark:text-slate-400 tracking-widest">
+          <nav class="flex items-center col-span-2 px-10 pt-10 -space-x-2 justify-between text-slate-500 dark:text-slate-400 tracking-widest">
             <a class="inline-flex flex-1 justify-center items-center hover:text-sky-500 hover:font-bold" href="https://dms-vep.org/Nipah_Malaysia_RBP_DMS/">Link to website with more information</a>
             <a class="inline-flex flex-1 justify-center hover:text-sky-500 hover:font-bold" href="https://www.biorxiv.org/content/10.1101/2024.04.17.589977v1">Link to preprint</a>
           </nav>
@@ -110,12 +110,12 @@ export default {
 </section>
 
 <section id="section-2" class="lg:px-4 overflow-hidden">
-  <div class="rounded-md lg:rounded-2xl px-6 py-24 lg:p-12 relative bg-slate-400 dark:bg-slate-600 text-slate-600 dark:text-slate-400">
+  <div class="rounded-md lg:rounded-2xl px-6 py-24 lg:p-12 relative bg-slate-400 dark:bg-slate-600 text-slate-800 dark:text-slate-200">
     <div class="absolute top-2 left-2 lg:top-4 lg:left-6 text-4xl font-extrabold text-white">Past Projects</div>
     <div class="absolute top-12 lg:top-16 left-2 lg:left-6 text-lg lg:text-2xl">Evolution and Diversity of Paramyxoviruses in Bats and Rodents</div>
     <div class="container pt-16 lg:pt-20 grid grid-cols-2 gap-8 text-md md:text-lg lg:text-2xl leading-loose font-extralight">
       <div class="flex items-center col-span-2 justify-center text-center">
-        <p class="litems-center justify-center  element-hidden"> Paramyxoviruses are widespread and extremely diverse, including notable human pathogens such as Nipah and Measles viruses. To explore this diversity, I captured hundreds of individual animals from 19 bat and 15 rodent species across Southeastern Arizona. From these samples, I successfully sequenced and analyzed 55 novel paramyxoviruses.</p>
+        <p class="litems-center justify-center  element-hidden"> Paramyxoviruses are widespread and extremely diverse, including notable human pathogens such as Nipah and Measles viruses. To explore this diversity, I captured hundreds of individual animals from 19 bat and 15 rodent species across Southeastern Arizona. I successfully sequenced and analyzed 55 novel paramyxoviruses, adding to our knowledge of these viruses.</p>
       </div>
       <div class="flex justify-center items-center element-hidden">
         <img src="/images/pallid.jpg" class="max-h-96">
@@ -124,7 +124,7 @@ export default {
         <img src="/images/peromyscus.png" class="max-w-full max-h-64 lg:max-h-96 " alt="Escape">
       </div>
       <div class="flex items-center justify-center text-center col-span-2">
-        <p class="element-hidden">Through this sequencing effort, we can uncover the long-term evolutionary history of these viruses. A comparison of bat and virus phylogenies reveals similar branching patterns, suggesting a long-standing association that spans millions of years. This relationship highlights the intricate evolutionary dynamics between hosts and their viruses.</p>
+        <p class="element-hidden">Through this sequencing effort, we uncovered the long-term evolutionary history of these viruses. A comparison of bat and virus phylogenies reveals similar branching patterns, suggesting a long-standing association that spans millions of years. This relationship highlights the intricate evolutionary dynamics between hosts and their viruses.</p>
       </div>
       <div class="flex items-center justify-center col-span-2">
         <img class="max-w-full max-h-96" src="/images/pmv_co_phylogeny.jpg"></img>
@@ -185,7 +185,7 @@ export default {
   </div>
 </section>
 <section id="section-3" class="lg:px-4 overflow-hidden">
-  <div class="rounded-md lg:rounded-2xl px-6 py-24 lg:p-12 relative bg-slate-200 dark:bg-slate-600 text-slate-800 dark:text-slate-200">
+  <div class="rounded-md lg:rounded-2xl px-6 py-24 lg:p-12 relative bg-slate-200 dark:bg-slate-500 text-slate-800 dark:text-slate-200">
     <div class="absolute top-2 left-2 lg:top-4 lg:left-6 text-4xl font-extrabold ">Interests</div>
     <div class="container pt-16 lg:pt-20 grid grid-cols-1 gap-8 text-lg lg:text-2xl leading-loose font-light">
       <p class="flex items-center justify-center text-center">Viral Evolution and Diversity</p>

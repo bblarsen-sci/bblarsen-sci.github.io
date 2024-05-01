@@ -1,9 +1,19 @@
-# How to map deep mutational scanning data onto protein structures in ChimeraX
+---
+title: ChimeraX 
+aside: false
+date: 2024-04-25
+keywords:
+    - ChimeraX
+    - Interactive
+subtext: How to map aggregate deep mutational scanning measurements on a protein structure.
+---
 
-[ChimeraX](https://www.cgl.ucsf.edu/chimerax/){target="_self"} is a powerful free software for visualizing protein structure data. Here I show how to make pretty structures that have the mean effects of mutations at each site mapped onto them.
+# {{$frontmatter.title}}
+{{$frontmatter.subtext}}
+
 
 <div class="flex justify-center items-center">
-    <img src="/images/entry_tetramer_better.png" class="w-full sm:w-1/4 md:w-1/2 lg:w-1/2" alt="Descriptive Alt Text" />
+    <img src="/images/entry_tetramer_better.png" class="w-full sm:w-1/4 md:w-1/2 lg:w-1/2"/>
 </div>
 
 
@@ -21,7 +31,7 @@ recipient: residues
 	:75	0.099
     ...
 ```
-Where the attribute is the name of the effect, which will be called in ChimeraX, the match mode is how to match the residues, and the recipient is the residues. This is followed by the site number and the effect. Since the DMS data is in a .csv file, I wrote a Python script to aggregate the mean effects of mutations by site and write them to a .defattr file.
+Where the attribute is the **name** of what you are mapping, which will be called in ChimeraX, the match mode is how to match the residues, and the recipient is the residues. This is followed by the site number and the effect. Since the DMS data is in a .csv file, I wrote a Python script to aggregate the mean effects of mutations by site and write them to a .defattr file.
 
 
 ```python
