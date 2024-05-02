@@ -12,7 +12,7 @@ subtext: How to make a heatmap from deep mutational scanning data using D3, addi
 {{$frontmatter.subtext}}
 
 <script setup>
-import Heatmap from "/components/Heatmap.vue";
+import Heatmap from "/components/graphs/Heatmap.vue";
 </script>
 
 <Heatmap />

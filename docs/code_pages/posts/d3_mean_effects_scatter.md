@@ -12,7 +12,7 @@ subtext: How to make a simple plot with D3
 {{$frontmatter.subtext}}
 
 <script setup>
-import BaseChart from "/components/BaseChart.vue";
+import BaseChart from "/components/graphs/BaseChart.vue";
 </script>
 
 # Mean effects of mutations on cell entry

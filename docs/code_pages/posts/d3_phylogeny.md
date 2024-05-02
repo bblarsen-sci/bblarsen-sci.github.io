@@ -9,7 +9,7 @@ subtext: How to make a phylogeny with D3
 ---
 
 <script setup>
-import PhylogeneticTree from "/components/PhylogeneticTree.vue";
+import PhylogeneticTree from "/components/graphs/PhylogeneticTree.vue";
 </script>
 
 # {{$frontmatter.title}}
