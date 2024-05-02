@@ -58,7 +58,6 @@
   }
   </script>
   
-  <style scoped>
-  /* Add any specific styles for your chart container or SVG here */
-  </style>
+<style scoped>
+</style>
   

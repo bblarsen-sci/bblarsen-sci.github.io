@@ -1,5 +1,4 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
 layout: page
 ---
 
@@ -7,7 +6,7 @@ layout: page
 export default {
   data() {
     return {
-      observer: null,  // Store the intersection observer instance here
+      observer: null,  
     };
   },
   mounted() {
@@ -16,8 +15,8 @@ export default {
   methods: {
     initObserver() {
       const options = {
-        root: null, // observing relative to viewport
-        threshold: 0.1, // trigger when 10% of the element is visible
+        root: null, 
+        threshold: 0.1, 
         rootMargin: '0px'
       };
 
@@ -44,6 +43,7 @@ export default {
 };
 </script>
 
+
 <section class="absolute top-0 left-0 right-0 h-72 z-[-1] opacity-80">
   <div style="animation-delay:0.8s; animation-duration:2s" class="fade-in bg-waves"></div>
 </section>
@@ -69,8 +69,6 @@ export default {
         <a class="inline-flex flex-1 justify-center hover:text-sky-500 hover:font-bold" href="#section-3">Interests</a>
     </nav>
 </section>
-
-
 
 
 <section id="section-1"> 
@@ -136,8 +134,8 @@ export default {
             <a class="inline-flex flex-1 justify-center hover:text-sky-500 hover:font-bold" href="https://pubmed.ncbi.nlm.nih.gov/34668771/">Link to paper</a>
       </nav>
     </div>
-    
   </div>
+
   <div class="h-1 m-4 bg-slate-600"></div>
   <div class="rounded-md lg:rounded-2xl px-6 py-24 lg:p-12 relative bg-slate-400 dark:bg-slate-600 text-slate-600 dark:text-slate-400">    
     <div class="absolute top-12 lg:top-16 left-2 lg:left-6 font-semibold text-lg lg:text-2xl">Early evolution and spread of SARS-CoV-2</div>
@@ -184,6 +182,7 @@ export default {
     </div> 
   </div>
 </section>
+
 <section id="section-3" class="lg:px-4 overflow-hidden">
   <div class="rounded-md lg:rounded-2xl px-6 py-24 lg:p-12 relative bg-slate-200 dark:bg-slate-500 text-slate-800 dark:text-slate-200">
     <div class="absolute top-2 left-2 lg:top-4 lg:left-6 text-4xl font-extrabold ">Interests</div>

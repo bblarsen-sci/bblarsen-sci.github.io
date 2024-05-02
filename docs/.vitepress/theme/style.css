@@ -23,13 +23,6 @@
 
 }
 
-.VPFeature .box {
-  display: flex; /* Enable Flexbox */
-  justify-content: space-between; /* Space between items */
-  align-items: center; /* Align items to the start of the cross axis */
-}
-
-
 /* Increase the max width of the content */
 @media (min-width: 1500px) {
   .VPDoc:not(.has-sidebar) .content {
