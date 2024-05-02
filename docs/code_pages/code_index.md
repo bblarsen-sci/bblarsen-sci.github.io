@@ -5,7 +5,6 @@ dir: 'code_pages'
 title: Code
 ---
 
-
 # Posts about code
 I primarily use Altair, D3, and ChimeraX to make visualizations. 
 

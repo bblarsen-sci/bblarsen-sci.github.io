@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col justify-center items-center">
+  <div class="flex flex-col justify-center items-center ">
     <div class="" ref="svgContainer"></div>
   </div>
 </template>
@@ -179,7 +179,5 @@ onMounted(() => {
 .stroke {
   @apply stroke-current ;
 }
-.legend-text {
-  @apply text-slate-800 dark:text-slate-200;
-}
+
 </style>

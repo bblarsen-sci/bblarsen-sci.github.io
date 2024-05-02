@@ -8,11 +8,9 @@ keywords:
 subtext: test
 ---
 
-hello
-<script setup>
 
+<script setup>
 </script>
 
 
-<VueRandomTest />
 

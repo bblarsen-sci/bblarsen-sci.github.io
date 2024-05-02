@@ -1,11 +1,10 @@
 ---
-title: ChimeraX 
+title: Mapping quantitative values onto protein structures 
 aside: false
 date: 2024-04-25
 keywords:
     - ChimeraX
-    - Interactive
-subtext: How to map aggregate deep mutational scanning measurements on a protein structure.
+subtext: How to map aggregate deep mutational scanning measurements on a protein structure using ChimeraX.
 ---
 
 # {{$frontmatter.title}}
@@ -66,7 +65,7 @@ aggregate_entry_mean(E2_func_infile,'E2_entry_mean',E2_func_output)
 aggregate_entry_mean(E3_func_infile,'E3_entry_mean',E3_func_output)
 ```
 
-Now that we have a file in the correct .defattr format, I load everything into Chimera using a ```.cxc``` file that can be interpreted by ChimeraX. Note, most of these parameters are highly flexible, this is just an example. It is possible to run these commands one at a time in ChimeraX, however I prefer to have most things automated. I will usually comment out the ```save``` command at the end to get the view I want, then run that command at the end once I'm ready to make a nice image. 
+Now that we have a file in the correct .defattr format, I load everything into ChimeraX using a ```.cxc``` file that can be interpreted by ChimeraX. Note, most of these parameters are highly flexible, this is just an example. It is possible to run these commands one at a time in ChimeraX, however I prefer to have most things automated. I will usually comment out the ```save``` command at the end to get the view I want, then run that command at the end once I'm ready to make a nice image. 
 
 ```
 # open PDB file
