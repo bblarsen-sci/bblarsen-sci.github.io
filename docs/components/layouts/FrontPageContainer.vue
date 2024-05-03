@@ -1,9 +1,9 @@
 <template>
     <div class="lg:mx-4">
-        <div class="rounded-sm lg:rounded-lg px-2 py-8 lg:px-12 bg-slate-800 text-slate-400 text-md md:text-lg lg:text-2xl font-light">
+        <div class="rounded-sm lg:rounded-lg px-2 py-8 lg:px-12 bg-slate-800 text-slate-400 text-md md:text-lg lg:text-xl font-light">
             <div>
-                <div class="text-white text-4xl lg:text-6xl font-extrabold">Current Projects</div>
-                <div id="section-1" class="pt-4 text-xl lg:text-4xl font-semibold">Deep Mutational Scanning of the Nipah Receptor Binding Protein</div>
+                <div class="text-white text-2xl lg:text-4xl font-extrabold">Current Projects</div>
+                <div id="section-1" class="pt-4 text-xl lg:text-2xl font-semibold">Deep Mutational Scanning of the Nipah Receptor Binding Protein</div>
             </div>
             <div class="md:px-12 lg:px-48">
                 <div class="flex flex-col flex-wrap items-center">
@@ -27,10 +27,10 @@
                 </div>
             </div>
         </div>
-        <div class="rounded-sm lg:rounded-lg px-2 py-8 lg:px-12 bg-slate-400 dark:bg-slate-700 text-slate-800 dark:text-slate-400 text-md md:text-lg lg:text-2xl font-light">
+        <div class="rounded-sm lg:rounded-lg px-2 py-8 lg:px-12 bg-slate-400 dark:bg-slate-700 text-slate-800 dark:text-slate-400 text-md md:text-lg lg:text-xl font-light">
             <div>
-                <div class="text-white text-4xl lg:text-6xl font-extrabold">Past Projects</div>
-                <div id="section-2" class="pt-4 text-xl lg:text-4xl font-semibold">Evolution and Diversity of Paramyxoviruses in Bats and Rodents</div>
+                <div class="text-white text-2xl lg:text-4xl font-extrabold">Past Projects</div>
+                <div id="section-2" class="pt-4 text-xl lg:text-2xl font-semibold">Evolution and Diversity of Paramyxoviruses in Bats and Rodents</div>
             </div>
             <div class="md:px-12 lg:px-48">
                 <div class="pt-14 lg:pt-20 grid grid-cols-2 gap-8">
@@ -56,7 +56,7 @@
             </div>
             <div class="h-1 bg-slate-800 dark:bg-slate-600"></div>
             <div>
-                <div class="pt-4 text-xl lg:text-4xl font-semibold">Early evolution and spread of SARS-CoV-2</div>
+                <div class="pt-4 text-xl lg:text-2xl font-semibold">Early evolution and spread of SARS-CoV-2</div>
             </div>
             <div class="md:px-12 lg:px-48">
                 <div class="mt-14 grid grid-cols-2 gap-8">
@@ -85,7 +85,7 @@
             </div>
             <div class="h-1 bg-slate-800 dark:bg-slate-400 mt-14 lg:mx-0"></div>
             <div>
-                <div class="pt-4 text-xl lg:text-4xl font-semibold">Ancient DNA</div>
+                <div class="pt-4 text-xl lg:text-2xl font-semibold">Ancient DNA</div>
             </div>
             <div class="md:px-12 lg:px-48"> 
                 <div class="container pt-14 grid grid-cols-2 gap-8">

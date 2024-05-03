@@ -8,7 +8,7 @@
         <div class="px-4 lg:px-8 lg:mx-12">
             <img src="/images/pallid.jpg" alt="Descriptive Alt Text" class="float-right ml-4 mb-4 w-48 lg:w-72 object-cover"></img>
             <p class="text-left">
-                I am broadly interested in how viruses evolve in wild mammals, in particular bats and rodents. My research spans field work, experimental approaches using pseudotyped lentiviruses, and computational analyses. I am currently a postdoctoral fellow at the <a class="text-blue-500 hover:text-blue-800" href="https://www.fredhutch.org/en.html">Fred Hutch Cancer Center</a>, in Seattle, Washington, where I study the molecular and protein evolution of Nipah virus in the <a class="text-blue-500 hover:text-blue-800" href="https://research.fredhutch.org/bloom/en.html">Bloom lab</a>.
+                I am broadly interested in how viruses evolve in wild mammals, in particular bats and rodents. I am currently a postdoctoral fellow at the <a class="text-blue-500 hover:text-blue-800" href="https://www.fredhutch.org/en.html">Fred Hutch Cancer Center</a>, in Seattle, Washington, where I study the function and evolution of Nipah virus in the <a class="text-blue-500 hover:text-blue-800" href="https://research.fredhutch.org/bloom/en.html">Bloom lab</a>.
             </p>
             <br></br>
             <p class="text-left">
@@ -19,9 +19,7 @@
                 Prior to my PhD, I worked as a research technician in the lab of <a class="text-blue-500 hover:text-blue-800" href="https://mullinslab.microbiol.washington.edu/people/faculty/1460-James-Mullins">Dr. James Mullins</a> at the University of Washington, in Seattle, Washington. I worked on projects that involved sequencing HIV genomes from breakthrough infections in vaccine trials and early infection.
             </p>
             <br></br>
-            <p class="text-left">
-                I am originally from Anchorage, Alaska. 
-            </p>
+            
             <br></br>
         </div>
     </div>

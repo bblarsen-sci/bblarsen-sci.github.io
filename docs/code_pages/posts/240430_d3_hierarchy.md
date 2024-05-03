@@ -1,11 +1,11 @@
 ---
-title: D3 Hierarchy
+title: D3 hierarchy
 aside: false
 date: 2024-04-30
 keywords:
     - D3
     - Hierarchy
-subtext: How to convert a .csv into a D3 hierarchy
+subtext: convert a .csv into a D3 hierarchy
 ---
 # {{$frontmatter.title}}
 {{$frontmatter.subtext}}

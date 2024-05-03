@@ -1,5 +1,5 @@
 ---
-title: Altair Letter Scatter
+title: Altair letter scatter
 aside: false
 date: 2024-04-26
 keywords:

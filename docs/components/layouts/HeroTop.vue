@@ -8,7 +8,7 @@
         <div class="text-2xl md:text-2xl lg:text-4xl font-semibold leading-tight tracking-tight text-slate-600 dark:text-slate-400 ">
         Brendan Larsen
         </div>
-        <div class="text-2xl md:text-4xl lg:text-6xl font-semibold leading-tight tracking-tight py-4 md:py-6 bg-clip-text text-transparent bg-gradient-to-r from-slate-400 to-sky-600 ">
+        <div class="text-xl md:text-2xl lg:text-4xl font-semibold leading-tight tracking-tight py-4 md:py-6 bg-clip-text text-transparent bg-gradient-to-r from-slate-400 to-sky-600 ">
           Scientist / Biologist
         </div>
         <p class="text-lg md:text-xl lg:text-2xl leading-tight tracking-tight text-slate-400 dark:text-slate-400">

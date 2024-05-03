@@ -1,11 +1,11 @@
 ---
-title: D3 Phylogeny
+title: D3 phylogeny
 aside: false
 date: 2024-04-28
 keywords:
     - D3
     - Phylogeny
-subtext: How to make a phylogeny with D3
+subtext: How to plot a phylogeny with D3
 ---
 
 <script setup>

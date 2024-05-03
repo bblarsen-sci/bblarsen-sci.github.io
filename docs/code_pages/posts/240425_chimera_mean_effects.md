@@ -12,7 +12,7 @@ subtext: How to map aggregate deep mutational scanning measurements on a protein
 
 
 <div class="flex justify-center items-center">
-    <img src="/images/entry_tetramer_better.png" class="w-full sm:w-1/4 md:w-1/2 lg:w-1/2"/>
+    <img src="/images/entry_tetramer_better.png" class="sm:w-1/4 md:w-1/4 lg:w-1/2"/>
 </div>
 
 
