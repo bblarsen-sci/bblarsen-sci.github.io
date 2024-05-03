@@ -15,6 +15,7 @@ async function fetchData() {
   const group = d3.group(parsedData, d => d.site, d => d.mutant);
   const root = d3.hierarchy(group);
 
+  console.log(root)
   const width = 800;
   const dx = 10;
   const dy = width / (root.height + 1);
@@ -43,7 +44,7 @@ async function fetchData() {
     .attr("viewBox", [-dy / 3, x0 - dx, width, height])
     .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
 
-  const link = svg.append("g")
+  svg.append("g")
       .attr("fill", "none")
       .attr("stroke", "#555")
       .attr("stroke-opacity", 0.3)

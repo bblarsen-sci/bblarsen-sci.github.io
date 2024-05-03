@@ -1,0 +1,106 @@
+<template>
+    <div class=" px-6 pb-6">
+        <div class="flex flex-col items-center justify-between py-4">
+            <p class="text-3xl tracking-tight leading-8 font-bold text-slate-700 dark:text-slate-300">Visualizing Biological Data</p>
+            <p class="py-4 text-lg">With <a href="https://d3js.org/" class="text-sky-600 hover:text-sky-800">D3</a>, <a href="https://altair-viz.github.io/" class="text-sky-600 hover:text-sky-800">Altair</a>, and <a href="https://www.cgl.ucsf.edu/chimerax/" class="text-sky-600 hover:text-sky-800">ChimeraX</a></p>
+        </div>
+        <div>
+            <v-select class="mb-10 max-w-96 border border-gray-300 dark:border-slate-700 rounded-md shadow-sm text-gray-700 dark:text-slate-300 text-base"
+                v-model="selectedKeywords"
+                :options="filteredKeywords"
+                multiple
+                placeholder="Filter by keywords">
+            </v-select>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div v-for="(post, index) in filteredPosts" :key="index" class="card">
+                    <a :href="post.url" class="block h-full">
+                        <article class="h-full flex flex-col justify-between space-y-2 p-6 bg-white dark:bg-slate-800 rounded-lg shadow-md">
+                            <div class="space-y-4">
+                                <p class="text-2xl leading-8 text-slate-700 dark:text-slate-300 font-bold tracking-tight">{{ post.title }}</p>
+                                <div v-if="post.subtext" class="text-slate-600 dark:text-slate-400" v-html="post.subtext"></div>
+                                <div v-if="post.keywords" class="keywords">
+                                    <span><strong>Keywords: </strong></span>
+                                    <span v-for="(keyword, kIndex) in post.keywords" :key="kIndex">{{ keyword }}<span v-if="kIndex < post.keywords.length - 1">, </span></span>
+                                </div>
+                            </div>
+                            <div class="mt-4 text-sky-600">
+                                <DateComponent :dateString="post.date" />
+                            </div>
+                        </article>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
+<script>
+import { ref, computed } from 'vue';
+import { data as postsData } from './posts.data.js';
+import { useData } from 'vitepress';
+import DateComponent from './Date.vue';
+
+export default {
+    components: {
+        DateComponent,
+    },
+    props: {
+        currentDirectory: {
+            type: String,
+            required: true
+        }
+    },
+    setup(props) {
+        const { frontmatter } = useData();
+        const selectedKeywords = ref([]);
+
+        const filteredPosts = computed(() => {
+            const currentDirectory = props.currentDirectory;
+
+            return postsData.filter(post => {
+                const parentDirectory = post.url.split('/').slice(-3, -2)[0];
+                const isInCurrentDirectory = parentDirectory === currentDirectory;
+                const hasSelectedKeywords = selectedKeywords.value.length === 0 ||
+                    post.keywords?.some(keyword => selectedKeywords.value.includes(keyword));
+
+                return isInCurrentDirectory && hasSelectedKeywords;
+            });
+        });
+
+        const filteredKeywords = computed(() => {
+            const keywords = new Set();
+            filteredPosts.value.forEach(post => {
+                if (post.keywords) {
+                    post.keywords.forEach(keyword => keywords.add(keyword));
+                }
+            });
+            return Array.from(keywords);
+        });
+
+        return {
+            frontmatter,
+            selectedKeywords,
+            filteredKeywords,
+            filteredPosts,
+            currentDirectory: props.currentDirectory,
+        };
+    }
+}
+</script>
+<style scoped>
+a {
+    text-decoration: none;
+}
+
+.card {
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.keywords {
+    font-size: 0.875rem;
+    color: var(--vp-c-text-2);
+}
+</style>

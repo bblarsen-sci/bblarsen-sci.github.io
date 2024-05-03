@@ -4,8 +4,7 @@ aside: false
 date: 2024-05-01
 keywords:
     - D3
-    - Heatmap
-subtext: Heatmap showing blocks of sites at one time.
+subtext: Heatmap showing blocks of sites that can be scrolled, with transistion animation.
 ---
 
 # {{$frontmatter.title}}

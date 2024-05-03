@@ -1,22 +1,20 @@
 <template>
   <div class="dark:bg-slate-900">
     <div class="absolute top-0 left-0 right-0 h-72 opacity-80">
-        <div style="animation-delay:0.8s; animation-duration:2s" class="fade-in bg-waves"></div>
+        <div style="animation-delay:0.4s; animation-duration:2.5s" class="fade-in bg-layeredpeaks"></div>
     </div>
     <section class="flex flex-col items-center justify-center h-screen">
       <div class="text-center mx-auto inline-block">
-        <div class="text-2xl md:text-2xl lg:text-4xl font-semibold leading-tight tracking-tight text-slate-600 dark:text-slate-400 ">
+        <div class="text-4xl md:text-4xl lg:text-4xl 2xl:text-6xl font-semibold leading-8 tracking-tight text-slate-500 dark:text-slate-400 ">
         Brendan Larsen
         </div>
-        <div class="text-xl md:text-2xl lg:text-4xl font-semibold leading-tight tracking-tight py-4 md:py-6 bg-clip-text text-transparent bg-gradient-to-r from-slate-400 to-sky-600 ">
-          Scientist / Biologist
-        </div>
-        <p class="text-lg md:text-xl lg:text-2xl leading-tight tracking-tight text-slate-400 dark:text-slate-400">
-          Studying the evolution of viruses.
+
+        <p class="text-2xl md:text-2xl lg:text-2xl 2xl:text-4xl font-semibold leading-8 tracking-tight py-4 md:py-6 bg-clip-text text-transparent bg-gradient-to-r from-slate-400 to-sky-400 ">
+          Studying Viral Evolution
         </p>
       </div>
     </section>
-    <section class="p-6 lg:p-10 lg:mx-4 rounded-md">
+    <section class="p-6 lg:p-10 lg:mx-4 rounded-md bg-white dark:bg-slate-900">
       <div class="text-sm lg:text-xl flex justify-evenly text-slate-500 dark:text-slate-400 tracking-widest uppercase">
         <a class=" hover:text-sky-600" href="#section-1">Current</a>
         <a class=" hover:text-sky-600" href="#section-2">Past</a>

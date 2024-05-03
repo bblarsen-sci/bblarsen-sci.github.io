@@ -4,7 +4,6 @@ aside: false
 date: 2024-04-28
 keywords:
     - D3
-    - Phylogeny
 subtext: How to plot a phylogeny with D3
 ---
 
@@ -21,9 +20,9 @@ import PhylogeneticTree from "/components/graphs/PhylogeneticTree.vue";
 <div style="text-align: center; color: grey; font-size: smaller">Phylogeny of Nipah colored by country of origin. Based on whole genome sequences.</div>
 
 ## D3 circular tree
-Make the actual plotting script in ```/components/PhylogeneticTree.vue```. 
+The code for making the tree is in ```/components/PhylogeneticTree.vue```. 
 
-Then, import into the markdown file with the following code:
+To visualize, I import the ```.vue``` script into a markdown file with the following code:
 
 ```html
 <script setup>
@@ -42,8 +41,13 @@ The actual script ```PhylogeneticTree.vue``` contains some html with tailwind CS
   </div>
 </template>
 ```
+I made a maximum likelihood tree using IQ-Tree, and added country info to each taxon. Here is an example of what the tree .newick format looks like.
 
-To parse the Newick tree, I used javascript to parse the string into a JSON object with a function written by [Jason Davies](https://github.com/jasondavies/newick.js/blob/master/src/newick.js){target="_self"}. I added a slight modification to get the Country information for the tree.
+```
+((('OM135495.1'[India]:0.0052953671000000035,((('MN549402.1'[India]:0.003601001100000001,...
+```
+
+Which shows the taxon name, the country, and the branch lengths. To parse the newick tree, I used javascript to read the string into a JSON object with a function written by [Jason Davies](https://github.com/jasondavies/newick.js/blob/master/src/newick.js){target="_self"}. I added a slight modification to get the country information for the tree.
 
 ```js
 parseNewick(a) {
@@ -81,20 +85,15 @@ parseNewick(a) {
 },
 ```
 
-Then, I load the tree data with ```Vue``` and parse it, and call the plot function.
+Then, I load the tree data, parse it, and call the plot function.
 
 ```js
-async loadTreeData() {
-      try {
-        const response = await fetch('/data/nipah_whole_genome_phylo.tre');
-        const data = await response.text();
-        const parsedData = this.parseNewick(data); // Parse the newick tree data
-        this.treeData = parsedData;  // Store the parsed data in treeData
-        this.drawChart(this.treeData);  // Pass the data to drawChart
-      } catch (error) {
-        console.error('Error loading tree data:', error);
-      }
-    },
+async function fetchData() {
+  const file = await fetch('/data/nipah_whole_genome_phylo.tre');
+  const csv = await file.text();
+  const parsedData = parseNewick(csv); 
+  drawChart(parsedData); 
+};
 ```
 
 The actual plotting function is a recursive function that plots the tree. Most of this code was [taken from the excellent example](https://observablehq.com/@d3/tree-of-life?intent=fork){target="_self"} by Mike Bostock. 
@@ -209,6 +208,14 @@ legendItems.append("text")
     .attr("y", 6)
     .attr("dy", "0em")
     .text(d => d[0]);
+```
+
+I use this ```vue.js``` function to run all the code once the DOM has been mounted:
+
+```js
+onMounted(() => {
+  fetchData();
+});
 ```
 
 And here is the final tree again. 

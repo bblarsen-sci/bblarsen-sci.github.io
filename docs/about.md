@@ -1,7 +1,7 @@
 ---
 layout: page
 ---
-[Test](/test)
+
 
 <script setup>
 import About from "/components/layouts/About.vue";

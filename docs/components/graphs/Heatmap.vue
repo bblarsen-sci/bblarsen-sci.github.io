@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col justify-left items-left">
+    <div class="flex flex-col justify-left items-left mx-6">
         <div class="m-2 text-xs">
             <label for="siteInput">Enter Specific Sites:</label>
             <input type="text" id="siteInput" v-model="siteInputValue" class="mx-2 px-2 py-2 rounded-md ring-1 ring-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="e.g., 555-560, 590-600">
@@ -186,12 +186,20 @@ function updateHeatmap(data) {
       const tooltip = d3.select('#tooltip');
       tooltip.html(tooltipText)
       .style('opacity', 1)
-      .style('transform', `translate(${event.offsetX - margin.left + 30}px, ${event.offsetY - height - 27}px)`)
+      .style('transform', `translate(${event.offsetX - margin.left + 0}px, ${event.offsetY - height - 90}px)`)
+
+    d3.select(this)
+      .attr('stroke', 'black')
+      .attr('stroke-width', 3);
     })
+    
     .on('mouseout', function() {
       const tooltip = d3.select('#tooltip');
       tooltip.style('opacity', 0)
         .style('transform', 'none');
+    d3.select(this)
+      .attr('stroke', 'black')
+      .attr('stroke-width', strokeWidthValue.value);
     });
 
 

@@ -4,7 +4,7 @@ aside: false
 date: 2024-04-27
 keywords:
     - D3
-subtext: How to make a simple plot with D3
+subtext: Simple plot with D3
 ---
 
 # {{$frontmatter.title}}
