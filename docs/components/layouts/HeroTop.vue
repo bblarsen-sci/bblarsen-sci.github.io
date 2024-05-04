@@ -1,26 +1,14 @@
 <template>
-  <div class="dark:bg-slate-950 ">
-    <div class="absolute top-0 left-0 right-0 h-72 opacity-80">
-        <div style="animation-delay:0.4s; animation-duration:2.5s" class="fade-in"></div>
+  <div class="h-screen flex flex-col justify-center items-center">
+    <div class="text-center">
+      <div class="text-2xl xl:4xl font-semibold">Brendan Larsen</div>
+      <div class="pt-4 pb-20 text-4xl xl:text-4xl uppercase font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-red-700 to-sky-700 via-slate-300 ">Viral Evolution and Diversity</div>
     </div>
-    <section class="flex flex-col items-center justify-center h-screen">
-      <div class="text-center">
-        <div class="font-semibold md:text-lg lg:text-xl 2xl:text-2xl tracking-widest text-black dark:text-slate-300 ">
-        Brendan Larsen
-        </div>
-
-        <p class="text-4xl 2xl:text-6xl pt-2 font-semibold tracking-tight uppercase bg-clip-text text-transparent  bg-gradient-to-r from-red-700 to-sky-700 via-slate-300 ">
-           Viral Evolution and Diversity
-        </p>
+      <div class="text-sm flex flex-row justify-center gap-6 lg:gap-10 tracking-wide uppercase">
+        <a class="p-2 border-2 border-black dark:border-white rounded-xl shadow-lg hover:border-sky-500" href="/about">About</a>
+        <a class="p-2 border-2 border-black  dark:border-white rounded-xl shadow-lg hover:border-sky-500" href="/publications">Publications</a>
+        <a class="p-2 border-2 border-black dark:border-white rounded-xl shadow-lg hover:border-sky-500" href="/code_pages/code_index">Code</a>
       </div>
-    </section>
-    <section class="p-6 lg:p-10 lg:mx-4 rounded-md bg-white dark:bg-slate-950">
-      <div class="text-sm lg:text-xl flex justify-evenly text-slate-600 dark:text-slate-400 tracking-widest uppercase">
-        <a class=" hover:text-sky-600" href="#section-1">Current</a>
-        <a class=" hover:text-sky-600" href="#section-2">Past</a>
-        <a class=" hover:text-sky-600" href="#section-3">Interests</a>
-      </div>
-    </section>  
   </div>
 </template>
 
