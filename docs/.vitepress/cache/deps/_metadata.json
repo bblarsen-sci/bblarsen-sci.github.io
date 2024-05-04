@@ -1,59 +1,62 @@
 {
-  "hash": "08d3b9f3",
-  "configHash": "1e2cb65f",
+  "hash": "3a5d9273",
+  "configHash": "2f267fac",
   "lockfileHash": "450e76ed",
-  "browserHash": "80a4767c",
+  "browserHash": "b427e3dd",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "17e57867",
+      "fileHash": "27329c04",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "c6311868",
+      "fileHash": "d3191b21",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "3b592078",
+      "fileHash": "c7a0e16e",
       "needsInterop": false
     },
     "vue-select": {
       "src": "../../../../node_modules/vue-select/dist/vue-select.es.js",
       "file": "vue-select.js",
-      "fileHash": "1605fb80",
+      "fileHash": "5b756122",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "fe714009",
+      "fileHash": "9e72df66",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "ad598e2a",
+      "fileHash": "caa6693b",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "3af7fb18",
+      "fileHash": "41825edd",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "33986e8c",
+      "fileHash": "2273f729",
       "needsInterop": false
     }
   },
   "chunks": {
+    "chunk-O4XWQMLZ": {
+      "file": "chunk-O4XWQMLZ.js"
+    },
     "chunk-5UV7SUN4": {
       "file": "chunk-5UV7SUN4.js"
     },
@@ -62,9 +65,6 @@
     },
     "chunk-AVDKQJKK": {
       "file": "chunk-AVDKQJKK.js"
-    },
-    "chunk-O4XWQMLZ": {
-      "file": "chunk-O4XWQMLZ.js"
     },
     "chunk-ZS7NZCD4": {
       "file": "chunk-ZS7NZCD4.js"

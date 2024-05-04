@@ -1,74 +1,78 @@
 <template>
-    <div class="lg:px-4 xl:px-10 2xl:px-24 dark:bg-slate-900">
-        <div class="rounded-lg lg:rounded-xl 2xl:rounded-2xl px-2 py-8 lg:px-12 bg-sky-dark bg-no-repeat text-slate-400 text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl font-light">
+    <div class="lg:px-4 xl:px-6  dark:bg-slate-950">
+        <div class="rounded-lg lg:rounded-xl 2xl:rounded-2xl py-4 px-4 lg:py-10 lg:px-12 bg-sky-dark bg-no-repeat text-slate-300 text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl font-light">
             <div>
-                <div class="text-white dark:text-slate-200 text-2xl lg:text-2xl xl:text-4xl 2xl:text-6xl font-extrabold tracking-tight leading-tight">Current Projects</div>
-                <div id="section-1" class="pt-4 text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-semibold">Deep Mutational Scanning of the Nipah Receptor Binding Protein</div>
+                <div class="text-white dark:text-slate-200 text-2xl lg:text-2xl xl:text-4xl 2xl:text-6xl font-extrabold tracking-tight">Current Projects</div>
+                <div id="section-1" class="text-slate-400 leading-8 text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-semibold">Deep Mutational Scanning of the Nipah Receptor Binding Protein</div>
             </div>
-            <div class="md:px-24 lg:px-60 2xl:px-80">
-                <div class="flex flex-col flex-wrap items-center ">
+            <div class="md:px-24 lg:px-50 2xl:px-100">
+                <div class="flex flex-col flex-wrap items-center text-center">
                     <NipahPhylogeny />
-                    <div class="-mt-6 md:-mt-12 text-center text-xs md:text-sm lg:text-md">Phylogeny of Nipah colored by country of origin. Based on whole genome sequences.</div>
+                    <div class="-mt-6 md:-mt-12 text-center text-xs lg:text-md">Phylogeny of Nipah viruses</div>
                 </div>
-                <div class="mt-14">Nipah is a bat-borne virus that occasionally spills over into humans. Nipah virus expresses two surface proteins: the receptor binding and fusion proteins. The receptor binding protein attaches to host receptors, ephrin-B2 and ephrin-B3, with high affinity. Following receptor binding, the receptor binding protein undergoes a conformational shift, which triggers the fusion protein to fuse viral and cell membranes. These complex conformational cascades between two proteins leads to viral entry into host cells. To better understand these processes, I performed deep mutational scanning on the receptor binding protein and measured the effects of mutations on cell entry, receptor binding, and antibody escape with a BSL-2 pseudovirus platform.</div>
-                <div class="flex justify-evenly lg:grid-cols-2 items-center text-center pt-12">
-                    <p class=" max-w-96">Structure of the tetrameric receptor binding protein colored by the mean effect of mutations on cell entry. Darker red indicates sites with low tolerance for mutations.</p>
-                    <img src="/images/entry_tetramer_better.png" class="max-w-48 lg:max-w-80 2xl:max-w-[400px] element-hidden">
+                <div class="pt-14 text-center leading-8 ">Nipah is a bat-borne virus that occasionally spills over into humans. Nipah virus expresses two surface proteins: the receptor binding and fusion proteins.</div>
+                <div class="flex flex-col flex-wrap items-center pt-14">
+                    <img src="/images/nipah.png" class="max-h-96">
                 </div>
-                <div class="mt-14 text-center">The receptor binding protein is also an important target for neutralizing antibodies, which have shown effectiveness in preventing disease in animal models. To better understand constraint across different epitopes, we prospectively mapped sites of escape for six antibodies. </div>
-                <div class="flex justify-evenly lg:grid-cols-2 items-center text-center mt-14 gap-2">
+                <div class="pt-14 leading-8 text-center">The receptor binding protein can bind two different host receptors with high affinity: ephrin-B2 and ephrin-B3. Following attachment to a cell, the receptor binding protein undergoes a conformational shift, which triggers the fusion protein to fuse viral and cell membranes. These complex conformational cascades between two proteins leads to viral entry into host cells. To better understand these processes, I performed deep mutational scanning on the receptor binding protein and measured the effects of mutations on cell entry, receptor binding, and antibody escape with a BSL-2 pseudovirus platform.</div>
+                <div class="flex justify-center gap-2 lg:grid-cols-2 items-center text-center pt-12">
+                    <p class="max-w-72 font-semibold leading-tight text-xs">Structure of the tetrameric receptor binding protein colored by the mean effect of mutations on cell entry. Darker red indicates sites with low tolerance for mutations.</p>
+                    <img src="/images/entry_tetramer_better.png" class="element-hidden max-w-48 lg:max-w-72 xl:max-w-80 2xl:max-w-[400px]">
+                </div>
+                <div class="mt-14 text-center leading-8">The receptor binding protein is also an important target for neutralizing antibodies, which have shown effectiveness in preventing disease in animal models. To better understand constraint across different epitopes, we prospectively mapped sites of escape for six antibodies. </div>
+                <div class="flex justify-evenly lg:grid-cols-2 items-center text-center pt-14 gap-2">
                     <img src="/images/escape.png" class="max-h-60 md:max-h-96 element-hidden shadow-lg shadow-slate-400">
-                    <p class="max-w-96"> Logo plot showing how receptor binding protein mutations affect neutralization by two different monoclonal antibodies (HENV-32, HENV-103). The height of each letter represents antibody escape, colored by functional tolerance. </p>
+                    <p class="max-w-72 font-semibold leading-tight text-xs"> Effect of mutations on antibody neutralization. The height of each letter represents antibody escape, colored by functional tolerance. </p>
                 </div>
-                <div class="leading-tight text-center mt-14 tracking-tight text-2xl lg:text-4xl pb-10 bg-clip-text text-transparent bg-gradient-to-r from-slate-400 to-red-600 font-semibold drop-shadow-xl ">These data aid in the development of vaccines and antibody therapies, in addition to improving basic understanding of the function of the receptor binding protein.</div>
-                <div class="flex justify-evenly text-center pt-14 tracking-wide uppercase gap-10">
+                <div class="leading-tight text-center pt-14 tracking-tight text-2xl lg:text-4xl pb-10 bg-clip-text text-transparent bg-gradient-to-r from-slate-400 to-red-400 font-semibold">These data aid in the development of vaccines and antibody therapies, in addition to improving basic understanding of the function of the receptor binding protein.</div>
+                <div class="flex justify-evenly text-center pt-10 tracking-wide uppercase gap-10">
                     <a class=" hover:text-sky-600 " href="https://dms-vep.org/Nipah_Malaysia_RBP_DMS/">Link to project website</a>
                     <a class=" hover:text-sky-600 " href="https://www.biorxiv.org/content/10.1101/2024.04.17.589977v1">Link to preprint</a>
                 </div>
             </div>
         </div>
         <br class=""></br>
-        <div class="rounded-lg lg:rounded-xl 2xl:rounded-2xl px-2 py-8 lg:px-12 bg-simpleshiny  text-slate-900 dark:text-slate-900 text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl font-light">
+        <div class="rounded-lg lg:rounded-xl 2xl:rounded-2xl py-4 px-4 lg:py-10 lg:px-12 bg-lightblue  text-slate-300  text-sm md:text-md lg:text-lg xl:text-xl 2xl:text-2xl font-light">
             <div>
                 <div class="text-white dark:text-slate-200 text-2xl lg:text-2xl xl:text-4xl 2xl:text-6xl tracking-tight leading-tight font-extrabold">Past Projects</div>
-                <div id="section-2" class="pt-4 text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-semibold">Evolution and Diversity of Paramyxoviruses in Bats and Rodents</div>
+                <div id="section-2" class="text-slate-400 leading-8 text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-semibold">Evolution and Diversity of Paramyxoviruses in Bats and Rodents</div>
             </div>
             <div class="md:px-24 lg:px-60 2xl:px-80">
                 <div class="pt-14 lg:pt-20 grid grid-cols-2 gap-8">
                     <div class="flex items-center col-span-2 justify-center text-center">
-                        <p class="litems-center justify-center"> Paramyxoviruses are widespread and extremely diverse, including notable human pathogens such as Nipah and Measles. To better understand viral diversity across host species, I captured hundreds of individual animals from 19 bat and 15 rodent species across Arizona. From feces and urine samples collected from these animals, I identified 55 new viral sequences, including some nearly full-length genomes.</p>
+                        <p class="litems-center justify-center leading-8"> Paramyxoviruses are widespread and extremely diverse, including notable human pathogens such as Nipah and Measles. To better understand viral diversity across host species, I captured hundreds of individual animals from 19 bat and 15 rodent species across Arizona. From feces and urine samples collected from these animals, I identified 55 new viral sequences, including some nearly full-length genomes.</p>
                     </div>
                     <div class="flex justify-center items-center element-hidden">
-                        <img src="/images/pallid.jpg" class="max-h-96 shadow-lg shadow-slate-400">
+                        <img src="/images/pallid.jpg" class="max-h-80 shadow-md shadow-slate-500">
                     </div>
                     <div class="flex justify-center items-center element-hidden">
-                        <img src="/images/peromyscus.png" class="max-w-full max-h-64 lg:max-h-96 shadow-lg shadow-slate-400 " alt="Escape">
+                        <img src="/images/peromyscus.png" class="max-w-full max-h-64 lg:max-h-96 shadow-md shadow-slate-500 " alt="Escape">
                     </div>
-                    <div class="flex items-center justify-center text-center col-span-2 mt-14">
+                    <div class="flex items-center justify-center text-center col-span-2 mt-14 leading-8">
                         <p class="">What is the phylogenetic history of these viruses? A comparison of bat and virus phylogenies reveals similar branching patterns, suggesting a long-standing association that spans millions of years. This relationship highlights the intricate evolutionary dynamics between hosts and their viruses.</p>
                     </div>
                     <div class="flex items-center justify-center col-span-2 pt-14 ">
                         <img class="max-w-full max-h-96 element-hidden shadow-lg shadow-slate-400" src="/images/pmv_co_phylogeny.jpg"></img>
                     </div>
-                    <nav class="flex col-span-2 justify-center text-center py-14  tracking-wide uppercase">
+                    <nav class="flex col-span-2 justify-center text-center py-6  tracking-wide uppercase">
                         <a class=" hover:text-sky-600 " href="https://pubmed.ncbi.nlm.nih.gov/34668771/">Link to paper</a>
                     </nav>
                 </div>
             </div>
-            <div class="h-1 bg-slate-800 dark:bg-slate-600"></div>
+            <div class="h-1 bg-slate-400"></div>
             <div>
                 <div class="pt-4 text-lg lg:text-xl xl:text-2xl 2xl:text-4xl font-semibold">Early evolution and spread of SARS-CoV-2</div>
             </div>
             <div class="md:px-24 lg:px-60">
-                <div class="mt-14 grid grid-cols-2 gap-8">
+                <div class="mt-14 grid grid-cols-2 gap-8 leading-8">
                     <div class="flex items-center justify-center text-center col-span-2">
-                        <p class="items-center justify-center"> During the initial stages of the SARS-CoV-2 pandemic, I helped sequence viral genomes and analyzed phylogenetic patterns of early introductions and spread across various geographic regions.</p>
+                        <p class="items-center justify-center leading-8"> During the initial stages of the SARS-CoV-2 pandemic, I helped sequence viral genomes and analyzed phylogenetic patterns of early introductions and spread across various geographic regions.</p>
                     </div>
                     <div class="flex justify-center items-center element-hidden pt-14">
                         <img src="/images/mbio_phylogeny.jpg" class="max-h-96 shadow-lg shadow-slate-400"></img>
                     </div>
                     <div class="flex justify-center items-center  text-center pt-14">
-                        <p class=""> <a href="https://pubmed.ncbi.nlm.nih.gov/32887735/" class="hover:text-sky-600 underline">In a collaboration with scientists across Arizona (UA, ASU, NAU, TGen)</a>, we sequenced many of the earliest COVID-19 cases identified in March 2020. Our analysis focused on determining the number of distinct introductions during this period.</p>
+                        <p class="leading-8"> <a href="https://pubmed.ncbi.nlm.nih.gov/32887735/" class="hover:text-sky-600 underline">In a collaboration with scientists across Arizona (UA, ASU, NAU, TGen)</a>, we sequenced many of the earliest COVID-19 cases identified in March 2020. Our analysis focused on determining the number of distinct introductions during this period.</p>
                     </div>
                     <div class="flex items-center justify-center text-center col-span-2 pt-14">
                         <p class="">I also contributed to a <a href="https://pubmed.ncbi.nlm.nih.gov/32912998/" class="hover:text-sky-600 underline">study published in Science</a> that investigated various phylogenetic hypotheses regarding the initial introductions into the United States and Europe.</p>
@@ -85,9 +89,9 @@
                 </div>
             </div>
         </div>
-        <br class="bg-white dark:bg-slate-900"></br>
+        <br class="bg-white dark:bg-slate-950"></br>
         <div id="section-3" class="">
-            <div class="rounded-lg lg:rounded-xl 2xl:rounded-2xl px-2 py-24 lg:p-12 relative bg-sky-light dark:bg-slate-800 text-slate-400 ">
+            <div class="rounded-lg lg:rounded-xl 2xl:rounded-2xl py-4 px-4 lg:py-10 lg:px-12 relative bg-sky-light dark:bg-slate-800 text-slate-400 ">
                 <div class="absolute top-6 text-white text-2xl lg:text-2xl xl:text-4xl 2xl:text-6xl font-extrabold tracking-tight leading-tight">Interests</div>
                 <div class="flex flex-col pt-16 lg:pt-20 gap-8 text-lg lg:text-2xl 2xl:text-4xl tracking-wide leading-loose font-light">
                     <p class="text-center">Viral Evolution and Diversity</p>

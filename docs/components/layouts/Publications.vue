@@ -35,7 +35,7 @@ export default {
 <template>
   <div class="text-slate-800 dark:text-slate-400 bg-white dark:bg-slate-900">
     <div class="flex flex-col justify-center h-80 md:h-96 bg-layeredpeaks">
-      <div class="text-left text-6xl 2xl:text-6xl tracking-tight leading-8 font-bold px-8">
+      <div class="text-left text-4xl 2xl:text-6xl tracking-tight leading-8 font-bold px-8">
         <p>Publications</p>
       </div>
     </div>

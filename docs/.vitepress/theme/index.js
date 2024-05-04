@@ -1,5 +1,5 @@
 import { h } from "vue";
-import DefaultTheme from "vitepress/theme";
+import DefaultTheme from "vitepress/theme-without-fonts";
 import Altair from "./Altair.vue";
 import Figure from "./Figure.vue";
 import "bootstrap-icons/font/bootstrap-icons.css";
