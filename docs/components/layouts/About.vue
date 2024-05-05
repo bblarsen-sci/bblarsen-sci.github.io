@@ -1,7 +1,7 @@
 <template>
     <div class="dark:bg-slate-900 min-h-screen text-slate-800 dark:text-slate-400">
         <div class="">
-            <div class="flex flex-col justify-center h-80 lg:h-96 bg-layeredpeaks">
+            <div class="flex flex-col justify-center h-80 lg:h-96">
                 <div class="text-left text-4xl 2xl:text-6xl font-semibold px-4 lg:px-10 xl:px-24 2xl:px-30">
                     <p>About</p>
                 </div>

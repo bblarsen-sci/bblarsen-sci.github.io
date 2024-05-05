@@ -124,7 +124,7 @@ function updateHeatmap(data) {
   
   // D3 FIGURE MAKING
   let colorScale = d3.scaleDiverging(d3.interpolateRdBu) // Use a diverging color scale
-    .domain([-4, 0, 4]);
+    .domain([-4, 0, 2]);
 
   // setup the scales
   const yScale = d3.scaleBand()
