@@ -4,7 +4,6 @@
             <div class="flex items-center mx-auto gap-2 justify-between pb-4 text-sm md:text-lg tracking-wider uppercase opacity-70 text-center">
                 <a class="inline-flex flex-1 justify-center hover:text-sky-500" href="#section-1">Current Projects</a>
                 <a class="inline-flex flex-1 justify-center hover:text-sky-500" href="#section-2">Past Projects</a>
-                <a class="inline-flex flex-1 justify-center hover:text-sky-500" href="#section-3">Interests</a>
             </div>
             <div class="grid grid-cols-12 p-4 lg:p-10 lg:rounded-2xl bg-sky-dark bg-no-repeat text-slate-200 ">
                 <div class="col-start-1 col-span-12 lg:col-span-10 mt-4">
@@ -13,9 +12,10 @@
                 </div>
                 <div class="col-start-4 col-span-6 text-md ">
                     <div class="font-semibold text-2xl text-sky-400 pt-16">Nipah Virus</div>
-                    <div class="leading-8">Nipah is a bat-borne virus that occasionally spills over into humans, causing devastating disease and high fatality rates. There are currently no approved vaccines or therapeutics. The phylogeny below shows the evolutionary relationship between Nipah viruses.</div>
+                    <div class="leading-8">Nipah is a bat-borne virus that occasionally spills over into humans, causing devastating disease and high fatality rates. There are currently no approved vaccines or therapeutics.</div>
                     <div class="flex flex-col items-center -pt-8">
-                        <NipahPhylogeny class="aspect-square" />   
+                        <NipahPhylogeny class="min-w-96" />  
+                        <div class="font-light text-sm">Phylogenetic tree of Nipah viruses</div> 
                     </div>
                     <div class="pt-10 font-semibold text-2xl text-sky-400">Receptor Binding Protein</div>
                     <div class="flex flex-col justify-center items-center">
@@ -23,13 +23,13 @@
                     </div>
                     <div class="flex flex-col justify-center gap-2 items-center text-center pt-10">
                         <img src="/images/entry_tetramer_better.png" class="max-w-96 ">
-                        <p class="text-sm">Structure of the tetrameric receptor binding protein colored by the mean effect of mutations on cell entry. Darker red indicates sites with low tolerance for mutations.</p>
+                        <p class="text-sm font-light">Structure of the tetrameric receptor binding protein colored by the mean effect of mutations on cell entry. Darker red indicates sites with low tolerance for mutations.</p>
                     </div>
                     <div class="pt-20 font-semibold text-2xl text-sky-400">Antibody Escape</div>
                     <div class="leading-8">The receptor binding protein is also an important target for neutralizing antibodies, which have shown effectiveness in preventing disease in animal models. To better understand constraint across different epitopes, we prospectively mapped sites of escape for six antibodies. </div>
                     <div class="flex flex-row justify-center items-center text-center py-16 gap-2">
-                        <img src="/images/escape.png" class="max-h-80">
-                        <p class="leading-tight text-sm"> Effect of mutations on antibody neutralization. The height of each letter represents antibody escape, colored by functional tolerance. </p>
+                        <img src="/images/antibody_escape-01.png" class="max-h-80 bg-white rounded-lg">
+                        <p class=" text-sm font-light"> Sites of antibody escape. </p>
                     </div>
                     <div class="leading-tight text-center py-16 tracking-tight text-2xl lg:text-4xl bg-clip-text text-transparent bg-gradient-to-r from-slate-200 to-sky-400 font-semibold">These data aid in the development of vaccines and antibody therapies, in addition to improving basic understanding of the function of the receptor binding protein.</div>
                     <div class="flex items-center mx-auto gap-2 justify-between pb-4 text-sm md:text-lg tracking-wider uppercase opacity-70 text-center">
@@ -88,21 +88,12 @@
             </div>
         </div>
         <br class=""></br>
-        <div id="section-3" class="grid grid-cols-12 p-4 lg:p-10 lg:rounded-2xl bg-sky-light bg-no-repeat text-slate-200">
-            <div class="col-start-1 col-span-12 lg:col-span-10 mt-4t">
-                <div class="text-4xl 2xl:text-6xl font-extrabold mb-4">Interests</div>
-                <div class="flex flex-col pt-16 lg:pt-20 gap-8 text-lg lg:text-2xl 2xl:text-4xl">
-                    <p class="text-center">Viral Evolution and Diversity</p>
-                    <p class="text-center">Mammal Biodiversity</p>
-                    <p class="text-center">Host/Virus Coevolution</p>
-                    <p class="text-center">Phylogenetics</p>
-                </div>
-            </div>
-        </div>
+        
     </div>
 </template>
 
 <script setup>
+import HeatmapTenBlocks from "/components/graphs/HeatmapTenBlocks.vue";
 import NipahPhylogeny from "/components/graphs/PhylogeneticTree.vue";
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 

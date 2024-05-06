@@ -2,16 +2,11 @@
   <div ref="container" class="flex flex-col justify-center items-center">
     <div class="" ref="svgContainer"></div>
   </div>
-  <div class="flex justify-evenly">
-    <button @click="prevSites" class="px-4 py-2 bg-sky-800 shadow-md shadow-sky-800 text-white rounded-lg hover:ring-2 ring-sky-500">Prev</button>
-    <button @click="nextSites" class="px-4 py-2 bg-sky-800 shadow-md shadow-sky-800 text-white rounded-lg hover:ring-2 ring-sky-500">Next</button>
-  </div>
-  
 </template>
 
 
 <script setup>
-import { ref, watch, onMounted } from 'vue';
+import { ref, watch, onMounted, onUnmounted } from 'vue';
 import * as d3 from 'd3';
   
   // Define constants
@@ -63,7 +58,21 @@ import * as d3 from 'd3';
     URL.revokeObjectURL(url);
   }
   
-  const height = 400;
+  let intervalId = null;
+
+function autoMove() {
+  const sites = Array.from(new Set(data.value.map(d => +d.site)));
+  const totalSites = sites.length;
+  const totalPages = Math.ceil(totalSites / sitesPerView);
+  intervalId = setInterval(() => {
+    if (currentIndex.value < totalPages - 1) {
+      currentIndex.value++;
+    } else {
+      currentIndex.value = 0;
+    }
+  }, 2500);
+}
+  const height = 300;
   const margin = { top: 20, right: 20, bottom: 40, left: 20 };
   const innerHeight = height - margin.top - margin.bottom;
   const squareSize = Math.min(innerHeight / amino_acids.length, 20); // Define the square size based on the height and number of amino acids
@@ -240,11 +249,15 @@ import * as d3 from 'd3';
     const csv = d3.csvParse(file_text);
     data.value = csv;
     updateHeatmap(data.value);
+    autoMove();
   }
   
   onMounted(() => {
     fetchData();
   });
+  onUnmounted(() => {
+  clearInterval(intervalId);
+});
   </script>
 <style scoped>
 
