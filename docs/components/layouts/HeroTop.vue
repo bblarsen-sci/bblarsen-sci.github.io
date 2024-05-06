@@ -1,13 +1,13 @@
 <template>
-  <div class="h-screen mx-auto flex flex-col justify-center items-center text-center max-w-screen-sm relative">
+  <div class="h-screen mx-auto flex flex-col justify-center items-center text-center max-w-screen-md">
     <div class="max-w-screen-xl ">
       <div class="text-2xl font-semibold">Brendan Larsen</div>
       <div class=" text-4xl xl:text-4xl uppercase font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-red-700 to-sky-700 via-slate-300 ">Viral Evolution and Diversity</div>
     </div>
-      <div class=" mt-12 text-sm flex flex-row justify-center gap-6 lg:gap-10 tracking-wide uppercase">
-        <a class="p-2 border-2 border-black dark:border-white rounded-xl shadow-lg hover:border-sky-500" href="/about">About</a>
-        <a class="p-2 border-2 border-black  dark:border-white rounded-xl shadow-lg hover:border-sky-500" href="/publications">Publications</a>
-        <a class="p-2 border-2 border-black dark:border-white rounded-xl shadow-lg hover:border-sky-500" href="/code_pages/code_index">Code</a>
+      <div class=" mt-12 text-sm md:text-lg flex flex-row justify-center gap-10 lg:gap-20 uppercase">
+        <a class="tracking-wider opacity-70 hover:text-sky-500" href="/about">About</a>
+        <a class="tracking-wider opacity-70 hover:text-sky-500" href="/publications">Publications</a>
+        <a class="tracking-wider opacity-70 hover:text-sky-500" href="/code_pages/code_index">Code</a>
       </div>
   </div>
 </template>
