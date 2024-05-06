@@ -1,8 +1,8 @@
 <template>
-    <div class="mx-auto max-w-screen-md relative">
+    <div class="mx-auto max-w-screen-md ">
         <div class="h-36 flex items-center mx-2">
             <div class="text-left">
-                <div class="font-semibold text-2xl">About</div>
+                <div class="font-semibold text-4xl">About</div>
             </div>
         </div>
         <div class="container inline-block mx-2">

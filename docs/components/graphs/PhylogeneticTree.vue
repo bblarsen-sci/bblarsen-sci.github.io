@@ -174,7 +174,7 @@ onMounted(() => {
 
 <style>
 .circle {
-  @apply stroke-slate-800 dark:stroke-slate-200 stroke-2;
+  @apply stroke-white dark:stroke-slate-200 stroke-1;
 }
 .stroke {
   @apply stroke-current ;

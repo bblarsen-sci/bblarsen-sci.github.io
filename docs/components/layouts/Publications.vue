@@ -33,21 +33,21 @@ export default {
 
 
 <template>
-  <div class="mx-0 lg:mx-4">
+  <div class="max-w-screen-lg mx-auto">
     <div class="h-36 flex items-center mx-2">
         <div class="text-left">
-            <div class="font-semibold text-2xl">Publications</div>
+            <div class="font-semibold text-4xl">Publications</div>
         </div>
     </div>
     <div class="flex items-center mx-auto gap-2 justify-between pb-4 text-sm md:text-lg tracking-wider uppercase opacity-70 text-center">
       <a class="inline-flex flex-1 justify-center hover:text-sky-500" href="#section-1">Preprints</a>
       <a class="inline-flex flex-1 justify-center hover:text-sky-500" href="#section-2">First author </a>
-      <a class="inline-flex flex-1 justify-center hover:text-sky-500" href="#section-3">Coauthored</a>
+      <a class="inline-flex flex-1 justify-center hover:text-sky-500" href="#section-3">Co-authored</a>
     </div>
     <div class="pb-10 mx-2">
       <div class="h-1 bg-slate-400"></div>
       <h2 class="mx-2 text-2xl leading-8 tracking-tight font-bold py-10 ">Preprints</h2>
-      <div id="section-1" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-evenly gap-20 mx-20">
+      <div id="section-1" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-evenly gap-8 px-8">
         <div v-for="paper in preprints" :key="paper.title" class="card">
           <a :href="paper.link" class="block h-full">
             <div class="h-full flex flex-col justify-evenly space-y-2 p-6 bg-white dark:bg-slate-700 rounded-xl shadow-md shadow-slate-500">

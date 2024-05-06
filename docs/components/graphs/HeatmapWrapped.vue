@@ -1,46 +1,93 @@
 <template>
-<div class="pt-4 ">
-  <div class="font-sans text-2xl font-semibold text-center py-4">Heatmap of Mutational Effects on Cell Entry</div>
-  <div class="flex items-center justify-center">
-    <div class="" ref="svgContainer"></div>
+  <div class="flex flex-col justify-evenly items-center text-center gap-10 font-medium text-sm">
+    <div class="">
+      <label for="fileInput" class="mr-2">Upload CSV:</label>
+      <input type="file" id="fileInput" @change="handleFileUpload" accept=".csv" class="p-1 ring-1 ring-slate-400">
+    </div>
+    <div class="flex flex-row justify-between gap-10">
+      <div class="">
+        <label for="paddingSelect" class="mr-2">Select Padding:</label>
+        <select id="paddingSelect" v-model="paddingValue" class="p-1 ring-1 ring-slate-400">
+          <option class="" value="0">none</option>
+          <option value="0.01">thin</option>
+          <option value="0.05">medium</option>
+          <option value="0.1">large</option>
+        </select>
+      </div>
+      <div class="">
+        <label for="strokeSelect" class="mr-2">Select Stroke Size:</label>
+        <select id="strokeSelect" v-model="strokeWidthValue" class="p-1 ring-1 ring-slate-400">
+          <option value="0">0</option>
+          <option value="0.25">0.25</option>
+          <option value="0.5">0.5</option>
+          <option value="1.0">1.0</option>
+        </select>
+      </div>
+      <div class="">
+        <label for="rowsSelect" class="mr-2">Select rows:</label>
+        <select id="rowsSelect" v-model="rows" class="p-1 ring-1 ring-slate-400">
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="8">8</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex flex-row justify-between gap-10">
+      <div class="">
+        <label for="cutoffs" class="mr-2">Select color cutoff values:</label>
+        <select id="cutoffs" v-model="cutoffs" class="p-1 ring-1 ring-slate-400">
+          <option value="1">-1 to 1</option>
+          <option value="2">-2 to 2</option>
+          <option value="4">-4 to 4</option>
+        </select>
+      </div>
+    </div>
+    <div class="flex flex-row align-middle justify-between gap-4">
+      <label class=" my-2">Change color:</label>
+      <div class="">
+        <button @click="changeColorScale('interpolateRdBu')" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Red Blue</button>
+      </div>
+      <div class="">
+        <button @click="changeColorScale('interpolateBrBG')" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Brown Green</button>
+      </div>
+      <div class="">
+        <button @click="changeColorScale('interpolatePRGn')" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Purple Green</button>
+      </div>
+      <div class="">
+        <button @click="changeColorScale('interpolatePiYG')" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Pink Yellow Green</button>
+      </div>
+    </div>
+    <div class="flex flex-row gap-6">
+      <div class="pl-4">
+        <button @click="downloadSVG" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Download SVG</button>
+      </div>
+      <div class="">
+        <button @click="downloadImage('png')" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Download PNG</button>
+      </div>
+      <div class="">
+        <button @click="downloadImage('jpg')" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Download JPG</button>
+      </div>
+    </div>
   </div>
-  <div class="flex justify-center my-12">
-    <div ref="legendContainer"></div>
+  <div class="flex flex-col overflow-visible justify-between gap-4 lg:items-center mt-10 ">
+    <div class="py-2">
+      <div class="" ref="svgContainer"></div>
+    </div>
+    <div class="">
+      <div class="" ref="legendContainer"></div>
+    </div>
   </div>
-</div>
-<div class="flex flex-row justify-evenly items-center text-center pb-6 font-medium text-sm">
-  <div class="">
-    <label for="paddingSelect" class="mr-2">Select Padding:</label>
-    <select id="paddingSelect" v-model="paddingValue" class="p-1 ring-1 ring-slate-400">
-      <option class="" value="0">none</option>
-      <option value="0.01">thin</option>
-      <option value="0.05">medium</option>
-      <option value="0.1">large</option>
-    </select>
-  </div>
-  <div class="">
-    <label for="strokeSelect" class="mr-2">Select Stroke Size:</label>
-    <select id="strokeSelect" v-model="strokeWidthValue" class="p-1 ring-1 ring-slate-400">
-      <option value="0">0</option>
-      <option value="0.25">0.25</option>
-      <option value="0.5">0.5</option>
-      <option value="1.0">1.0</option>
-    </select>
-  </div>
-  <div class="">
-    <button @click="downloadSVG" class="p-2 bg-sky-600 shadow-md shadow-sky-600 text-white rounded-full hover:ring-2 ring-sky-800">Download SVG</button>
-  </div>
-</div>
-<div class="relative inline-block text-center">
-    <div ref="tooltip" id="tooltip" class="bg-black/80 opacity-90 shadow-md shadow-black whitespace-nowrap text-white absolute rounded-md p-2 text-sm"></div>
-</div>
+  
 </template>
 
 <script setup>
 import { ref, watch, onMounted} from 'vue';
+import { saveAs } from 'file-saver';
 import * as d3 from 'd3';
 
 // Define constants
+const rows = ref(4);
 const svgContainer = ref(null);
 const paddingValue = ref(0.1);
 const strokeWidthValue = ref(0.0);
@@ -48,13 +95,17 @@ const selectedAminoAcid = ref('');
 const selectedSites = ref([]);
 const data = ref(null);
 const legendContainer = ref(null);
+const uploadedFile = ref(null);
+const selectedColorScale = ref('interpolateRdBu');
+const cutoffs = ref(4);
+
 
 const amino_acids = [
   "R", "K", "H", "D", "E", "Q", "N", "S", "T", "Y",
   "W", "F", "A", "I", "L", "M", "V", "G", "P", "C"
 ];
 
-watch([paddingValue, strokeWidthValue, selectedAminoAcid, selectedSites], () => {
+watch([paddingValue, strokeWidthValue, selectedAminoAcid, selectedSites, rows, selectedColorScale, cutoffs], () => {
   updateHeatmap(data.value);
 });
 
@@ -73,6 +124,38 @@ function parseSites(input) {
   return sites;
 };
 
+function downloadImage(format) {
+  const svgElement = document.querySelector('svg');
+  const serializer = new XMLSerializer();
+  const svgString = serializer.serializeToString(svgElement);
+
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  const svgWidth = svgElement.getAttribute('width');
+  const svgHeight = svgElement.getAttribute('height');
+
+  
+  canvas.width = (svgWidth * 4) + 20;
+  canvas.height = (svgHeight * 4) + 20;
+
+  // Set the canvas background color to white
+  ctx.fillStyle = 'white';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  const img = new Image();
+  img.onload = () => {
+    // Draw the image on the canvas with double the size for higher resolution
+    ctx.drawImage(img, 0, 0, (canvas.width - 20), (canvas.height - 20));
+
+    canvas.toBlob((blob) => {
+      saveAs(blob, `heatmap.${format}`);
+    }, `image/${format}`);
+  };
+
+  img.src = `data:image/svg+xml;base64,${btoa(svgString)}`;
+}
+
 function downloadSVG() {
     const svgElement = document.querySelector('svg'); 
     const serializer = new XMLSerializer();
@@ -86,10 +169,17 @@ function downloadSVG() {
     document.body.removeChild(downloadLink); 
     URL.revokeObjectURL(url); 
 };
+function handleFileUpload(event) {
+  uploadedFile.value = event.target.files[0];
+  fetchData();
+}
 
+function changeColorScale(scale) {
+  selectedColorScale.value = scale;
+  updateHeatmap(data.value);
+}
 
-const rows=4;
-const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+const margin = { top: 20, right: 20, bottom: 30, left: 50 };
 const rowPadding = 30;
 
 
@@ -105,26 +195,26 @@ function updateHeatmap(data) {
   } 
 
   const sites = Array.from(new Set(filteredData.map(d => +d.site)));
-  const sitesPerRow = Math.ceil(sites.length / rows);
-  const siteRows = Array.from({ length: rows }, (_, i) =>
+  const sitesPerRow = Math.ceil(sites.length / rows.value);
+  const siteRows = Array.from({ length: rows.value }, (_, i) =>
     sites.slice(i * sitesPerRow, (i + 1) * sitesPerRow)
   );
 
   const maxSitesInRow = Math.max(...siteRows.map(row => row.length));
-  const squareSize = 11;
+  const squareSize = 9;
   const innerWidth = squareSize * maxSitesInRow;
   const width = innerWidth + margin.left + margin.right;
-  const height = squareSize * amino_acids.length * rows + margin.top + margin.bottom + rowPadding * (rows - 1) + margin.bottom;
+  const height = squareSize * amino_acids.length * rows.value + margin.top + margin.bottom + rowPadding * (rows.value - 1) + margin.bottom;
   const innerHeight = height - margin.top - margin.bottom;
 
   const allCombinations = sites.flatMap(site => // Create all combinations of sites and amino acids to fill in gray for sites not found
     amino_acids.map(mutant => ({ site, mutant }))
   );
 
-  
   // D3 FIGURE MAKING
-  let colorScale = d3.scaleDiverging(d3.interpolateRdBu) // Use a diverging color scale
-    .domain([-4, 0, 2]);
+  const maxAbsValue = Math.abs(cutoffs.value);
+  let colorScale = d3.scaleDiverging(d3[selectedColorScale.value])
+    .domain([-maxAbsValue, 0, maxAbsValue]);
 
   // setup the scales
   const yScale = d3.scaleBand()
@@ -170,36 +260,14 @@ function updateHeatmap(data) {
     .attr('fill', d => {
       const key = `${d.site}-${d.mutant}`;
       if (dataLookup[key]) {
-        return colorScale(+dataLookup[key].entry_CHO_bEFNB2);
+        return colorScale(+dataLookup[key].effect);
       } else {
         return wildtypeLookup[d.site] === d.mutant ? 'white' : 'lightgray';
       }
     })
     .attr('stroke', 'black')
     .attr('stroke-width', strokeWidthValue.value)
-    .on('mouseover', function(event, d) {
-    const dataPoint = filteredData.find(dp => +dp.site === d.site && dp.mutant === d.mutant);
-    let tooltipText = '';
-    if (dataPoint) {
-      tooltipText = `<div>${d.site} ${d.mutant}</div>Entry: ${parseFloat(dataPoint.entry_CHO_bEFNB2).toFixed(2)}`
-    } else {
-      const wildtypePoint = filteredData.find(dp => +dp.site === d.site && dp.wildtype === d.mutant);
-      if (wildtypePoint) {
-        tooltipText = `<div>${d.site}</div>Wildtype: ${d.mutant}`;
-      } else {
-        tooltipText = `<div>${d.site} ${d.mutant}</div> Value: Missing`;
-      }
-    }
-    const tooltip = d3.select('#tooltip');
-    tooltip.html(tooltipText)
-    .style('opacity', 1)
-    .style('transform', `translate(${event.offsetX - margin.left + 175 }px, ${event.offsetY - height - 270}px)`)
-  })
-  .on('mouseout', function() {
-    const tooltip = d3.select('#tooltip');
-    tooltip.style('opacity', 0)
-      .style('transform', 'none');
-  });
+    
 
   // Add the wildtype 'X' text to the boxes
   svgElement.selectAll(`.wildtype-row-${rowIndex}`)
@@ -211,6 +279,7 @@ function updateHeatmap(data) {
     .attr('text-anchor', 'middle')
     .attr('font-size', '8px')
     .attr('font-weight', '100')
+    .attr('font-family', 'sans-serif')
     .attr('fill', 'black')
     .text('X');
 
@@ -238,10 +307,28 @@ function updateHeatmap(data) {
     .attr('transform', `translate(0, ${(yScale.range()[1] + rowPadding) * rowIndex})`)
     .call(d3.axisLeft(yScale).tickSizeOuter(0));
 
+    svgElement.append('text')
+      .attr('class', 'x-axis-title')
+      .attr('x', innerWidth / 2)
+      .attr('y', innerHeight + margin.bottom-10)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '18px')
+      .text('Site');
+      
+
+    svgElement.append('text')
+      .attr('class', 'y-axis-title')
+      .attr('transform', 'rotate(-90)')
+      .attr('x', -innerHeight / 2)
+      .attr('y', -margin.left)
+      .attr('dy', '1em')
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '18px')
+      .text('Amino Acid');
 
   //make the legend
   d3.select(legendContainer.value).html('');
-  const legendWidth = 250;
+  const legendWidth = 300;
   const legendHeight = 60;
 
   const legend = d3.select(legendContainer.value)
@@ -250,12 +337,12 @@ function updateHeatmap(data) {
     .attr('height', legendHeight);
 
   const legendScale = d3.scaleLinear()
-    .domain([-4, 4])
-    .range([0, legendWidth - 20 ]);
+    .domain([-maxAbsValue, maxAbsValue])
+    .range([30, legendWidth - 20]);
 
   const legendAxis = d3.axisBottom(legendScale)
-    .ticks(5)
-    .tickFormat(d3.format('.0f'))
+    .tickValues([-maxAbsValue, 0, maxAbsValue])
+    .tickFormat(d => d === 0 ? '0' : (d > 0 ? '+' : '-') + d3.format('.0f')(Math.abs(d)))
     .tickSize(5);
 
   const legendGradient = legend.append('defs')
@@ -267,7 +354,7 @@ function updateHeatmap(data) {
     .attr('y2', '0%');
 
   const numStops = 100;
-  const stopDomain = d3.range(-4, 4, 8 / (numStops - 1));
+  const stopDomain = d3.range(-maxAbsValue, maxAbsValue, (2 * maxAbsValue) / (numStops - 1));
 
   legendGradient.selectAll('stop')
     .data(stopDomain)
@@ -277,9 +364,9 @@ function updateHeatmap(data) {
     .attr('stop-color', d => colorScale(d));
 
   legend.append('rect')
-    .attr('x', 0)
+    .attr('x', 30)
     .attr('y', 30)
-    .attr('width', legendWidth-20)
+    .attr('width', legendWidth-50)
     .attr('height', 10)
     .style('fill', 'url(#legendGradient)');
 
@@ -288,32 +375,55 @@ function updateHeatmap(data) {
     .attr('transform', `translate(0, 40)`)
     .call(legendAxis)
     .selectAll('text')
-    .attr('font-size', '10px');
+    .attr('font-size', '12px');
 
   // Add the legend title
   legend.append('text')
     .attr('class', 'legend-title')
-    .attr('x', (legendWidth-20) / 2)
+    .attr('x', (legendWidth) / 2)
     .attr('y', 15)
     .attr('text-anchor', 'middle')
-    .attr('font-size', '14px')
-    //.attr('font-weight', 'bold')
-    .text('Cell Entry Effect');
+    //.attr('font-size', '14px')
+    .text('Effect of mutation on cell entry');
 });
 };
 
 async function fetchData() {
-    const file = await fetch('https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB2.csv');
+  if (uploadedFile.value) {
+    const file = uploadedFile.value;
+    const reader = new FileReader();
+    reader.onload = () => {
+      const file_text = reader.result;
+      const csv = d3.csvParse(file_text);
+      data.value = csv;
+      updateHeatmap(data.value);
+    };
+    reader.readAsText(file);
+  } else {
+    const file = await fetch('/data/default_heatmap.csv');
     const file_text = await file.text();
     const csv = d3.csvParse(file_text);
     data.value = csv;
     updateHeatmap(data.value);
-};
+
+  }
+}
 
 onMounted(() => {
     fetchData();
 });
 </script>
 
-<style scoped>
+<style>
+.legend-title {
+  font-weight: bold;
+  font-size: 14px;
+  color: black; /* Default color for light mode */
+}
+
+@media (isDarkMode: true) {
+  .legend-title {
+    color: white; /* Color for dark mode */
+  }
+}
 </style>

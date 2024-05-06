@@ -10,9 +10,11 @@ subtext: How to inject custom CSS into Altair plots.
 # {{$frontmatter.title}}
 {{$frontmatter.subtext}}
 
+Although Altair offers incredible customization, there may be cases where you want to modify the appearance of the plots when embedding into a web page. I show how to do that here, using CSS.
+
 ## Altair .html files
 
-When making altair plots, we can save them as an .html file with ```plotName.save(plot.html)```. If we inspect the file, we see a typical ```.html``` format. 
+When making Altair plots, we can save them as an .html file with ```plotName.save(plotName.html)```. If we inspect the file, we see a typical ```.html``` format. 
 
 
 ```html
@@ -35,7 +37,7 @@ When making altair plots, we can save them as an .html file with ```plotName.sav
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
 <body>
-...Rest of plotting code
+...Rest of HTML file
 ```
 
 Under style, we see some default CSS already, to ```#vis.vega-embed```.
@@ -131,4 +133,4 @@ for specific_file in specific_files:
 
 Now, when we open the file, we find the figure has been centered on the page, the tooltip stylings have changed, and there is a nice fade-in animation of the altair heatmap. The possibilities are endless!
 
-[Click here](/htmls/E3_entry_heatmap.html){target="_self"} to see the custom CSS in action!
+[Click here](/htmls/E3_entry_heatmap.html){target="_self"} to see the custom CSS in action. Note-does not work for mobile devices.

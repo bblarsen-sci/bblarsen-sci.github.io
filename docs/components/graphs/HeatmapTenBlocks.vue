@@ -73,7 +73,7 @@ function autoMove() {
   }, 2500);
 }
   const height = 300;
-  const margin = { top: 20, right: 20, bottom: 40, left: 20 };
+  const margin = { top: 20, right: 20, bottom: 40, left: 40 };
   const innerHeight = height - margin.top - margin.bottom;
   const squareSize = Math.min(innerHeight / amino_acids.length, 20); // Define the square size based on the height and number of amino acids
   
@@ -180,6 +180,21 @@ function autoMove() {
       .attr('class', 'y-axis')
       .call(d3.axisLeft(yScale).tickSizeOuter(0));
 
+    svgElement.append('text')
+      .attr('class', 'x-axis-title')
+      .attr('x', innerWidth / 2)
+      .attr('y', innerHeight + margin.bottom)
+      .attr('text-anchor', 'middle')
+      .text('Site');
+
+    svgElement.append('text')
+      .attr('class', 'y-axis-title')
+      .attr('transform', 'rotate(-90)')
+      .attr('x', -innerHeight / 2)
+      .attr('y', -margin.left)
+      .attr('dy', '1em')
+      .attr('text-anchor', 'middle')
+      .text('Amino Acid');
 
     const rectSelection = svgElement.selectAll('rect')
       .data(allCombinations)

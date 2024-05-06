@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen mx-auto flex flex-col justify-center items-center text-center ">
     <HeatmapTenBlocks />
-    <div class="max-w-screen-xl mt-4">
+    <div class="max-w-screen-xl mt-12">
       <div class="text-2xl font-semibold">Brendan Larsen</div>
       <div class=" text-4xl xl:text-4xl uppercase font-semibold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-red-700 to-sky-700 via-slate-300 ">Viral Evolution and Diversity</div>
     </div>

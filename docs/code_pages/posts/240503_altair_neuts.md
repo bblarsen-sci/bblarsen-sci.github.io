@@ -1,20 +1,25 @@
 ---
-title: Plotting neut curves with Altair
+title: Plotting neutralization curves with Altair
 aside: false
 date: 2024-05-03
 keywords:
     - Altair
-subtext: How to plot neut curves.
+subtext: How to plot nice neutralization curves using Altair.
 ---
 
 # {{$frontmatter.title}}
 {{$frontmatter.subtext}}
 
+Example I will be using, showing inhibition of Nipah pseudovirus with different soluble receptor constructs.
+<div class="flex justify-center items-center">
+    <img src="/images/code_posts/altair_neut_curve-01.png" />
+</div>
+
 ## Python code to make neutralization curves with Altair.
 
 We often want to know how well an antibody inhibits viral infection of cells. To do this, we make neutralization curves of virus with either antibodies or soluble receptor (could be anything that inhibits infection). Dilutions of neutralizing antibodies are added to virus for 1 hour, followed by infection of cells. After 48 hours, the amount of Luciferase signal is measured with a plate reader, as a proxy for the amount of virus that infected the cells. Viruses that were in the presence of higher concentrations of antibody are neutralized more, and cannot infect cells. 
 
-The neutcurve package we will be using to fit the actual curves also makes plots with ```matplotlib```, but I didn't really like the look of them, and wanted to make nice looking ones with ```Altair```. Heres an example:
+The [```neutcurve```](https://jbloomlab.github.io/neutcurve/){target="_self"} package we will be using to fit the actual curves also makes plots with ```matplotlib```, but I didn't really like the look of them, and wanted to make nice looking ones with ```Altair```. Heres an example of the default plot:
 
 <div class="flex justify-center items-center">
     <img src="/images/code_posts/ephrin_b2.pdf" />
@@ -25,8 +30,9 @@ The neutcurve package we will be using to fit the actual curves also makes plots
 
 The data we have are:
 - 'serum' - In this case we are actually measuring neutralization by soluble receptor, not sera, but the neutcurve package requires certain column names, so bear with me, we will fix later.
-- 'virus' - Again, neutcurve requires certain names. These are actually the different soluble receptors.
-- 'concentration' - The concentration of antibody or soluble receptor that were added (in microgram per milliliter)
+- 'virus' - Again, neutcurve requires certain names. In this case we just used unmutated nipah pseudovirus.
+- 'replicate' - two replicates of the data.
+- 'concentration' - The concentration of antibody or soluble receptor that were added (in this specific example, micromolar)
 - 'fraction_infectivity' - The amount of infection at each concentration relative to conditions where **no** antibody or receptor were added.
 
 
@@ -57,50 +63,51 @@ Read in the data as a ```.csv```. Here, I slightly adjust the names of some of t
 ```python
 # First, load in the neut data
 df = pd.read_csv(ephrin_binding_neuts_file)
-
-# In this particular case I want to fix the names
-df["virus"] = df["virus"].replace(
-    {
-        "E2-dimeric": "dimeric-bEFNB2",
-        "E2-monomeric": "monomeric-bEFNB2",
-        "E3-dimeric": "dimeric-bEFNB3",
-        "E3-monomeric": "monomeric-bEFNB3",
-    }
-)
 ```
-Ok, so now that we have our data, lets fit the curves. I do this in a loop to extract curves for each 'virus', then concatante them all. In order to get bars for the measurements, we have to do some calculations and assign them back to the ```curve``` dataframe.
+Ok, so now that we have our data, lets fit the curves. I do this in a loop to extract curves for each 'serum' and 'virus', then concatante them all into a single dataframe. In order to get bars for the measurements, we have to do some calculations and assign them back to the ```curve``` dataframe. The function 'get_neutcurve' does all of this so we call it and assign it to 'neutcurve_df'.
 
 ```python
-fits = neutcurve.curvefits.CurveFits(
-    data=df,
-    fixbottom=0,
-)
+def get_neutcurve(df, replicate="average"):
+    #estimate fits
+    fits = neutcurve.curvefits.CurveFits(
+        data=df,
+        serum_col="serum",
+        virus_col="virus",
+        replicate_col="replicate",
+        conc_col="concentration",
+        fracinf_col="fraction infectivity",
+        fixbottom=0,
+    )
+    
+    fitParams = fits.fitParams(ics=[50, 90, 95, 97, 98, 99])
 
-fitParams = fits.fitParams(ics=[50, 90, 95, 97, 98, 99]) #what ICs we want to estimate
+    #get list of different sera and viruses that were tested
+    serum_list = list(df["serum"].unique())
+    virus_list = list(df["virus"].unique())
 
-
-def extract_dataframe_from_neutcurve(serum, viruses, replicate="average"):
-    curves = []
-    # Loop over each virus type and retrieve the curve
-    for virus in viruses:
-        curve = fits.getCurve(serum=serum, virus=virus, replicate=replicate)
-        df = curve.dataframe()
-        df["virus"] = virus
-        curves.append(df)
+    curves = [] #initialize an empty list to store neutralization curve data
+    
+    # Loop over each serum type and retrieve the curve
+    for serum in serum_list:
+        for virus in virus_list:
+            curve = fits.getCurve(serum=serum, virus=virus, replicate=replicate)
+            neut_df = curve.dataframe() #turn into a dataframe
+            neut_df["serum"] = serum #assign serum name to a column
+            neut_df["virus"] = virus #assign virus name to a column
+            curves.append(neut_df)
 
     # Concatenate all the dataframes into one
     combined_curve = pd.concat(curves, axis=0)
+    combined_curve["upper"] = combined_curve["measurement"] + combined_curve["stderr"]
+    combined_curve["lower"] = combined_curve["measurement"] - combined_curve["stderr"]
+    
     return combined_curve
 
 
-serum = "CHO-EFNB3"  # pull out the neuts that were done on CHO-EFNB3 cells, not E2
-viruses = ["dimeric-bEFNB2", "monomeric-bEFNB2", "dimeric-bEFNB3", "monomeric-bEFNB3"]
-curve = extract_dataframe_from_neutcurve(serum, viruses)
-curve["upper"] = curve["measurement"] + curve["stderr"]
-curve["lower"] = curve["measurement"] - curve["stderr"]
+neutcurve_df = get_neutcurve(df)
 ```
 
-Now we have a pandas dataframe called ```curve``` that contains the fits. Lets go ahead and plot these data with altair. We need to plot three separate things then combine them together at the end.
+Now we have a pandas dataframe called ```neutcurve_df``` that contains all the data needed for plotting. Lets go ahead and plot these data with altair. We need to make three separate plots, then combine them together at the end.
 - A line plot with the fit
 - A circle plot that contains the actual data we collected.
 - Std deviation bars on each point.
@@ -121,7 +128,7 @@ def plot_neut_curve(df):
                 "fit:Q",
                 title="Fraction Infectivity",
             ),
-            color=alt.Color("virus", title="Receptor"),
+            color=alt.Color("serum", title="Receptor"),
         )
         .properties(
             width=300, height=200
@@ -138,7 +145,7 @@ def plot_neut_curve(df):
                 title="Concentration (μM)",
             ),
             y=alt.Y("measurement:Q", title="Fraction Infectivity"),
-            color=alt.Color("virus", title="Receptor"),
+            color=alt.Color("serum", title="Receptor"),
         )
         .properties(
             width=300, height=200
@@ -151,7 +158,7 @@ def plot_neut_curve(df):
             x="concentration",
             y=alt.Y("lower", title="Fraction Infectivity"),
             y2="upper",
-            color="virus",
+            color="serum",
         )
         .properties(
             width=300, height=200
@@ -161,12 +168,12 @@ def plot_neut_curve(df):
     return plot
 
 
-ephrin_curve = plot_neut_curve(curve)
+ephrin_curve = plot_neut_curve(neutcurve_df)
 ephrin_curve.display()
 ```
 
 
-Running that, we get the following nice looking neut curve plot that was made with Altair. 
+Running that, we get the following nice looking neut curve plot that was made with Altair. If you choose to run, you will likely see something slightly different, as I am applying a custom [theme](/code_pages/posts/240503_altair_theme) to the altair figure.
 
 <div class="flex justify-center items-center">
     <img src="/images/code_posts/altair_neut_curve-01.png" />
