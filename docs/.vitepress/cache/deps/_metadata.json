@@ -1,76 +1,70 @@
 {
-  "hash": "8354e49c",
-  "configHash": "1e2cb65f",
+  "hash": "ca3b4685",
+  "configHash": "2f267fac",
   "lockfileHash": "3140332f",
-  "browserHash": "fa9898e5",
+  "browserHash": "800bb5bd",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "4fc76266",
+      "fileHash": "fa4d5b9c",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "2a028b8f",
+      "fileHash": "dfef3867",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "bb1abbaf",
+      "fileHash": "9cb11bb8",
       "needsInterop": false
     },
     "vue-select": {
       "src": "../../../../node_modules/vue-select/dist/vue-select.es.js",
       "file": "vue-select.js",
-      "fileHash": "555e425e",
+      "fileHash": "1751ac78",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "44989938",
+      "fileHash": "d2a11ffe",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "4339d9c5",
+      "fileHash": "c2dd7ef1",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "450f439c",
+      "fileHash": "aa69a01d",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "a5d8bfd2",
+      "fileHash": "15fb19c2",
       "needsInterop": false
-    },
-    "file-saver": {
-      "src": "../../../../node_modules/file-saver/dist/FileSaver.min.js",
-      "file": "file-saver.js",
-      "fileHash": "ae7e1765",
-      "needsInterop": true
     }
   },
   "chunks": {
+    "chunk-5UV7SUN4": {
+      "file": "chunk-5UV7SUN4.js"
+    },
+    "chunk-XJDZ4BQV": {
+      "file": "chunk-XJDZ4BQV.js"
+    },
+    "chunk-AVDKQJKK": {
+      "file": "chunk-AVDKQJKK.js"
+    },
     "chunk-O4XWQMLZ": {
       "file": "chunk-O4XWQMLZ.js"
-    },
-    "chunk-AUTOGC5R": {
-      "file": "chunk-AUTOGC5R.js"
-    },
-    "chunk-HUQGSQ4Q": {
-      "file": "chunk-HUQGSQ4Q.js"
-    },
-    "chunk-NTP5MXPO": {
-      "file": "chunk-NTP5MXPO.js"
     },
     "chunk-ZS7NZCD4": {
       "file": "chunk-ZS7NZCD4.js"
