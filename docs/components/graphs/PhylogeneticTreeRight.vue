@@ -1,13 +1,14 @@
 <template>
-  <div class="flex flex-col justify-center items-center ">
-    <div class="" ref="svgContainer"></div>
+  <div class="">
+    <svg viewBox="0 0 600 600" ref="svgContainer" class=""> ></svg>
   </div>
 </template>
+
+
 
 <script setup>
 import * as d3 from 'd3'; 
 import { onMounted, ref } from 'vue';
-
 const svgContainer = ref(null);
 
 function parseNewick(a) {
@@ -45,12 +46,10 @@ function parseNewick(a) {
 }
 
 function projection(d) {
-        // reversed projection - horizontal tree instead of vertical
         return [parseInt(d.y), parseInt(d.x)];
 }
 
 function diagonal(diagonalPath, i) {
-        // draw the hooked paths between nodes
         var source = diagonalPath.source,
             target = diagonalPath.target,
             pathData = [source, {x: target.x, y: source.y}, target];
@@ -58,7 +57,6 @@ function diagonal(diagonalPath, i) {
 
         return "M" + pathData[0] + ' ' + pathData[1] + " " + pathData[2];
     }
-
 
 function scaleBranchLengths(nodes, w) {
     function visitPreOrder(root, callback) {
@@ -69,10 +67,9 @@ function scaleBranchLengths(nodes, w) {
         };
       }
     }
-
     visitPreOrder(nodes[0], function(node) {
-      if (node.branchLength < 0) node.branchLength = -1 * node.branchLength;
-      node.rootDist = (node.parent ? node.parent.rootDist : 0) + (node.branchLength || 0)
+      if (node.value < 0) node.value = -1 * node.value;
+      node.rootDist = (node.parent ? node.parent.rootDist : 0) + (node.value || 0)
     });
 
     var rootDists = nodes.map(function(n) { 
@@ -84,71 +81,112 @@ function scaleBranchLengths(nodes, w) {
       .range([0, w]);
 
     visitPreOrder(nodes[0], function(node) {
-      node.y = parseInt(yscale(node.rootDist));
+      node.y = yscale(node.rootDist);
     });
     return yscale
 }
 
 
 function drawChart(data) {
-  console.log('data', data);
   var margin = { top: 20, right: 10, bottom: 20, left: 10 };
-  var width = 500 - margin.left - margin.right;
+  var width = 600 - margin.left - margin.right;
   var height = 600 - margin.top - margin.bottom;
-
-
-  var root = d3.hierarchy(data, d => d.branchset)
-    //.sort((a, b) => b.height - a.height || d3.ascending(a.id, b.id));
-
-
-  var tree = d3.cluster()
-    .size([height, width])
+  
+  //SETUP TREE
+  const root = d3.hierarchy(data, d => d.branchset)
+    .sort((a, b) => b.height - a.height || d3.ascending(a.id, b.id))
+    .sum((d) => d.branchLength || 0);
+    
+  const tree = d3.cluster()
+    .size([height , width ])
     .separation(function separation(a, b) {
       return a.parent == b.parent ? 1 : 1;
     })
-    
   
-  var nodes = tree(root);
-  console.log('nodes', nodes);
+  //SETUP COLOR SCALE OF LEAVES
+  const countries = Array.from(new Set(root.descendants().map(d => d.data.country))).filter(Boolean);
+  const colorScale = d3.scaleOrdinal(d3.schemeTableau10).domain(countries);
+  
+  //ROOT TO GET X,Y POSITIONS, THEN SCALE BRANCH LENGTHS
+  tree(root); 
+  scaleBranchLengths(root.descendants(), width)
 
-
-  var svg = d3.select(svgContainer.value).append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
+  //DRAW SVG
+  const svg = d3.select(svgContainer.value).append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
     .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
+  //DRAW LINKS
   svg.selectAll(".link")
-    .data(nodes.links())
+    .data(root.links())
     .enter().append("path")
     .attr("class", "link")
     .attr("fill", "none")
-    .attr("stroke", "#ccc")
-    .attr("stroke-width", 2)
+    .attr("stroke", "currentColor")
+    .attr("stroke-width", 1.25)
+    .join("path")
     .attr("d", diagonal)
 
+  //DRAW NODES
   var node = svg.selectAll(".node")
     .data(root.descendants())
     .enter()
     .append("g")
     .attr("class", function(d) { return "node" + (d.children ? " node--internal" : " node--leaf"); })
-    .attr("transform", function(d) { return "translate(" + (d.y) + "," + d.x + ")"; });
+    .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
 
+  //DRAW CIRCLES
+  node.filter(".node--leaf")
+    .append("circle")
+    .attr("r", 3)
+    .attr("stroke", "currentColor")
+    .attr("stroke-width", 1.5)
+    .attr("fill", d => colorScale(d.data.country));
 
-  node.append("circle")
-    .attr("r", 2.5)
-    .attr("stroke", "indianred")
-    .attr("stroke-width", 2)
-    .attr("fill", "white");
-
-  
+//  //MAKE LEGEND
+//  const legend = svg.append("g")
+//    .attr("class", "legend")
+//    .attr("transform", `translate(${margin.left + 125}, ${margin.top})`);
+//
+//  // ADD LEGEND OPTIONS
+//  const legendItems = legend.selectAll(".legend-item")
+//    .data(countries)
+//    .enter()
+//    .append("g")
+//    .attr("class", "legend-item")
+//    .attr("transform", (d, i) => `translate(0, ${i * 20})`);
+//
+//  // Add circles to legend items
+//  legendItems.append("circle")
+//    .attr("r", 5)
+//    .attr("class", "legendcircle")
+//    .attr("stroke", "currentColor") 
+//    .attr("stroke-width", 2)
+//    .attr("fill", d => colorScale(d))
+//
+//  // Add country labels to legend items
+//  legendItems.append("text")
+//    .attr("class", "legend-text")
+//    .attr("x", 8)
+//    .style("fill","currentColor")
+//    .attr("font-size", "12px")
+//    .attr("y", 4)
+//    .attr("dy", "0em")
+//    .text(d => d);
 }
 
 async function fetchData() {
+  try {
   const file = await fetch('/data/nipah_whole_genome_phylo.tre');
   const csv = await file.text();
   const parsedData = parseNewick(csv); 
   drawChart(parsedData); 
+  } catch (error) {
+    console.error('Error in fetchData:', error);
+  }
 };
 onMounted(() => {
   fetchData();
@@ -156,4 +194,5 @@ onMounted(() => {
 </script>
 
 <style>
+
 </style>

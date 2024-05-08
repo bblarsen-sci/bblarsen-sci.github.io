@@ -1,4 +1,5 @@
 ---
+layout: page
 title: D3 phylogeny
 aside: false
 date: 2024-05-06
@@ -11,8 +12,7 @@ subtext: How to plot a right-angled phylogeny with D3
 import PhylogeneticTreeRight from "/components/graphs/PhylogeneticTreeRight.vue";
 </script>
 
-# {{$frontmatter.title}}
-{{$frontmatter.subtext}}
+
 
 
 
