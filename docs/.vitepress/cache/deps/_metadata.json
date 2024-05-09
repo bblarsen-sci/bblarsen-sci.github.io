@@ -1,118 +1,76 @@
 {
-  "hash": "8354e49c",
-  "configHash": "1e2cb65f",
+  "hash": "ca3b4685",
+  "configHash": "2f267fac",
   "lockfileHash": "3140332f",
-  "browserHash": "3a79eafb",
+  "browserHash": "ab4769c5",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "efc4cb27",
+      "fileHash": "8e90b9b9",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "e9111059",
+      "fileHash": "f0806874",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "67ab3109",
+      "fileHash": "22308f9d",
       "needsInterop": false
     },
     "vue-select": {
       "src": "../../../../node_modules/vue-select/dist/vue-select.es.js",
       "file": "vue-select.js",
-      "fileHash": "b88299b4",
+      "fileHash": "6d169310",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "fd21d021",
+      "fileHash": "e991e2e0",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "a51a2ff8",
+      "fileHash": "aee2be6e",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "cbb6d9cd",
+      "fileHash": "88fbc469",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "766224ff",
-      "needsInterop": false
-    },
-    "d3-scale": {
-      "src": "../../../../node_modules/d3-scale/src/index.js",
-      "file": "d3-scale.js",
-      "fileHash": "1e2c23c7",
-      "needsInterop": false
-    },
-    "d3-array": {
-      "src": "../../../../node_modules/d3-array/src/index.js",
-      "file": "d3-array.js",
-      "fileHash": "b3b64514",
-      "needsInterop": false
-    },
-    "d3-selection": {
-      "src": "../../../../node_modules/d3-selection/src/index.js",
-      "file": "d3-selection.js",
-      "fileHash": "403a7183",
-      "needsInterop": false
-    },
-    "d3-transition": {
-      "src": "../../../../node_modules/d3-transition/src/index.js",
-      "file": "d3-transition.js",
-      "fileHash": "02c31177",
+      "fileHash": "134c1e6c",
       "needsInterop": false
     },
     "file-saver": {
       "src": "../../../../node_modules/file-saver/dist/FileSaver.min.js",
       "file": "file-saver.js",
-      "fileHash": "7d72fed0",
+      "fileHash": "c95a900e",
       "needsInterop": true
     }
   },
   "chunks": {
-    "chunk-KJ3S3D7D": {
-      "file": "chunk-KJ3S3D7D.js"
-    },
     "chunk-O4XWQMLZ": {
       "file": "chunk-O4XWQMLZ.js"
     },
-    "chunk-DYS7S53I": {
-      "file": "chunk-DYS7S53I.js"
+    "chunk-5UV7SUN4": {
+      "file": "chunk-5UV7SUN4.js"
     },
-    "chunk-5UQBLVOX": {
-      "file": "chunk-5UQBLVOX.js"
+    "chunk-XJDZ4BQV": {
+      "file": "chunk-XJDZ4BQV.js"
     },
-    "chunk-ODXH2HTY": {
-      "file": "chunk-ODXH2HTY.js"
-    },
-    "chunk-43HP4RIT": {
-      "file": "chunk-43HP4RIT.js"
-    },
-    "chunk-MSOUMGP6": {
-      "file": "chunk-MSOUMGP6.js"
-    },
-    "chunk-IWTQSBGV": {
-      "file": "chunk-IWTQSBGV.js"
-    },
-    "chunk-ENM4PJ22": {
-      "file": "chunk-ENM4PJ22.js"
-    },
-    "chunk-H3PJCI32": {
-      "file": "chunk-H3PJCI32.js"
+    "chunk-AVDKQJKK": {
+      "file": "chunk-AVDKQJKK.js"
     },
     "chunk-ZS7NZCD4": {
       "file": "chunk-ZS7NZCD4.js"

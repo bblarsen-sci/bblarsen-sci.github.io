@@ -1,5 +1,5 @@
 ---
-title: D3 heatmap small
+title: D3 heatmap blocks + animation
 aside: false
 date: 2024-05-01
 keywords:

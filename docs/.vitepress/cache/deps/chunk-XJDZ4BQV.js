@@ -6,12 +6,17 @@ import {
   arc_default,
   area_default,
   area_default2,
+  ascending,
   azimuthalEqualArea_default,
   azimuthalEquidistant_default,
-  basisClosed_default,
+  basisClosed_default2 as basisClosed_default,
   basisOpen_default,
-  basis_default,
+  basis_default2 as basis_default,
   binary_default,
+  bisectLeft,
+  bisectRight,
+  bisect_default,
+  bisector,
   bounds_default,
   bundle_default,
   cardinalClosed_default,
@@ -27,79 +32,92 @@ import {
   conicConformal_default,
   conicEqualArea_default,
   conicEquidistant_default,
+  deviation,
   dice_default,
-  dsv_default,
-  equalEarth_default,
-  equirectangular_default,
-  gnomonic_default,
-  graticule,
-  hierarchy,
-  identity_default,
-  line_default,
-  linearClosed_default,
-  linear_default,
-  link_default,
-  manyBody_default,
-  mercator_default,
-  monotoneX,
-  monotoneY,
-  naturalEarth1_default,
-  natural_default,
-  orthographic_default,
-  pack_default,
-  partition_default,
-  path,
-  path_default,
-  projection,
-  resquarify_default,
-  simulation_default,
-  sliceDice_default,
-  slice_default,
-  squarify_default,
-  stepAfter,
-  stepBefore,
-  step_default,
-  stereographic_default,
-  stratify_default,
-  transverseMercator_default,
-  tree_default,
-  treemap_default,
-  x_default,
-  y_default
-} from "./chunk-5UQBLVOX.js";
-import {
   diverging,
   divergingLog,
   divergingPow,
   divergingSqrt,
   divergingSymlog,
+  dsv_default,
+  equalEarth_default,
+  equirectangular_default,
   format,
   formatLocale,
   formatPrefix,
   formatSpecifier,
+  gnomonic_default,
+  graticule,
+  hcl,
+  hierarchy,
+  hsl,
   identity,
+  identity_default,
   implicit,
+  intersection,
+  interval_default,
+  lab,
+  line_default,
   linear,
+  linearClosed_default,
+  linear_default,
+  link_default,
   locale_default,
   log,
+  manyBody_default,
+  max,
+  mean,
+  median,
+  mercator_default,
   millisecond,
+  min,
+  monotoneX,
+  monotoneY,
+  naturalEarth1_default,
+  natural_default,
   ordinal,
+  orthographic_default,
+  pack_default,
+  partition_default,
+  path,
+  path_default,
+  permute,
+  piecewise,
   pow,
   precisionFixed_default,
   precisionPrefix_default,
   precisionRound_default,
-  quantile as quantile2,
+  projection,
+  quantile,
+  quantile2,
+  quantileSorted,
   quantize,
+  range,
+  resquarify_default,
+  rgb,
+  round_default,
   second,
   sequential,
   sequentialLog,
   sequentialPow,
   sequentialSqrt,
   sequentialSymlog,
+  simulation_default,
+  sliceDice_default,
+  slice_default,
   sqrt,
+  squarify_default,
+  src_exports,
+  stepAfter,
+  stepBefore,
+  step_default,
+  stereographic_default,
+  stratify_default,
+  sum,
   symlog,
   threshold,
   tickFormat,
+  tickStep,
   time,
   timeDay,
   timeFormat,
@@ -109,6 +127,10 @@ import {
   timeParse,
   timeSunday,
   timeYear,
+  transverseMercator_default,
+  tree_default,
+  treemap_default,
+  union,
   utcDay,
   utcFormat,
   utcHour,
@@ -117,41 +139,11 @@ import {
   utcParse,
   utcSunday,
   utcTime,
-  utcYear
-} from "./chunk-ODXH2HTY.js";
-import {
-  ascending,
-  bisectLeft,
-  bisectRight,
-  bisect_default,
-  bisector,
-  deviation,
-  intersection,
-  max,
-  mean,
-  median,
-  min,
-  permute,
-  quantile,
-  quantileSorted,
-  range,
-  sum,
-  tickStep,
-  union
-} from "./chunk-43HP4RIT.js";
-import {
-  interval_default
-} from "./chunk-ENM4PJ22.js";
-import {
-  hcl,
-  hsl,
-  lab,
-  piecewise,
-  rgb,
-  round_default,
-  src_exports,
-  value_default
-} from "./chunk-H3PJCI32.js";
+  utcYear,
+  value_default,
+  x_default,
+  y_default
+} from "./chunk-AVDKQJKK.js";
 import {
   __export
 } from "./chunk-ZS7NZCD4.js";
@@ -8888,8 +8880,8 @@ var ts = (item) => item.size || 1;
 var def = (item) => !(item.defined === false);
 var type = (item) => symbols2(item.shape || "circle");
 var arcShape = arc_default().startAngle(sa).endAngle(ea).padAngle(pa).innerRadius(ir).outerRadius(or).cornerRadius(cr);
-var areavShape = area_default().x(x).y1(y).y0(yh).defined(def);
-var areahShape = area_default().y(y).x1(x).x0(xw).defined(def);
+var areavShape = area_default2().x(x).y1(y).y0(yh).defined(def);
+var areahShape = area_default2().y(y).x1(x).x0(xw).defined(def);
 var lineShape = line_default().x(x).y(y).defined(def);
 var rectShape = vg_rect().x(x).y(y).width(w).height(h).cornerRadius(tl, tr, br, bl);
 var symbolShape = Symbol2().type(type).size(sz);
@@ -20602,7 +20594,7 @@ function geoMethod(methodName, globalMethod) {
     }
   };
 }
-var geoArea = geoMethod("area", area_default2);
+var geoArea = geoMethod("area", area_default);
 var geoBounds = geoMethod("bounds", bounds_default);
 var geoCentroid = geoMethod("centroid", centroid_default);
 function geoScale(projection3, group2) {
@@ -26281,4 +26273,4 @@ export {
   version,
   vega_module_exports
 };
-//# sourceMappingURL=chunk-DYS7S53I.js.map
+//# sourceMappingURL=chunk-XJDZ4BQV.js.map

@@ -11,11 +11,6 @@ import * as d3 from 'd3';
   
   // Define constants
   const svgContainer = ref(null);
-  const paddingValue = ref(0.1);
-  const strokeWidthValue = ref(0.0);
-  const selectedAminoAcid = ref('');
-  const siteInputValue = ref('');
-  const selectedSites = ref([]);
   const data = ref(null);
   const currentIndex = ref(0);
   const sitesPerView = 25;
@@ -25,7 +20,7 @@ import * as d3 from 'd3';
     "W", "F", "A", "I", "L", "M", "V", "G", "P", "C"
   ];
   
-  watch([paddingValue, strokeWidthValue, selectedAminoAcid, selectedSites, currentIndex], () => {
+  watch([currentIndex], () => {
     updateHeatmap(data.value);
   });
   
@@ -44,21 +39,9 @@ import * as d3 from 'd3';
     return sites;
   }
   
-  function downloadSVG() {
-    const svgElement = document.querySelector('svg');
-    const serializer = new XMLSerializer();
-    const svgBlob = new Blob([serializer.serializeToString(svgElement)], { type: 'image/svg+xml' });
-    const url = URL.createObjectURL(svgBlob);
-    const downloadLink = document.createElement('a');
-    downloadLink.href = url;
-    downloadLink.download = 'heatmap.svg';
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-    URL.revokeObjectURL(url);
-  }
+
   
-  let intervalId = null;
+let intervalId = null;
 
 function autoMove() {
   const sites = Array.from(new Set(data.value.map(d => +d.site)));
@@ -70,23 +53,15 @@ function autoMove() {
     } else {
       currentIndex.value = 0;
     }
-  }, 2500);
+  }, 4000);
 }
   const height = 300;
   const margin = { top: 20, right: 20, bottom: 40, left: 40 };
   const innerHeight = height - margin.top - margin.bottom;
   const squareSize = Math.min(innerHeight / amino_acids.length, 20); // Define the square size based on the height and number of amino acids
   
-  function updateHeatmap(data) {
-    let filteredData = data; // assign data to filtered data, otherwise it gets overwritten when filtering
-  
-    // functions for filtering the data
-    if (selectedSites.value.length > 1) {
-      filteredData = filteredData.filter(d => selectedSites.value.includes(+d.site));
-    }
-    if (selectedAminoAcid.value) {
-      filteredData = filteredData.filter(d => d.wildtype === selectedAminoAcid.value);
-    }
+  function updateHeatmap(input_data) {
+    let filteredData = input_data; // assign data to filtered data, otherwise it gets overwritten when filtering
   
     const sites = Array.from(new Set(filteredData.map(d => +d.site))); // Define sites based on the filtered data
     const visibleSites = sites.slice(currentIndex.value * sitesPerView, (currentIndex.value + 1) * sitesPerView);
@@ -105,12 +80,13 @@ function autoMove() {
     const yScale = d3.scaleBand() // Define the y scale based on the amino acids
       .domain(amino_acids)
       .range([0, innerHeight])
-      .padding(paddingValue.value);
+      .padding(0.1);
   
     const xScale = d3.scaleBand() // Define the x scale based on the visible sites
       .domain(visibleSites)
       .range([0, innerWidth])
-      .padding(paddingValue.value);
+      .padding(0.1);
+
     //let svgElement;
     const svg = d3.select(svgContainer.value); // Select the SVG container
     svg.html(''); // Remove all existing elements in the SVG
@@ -145,11 +121,10 @@ function autoMove() {
         if (dataLookup[key]) {
           return colorScale(+dataLookup[key].entry_CHO_bEFNB2);
         } else {
-          return wildtypeLookup[d.site] === d.mutant ? 'white' : 'lightgray';
+          return wildtypeLookup[d.site] === d.mutant ? 'black' : 'lightgray';
         }
       })
-      .attr('stroke', 'black')
-      .attr('stroke-width', strokeWidthValue.value)
+      
       
   
     svgElement.selectAll('.wildtype') // Add the wildtype amino acids as text
@@ -161,7 +136,7 @@ function autoMove() {
       .attr('text-anchor', 'middle')
       .attr('font-size', '10px')
       .attr('font-weight', '100')
-      .attr('fill', 'black')
+      .attr('fill', 'white')
       .text('X');
   
     const xAxis = d3.axisBottom(xScale).tickSizeOuter(0); // Add the x-axis
@@ -204,8 +179,7 @@ function autoMove() {
       .attr('width', xScale.bandwidth())
       .attr('height', yScale.bandwidth())
       .attr('fill', 'white')
-      .attr('stroke', 'black')
-      .attr('stroke-width', strokeWidthValue.value);
+
 
     const wildtypeSelection = svgElement.selectAll('.wildtype')
       .data(filteredData.filter(d => visibleSites.includes(+d.site)))
@@ -220,7 +194,7 @@ function autoMove() {
       .text('X');
 
     rectSelection.transition()
-      //.duration(1000)
+      .duration(200)
       .attr('transform', 'scale(0)')
       .delay(() => Math.random() * 1000)
       .attr('fill', d => {

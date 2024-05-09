@@ -16,7 +16,7 @@ import {
   parser,
   splitAccessPath,
   writeConfig
-} from "./chunk-DYS7S53I.js";
+} from "./chunk-XJDZ4BQV.js";
 import {
   __export
 } from "./chunk-ZS7NZCD4.js";
@@ -17843,4 +17843,4 @@ export {
   version,
   src_exports
 };
-//# sourceMappingURL=chunk-KJ3S3D7D.js.map
+//# sourceMappingURL=chunk-5UV7SUN4.js.map

@@ -1,6 +1,6 @@
 import {
   src_exports
-} from "./chunk-KJ3S3D7D.js";
+} from "./chunk-5UV7SUN4.js";
 import {
   isArray,
   isBoolean,
@@ -9,12 +9,8 @@ import {
   mergeConfig,
   vega_module_exports,
   writeConfig
-} from "./chunk-DYS7S53I.js";
-import "./chunk-5UQBLVOX.js";
-import "./chunk-ODXH2HTY.js";
-import "./chunk-43HP4RIT.js";
-import "./chunk-ENM4PJ22.js";
-import "./chunk-H3PJCI32.js";
+} from "./chunk-XJDZ4BQV.js";
+import "./chunk-AVDKQJKK.js";
 import {
   __commonJS,
   __export,
