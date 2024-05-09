@@ -12,7 +12,7 @@ subtext: How to make a simple interactive plot with Altair
 
 
 ## Interactive plot with slider to move between sites.
-For the Nipah receptor binding protein deep mutational scanning project, it was sometimes necessary to plot the effects of mutations between two conditions. For example, to compare the affect of mutations on entry in CHO-bEFNB2 or CHO-bEFNB3 cells. 
+For the Nipah receptor binding protein deep mutational scanning project, it was sometimes necessary to plot the effects of mutations between two conditions. For example, to compare the effect of mutations on entry in CHO-bEFNB2 or CHO-bEFNB3 cells. 
 
 
 <Altair :showShadow="false" :spec-url="'/htmls/entry_letter_plot_slider.html'"></Altair>

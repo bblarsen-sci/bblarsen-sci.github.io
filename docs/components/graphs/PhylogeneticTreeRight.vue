@@ -1,14 +1,11 @@
 <template>
-  <div class="">
-    <svg viewBox="0 0 600 600" ref="svgContainer" class=""> ></svg>
-  </div>
+    <div ref="svgContainer" class="mx-auto mt-24 container flex flex-col "></div>
 </template>
-
-
 
 <script setup>
 import * as d3 from 'd3'; 
 import { onMounted, ref } from 'vue';
+
 const svgContainer = ref(null);
 
 function parseNewick(a) {
@@ -46,10 +43,12 @@ function parseNewick(a) {
 }
 
 function projection(d) {
+        // reversed projection - horizontal tree instead of vertical
         return [parseInt(d.y), parseInt(d.x)];
 }
 
 function diagonal(diagonalPath, i) {
+        // draw the hooked paths between nodes
         var source = diagonalPath.source,
             target = diagonalPath.target,
             pathData = [source, {x: target.x, y: source.y}, target];
@@ -57,6 +56,7 @@ function diagonal(diagonalPath, i) {
 
         return "M" + pathData[0] + ' ' + pathData[1] + " " + pathData[2];
     }
+
 
 function scaleBranchLengths(nodes, w) {
     function visitPreOrder(root, callback) {
@@ -81,16 +81,16 @@ function scaleBranchLengths(nodes, w) {
       .range([0, w]);
 
     visitPreOrder(nodes[0], function(node) {
-      node.y = yscale(node.rootDist);
+      node.y = parseInt(yscale(node.rootDist));
     });
     return yscale
 }
 
 
 function drawChart(data) {
-  var margin = { top: 20, right: 10, bottom: 20, left: 10 };
-  var width = 600 - margin.left - margin.right;
-  var height = 600 - margin.top - margin.bottom;
+  var margin = { top: 20, right: 20, bottom: 20, left: 20 };
+  var width = 1000 
+  var height = 400 
   
   //SETUP TREE
   const root = d3.hierarchy(data, d => d.branchset)
@@ -98,7 +98,7 @@ function drawChart(data) {
     .sum((d) => d.branchLength || 0);
     
   const tree = d3.cluster()
-    .size([height , width ])
+    .size([height - margin.top - margin.bottom, width - margin.right - margin.left])
     .separation(function separation(a, b) {
       return a.parent == b.parent ? 1 : 1;
     })
@@ -109,15 +109,16 @@ function drawChart(data) {
   
   //ROOT TO GET X,Y POSITIONS, THEN SCALE BRANCH LENGTHS
   tree(root); 
-  scaleBranchLengths(root.descendants(), width)
+  scaleBranchLengths(root.descendants(), width -  margin.right - margin.left)
 
   //DRAW SVG
   const svg = d3.select(svgContainer.value).append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .attr('viewBox', `0 0 ${width + margin.left + margin.right} ${height + margin.top + margin.bottom}`)
-    .append("g")
-    .attr('transform', `translate(${margin.left}, ${margin.top})`);
+   .attr('width', '100%')
+   .attr('height', '100%')
+   .attr('viewBox', [0, 0, width , height ])
+   .append("g")
+   .attr("transform", `translate(${margin.left - 200}, ${margin.top})`);
+
 
   //DRAW LINKS
   svg.selectAll(".link")
@@ -125,11 +126,21 @@ function drawChart(data) {
     .enter().append("path")
     .attr("class", "link")
     .attr("fill", "none")
-    .attr("stroke", "currentColor")
+    .attr("stroke", "darkgray")
     .attr("stroke-width", 1.25)
+    
     .join("path")
     .attr("d", diagonal)
+    .append('g')
 
+  svg.append("rect")
+    .attr("width", "100%")
+    .attr("height", "100%")
+    //.attr("stroke", "black")
+    //.attr("stroke-width", "2px")
+    .attr("fill", "none");
+
+    
   //DRAW NODES
   var node = svg.selectAll(".node")
     .data(root.descendants())
@@ -141,41 +152,41 @@ function drawChart(data) {
   //DRAW CIRCLES
   node.filter(".node--leaf")
     .append("circle")
-    .attr("r", 3)
+    .attr("r", 4)
     .attr("stroke", "currentColor")
     .attr("stroke-width", 1.5)
     .attr("fill", d => colorScale(d.data.country));
 
-//  //MAKE LEGEND
-//  const legend = svg.append("g")
-//    .attr("class", "legend")
-//    .attr("transform", `translate(${margin.left + 125}, ${margin.top})`);
-//
-//  // ADD LEGEND OPTIONS
-//  const legendItems = legend.selectAll(".legend-item")
-//    .data(countries)
-//    .enter()
-//    .append("g")
-//    .attr("class", "legend-item")
-//    .attr("transform", (d, i) => `translate(0, ${i * 20})`);
-//
-//  // Add circles to legend items
-//  legendItems.append("circle")
-//    .attr("r", 5)
-//    .attr("class", "legendcircle")
-//    .attr("stroke", "currentColor") 
-//    .attr("stroke-width", 2)
-//    .attr("fill", d => colorScale(d))
-//
-//  // Add country labels to legend items
-//  legendItems.append("text")
-//    .attr("class", "legend-text")
-//    .attr("x", 8)
-//    .style("fill","currentColor")
-//    .attr("font-size", "12px")
-//    .attr("y", 4)
-//    .attr("dy", "0em")
-//    .text(d => d);
+  //MAKE LEGEND
+  const legend = svg.append("g")
+    .attr("class", "legend")
+    .attr("transform", `translate(${margin.left + 275}, ${margin.top})`);
+
+  // ADD LEGEND OPTIONS
+  const legendItems = legend.selectAll(".legend-item")
+    .data(countries)
+    .enter()
+    .append("g")
+    .attr("class", "legend-item")
+    .attr("transform", (d, i) => `translate(0, ${i * 20})`);
+
+  // Add circles to legend items
+  legendItems.append("circle")
+    .attr("r", 4)
+    .attr("class", "legendcircle")
+    .attr("stroke", "currentColor") 
+    .attr("stroke-width", 1)
+    .attr("fill", d => colorScale(d))
+
+  // Add country labels to legend items
+  legendItems.append("text")
+    .attr("class", "legend-text")
+    .attr("x", 6)
+    .style("fill","currentColor")
+    .attr("font-size", "10px")
+    .attr("y", 3)
+    .attr("dy", "0em")
+    .text(d => d);
 }
 
 async function fetchData() {

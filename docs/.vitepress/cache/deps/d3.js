@@ -1,12 +1,8 @@
 import {
-  Adder,
   Delaunay,
-  FormatSpecifier,
-  InternMap,
-  InternSet,
   Node,
   Path,
-  Symbol as Symbol2,
+  Symbol,
   Voronoi,
   albersUsa_default,
   albers_default,
@@ -16,8 +12,6 @@ import {
   areaRadial_default,
   area_default,
   area_default2,
-  array_default,
-  ascending,
   ascending_default,
   asterisk_default,
   autoType,
@@ -25,22 +19,10 @@ import {
   azimuthalEqualArea_default,
   azimuthalEquidistantRaw,
   azimuthalEquidistant_default,
-  band,
   basisClosed_default,
-  basisClosed_default2,
   basisOpen_default,
   basis_default,
-  basis_default2,
-  bin,
   binary_default,
-  bisectCenter,
-  bisectLeft,
-  bisectRight,
-  bisect_default,
-  bisector,
-  blur,
-  blur2,
-  blurImage,
   bounds_default,
   bumpX,
   bumpY,
@@ -59,7 +41,6 @@ import {
   clipRectangle,
   cluster_default,
   collide_default,
-  color,
   conicConformalRaw,
   conicConformal_default,
   conicEqualAreaRaw,
@@ -67,8 +48,6 @@ import {
   conicEquidistantRaw,
   conicEquidistant_default,
   contains_default,
-  count,
-  cross,
   cross_default,
   csvFormat,
   csvFormatBody,
@@ -77,29 +56,11 @@ import {
   csvFormatValue,
   csvParse,
   csvParseRows,
-  cubehelix,
-  cubehelixLong,
-  cubehelix_default,
-  cumsum,
-  date_default,
-  defaultLocale,
-  defaultLocale2,
-  descending,
   descending_default,
-  deviation,
   diamond2_default,
   diamond_default,
   dice_default,
-  difference,
-  discrete_default,
-  disjoint,
-  dispatch_default,
   distance_default,
-  diverging,
-  divergingLog,
-  divergingPow,
-  divergingSqrt,
-  divergingSymlog,
   diverging_default,
   dsv_default,
   enclose_default,
@@ -107,59 +68,19 @@ import {
   equalEarth_default,
   equirectangularRaw,
   equirectangular_default,
-  every,
   expand_default,
-  extent,
   extent_default,
-  fcumsum,
-  filter,
-  flatGroup,
-  flatRollup,
-  format,
-  formatLocale,
-  formatPrefix,
-  formatSpecifier,
-  fsum,
   gnomonicRaw,
   gnomonic_default,
   graticule,
   graticule10,
-  gray,
-  greatest,
-  greatestIndex,
-  group,
-  groupSort,
-  groups,
-  hcl,
-  hclLong,
-  hcl_default,
   hierarchy,
-  hsl,
-  hslLong,
-  hsl_default,
-  hue_default,
-  identity,
   identity_default,
-  implicit,
-  index,
-  indexes,
   insideOut_default,
-  interpolateTransformCss,
-  interpolateTransformSvg,
   interpolate_default,
-  intersection,
-  interval_default,
-  isoFormat_default,
-  isoParse_default,
-  lab,
-  lab2,
-  lch,
-  least,
-  leastIndex,
   length_default,
   lineRadial_default,
   line_default,
-  linear,
   linearClosed_default,
   linear_default,
   link,
@@ -167,99 +88,38 @@ import {
   linkRadial,
   linkVertical,
   link_default,
-  locale_default,
-  log,
   manyBody_default,
-  map,
-  max,
-  maxIndex,
-  mean,
-  median,
-  medianIndex,
   mercatorRaw,
   mercator_default,
-  merge,
-  millisecond,
-  milliseconds,
-  min,
-  minIndex,
-  mode,
   monotoneX,
   monotoneY,
   naturalEarth1Raw,
   naturalEarth1_default,
   natural_default,
-  nice,
   none_default,
   none_default2,
-  now,
-  numberArray_default,
-  number_default,
-  object_default,
-  ordinal,
   orthographicRaw,
   orthographic_default,
   pack_default,
-  pairs,
   partition_default,
   path,
   pathRound,
   path_default,
-  permute,
   pie_default,
-  piecewise,
   plus_default,
-  point,
   pointRadial_default,
-  pow,
-  precisionFixed_default,
-  precisionPrefix_default,
-  precisionRound_default,
   projection,
   projectionMutator,
   quadtree,
-  quantile,
-  quantile2,
-  quantileIndex,
-  quantileSorted,
-  quantize,
-  quantize_default,
-  quickselect,
-  radial,
   radial_default,
-  range,
-  rank,
-  reduce,
   resquarify_default,
-  reverse,
   reverse_default,
-  rgb,
-  rgbBasis,
-  rgbBasisClosed,
-  rgb_default,
-  rollup,
-  rollups,
   rotation_default,
-  round_default,
-  scan,
-  second,
-  seconds,
-  sequential,
-  sequentialLog,
-  sequentialPow,
-  sequentialQuantile,
-  sequentialSqrt,
-  sequentialSymlog,
-  shuffle_default,
-  shuffler,
   siblings_default,
   silhouette_default,
   simulation_default,
   sliceDice_default,
   slice_default,
-  some,
-  sort,
-  sqrt,
   square2_default,
   square_default,
   squarify_default,
@@ -272,21 +132,72 @@ import {
   stereographic_default,
   stratify_default,
   stream_default,
-  string_default,
-  subset,
-  sum,
-  superset,
   symbolsFill,
   symbolsStroke,
+  times_default,
+  transform_default,
+  transverseMercatorRaw,
+  transverseMercator_default,
+  tree_default,
+  treemap_default,
+  triangle2_default,
+  triangle_default,
+  tsvFormat,
+  tsvFormatBody,
+  tsvFormatRow,
+  tsvFormatRows,
+  tsvFormatValue,
+  tsvParse,
+  tsvParseRows,
+  wiggle_default,
+  wye_default,
+  x_default,
+  y_default
+} from "./chunk-5UQBLVOX.js";
+import {
+  FormatSpecifier,
+  band,
+  defaultLocale,
+  defaultLocale2,
+  diverging,
+  divergingLog,
+  divergingPow,
+  divergingSqrt,
+  divergingSymlog,
+  format,
+  formatLocale,
+  formatPrefix,
+  formatSpecifier,
+  identity,
+  implicit,
+  isoFormat_default,
+  isoParse_default,
+  linear,
+  locale_default,
+  log,
+  millisecond,
+  milliseconds,
+  ordinal,
+  point,
+  pow,
+  precisionFixed_default,
+  precisionPrefix_default,
+  precisionRound_default,
+  quantile as quantile2,
+  quantize,
+  radial,
+  second,
+  seconds,
+  sequential,
+  sequentialLog,
+  sequentialPow,
+  sequentialQuantile,
+  sequentialSqrt,
+  sequentialSymlog,
+  sqrt,
   symlog,
   threshold,
-  thresholdFreedmanDiaconis,
-  thresholdScott,
-  thresholdSturges,
   tickFormat,
-  tickIncrement,
-  tickStep,
-  ticks,
   time,
   timeDay,
   timeDays,
@@ -317,26 +228,6 @@ import {
   timeWednesdays,
   timeYear,
   timeYears,
-  timeout_default,
-  timer,
-  timerFlush,
-  times_default,
-  transform_default,
-  transpose,
-  transverseMercatorRaw,
-  transverseMercator_default,
-  tree_default,
-  treemap_default,
-  triangle2_default,
-  triangle_default,
-  tsvFormat,
-  tsvFormatBody,
-  tsvFormatRow,
-  tsvFormatRows,
-  tsvFormatValue,
-  tsvParse,
-  tsvParseRows,
-  union,
   unixDay,
   unixDays,
   utcDay,
@@ -367,16 +258,183 @@ import {
   utcWednesday,
   utcWednesdays,
   utcYear,
-  utcYears,
-  value_default,
+  utcYears
+} from "./chunk-ODXH2HTY.js";
+import {
+  Adder,
+  InternMap,
+  InternSet,
+  ascending,
+  bin,
+  bisectCenter,
+  bisectLeft,
+  bisectRight,
+  bisect_default,
+  bisector,
+  blur,
+  blur2,
+  blurImage,
+  count,
+  cross,
+  cumsum,
+  descending,
+  deviation,
+  difference,
+  disjoint,
+  every,
+  extent,
+  fcumsum,
+  filter,
+  flatGroup,
+  flatRollup,
+  fsum,
+  greatest,
+  greatestIndex,
+  group,
+  groupSort,
+  groups,
+  index,
+  indexes,
+  intersection,
+  least,
+  leastIndex,
+  map,
+  max,
+  maxIndex,
+  mean,
+  median,
+  medianIndex,
+  merge,
+  min,
+  minIndex,
+  mode,
+  nice,
+  pairs,
+  permute,
+  quantile,
+  quantileIndex,
+  quantileSorted,
+  quickselect,
+  range,
+  rank,
+  reduce,
+  reverse,
+  rollup,
+  rollups,
+  scan,
+  shuffle_default,
+  shuffler,
+  some,
+  sort,
+  subset,
+  sum,
+  superset,
+  thresholdFreedmanDiaconis,
+  thresholdScott,
+  thresholdSturges,
+  tickIncrement,
+  tickStep,
+  ticks,
+  transpose,
+  union,
   variance,
-  wiggle_default,
-  wye_default,
-  x_default,
-  y_default,
-  zip,
+  zip
+} from "./chunk-43HP4RIT.js";
+import {
+  active_default,
+  backIn,
+  backInOut,
+  backOut,
+  bounceIn,
+  bounceInOut,
+  bounceOut,
+  circleIn,
+  circleInOut,
+  circleOut,
+  cubicIn,
+  cubicInOut,
+  cubicOut,
+  elasticIn,
+  elasticInOut,
+  elasticOut,
+  expIn,
+  expInOut,
+  expOut,
+  interrupt_default,
+  linear as linear2,
+  polyIn,
+  polyInOut,
+  polyOut,
+  quadIn,
+  quadInOut,
+  quadOut,
+  sinIn,
+  sinInOut,
+  sinOut,
+  transition
+} from "./chunk-MSOUMGP6.js";
+import {
+  create_default,
+  creator_default,
+  local,
+  matcher_default,
+  namespace_default,
+  namespaces_default,
+  pointer_default,
+  pointers_default,
+  selectAll_default,
+  select_default,
+  selection_default,
+  selectorAll_default,
+  selector_default,
+  styleValue,
+  window_default
+} from "./chunk-IWTQSBGV.js";
+import {
+  dispatch_default,
+  interval_default,
+  now,
+  timeout_default,
+  timer,
+  timerFlush
+} from "./chunk-ENM4PJ22.js";
+import {
+  array_default,
+  basisClosed_default as basisClosed_default2,
+  basis_default as basis_default2,
+  color,
+  cubehelix,
+  cubehelixLong,
+  cubehelix_default,
+  date_default,
+  discrete_default,
+  gray,
+  hcl,
+  hclLong,
+  hcl_default,
+  hsl,
+  hslLong,
+  hsl_default,
+  hue_default,
+  interpolateTransformCss,
+  interpolateTransformSvg,
+  lab,
+  lab2,
+  lch,
+  numberArray_default,
+  number_default,
+  object_default,
+  piecewise,
+  quantize_default,
+  rgb,
+  rgbBasis,
+  rgbBasisClosed,
+  rgb_default,
+  round_default,
+  string_default,
+  value_default,
   zoom_default
-} from "./chunk-NTP5MXPO.js";
+} from "./chunk-H3PJCI32.js";
 import "./chunk-ZS7NZCD4.js";
 
 // node_modules/d3-axis/src/identity.js
@@ -411,12 +469,12 @@ function entering() {
 function axis(orient, scale) {
   var tickArguments = [], tickValues = null, tickFormat2 = null, tickSizeInner = 6, tickSizeOuter = 6, tickPadding = 3, offset = typeof window !== "undefined" && window.devicePixelRatio > 1 ? 0 : 0.5, k = orient === top || orient === left ? -1 : 1, x = orient === left || orient === right ? "x" : "y", transform2 = orient === top || orient === bottom ? translateX : translateY;
   function axis2(context) {
-    var values = tickValues == null ? scale.ticks ? scale.ticks.apply(scale, tickArguments) : scale.domain() : tickValues, format2 = tickFormat2 == null ? scale.tickFormat ? scale.tickFormat.apply(scale, tickArguments) : identity_default2 : tickFormat2, spacing = Math.max(tickSizeInner, 0) + tickPadding, range3 = scale.range(), range0 = +range3[0] + offset, range1 = +range3[range3.length - 1] + offset, position = (scale.bandwidth ? center : number)(scale.copy(), offset), selection2 = context.selection ? context.selection() : context, path2 = selection2.selectAll(".domain").data([null]), tick = selection2.selectAll(".tick").data(values, scale).order(), tickExit = tick.exit(), tickEnter = tick.enter().append("g").attr("class", "tick"), line = tick.select("line"), text = tick.select("text");
+    var values = tickValues == null ? scale.ticks ? scale.ticks.apply(scale, tickArguments) : scale.domain() : tickValues, format2 = tickFormat2 == null ? scale.tickFormat ? scale.tickFormat.apply(scale, tickArguments) : identity_default2 : tickFormat2, spacing = Math.max(tickSizeInner, 0) + tickPadding, range3 = scale.range(), range0 = +range3[0] + offset, range1 = +range3[range3.length - 1] + offset, position = (scale.bandwidth ? center : number)(scale.copy(), offset), selection = context.selection ? context.selection() : context, path2 = selection.selectAll(".domain").data([null]), tick = selection.selectAll(".tick").data(values, scale).order(), tickExit = tick.exit(), tickEnter = tick.enter().append("g").attr("class", "tick"), line = tick.select("line"), text = tick.select("text");
     path2 = path2.merge(path2.enter().insert("path", ".tick").attr("class", "domain").attr("stroke", "currentColor"));
     tick = tick.merge(tickEnter);
     line = line.merge(tickEnter.append("line").attr("stroke", "currentColor").attr(x + "2", k * tickSizeInner));
     text = text.merge(tickEnter.append("text").attr("fill", "currentColor").attr(x, k * spacing).attr("dy", orient === top ? "0em" : orient === bottom ? "0.71em" : "0.32em"));
-    if (context !== selection2) {
+    if (context !== selection) {
       path2 = path2.transition(context);
       tick = tick.transition(context);
       line = line.transition(context);
@@ -436,8 +494,8 @@ function axis(orient, scale) {
     });
     line.attr(x + "2", k * tickSizeInner);
     text.attr(x, k * spacing).text(format2);
-    selection2.filter(entering).attr("fill", "none").attr("font-size", 10).attr("font-family", "sans-serif").attr("text-anchor", orient === right ? "start" : orient === left ? "end" : "middle");
-    selection2.each(function() {
+    selection.filter(entering).attr("fill", "none").attr("font-size", 10).attr("font-family", "sans-serif").attr("text-anchor", orient === right ? "start" : orient === left ? "end" : "middle");
+    selection.each(function() {
       this.__axis = position;
     });
   }
@@ -486,918 +544,6 @@ function axisLeft(scale) {
   return axis(left, scale);
 }
 
-// node_modules/d3-selection/src/namespaces.js
-var xhtml = "http://www.w3.org/1999/xhtml";
-var namespaces_default = {
-  svg: "http://www.w3.org/2000/svg",
-  xhtml,
-  xlink: "http://www.w3.org/1999/xlink",
-  xml: "http://www.w3.org/XML/1998/namespace",
-  xmlns: "http://www.w3.org/2000/xmlns/"
-};
-
-// node_modules/d3-selection/src/namespace.js
-function namespace_default(name) {
-  var prefix = name += "", i = prefix.indexOf(":");
-  if (i >= 0 && (prefix = name.slice(0, i)) !== "xmlns")
-    name = name.slice(i + 1);
-  return namespaces_default.hasOwnProperty(prefix) ? { space: namespaces_default[prefix], local: name } : name;
-}
-
-// node_modules/d3-selection/src/creator.js
-function creatorInherit(name) {
-  return function() {
-    var document2 = this.ownerDocument, uri = this.namespaceURI;
-    return uri === xhtml && document2.documentElement.namespaceURI === xhtml ? document2.createElement(name) : document2.createElementNS(uri, name);
-  };
-}
-function creatorFixed(fullname) {
-  return function() {
-    return this.ownerDocument.createElementNS(fullname.space, fullname.local);
-  };
-}
-function creator_default(name) {
-  var fullname = namespace_default(name);
-  return (fullname.local ? creatorFixed : creatorInherit)(fullname);
-}
-
-// node_modules/d3-selection/src/selector.js
-function none() {
-}
-function selector_default(selector) {
-  return selector == null ? none : function() {
-    return this.querySelector(selector);
-  };
-}
-
-// node_modules/d3-selection/src/selection/select.js
-function select_default(select) {
-  if (typeof select !== "function")
-    select = selector_default(select);
-  for (var groups2 = this._groups, m = groups2.length, subgroups = new Array(m), j = 0; j < m; ++j) {
-    for (var group2 = groups2[j], n = group2.length, subgroup = subgroups[j] = new Array(n), node, subnode, i = 0; i < n; ++i) {
-      if ((node = group2[i]) && (subnode = select.call(node, node.__data__, i, group2))) {
-        if ("__data__" in node)
-          subnode.__data__ = node.__data__;
-        subgroup[i] = subnode;
-      }
-    }
-  }
-  return new Selection(subgroups, this._parents);
-}
-
-// node_modules/d3-selection/src/array.js
-function array(x) {
-  return x == null ? [] : Array.isArray(x) ? x : Array.from(x);
-}
-
-// node_modules/d3-selection/src/selectorAll.js
-function empty() {
-  return [];
-}
-function selectorAll_default(selector) {
-  return selector == null ? empty : function() {
-    return this.querySelectorAll(selector);
-  };
-}
-
-// node_modules/d3-selection/src/selection/selectAll.js
-function arrayAll(select) {
-  return function() {
-    return array(select.apply(this, arguments));
-  };
-}
-function selectAll_default(select) {
-  if (typeof select === "function")
-    select = arrayAll(select);
-  else
-    select = selectorAll_default(select);
-  for (var groups2 = this._groups, m = groups2.length, subgroups = [], parents = [], j = 0; j < m; ++j) {
-    for (var group2 = groups2[j], n = group2.length, node, i = 0; i < n; ++i) {
-      if (node = group2[i]) {
-        subgroups.push(select.call(node, node.__data__, i, group2));
-        parents.push(node);
-      }
-    }
-  }
-  return new Selection(subgroups, parents);
-}
-
-// node_modules/d3-selection/src/matcher.js
-function matcher_default(selector) {
-  return function() {
-    return this.matches(selector);
-  };
-}
-function childMatcher(selector) {
-  return function(node) {
-    return node.matches(selector);
-  };
-}
-
-// node_modules/d3-selection/src/selection/selectChild.js
-var find = Array.prototype.find;
-function childFind(match) {
-  return function() {
-    return find.call(this.children, match);
-  };
-}
-function childFirst() {
-  return this.firstElementChild;
-}
-function selectChild_default(match) {
-  return this.select(match == null ? childFirst : childFind(typeof match === "function" ? match : childMatcher(match)));
-}
-
-// node_modules/d3-selection/src/selection/selectChildren.js
-var filter2 = Array.prototype.filter;
-function children() {
-  return Array.from(this.children);
-}
-function childrenFilter(match) {
-  return function() {
-    return filter2.call(this.children, match);
-  };
-}
-function selectChildren_default(match) {
-  return this.selectAll(match == null ? children : childrenFilter(typeof match === "function" ? match : childMatcher(match)));
-}
-
-// node_modules/d3-selection/src/selection/filter.js
-function filter_default(match) {
-  if (typeof match !== "function")
-    match = matcher_default(match);
-  for (var groups2 = this._groups, m = groups2.length, subgroups = new Array(m), j = 0; j < m; ++j) {
-    for (var group2 = groups2[j], n = group2.length, subgroup = subgroups[j] = [], node, i = 0; i < n; ++i) {
-      if ((node = group2[i]) && match.call(node, node.__data__, i, group2)) {
-        subgroup.push(node);
-      }
-    }
-  }
-  return new Selection(subgroups, this._parents);
-}
-
-// node_modules/d3-selection/src/selection/sparse.js
-function sparse_default(update) {
-  return new Array(update.length);
-}
-
-// node_modules/d3-selection/src/selection/enter.js
-function enter_default() {
-  return new Selection(this._enter || this._groups.map(sparse_default), this._parents);
-}
-function EnterNode(parent, datum2) {
-  this.ownerDocument = parent.ownerDocument;
-  this.namespaceURI = parent.namespaceURI;
-  this._next = null;
-  this._parent = parent;
-  this.__data__ = datum2;
-}
-EnterNode.prototype = {
-  constructor: EnterNode,
-  appendChild: function(child) {
-    return this._parent.insertBefore(child, this._next);
-  },
-  insertBefore: function(child, next) {
-    return this._parent.insertBefore(child, next);
-  },
-  querySelector: function(selector) {
-    return this._parent.querySelector(selector);
-  },
-  querySelectorAll: function(selector) {
-    return this._parent.querySelectorAll(selector);
-  }
-};
-
-// node_modules/d3-selection/src/constant.js
-function constant_default(x) {
-  return function() {
-    return x;
-  };
-}
-
-// node_modules/d3-selection/src/selection/data.js
-function bindIndex(parent, group2, enter, update, exit, data) {
-  var i = 0, node, groupLength = group2.length, dataLength = data.length;
-  for (; i < dataLength; ++i) {
-    if (node = group2[i]) {
-      node.__data__ = data[i];
-      update[i] = node;
-    } else {
-      enter[i] = new EnterNode(parent, data[i]);
-    }
-  }
-  for (; i < groupLength; ++i) {
-    if (node = group2[i]) {
-      exit[i] = node;
-    }
-  }
-}
-function bindKey(parent, group2, enter, update, exit, data, key) {
-  var i, node, nodeByKeyValue = /* @__PURE__ */ new Map(), groupLength = group2.length, dataLength = data.length, keyValues = new Array(groupLength), keyValue;
-  for (i = 0; i < groupLength; ++i) {
-    if (node = group2[i]) {
-      keyValues[i] = keyValue = key.call(node, node.__data__, i, group2) + "";
-      if (nodeByKeyValue.has(keyValue)) {
-        exit[i] = node;
-      } else {
-        nodeByKeyValue.set(keyValue, node);
-      }
-    }
-  }
-  for (i = 0; i < dataLength; ++i) {
-    keyValue = key.call(parent, data[i], i, data) + "";
-    if (node = nodeByKeyValue.get(keyValue)) {
-      update[i] = node;
-      node.__data__ = data[i];
-      nodeByKeyValue.delete(keyValue);
-    } else {
-      enter[i] = new EnterNode(parent, data[i]);
-    }
-  }
-  for (i = 0; i < groupLength; ++i) {
-    if ((node = group2[i]) && nodeByKeyValue.get(keyValues[i]) === node) {
-      exit[i] = node;
-    }
-  }
-}
-function datum(node) {
-  return node.__data__;
-}
-function data_default(value, key) {
-  if (!arguments.length)
-    return Array.from(this, datum);
-  var bind = key ? bindKey : bindIndex, parents = this._parents, groups2 = this._groups;
-  if (typeof value !== "function")
-    value = constant_default(value);
-  for (var m = groups2.length, update = new Array(m), enter = new Array(m), exit = new Array(m), j = 0; j < m; ++j) {
-    var parent = parents[j], group2 = groups2[j], groupLength = group2.length, data = arraylike(value.call(parent, parent && parent.__data__, j, parents)), dataLength = data.length, enterGroup = enter[j] = new Array(dataLength), updateGroup = update[j] = new Array(dataLength), exitGroup = exit[j] = new Array(groupLength);
-    bind(parent, group2, enterGroup, updateGroup, exitGroup, data, key);
-    for (var i0 = 0, i1 = 0, previous, next; i0 < dataLength; ++i0) {
-      if (previous = enterGroup[i0]) {
-        if (i0 >= i1)
-          i1 = i0 + 1;
-        while (!(next = updateGroup[i1]) && ++i1 < dataLength)
-          ;
-        previous._next = next || null;
-      }
-    }
-  }
-  update = new Selection(update, parents);
-  update._enter = enter;
-  update._exit = exit;
-  return update;
-}
-function arraylike(data) {
-  return typeof data === "object" && "length" in data ? data : Array.from(data);
-}
-
-// node_modules/d3-selection/src/selection/exit.js
-function exit_default() {
-  return new Selection(this._exit || this._groups.map(sparse_default), this._parents);
-}
-
-// node_modules/d3-selection/src/selection/join.js
-function join_default(onenter, onupdate, onexit) {
-  var enter = this.enter(), update = this, exit = this.exit();
-  if (typeof onenter === "function") {
-    enter = onenter(enter);
-    if (enter)
-      enter = enter.selection();
-  } else {
-    enter = enter.append(onenter + "");
-  }
-  if (onupdate != null) {
-    update = onupdate(update);
-    if (update)
-      update = update.selection();
-  }
-  if (onexit == null)
-    exit.remove();
-  else
-    onexit(exit);
-  return enter && update ? enter.merge(update).order() : update;
-}
-
-// node_modules/d3-selection/src/selection/merge.js
-function merge_default(context) {
-  var selection2 = context.selection ? context.selection() : context;
-  for (var groups0 = this._groups, groups1 = selection2._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
-    for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge2 = merges[j] = new Array(n), node, i = 0; i < n; ++i) {
-      if (node = group0[i] || group1[i]) {
-        merge2[i] = node;
-      }
-    }
-  }
-  for (; j < m0; ++j) {
-    merges[j] = groups0[j];
-  }
-  return new Selection(merges, this._parents);
-}
-
-// node_modules/d3-selection/src/selection/order.js
-function order_default() {
-  for (var groups2 = this._groups, j = -1, m = groups2.length; ++j < m; ) {
-    for (var group2 = groups2[j], i = group2.length - 1, next = group2[i], node; --i >= 0; ) {
-      if (node = group2[i]) {
-        if (next && node.compareDocumentPosition(next) ^ 4)
-          next.parentNode.insertBefore(node, next);
-        next = node;
-      }
-    }
-  }
-  return this;
-}
-
-// node_modules/d3-selection/src/selection/sort.js
-function sort_default(compare) {
-  if (!compare)
-    compare = ascending2;
-  function compareNode(a, b) {
-    return a && b ? compare(a.__data__, b.__data__) : !a - !b;
-  }
-  for (var groups2 = this._groups, m = groups2.length, sortgroups = new Array(m), j = 0; j < m; ++j) {
-    for (var group2 = groups2[j], n = group2.length, sortgroup = sortgroups[j] = new Array(n), node, i = 0; i < n; ++i) {
-      if (node = group2[i]) {
-        sortgroup[i] = node;
-      }
-    }
-    sortgroup.sort(compareNode);
-  }
-  return new Selection(sortgroups, this._parents).order();
-}
-function ascending2(a, b) {
-  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
-}
-
-// node_modules/d3-selection/src/selection/call.js
-function call_default() {
-  var callback = arguments[0];
-  arguments[0] = this;
-  callback.apply(null, arguments);
-  return this;
-}
-
-// node_modules/d3-selection/src/selection/nodes.js
-function nodes_default() {
-  return Array.from(this);
-}
-
-// node_modules/d3-selection/src/selection/node.js
-function node_default() {
-  for (var groups2 = this._groups, j = 0, m = groups2.length; j < m; ++j) {
-    for (var group2 = groups2[j], i = 0, n = group2.length; i < n; ++i) {
-      var node = group2[i];
-      if (node)
-        return node;
-    }
-  }
-  return null;
-}
-
-// node_modules/d3-selection/src/selection/size.js
-function size_default() {
-  let size = 0;
-  for (const node of this)
-    ++size;
-  return size;
-}
-
-// node_modules/d3-selection/src/selection/empty.js
-function empty_default() {
-  return !this.node();
-}
-
-// node_modules/d3-selection/src/selection/each.js
-function each_default(callback) {
-  for (var groups2 = this._groups, j = 0, m = groups2.length; j < m; ++j) {
-    for (var group2 = groups2[j], i = 0, n = group2.length, node; i < n; ++i) {
-      if (node = group2[i])
-        callback.call(node, node.__data__, i, group2);
-    }
-  }
-  return this;
-}
-
-// node_modules/d3-selection/src/selection/attr.js
-function attrRemove(name) {
-  return function() {
-    this.removeAttribute(name);
-  };
-}
-function attrRemoveNS(fullname) {
-  return function() {
-    this.removeAttributeNS(fullname.space, fullname.local);
-  };
-}
-function attrConstant(name, value) {
-  return function() {
-    this.setAttribute(name, value);
-  };
-}
-function attrConstantNS(fullname, value) {
-  return function() {
-    this.setAttributeNS(fullname.space, fullname.local, value);
-  };
-}
-function attrFunction(name, value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (v == null)
-      this.removeAttribute(name);
-    else
-      this.setAttribute(name, v);
-  };
-}
-function attrFunctionNS(fullname, value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (v == null)
-      this.removeAttributeNS(fullname.space, fullname.local);
-    else
-      this.setAttributeNS(fullname.space, fullname.local, v);
-  };
-}
-function attr_default(name, value) {
-  var fullname = namespace_default(name);
-  if (arguments.length < 2) {
-    var node = this.node();
-    return fullname.local ? node.getAttributeNS(fullname.space, fullname.local) : node.getAttribute(fullname);
-  }
-  return this.each((value == null ? fullname.local ? attrRemoveNS : attrRemove : typeof value === "function" ? fullname.local ? attrFunctionNS : attrFunction : fullname.local ? attrConstantNS : attrConstant)(fullname, value));
-}
-
-// node_modules/d3-selection/src/window.js
-function window_default(node) {
-  return node.ownerDocument && node.ownerDocument.defaultView || node.document && node || node.defaultView;
-}
-
-// node_modules/d3-selection/src/selection/style.js
-function styleRemove(name) {
-  return function() {
-    this.style.removeProperty(name);
-  };
-}
-function styleConstant(name, value, priority) {
-  return function() {
-    this.style.setProperty(name, value, priority);
-  };
-}
-function styleFunction(name, value, priority) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (v == null)
-      this.style.removeProperty(name);
-    else
-      this.style.setProperty(name, v, priority);
-  };
-}
-function style_default(name, value, priority) {
-  return arguments.length > 1 ? this.each((value == null ? styleRemove : typeof value === "function" ? styleFunction : styleConstant)(name, value, priority == null ? "" : priority)) : styleValue(this.node(), name);
-}
-function styleValue(node, name) {
-  return node.style.getPropertyValue(name) || window_default(node).getComputedStyle(node, null).getPropertyValue(name);
-}
-
-// node_modules/d3-selection/src/selection/property.js
-function propertyRemove(name) {
-  return function() {
-    delete this[name];
-  };
-}
-function propertyConstant(name, value) {
-  return function() {
-    this[name] = value;
-  };
-}
-function propertyFunction(name, value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (v == null)
-      delete this[name];
-    else
-      this[name] = v;
-  };
-}
-function property_default(name, value) {
-  return arguments.length > 1 ? this.each((value == null ? propertyRemove : typeof value === "function" ? propertyFunction : propertyConstant)(name, value)) : this.node()[name];
-}
-
-// node_modules/d3-selection/src/selection/classed.js
-function classArray(string) {
-  return string.trim().split(/^|\s+/);
-}
-function classList(node) {
-  return node.classList || new ClassList(node);
-}
-function ClassList(node) {
-  this._node = node;
-  this._names = classArray(node.getAttribute("class") || "");
-}
-ClassList.prototype = {
-  add: function(name) {
-    var i = this._names.indexOf(name);
-    if (i < 0) {
-      this._names.push(name);
-      this._node.setAttribute("class", this._names.join(" "));
-    }
-  },
-  remove: function(name) {
-    var i = this._names.indexOf(name);
-    if (i >= 0) {
-      this._names.splice(i, 1);
-      this._node.setAttribute("class", this._names.join(" "));
-    }
-  },
-  contains: function(name) {
-    return this._names.indexOf(name) >= 0;
-  }
-};
-function classedAdd(node, names) {
-  var list = classList(node), i = -1, n = names.length;
-  while (++i < n)
-    list.add(names[i]);
-}
-function classedRemove(node, names) {
-  var list = classList(node), i = -1, n = names.length;
-  while (++i < n)
-    list.remove(names[i]);
-}
-function classedTrue(names) {
-  return function() {
-    classedAdd(this, names);
-  };
-}
-function classedFalse(names) {
-  return function() {
-    classedRemove(this, names);
-  };
-}
-function classedFunction(names, value) {
-  return function() {
-    (value.apply(this, arguments) ? classedAdd : classedRemove)(this, names);
-  };
-}
-function classed_default(name, value) {
-  var names = classArray(name + "");
-  if (arguments.length < 2) {
-    var list = classList(this.node()), i = -1, n = names.length;
-    while (++i < n)
-      if (!list.contains(names[i]))
-        return false;
-    return true;
-  }
-  return this.each((typeof value === "function" ? classedFunction : value ? classedTrue : classedFalse)(names, value));
-}
-
-// node_modules/d3-selection/src/selection/text.js
-function textRemove() {
-  this.textContent = "";
-}
-function textConstant(value) {
-  return function() {
-    this.textContent = value;
-  };
-}
-function textFunction(value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    this.textContent = v == null ? "" : v;
-  };
-}
-function text_default(value) {
-  return arguments.length ? this.each(value == null ? textRemove : (typeof value === "function" ? textFunction : textConstant)(value)) : this.node().textContent;
-}
-
-// node_modules/d3-selection/src/selection/html.js
-function htmlRemove() {
-  this.innerHTML = "";
-}
-function htmlConstant(value) {
-  return function() {
-    this.innerHTML = value;
-  };
-}
-function htmlFunction(value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    this.innerHTML = v == null ? "" : v;
-  };
-}
-function html_default(value) {
-  return arguments.length ? this.each(value == null ? htmlRemove : (typeof value === "function" ? htmlFunction : htmlConstant)(value)) : this.node().innerHTML;
-}
-
-// node_modules/d3-selection/src/selection/raise.js
-function raise() {
-  if (this.nextSibling)
-    this.parentNode.appendChild(this);
-}
-function raise_default() {
-  return this.each(raise);
-}
-
-// node_modules/d3-selection/src/selection/lower.js
-function lower() {
-  if (this.previousSibling)
-    this.parentNode.insertBefore(this, this.parentNode.firstChild);
-}
-function lower_default() {
-  return this.each(lower);
-}
-
-// node_modules/d3-selection/src/selection/append.js
-function append_default(name) {
-  var create2 = typeof name === "function" ? name : creator_default(name);
-  return this.select(function() {
-    return this.appendChild(create2.apply(this, arguments));
-  });
-}
-
-// node_modules/d3-selection/src/selection/insert.js
-function constantNull() {
-  return null;
-}
-function insert_default(name, before) {
-  var create2 = typeof name === "function" ? name : creator_default(name), select = before == null ? constantNull : typeof before === "function" ? before : selector_default(before);
-  return this.select(function() {
-    return this.insertBefore(create2.apply(this, arguments), select.apply(this, arguments) || null);
-  });
-}
-
-// node_modules/d3-selection/src/selection/remove.js
-function remove() {
-  var parent = this.parentNode;
-  if (parent)
-    parent.removeChild(this);
-}
-function remove_default() {
-  return this.each(remove);
-}
-
-// node_modules/d3-selection/src/selection/clone.js
-function selection_cloneShallow() {
-  var clone = this.cloneNode(false), parent = this.parentNode;
-  return parent ? parent.insertBefore(clone, this.nextSibling) : clone;
-}
-function selection_cloneDeep() {
-  var clone = this.cloneNode(true), parent = this.parentNode;
-  return parent ? parent.insertBefore(clone, this.nextSibling) : clone;
-}
-function clone_default(deep) {
-  return this.select(deep ? selection_cloneDeep : selection_cloneShallow);
-}
-
-// node_modules/d3-selection/src/selection/datum.js
-function datum_default(value) {
-  return arguments.length ? this.property("__data__", value) : this.node().__data__;
-}
-
-// node_modules/d3-selection/src/selection/on.js
-function contextListener(listener) {
-  return function(event) {
-    listener.call(this, event, this.__data__);
-  };
-}
-function parseTypenames(typenames) {
-  return typenames.trim().split(/^|\s+/).map(function(t) {
-    var name = "", i = t.indexOf(".");
-    if (i >= 0)
-      name = t.slice(i + 1), t = t.slice(0, i);
-    return { type: t, name };
-  });
-}
-function onRemove(typename) {
-  return function() {
-    var on = this.__on;
-    if (!on)
-      return;
-    for (var j = 0, i = -1, m = on.length, o; j < m; ++j) {
-      if (o = on[j], (!typename.type || o.type === typename.type) && o.name === typename.name) {
-        this.removeEventListener(o.type, o.listener, o.options);
-      } else {
-        on[++i] = o;
-      }
-    }
-    if (++i)
-      on.length = i;
-    else
-      delete this.__on;
-  };
-}
-function onAdd(typename, value, options) {
-  return function() {
-    var on = this.__on, o, listener = contextListener(value);
-    if (on)
-      for (var j = 0, m = on.length; j < m; ++j) {
-        if ((o = on[j]).type === typename.type && o.name === typename.name) {
-          this.removeEventListener(o.type, o.listener, o.options);
-          this.addEventListener(o.type, o.listener = listener, o.options = options);
-          o.value = value;
-          return;
-        }
-      }
-    this.addEventListener(typename.type, listener, options);
-    o = { type: typename.type, name: typename.name, value, listener, options };
-    if (!on)
-      this.__on = [o];
-    else
-      on.push(o);
-  };
-}
-function on_default(typename, value, options) {
-  var typenames = parseTypenames(typename + ""), i, n = typenames.length, t;
-  if (arguments.length < 2) {
-    var on = this.node().__on;
-    if (on)
-      for (var j = 0, m = on.length, o; j < m; ++j) {
-        for (i = 0, o = on[j]; i < n; ++i) {
-          if ((t = typenames[i]).type === o.type && t.name === o.name) {
-            return o.value;
-          }
-        }
-      }
-    return;
-  }
-  on = value ? onAdd : onRemove;
-  for (i = 0; i < n; ++i)
-    this.each(on(typenames[i], value, options));
-  return this;
-}
-
-// node_modules/d3-selection/src/selection/dispatch.js
-function dispatchEvent(node, type2, params) {
-  var window2 = window_default(node), event = window2.CustomEvent;
-  if (typeof event === "function") {
-    event = new event(type2, params);
-  } else {
-    event = window2.document.createEvent("Event");
-    if (params)
-      event.initEvent(type2, params.bubbles, params.cancelable), event.detail = params.detail;
-    else
-      event.initEvent(type2, false, false);
-  }
-  node.dispatchEvent(event);
-}
-function dispatchConstant(type2, params) {
-  return function() {
-    return dispatchEvent(this, type2, params);
-  };
-}
-function dispatchFunction(type2, params) {
-  return function() {
-    return dispatchEvent(this, type2, params.apply(this, arguments));
-  };
-}
-function dispatch_default2(type2, params) {
-  return this.each((typeof params === "function" ? dispatchFunction : dispatchConstant)(type2, params));
-}
-
-// node_modules/d3-selection/src/selection/iterator.js
-function* iterator_default() {
-  for (var groups2 = this._groups, j = 0, m = groups2.length; j < m; ++j) {
-    for (var group2 = groups2[j], i = 0, n = group2.length, node; i < n; ++i) {
-      if (node = group2[i])
-        yield node;
-    }
-  }
-}
-
-// node_modules/d3-selection/src/selection/index.js
-var root = [null];
-function Selection(groups2, parents) {
-  this._groups = groups2;
-  this._parents = parents;
-}
-function selection() {
-  return new Selection([[document.documentElement]], root);
-}
-function selection_selection() {
-  return this;
-}
-Selection.prototype = selection.prototype = {
-  constructor: Selection,
-  select: select_default,
-  selectAll: selectAll_default,
-  selectChild: selectChild_default,
-  selectChildren: selectChildren_default,
-  filter: filter_default,
-  data: data_default,
-  enter: enter_default,
-  exit: exit_default,
-  join: join_default,
-  merge: merge_default,
-  selection: selection_selection,
-  order: order_default,
-  sort: sort_default,
-  call: call_default,
-  nodes: nodes_default,
-  node: node_default,
-  size: size_default,
-  empty: empty_default,
-  each: each_default,
-  attr: attr_default,
-  style: style_default,
-  property: property_default,
-  classed: classed_default,
-  text: text_default,
-  html: html_default,
-  raise: raise_default,
-  lower: lower_default,
-  append: append_default,
-  insert: insert_default,
-  remove: remove_default,
-  clone: clone_default,
-  datum: datum_default,
-  on: on_default,
-  dispatch: dispatch_default2,
-  [Symbol.iterator]: iterator_default
-};
-var selection_default = selection;
-
-// node_modules/d3-selection/src/select.js
-function select_default2(selector) {
-  return typeof selector === "string" ? new Selection([[document.querySelector(selector)]], [document.documentElement]) : new Selection([[selector]], root);
-}
-
-// node_modules/d3-selection/src/create.js
-function create_default(name) {
-  return select_default2(creator_default(name).call(document.documentElement));
-}
-
-// node_modules/d3-selection/src/local.js
-var nextId = 0;
-function local() {
-  return new Local();
-}
-function Local() {
-  this._ = "@" + (++nextId).toString(36);
-}
-Local.prototype = local.prototype = {
-  constructor: Local,
-  get: function(node) {
-    var id2 = this._;
-    while (!(id2 in node))
-      if (!(node = node.parentNode))
-        return;
-    return node[id2];
-  },
-  set: function(node, value) {
-    return node[this._] = value;
-  },
-  remove: function(node) {
-    return this._ in node && delete node[this._];
-  },
-  toString: function() {
-    return this._;
-  }
-};
-
-// node_modules/d3-selection/src/sourceEvent.js
-function sourceEvent_default(event) {
-  let sourceEvent;
-  while (sourceEvent = event.sourceEvent)
-    event = sourceEvent;
-  return event;
-}
-
-// node_modules/d3-selection/src/pointer.js
-function pointer_default(event, node) {
-  event = sourceEvent_default(event);
-  if (node === void 0)
-    node = event.currentTarget;
-  if (node) {
-    var svg2 = node.ownerSVGElement || node;
-    if (svg2.createSVGPoint) {
-      var point2 = svg2.createSVGPoint();
-      point2.x = event.clientX, point2.y = event.clientY;
-      point2 = point2.matrixTransform(node.getScreenCTM().inverse());
-      return [point2.x, point2.y];
-    }
-    if (node.getBoundingClientRect) {
-      var rect = node.getBoundingClientRect();
-      return [event.clientX - rect.left - node.clientLeft, event.clientY - rect.top - node.clientTop];
-    }
-  }
-  return [event.pageX, event.pageY];
-}
-
-// node_modules/d3-selection/src/pointers.js
-function pointers_default(events, node) {
-  if (events.target) {
-    events = sourceEvent_default(events);
-    if (node === void 0)
-      node = events.currentTarget;
-    events = events.touches || [events];
-  }
-  return Array.from(events, (event) => pointer_default(event, node));
-}
-
-// node_modules/d3-selection/src/selectAll.js
-function selectAll_default2(selector) {
-  return typeof selector === "string" ? new Selection([document.querySelectorAll(selector)], [document.documentElement]) : new Selection([array(selector)], root);
-}
-
 // node_modules/d3-drag/src/noevent.js
 var nonpassive = { passive: false };
 var nonpassivecapture = { capture: true, passive: false };
@@ -1411,32 +557,32 @@ function noevent_default(event) {
 
 // node_modules/d3-drag/src/nodrag.js
 function nodrag_default(view) {
-  var root3 = view.document.documentElement, selection2 = select_default2(view).on("dragstart.drag", noevent_default, nonpassivecapture);
-  if ("onselectstart" in root3) {
-    selection2.on("selectstart.drag", noevent_default, nonpassivecapture);
+  var root = view.document.documentElement, selection = select_default(view).on("dragstart.drag", noevent_default, nonpassivecapture);
+  if ("onselectstart" in root) {
+    selection.on("selectstart.drag", noevent_default, nonpassivecapture);
   } else {
-    root3.__noselect = root3.style.MozUserSelect;
-    root3.style.MozUserSelect = "none";
+    root.__noselect = root.style.MozUserSelect;
+    root.style.MozUserSelect = "none";
   }
 }
 function yesdrag(view, noclick) {
-  var root3 = view.document.documentElement, selection2 = select_default2(view).on("dragstart.drag", null);
+  var root = view.document.documentElement, selection = select_default(view).on("dragstart.drag", null);
   if (noclick) {
-    selection2.on("click.drag", noevent_default, nonpassivecapture);
+    selection.on("click.drag", noevent_default, nonpassivecapture);
     setTimeout(function() {
-      selection2.on("click.drag", null);
+      selection.on("click.drag", null);
     }, 0);
   }
-  if ("onselectstart" in root3) {
-    selection2.on("selectstart.drag", null);
+  if ("onselectstart" in root) {
+    selection.on("selectstart.drag", null);
   } else {
-    root3.style.MozUserSelect = root3.__noselect;
-    delete root3.__noselect;
+    root.style.MozUserSelect = root.__noselect;
+    delete root.__noselect;
   }
 }
 
 // node_modules/d3-drag/src/constant.js
-var constant_default2 = (x) => () => x;
+var constant_default = (x) => () => x;
 
 // node_modules/d3-drag/src/event.js
 function DragEvent(type2, {
@@ -1484,17 +630,17 @@ function defaultTouchable() {
   return navigator.maxTouchPoints || "ontouchstart" in this;
 }
 function drag_default() {
-  var filter3 = defaultFilter, container = defaultContainer, subject = defaultSubject, touchable = defaultTouchable, gestures = {}, listeners = dispatch_default("start", "drag", "end"), active = 0, mousedownx, mousedowny, mousemoving, touchending, clickDistance2 = 0;
-  function drag(selection2) {
-    selection2.on("mousedown.drag", mousedowned).filter(touchable).on("touchstart.drag", touchstarted).on("touchmove.drag", touchmoved, nonpassive).on("touchend.drag touchcancel.drag", touchended).style("touch-action", "none").style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
+  var filter2 = defaultFilter, container = defaultContainer, subject = defaultSubject, touchable = defaultTouchable, gestures = {}, listeners = dispatch_default("start", "drag", "end"), active = 0, mousedownx, mousedowny, mousemoving, touchending, clickDistance2 = 0;
+  function drag(selection) {
+    selection.on("mousedown.drag", mousedowned).filter(touchable).on("touchstart.drag", touchstarted).on("touchmove.drag", touchmoved, nonpassive).on("touchend.drag touchcancel.drag", touchended).style("touch-action", "none").style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
   }
   function mousedowned(event, d) {
-    if (touchending || !filter3.call(this, event, d))
+    if (touchending || !filter2.call(this, event, d))
       return;
     var gesture = beforestart(this, container.call(this, event, d), event, d, "mouse");
     if (!gesture)
       return;
-    select_default2(event.view).on("mousemove.drag", mousemoved, nonpassivecapture).on("mouseup.drag", mouseupped, nonpassivecapture);
+    select_default(event.view).on("mousemove.drag", mousemoved, nonpassivecapture).on("mouseup.drag", mouseupped, nonpassivecapture);
     nodrag_default(event.view);
     nopropagation(event);
     mousemoving = false;
@@ -1511,13 +657,13 @@ function drag_default() {
     gestures.mouse("drag", event);
   }
   function mouseupped(event) {
-    select_default2(event.view).on("mousemove.drag mouseup.drag", null);
+    select_default(event.view).on("mousemove.drag mouseup.drag", null);
     yesdrag(event.view, mousemoving);
     noevent_default(event);
     gestures.mouse("end", event);
   }
   function touchstarted(event, d) {
-    if (!filter3.call(this, event, d))
+    if (!filter2.call(this, event, d))
       return;
     var touches = event.changedTouches, c3 = container.call(this, event, d), n = touches.length, i, gesture;
     for (i = 0; i < n; ++i) {
@@ -1598,16 +744,16 @@ function drag_default() {
     };
   }
   drag.filter = function(_) {
-    return arguments.length ? (filter3 = typeof _ === "function" ? _ : constant_default2(!!_), drag) : filter3;
+    return arguments.length ? (filter2 = typeof _ === "function" ? _ : constant_default(!!_), drag) : filter2;
   };
   drag.container = function(_) {
-    return arguments.length ? (container = typeof _ === "function" ? _ : constant_default2(_), drag) : container;
+    return arguments.length ? (container = typeof _ === "function" ? _ : constant_default(_), drag) : container;
   };
   drag.subject = function(_) {
-    return arguments.length ? (subject = typeof _ === "function" ? _ : constant_default2(_), drag) : subject;
+    return arguments.length ? (subject = typeof _ === "function" ? _ : constant_default(_), drag) : subject;
   };
   drag.touchable = function(_) {
-    return arguments.length ? (touchable = typeof _ === "function" ? _ : constant_default2(!!_), drag) : touchable;
+    return arguments.length ? (touchable = typeof _ === "function" ? _ : constant_default(!!_), drag) : touchable;
   };
   drag.on = function() {
     var value = listeners.on.apply(listeners, arguments);
@@ -1619,946 +765,14 @@ function drag_default() {
   return drag;
 }
 
-// node_modules/d3-transition/src/transition/schedule.js
-var emptyOn = dispatch_default("start", "end", "cancel", "interrupt");
-var emptyTween = [];
-var CREATED = 0;
-var SCHEDULED = 1;
-var STARTING = 2;
-var STARTED = 3;
-var RUNNING = 4;
-var ENDING = 5;
-var ENDED = 6;
-function schedule_default(node, name, id2, index2, group2, timing) {
-  var schedules = node.__transition;
-  if (!schedules)
-    node.__transition = {};
-  else if (id2 in schedules)
-    return;
-  create(node, id2, {
-    name,
-    index: index2,
-    // For context during callback.
-    group: group2,
-    // For context during callback.
-    on: emptyOn,
-    tween: emptyTween,
-    time: timing.time,
-    delay: timing.delay,
-    duration: timing.duration,
-    ease: timing.ease,
-    timer: null,
-    state: CREATED
-  });
-}
-function init(node, id2) {
-  var schedule = get(node, id2);
-  if (schedule.state > CREATED)
-    throw new Error("too late; already scheduled");
-  return schedule;
-}
-function set(node, id2) {
-  var schedule = get(node, id2);
-  if (schedule.state > STARTED)
-    throw new Error("too late; already running");
-  return schedule;
-}
-function get(node, id2) {
-  var schedule = node.__transition;
-  if (!schedule || !(schedule = schedule[id2]))
-    throw new Error("transition not found");
-  return schedule;
-}
-function create(node, id2, self) {
-  var schedules = node.__transition, tween;
-  schedules[id2] = self;
-  self.timer = timer(schedule, 0, self.time);
-  function schedule(elapsed) {
-    self.state = SCHEDULED;
-    self.timer.restart(start2, self.delay, self.time);
-    if (self.delay <= elapsed)
-      start2(elapsed - self.delay);
-  }
-  function start2(elapsed) {
-    var i, j, n, o;
-    if (self.state !== SCHEDULED)
-      return stop();
-    for (i in schedules) {
-      o = schedules[i];
-      if (o.name !== self.name)
-        continue;
-      if (o.state === STARTED)
-        return timeout_default(start2);
-      if (o.state === RUNNING) {
-        o.state = ENDED;
-        o.timer.stop();
-        o.on.call("interrupt", node, node.__data__, o.index, o.group);
-        delete schedules[i];
-      } else if (+i < id2) {
-        o.state = ENDED;
-        o.timer.stop();
-        o.on.call("cancel", node, node.__data__, o.index, o.group);
-        delete schedules[i];
-      }
-    }
-    timeout_default(function() {
-      if (self.state === STARTED) {
-        self.state = RUNNING;
-        self.timer.restart(tick, self.delay, self.time);
-        tick(elapsed);
-      }
-    });
-    self.state = STARTING;
-    self.on.call("start", node, node.__data__, self.index, self.group);
-    if (self.state !== STARTING)
-      return;
-    self.state = STARTED;
-    tween = new Array(n = self.tween.length);
-    for (i = 0, j = -1; i < n; ++i) {
-      if (o = self.tween[i].value.call(node, node.__data__, self.index, self.group)) {
-        tween[++j] = o;
-      }
-    }
-    tween.length = j + 1;
-  }
-  function tick(elapsed) {
-    var t = elapsed < self.duration ? self.ease.call(null, elapsed / self.duration) : (self.timer.restart(stop), self.state = ENDING, 1), i = -1, n = tween.length;
-    while (++i < n) {
-      tween[i].call(node, t);
-    }
-    if (self.state === ENDING) {
-      self.on.call("end", node, node.__data__, self.index, self.group);
-      stop();
-    }
-  }
-  function stop() {
-    self.state = ENDED;
-    self.timer.stop();
-    delete schedules[id2];
-    for (var i in schedules)
-      return;
-    delete node.__transition;
-  }
-}
-
-// node_modules/d3-transition/src/interrupt.js
-function interrupt_default(node, name) {
-  var schedules = node.__transition, schedule, active, empty3 = true, i;
-  if (!schedules)
-    return;
-  name = name == null ? null : name + "";
-  for (i in schedules) {
-    if ((schedule = schedules[i]).name !== name) {
-      empty3 = false;
-      continue;
-    }
-    active = schedule.state > STARTING && schedule.state < ENDING;
-    schedule.state = ENDED;
-    schedule.timer.stop();
-    schedule.on.call(active ? "interrupt" : "cancel", node, node.__data__, schedule.index, schedule.group);
-    delete schedules[i];
-  }
-  if (empty3)
-    delete node.__transition;
-}
-
-// node_modules/d3-transition/src/selection/interrupt.js
-function interrupt_default2(name) {
-  return this.each(function() {
-    interrupt_default(this, name);
-  });
-}
-
-// node_modules/d3-transition/src/transition/tween.js
-function tweenRemove(id2, name) {
-  var tween0, tween1;
-  return function() {
-    var schedule = set(this, id2), tween = schedule.tween;
-    if (tween !== tween0) {
-      tween1 = tween0 = tween;
-      for (var i = 0, n = tween1.length; i < n; ++i) {
-        if (tween1[i].name === name) {
-          tween1 = tween1.slice();
-          tween1.splice(i, 1);
-          break;
-        }
-      }
-    }
-    schedule.tween = tween1;
-  };
-}
-function tweenFunction(id2, name, value) {
-  var tween0, tween1;
-  if (typeof value !== "function")
-    throw new Error();
-  return function() {
-    var schedule = set(this, id2), tween = schedule.tween;
-    if (tween !== tween0) {
-      tween1 = (tween0 = tween).slice();
-      for (var t = { name, value }, i = 0, n = tween1.length; i < n; ++i) {
-        if (tween1[i].name === name) {
-          tween1[i] = t;
-          break;
-        }
-      }
-      if (i === n)
-        tween1.push(t);
-    }
-    schedule.tween = tween1;
-  };
-}
-function tween_default(name, value) {
-  var id2 = this._id;
-  name += "";
-  if (arguments.length < 2) {
-    var tween = get(this.node(), id2).tween;
-    for (var i = 0, n = tween.length, t; i < n; ++i) {
-      if ((t = tween[i]).name === name) {
-        return t.value;
-      }
-    }
-    return null;
-  }
-  return this.each((value == null ? tweenRemove : tweenFunction)(id2, name, value));
-}
-function tweenValue(transition2, name, value) {
-  var id2 = transition2._id;
-  transition2.each(function() {
-    var schedule = set(this, id2);
-    (schedule.value || (schedule.value = {}))[name] = value.apply(this, arguments);
-  });
-  return function(node) {
-    return get(node, id2).value[name];
-  };
-}
-
-// node_modules/d3-transition/src/transition/interpolate.js
-function interpolate_default2(a, b) {
-  var c3;
-  return (typeof b === "number" ? number_default : b instanceof color ? rgb_default : (c3 = color(b)) ? (b = c3, rgb_default) : string_default)(a, b);
-}
-
-// node_modules/d3-transition/src/transition/attr.js
-function attrRemove2(name) {
-  return function() {
-    this.removeAttribute(name);
-  };
-}
-function attrRemoveNS2(fullname) {
-  return function() {
-    this.removeAttributeNS(fullname.space, fullname.local);
-  };
-}
-function attrConstant2(name, interpolate, value1) {
-  var string00, string1 = value1 + "", interpolate0;
-  return function() {
-    var string0 = this.getAttribute(name);
-    return string0 === string1 ? null : string0 === string00 ? interpolate0 : interpolate0 = interpolate(string00 = string0, value1);
-  };
-}
-function attrConstantNS2(fullname, interpolate, value1) {
-  var string00, string1 = value1 + "", interpolate0;
-  return function() {
-    var string0 = this.getAttributeNS(fullname.space, fullname.local);
-    return string0 === string1 ? null : string0 === string00 ? interpolate0 : interpolate0 = interpolate(string00 = string0, value1);
-  };
-}
-function attrFunction2(name, interpolate, value) {
-  var string00, string10, interpolate0;
-  return function() {
-    var string0, value1 = value(this), string1;
-    if (value1 == null)
-      return void this.removeAttribute(name);
-    string0 = this.getAttribute(name);
-    string1 = value1 + "";
-    return string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
-  };
-}
-function attrFunctionNS2(fullname, interpolate, value) {
-  var string00, string10, interpolate0;
-  return function() {
-    var string0, value1 = value(this), string1;
-    if (value1 == null)
-      return void this.removeAttributeNS(fullname.space, fullname.local);
-    string0 = this.getAttributeNS(fullname.space, fullname.local);
-    string1 = value1 + "";
-    return string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
-  };
-}
-function attr_default2(name, value) {
-  var fullname = namespace_default(name), i = fullname === "transform" ? interpolateTransformSvg : interpolate_default2;
-  return this.attrTween(name, typeof value === "function" ? (fullname.local ? attrFunctionNS2 : attrFunction2)(fullname, i, tweenValue(this, "attr." + name, value)) : value == null ? (fullname.local ? attrRemoveNS2 : attrRemove2)(fullname) : (fullname.local ? attrConstantNS2 : attrConstant2)(fullname, i, value));
-}
-
-// node_modules/d3-transition/src/transition/attrTween.js
-function attrInterpolate(name, i) {
-  return function(t) {
-    this.setAttribute(name, i.call(this, t));
-  };
-}
-function attrInterpolateNS(fullname, i) {
-  return function(t) {
-    this.setAttributeNS(fullname.space, fullname.local, i.call(this, t));
-  };
-}
-function attrTweenNS(fullname, value) {
-  var t0, i0;
-  function tween() {
-    var i = value.apply(this, arguments);
-    if (i !== i0)
-      t0 = (i0 = i) && attrInterpolateNS(fullname, i);
-    return t0;
-  }
-  tween._value = value;
-  return tween;
-}
-function attrTween(name, value) {
-  var t0, i0;
-  function tween() {
-    var i = value.apply(this, arguments);
-    if (i !== i0)
-      t0 = (i0 = i) && attrInterpolate(name, i);
-    return t0;
-  }
-  tween._value = value;
-  return tween;
-}
-function attrTween_default(name, value) {
-  var key = "attr." + name;
-  if (arguments.length < 2)
-    return (key = this.tween(key)) && key._value;
-  if (value == null)
-    return this.tween(key, null);
-  if (typeof value !== "function")
-    throw new Error();
-  var fullname = namespace_default(name);
-  return this.tween(key, (fullname.local ? attrTweenNS : attrTween)(fullname, value));
-}
-
-// node_modules/d3-transition/src/transition/delay.js
-function delayFunction(id2, value) {
-  return function() {
-    init(this, id2).delay = +value.apply(this, arguments);
-  };
-}
-function delayConstant(id2, value) {
-  return value = +value, function() {
-    init(this, id2).delay = value;
-  };
-}
-function delay_default(value) {
-  var id2 = this._id;
-  return arguments.length ? this.each((typeof value === "function" ? delayFunction : delayConstant)(id2, value)) : get(this.node(), id2).delay;
-}
-
-// node_modules/d3-transition/src/transition/duration.js
-function durationFunction(id2, value) {
-  return function() {
-    set(this, id2).duration = +value.apply(this, arguments);
-  };
-}
-function durationConstant(id2, value) {
-  return value = +value, function() {
-    set(this, id2).duration = value;
-  };
-}
-function duration_default(value) {
-  var id2 = this._id;
-  return arguments.length ? this.each((typeof value === "function" ? durationFunction : durationConstant)(id2, value)) : get(this.node(), id2).duration;
-}
-
-// node_modules/d3-transition/src/transition/ease.js
-function easeConstant(id2, value) {
-  if (typeof value !== "function")
-    throw new Error();
-  return function() {
-    set(this, id2).ease = value;
-  };
-}
-function ease_default(value) {
-  var id2 = this._id;
-  return arguments.length ? this.each(easeConstant(id2, value)) : get(this.node(), id2).ease;
-}
-
-// node_modules/d3-transition/src/transition/easeVarying.js
-function easeVarying(id2, value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (typeof v !== "function")
-      throw new Error();
-    set(this, id2).ease = v;
-  };
-}
-function easeVarying_default(value) {
-  if (typeof value !== "function")
-    throw new Error();
-  return this.each(easeVarying(this._id, value));
-}
-
-// node_modules/d3-transition/src/transition/filter.js
-function filter_default2(match) {
-  if (typeof match !== "function")
-    match = matcher_default(match);
-  for (var groups2 = this._groups, m = groups2.length, subgroups = new Array(m), j = 0; j < m; ++j) {
-    for (var group2 = groups2[j], n = group2.length, subgroup = subgroups[j] = [], node, i = 0; i < n; ++i) {
-      if ((node = group2[i]) && match.call(node, node.__data__, i, group2)) {
-        subgroup.push(node);
-      }
-    }
-  }
-  return new Transition(subgroups, this._parents, this._name, this._id);
-}
-
-// node_modules/d3-transition/src/transition/merge.js
-function merge_default2(transition2) {
-  if (transition2._id !== this._id)
-    throw new Error();
-  for (var groups0 = this._groups, groups1 = transition2._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
-    for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge2 = merges[j] = new Array(n), node, i = 0; i < n; ++i) {
-      if (node = group0[i] || group1[i]) {
-        merge2[i] = node;
-      }
-    }
-  }
-  for (; j < m0; ++j) {
-    merges[j] = groups0[j];
-  }
-  return new Transition(merges, this._parents, this._name, this._id);
-}
-
-// node_modules/d3-transition/src/transition/on.js
-function start(name) {
-  return (name + "").trim().split(/^|\s+/).every(function(t) {
-    var i = t.indexOf(".");
-    if (i >= 0)
-      t = t.slice(0, i);
-    return !t || t === "start";
-  });
-}
-function onFunction(id2, name, listener) {
-  var on0, on1, sit = start(name) ? init : set;
-  return function() {
-    var schedule = sit(this, id2), on = schedule.on;
-    if (on !== on0)
-      (on1 = (on0 = on).copy()).on(name, listener);
-    schedule.on = on1;
-  };
-}
-function on_default2(name, listener) {
-  var id2 = this._id;
-  return arguments.length < 2 ? get(this.node(), id2).on.on(name) : this.each(onFunction(id2, name, listener));
-}
-
-// node_modules/d3-transition/src/transition/remove.js
-function removeFunction(id2) {
-  return function() {
-    var parent = this.parentNode;
-    for (var i in this.__transition)
-      if (+i !== id2)
-        return;
-    if (parent)
-      parent.removeChild(this);
-  };
-}
-function remove_default2() {
-  return this.on("end.remove", removeFunction(this._id));
-}
-
-// node_modules/d3-transition/src/transition/select.js
-function select_default3(select) {
-  var name = this._name, id2 = this._id;
-  if (typeof select !== "function")
-    select = selector_default(select);
-  for (var groups2 = this._groups, m = groups2.length, subgroups = new Array(m), j = 0; j < m; ++j) {
-    for (var group2 = groups2[j], n = group2.length, subgroup = subgroups[j] = new Array(n), node, subnode, i = 0; i < n; ++i) {
-      if ((node = group2[i]) && (subnode = select.call(node, node.__data__, i, group2))) {
-        if ("__data__" in node)
-          subnode.__data__ = node.__data__;
-        subgroup[i] = subnode;
-        schedule_default(subgroup[i], name, id2, i, subgroup, get(node, id2));
-      }
-    }
-  }
-  return new Transition(subgroups, this._parents, name, id2);
-}
-
-// node_modules/d3-transition/src/transition/selectAll.js
-function selectAll_default3(select) {
-  var name = this._name, id2 = this._id;
-  if (typeof select !== "function")
-    select = selectorAll_default(select);
-  for (var groups2 = this._groups, m = groups2.length, subgroups = [], parents = [], j = 0; j < m; ++j) {
-    for (var group2 = groups2[j], n = group2.length, node, i = 0; i < n; ++i) {
-      if (node = group2[i]) {
-        for (var children2 = select.call(node, node.__data__, i, group2), child, inherit2 = get(node, id2), k = 0, l = children2.length; k < l; ++k) {
-          if (child = children2[k]) {
-            schedule_default(child, name, id2, k, children2, inherit2);
-          }
-        }
-        subgroups.push(children2);
-        parents.push(node);
-      }
-    }
-  }
-  return new Transition(subgroups, parents, name, id2);
-}
-
-// node_modules/d3-transition/src/transition/selection.js
-var Selection2 = selection_default.prototype.constructor;
-function selection_default2() {
-  return new Selection2(this._groups, this._parents);
-}
-
-// node_modules/d3-transition/src/transition/style.js
-function styleNull(name, interpolate) {
-  var string00, string10, interpolate0;
-  return function() {
-    var string0 = styleValue(this, name), string1 = (this.style.removeProperty(name), styleValue(this, name));
-    return string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : interpolate0 = interpolate(string00 = string0, string10 = string1);
-  };
-}
-function styleRemove2(name) {
-  return function() {
-    this.style.removeProperty(name);
-  };
-}
-function styleConstant2(name, interpolate, value1) {
-  var string00, string1 = value1 + "", interpolate0;
-  return function() {
-    var string0 = styleValue(this, name);
-    return string0 === string1 ? null : string0 === string00 ? interpolate0 : interpolate0 = interpolate(string00 = string0, value1);
-  };
-}
-function styleFunction2(name, interpolate, value) {
-  var string00, string10, interpolate0;
-  return function() {
-    var string0 = styleValue(this, name), value1 = value(this), string1 = value1 + "";
-    if (value1 == null)
-      string1 = value1 = (this.style.removeProperty(name), styleValue(this, name));
-    return string0 === string1 ? null : string0 === string00 && string1 === string10 ? interpolate0 : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
-  };
-}
-function styleMaybeRemove(id2, name) {
-  var on0, on1, listener0, key = "style." + name, event = "end." + key, remove2;
-  return function() {
-    var schedule = set(this, id2), on = schedule.on, listener = schedule.value[key] == null ? remove2 || (remove2 = styleRemove2(name)) : void 0;
-    if (on !== on0 || listener0 !== listener)
-      (on1 = (on0 = on).copy()).on(event, listener0 = listener);
-    schedule.on = on1;
-  };
-}
-function style_default2(name, value, priority) {
-  var i = (name += "") === "transform" ? interpolateTransformCss : interpolate_default2;
-  return value == null ? this.styleTween(name, styleNull(name, i)).on("end.style." + name, styleRemove2(name)) : typeof value === "function" ? this.styleTween(name, styleFunction2(name, i, tweenValue(this, "style." + name, value))).each(styleMaybeRemove(this._id, name)) : this.styleTween(name, styleConstant2(name, i, value), priority).on("end.style." + name, null);
-}
-
-// node_modules/d3-transition/src/transition/styleTween.js
-function styleInterpolate(name, i, priority) {
-  return function(t) {
-    this.style.setProperty(name, i.call(this, t), priority);
-  };
-}
-function styleTween(name, value, priority) {
-  var t, i0;
-  function tween() {
-    var i = value.apply(this, arguments);
-    if (i !== i0)
-      t = (i0 = i) && styleInterpolate(name, i, priority);
-    return t;
-  }
-  tween._value = value;
-  return tween;
-}
-function styleTween_default(name, value, priority) {
-  var key = "style." + (name += "");
-  if (arguments.length < 2)
-    return (key = this.tween(key)) && key._value;
-  if (value == null)
-    return this.tween(key, null);
-  if (typeof value !== "function")
-    throw new Error();
-  return this.tween(key, styleTween(name, value, priority == null ? "" : priority));
-}
-
-// node_modules/d3-transition/src/transition/text.js
-function textConstant2(value) {
-  return function() {
-    this.textContent = value;
-  };
-}
-function textFunction2(value) {
-  return function() {
-    var value1 = value(this);
-    this.textContent = value1 == null ? "" : value1;
-  };
-}
-function text_default2(value) {
-  return this.tween("text", typeof value === "function" ? textFunction2(tweenValue(this, "text", value)) : textConstant2(value == null ? "" : value + ""));
-}
-
-// node_modules/d3-transition/src/transition/textTween.js
-function textInterpolate(i) {
-  return function(t) {
-    this.textContent = i.call(this, t);
-  };
-}
-function textTween(value) {
-  var t0, i0;
-  function tween() {
-    var i = value.apply(this, arguments);
-    if (i !== i0)
-      t0 = (i0 = i) && textInterpolate(i);
-    return t0;
-  }
-  tween._value = value;
-  return tween;
-}
-function textTween_default(value) {
-  var key = "text";
-  if (arguments.length < 1)
-    return (key = this.tween(key)) && key._value;
-  if (value == null)
-    return this.tween(key, null);
-  if (typeof value !== "function")
-    throw new Error();
-  return this.tween(key, textTween(value));
-}
-
-// node_modules/d3-transition/src/transition/transition.js
-function transition_default() {
-  var name = this._name, id0 = this._id, id1 = newId();
-  for (var groups2 = this._groups, m = groups2.length, j = 0; j < m; ++j) {
-    for (var group2 = groups2[j], n = group2.length, node, i = 0; i < n; ++i) {
-      if (node = group2[i]) {
-        var inherit2 = get(node, id0);
-        schedule_default(node, name, id1, i, group2, {
-          time: inherit2.time + inherit2.delay + inherit2.duration,
-          delay: 0,
-          duration: inherit2.duration,
-          ease: inherit2.ease
-        });
-      }
-    }
-  }
-  return new Transition(groups2, this._parents, name, id1);
-}
-
-// node_modules/d3-transition/src/transition/end.js
-function end_default() {
-  var on0, on1, that = this, id2 = that._id, size = that.size();
-  return new Promise(function(resolve, reject) {
-    var cancel = { value: reject }, end = { value: function() {
-      if (--size === 0)
-        resolve();
-    } };
-    that.each(function() {
-      var schedule = set(this, id2), on = schedule.on;
-      if (on !== on0) {
-        on1 = (on0 = on).copy();
-        on1._.cancel.push(cancel);
-        on1._.interrupt.push(cancel);
-        on1._.end.push(end);
-      }
-      schedule.on = on1;
-    });
-    if (size === 0)
-      resolve();
-  });
-}
-
-// node_modules/d3-transition/src/transition/index.js
-var id = 0;
-function Transition(groups2, parents, name, id2) {
-  this._groups = groups2;
-  this._parents = parents;
-  this._name = name;
-  this._id = id2;
-}
-function transition(name) {
-  return selection_default().transition(name);
-}
-function newId() {
-  return ++id;
-}
-var selection_prototype = selection_default.prototype;
-Transition.prototype = transition.prototype = {
-  constructor: Transition,
-  select: select_default3,
-  selectAll: selectAll_default3,
-  selectChild: selection_prototype.selectChild,
-  selectChildren: selection_prototype.selectChildren,
-  filter: filter_default2,
-  merge: merge_default2,
-  selection: selection_default2,
-  transition: transition_default,
-  call: selection_prototype.call,
-  nodes: selection_prototype.nodes,
-  node: selection_prototype.node,
-  size: selection_prototype.size,
-  empty: selection_prototype.empty,
-  each: selection_prototype.each,
-  on: on_default2,
-  attr: attr_default2,
-  attrTween: attrTween_default,
-  style: style_default2,
-  styleTween: styleTween_default,
-  text: text_default2,
-  textTween: textTween_default,
-  remove: remove_default2,
-  tween: tween_default,
-  delay: delay_default,
-  duration: duration_default,
-  ease: ease_default,
-  easeVarying: easeVarying_default,
-  end: end_default,
-  [Symbol.iterator]: selection_prototype[Symbol.iterator]
-};
-
-// node_modules/d3-ease/src/linear.js
-var linear2 = (t) => +t;
-
-// node_modules/d3-ease/src/quad.js
-function quadIn(t) {
-  return t * t;
-}
-function quadOut(t) {
-  return t * (2 - t);
-}
-function quadInOut(t) {
-  return ((t *= 2) <= 1 ? t * t : --t * (2 - t) + 1) / 2;
-}
-
-// node_modules/d3-ease/src/cubic.js
-function cubicIn(t) {
-  return t * t * t;
-}
-function cubicOut(t) {
-  return --t * t * t + 1;
-}
-function cubicInOut(t) {
-  return ((t *= 2) <= 1 ? t * t * t : (t -= 2) * t * t + 2) / 2;
-}
-
-// node_modules/d3-ease/src/poly.js
-var exponent = 3;
-var polyIn = function custom(e) {
-  e = +e;
-  function polyIn2(t) {
-    return Math.pow(t, e);
-  }
-  polyIn2.exponent = custom;
-  return polyIn2;
-}(exponent);
-var polyOut = function custom2(e) {
-  e = +e;
-  function polyOut2(t) {
-    return 1 - Math.pow(1 - t, e);
-  }
-  polyOut2.exponent = custom2;
-  return polyOut2;
-}(exponent);
-var polyInOut = function custom3(e) {
-  e = +e;
-  function polyInOut2(t) {
-    return ((t *= 2) <= 1 ? Math.pow(t, e) : 2 - Math.pow(2 - t, e)) / 2;
-  }
-  polyInOut2.exponent = custom3;
-  return polyInOut2;
-}(exponent);
-
-// node_modules/d3-ease/src/sin.js
-var pi = Math.PI;
-var halfPi = pi / 2;
-function sinIn(t) {
-  return +t === 1 ? 1 : 1 - Math.cos(t * halfPi);
-}
-function sinOut(t) {
-  return Math.sin(t * halfPi);
-}
-function sinInOut(t) {
-  return (1 - Math.cos(pi * t)) / 2;
-}
-
-// node_modules/d3-ease/src/math.js
-function tpmt(x) {
-  return (Math.pow(2, -10 * x) - 9765625e-10) * 1.0009775171065494;
-}
-
-// node_modules/d3-ease/src/exp.js
-function expIn(t) {
-  return tpmt(1 - +t);
-}
-function expOut(t) {
-  return 1 - tpmt(t);
-}
-function expInOut(t) {
-  return ((t *= 2) <= 1 ? tpmt(1 - t) : 2 - tpmt(t - 1)) / 2;
-}
-
-// node_modules/d3-ease/src/circle.js
-function circleIn(t) {
-  return 1 - Math.sqrt(1 - t * t);
-}
-function circleOut(t) {
-  return Math.sqrt(1 - --t * t);
-}
-function circleInOut(t) {
-  return ((t *= 2) <= 1 ? 1 - Math.sqrt(1 - t * t) : Math.sqrt(1 - (t -= 2) * t) + 1) / 2;
-}
-
-// node_modules/d3-ease/src/bounce.js
-var b1 = 4 / 11;
-var b2 = 6 / 11;
-var b3 = 8 / 11;
-var b4 = 3 / 4;
-var b5 = 9 / 11;
-var b6 = 10 / 11;
-var b7 = 15 / 16;
-var b8 = 21 / 22;
-var b9 = 63 / 64;
-var b0 = 1 / b1 / b1;
-function bounceIn(t) {
-  return 1 - bounceOut(1 - t);
-}
-function bounceOut(t) {
-  return (t = +t) < b1 ? b0 * t * t : t < b3 ? b0 * (t -= b2) * t + b4 : t < b6 ? b0 * (t -= b5) * t + b7 : b0 * (t -= b8) * t + b9;
-}
-function bounceInOut(t) {
-  return ((t *= 2) <= 1 ? 1 - bounceOut(1 - t) : bounceOut(t - 1) + 1) / 2;
-}
-
-// node_modules/d3-ease/src/back.js
-var overshoot = 1.70158;
-var backIn = function custom4(s) {
-  s = +s;
-  function backIn2(t) {
-    return (t = +t) * t * (s * (t - 1) + t);
-  }
-  backIn2.overshoot = custom4;
-  return backIn2;
-}(overshoot);
-var backOut = function custom5(s) {
-  s = +s;
-  function backOut2(t) {
-    return --t * t * ((t + 1) * s + t) + 1;
-  }
-  backOut2.overshoot = custom5;
-  return backOut2;
-}(overshoot);
-var backInOut = function custom6(s) {
-  s = +s;
-  function backInOut2(t) {
-    return ((t *= 2) < 1 ? t * t * ((s + 1) * t - s) : (t -= 2) * t * ((s + 1) * t + s) + 2) / 2;
-  }
-  backInOut2.overshoot = custom6;
-  return backInOut2;
-}(overshoot);
-
-// node_modules/d3-ease/src/elastic.js
-var tau = 2 * Math.PI;
-var amplitude = 1;
-var period = 0.3;
-var elasticIn = function custom7(a, p) {
-  var s = Math.asin(1 / (a = Math.max(1, a))) * (p /= tau);
-  function elasticIn2(t) {
-    return a * tpmt(- --t) * Math.sin((s - t) / p);
-  }
-  elasticIn2.amplitude = function(a2) {
-    return custom7(a2, p * tau);
-  };
-  elasticIn2.period = function(p2) {
-    return custom7(a, p2);
-  };
-  return elasticIn2;
-}(amplitude, period);
-var elasticOut = function custom8(a, p) {
-  var s = Math.asin(1 / (a = Math.max(1, a))) * (p /= tau);
-  function elasticOut2(t) {
-    return 1 - a * tpmt(t = +t) * Math.sin((t + s) / p);
-  }
-  elasticOut2.amplitude = function(a2) {
-    return custom8(a2, p * tau);
-  };
-  elasticOut2.period = function(p2) {
-    return custom8(a, p2);
-  };
-  return elasticOut2;
-}(amplitude, period);
-var elasticInOut = function custom9(a, p) {
-  var s = Math.asin(1 / (a = Math.max(1, a))) * (p /= tau);
-  function elasticInOut2(t) {
-    return ((t = t * 2 - 1) < 0 ? a * tpmt(-t) * Math.sin((s - t) / p) : 2 - a * tpmt(t) * Math.sin((s + t) / p)) / 2;
-  }
-  elasticInOut2.amplitude = function(a2) {
-    return custom9(a2, p * tau);
-  };
-  elasticInOut2.period = function(p2) {
-    return custom9(a, p2);
-  };
-  return elasticInOut2;
-}(amplitude, period);
-
-// node_modules/d3-transition/src/selection/transition.js
-var defaultTiming = {
-  time: null,
-  // Set on use.
-  delay: 0,
-  duration: 250,
-  ease: cubicInOut
-};
-function inherit(node, id2) {
-  var timing;
-  while (!(timing = node.__transition) || !(timing = timing[id2])) {
-    if (!(node = node.parentNode)) {
-      throw new Error(`transition ${id2} not found`);
-    }
-  }
-  return timing;
-}
-function transition_default2(name) {
-  var id2, timing;
-  if (name instanceof Transition) {
-    id2 = name._id, name = name._name;
-  } else {
-    id2 = newId(), (timing = defaultTiming).time = now(), name = name == null ? null : name + "";
-  }
-  for (var groups2 = this._groups, m = groups2.length, j = 0; j < m; ++j) {
-    for (var group2 = groups2[j], n = group2.length, node, i = 0; i < n; ++i) {
-      if (node = group2[i]) {
-        schedule_default(node, name, id2, i, group2, timing || inherit(node, id2));
-      }
-    }
-  }
-  return new Transition(groups2, this._parents, name, id2);
-}
-
-// node_modules/d3-transition/src/selection/index.js
-selection_default.prototype.interrupt = interrupt_default2;
-selection_default.prototype.transition = transition_default2;
-
-// node_modules/d3-transition/src/active.js
-var root2 = [null];
-function active_default(node, name) {
-  var schedules = node.__transition, schedule, i;
-  if (schedules) {
-    name = name == null ? null : name + "";
-    for (i in schedules) {
-      if ((schedule = schedules[i]).state > SCHEDULED && schedule.name === name) {
-        return new Transition([[node]], root2, name, +i);
-      }
-    }
-  }
-  return null;
-}
-
 // node_modules/d3-brush/src/constant.js
-var constant_default3 = (x) => () => x;
+var constant_default2 = (x) => () => x;
 
 // node_modules/d3-brush/src/event.js
 function BrushEvent(type2, {
   sourceEvent,
   target,
-  selection: selection2,
+  selection,
   mode: mode2,
   dispatch
 }) {
@@ -2566,7 +780,7 @@ function BrushEvent(type2, {
     type: { value: type2, enumerable: true, configurable: true },
     sourceEvent: { value: sourceEvent, enumerable: true, configurable: true },
     target: { value: target, enumerable: true, configurable: true },
-    selection: { value: selection2, enumerable: true, configurable: true },
+    selection: { value: selection, enumerable: true, configurable: true },
     mode: { value: mode2, enumerable: true, configurable: true },
     _: { value: dispatch }
   });
@@ -2698,7 +912,7 @@ function local2(node) {
       return;
   return node.__brush;
 }
-function empty2(extent2) {
+function empty(extent2) {
   return extent2[0][0] === extent2[1][0] || extent2[0][1] === extent2[1][1];
 }
 function brushSelection(node) {
@@ -2715,12 +929,12 @@ function brush_default() {
   return brush(XY);
 }
 function brush(dim) {
-  var extent2 = defaultExtent, filter3 = defaultFilter2, touchable = defaultTouchable2, keys = true, listeners = dispatch_default("start", "brush", "end"), handleSize = 6, touchending;
+  var extent2 = defaultExtent, filter2 = defaultFilter2, touchable = defaultTouchable2, keys = true, listeners = dispatch_default("start", "brush", "end"), handleSize = 6, touchending;
   function brush2(group2) {
     var overlay = group2.property("__brush", initialize).selectAll(".overlay").data([type("overlay")]);
     overlay.enter().append("rect").attr("class", "overlay").attr("pointer-events", "all").attr("cursor", cursors.overlay).merge(overlay).each(function() {
       var extent3 = local2(this).extent;
-      select_default2(this).attr("x", extent3[0][0]).attr("y", extent3[0][1]).attr("width", extent3[1][0] - extent3[0][0]).attr("height", extent3[1][1] - extent3[0][1]);
+      select_default(this).attr("x", extent3[0][0]).attr("y", extent3[0][1]).attr("width", extent3[1][0] - extent3[0][0]).attr("height", extent3[1][1] - extent3[0][1]);
     });
     group2.selectAll(".selection").data([type("selection")]).enter().append("rect").attr("class", "selection").attr("cursor", cursors.selection).attr("fill", "#777").attr("fill-opacity", 0.3).attr("stroke", "#fff").attr("shape-rendering", "crispEdges");
     var handle = group2.selectAll(".handle").data(dim.handles, function(d) {
@@ -2734,14 +948,14 @@ function brush(dim) {
     });
     group2.each(redraw).attr("fill", "none").attr("pointer-events", "all").on("mousedown.brush", started).filter(touchable).on("touchstart.brush", started).on("touchmove.brush", touchmoved).on("touchend.brush touchcancel.brush", touchended).style("touch-action", "none").style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
   }
-  brush2.move = function(group2, selection2, event) {
+  brush2.move = function(group2, selection, event) {
     if (group2.tween) {
       group2.on("start.brush", function(event2) {
         emitter(this, arguments).beforestart().start(event2);
       }).on("interrupt.brush end.brush", function(event2) {
         emitter(this, arguments).end(event2);
       }).tween("brush", function() {
-        var that = this, state = that.__brush, emit = emitter(that, arguments), selection0 = state.selection, selection1 = dim.input(typeof selection2 === "function" ? selection2.apply(this, arguments) : selection2, state.extent), i = value_default(selection0, selection1);
+        var that = this, state = that.__brush, emit = emitter(that, arguments), selection0 = state.selection, selection1 = dim.input(typeof selection === "function" ? selection.apply(this, arguments) : selection, state.extent), i = value_default(selection0, selection1);
         function tween(t) {
           state.selection = t === 1 && selection1 === null ? null : i(t);
           redraw.call(that);
@@ -2751,7 +965,7 @@ function brush(dim) {
       });
     } else {
       group2.each(function() {
-        var that = this, args = arguments, state = that.__brush, selection1 = dim.input(typeof selection2 === "function" ? selection2.apply(that, args) : selection2, state.extent), emit = emitter(that, args).beforestart();
+        var that = this, args = arguments, state = that.__brush, selection1 = dim.input(typeof selection === "function" ? selection.apply(that, args) : selection, state.extent), emit = emitter(that, args).beforestart();
         interrupt_default(that);
         state.selection = selection1 === null ? null : selection1;
         redraw.call(that);
@@ -2763,17 +977,17 @@ function brush(dim) {
     brush2.move(group2, null, event);
   };
   function redraw() {
-    var group2 = select_default2(this), selection2 = local2(this).selection;
-    if (selection2) {
-      group2.selectAll(".selection").style("display", null).attr("x", selection2[0][0]).attr("y", selection2[0][1]).attr("width", selection2[1][0] - selection2[0][0]).attr("height", selection2[1][1] - selection2[0][1]);
+    var group2 = select_default(this), selection = local2(this).selection;
+    if (selection) {
+      group2.selectAll(".selection").style("display", null).attr("x", selection[0][0]).attr("y", selection[0][1]).attr("width", selection[1][0] - selection[0][0]).attr("height", selection[1][1] - selection[0][1]);
       group2.selectAll(".handle").style("display", null).attr("x", function(d) {
-        return d.type[d.type.length - 1] === "e" ? selection2[1][0] - handleSize / 2 : selection2[0][0] - handleSize / 2;
+        return d.type[d.type.length - 1] === "e" ? selection[1][0] - handleSize / 2 : selection[0][0] - handleSize / 2;
       }).attr("y", function(d) {
-        return d.type[0] === "s" ? selection2[1][1] - handleSize / 2 : selection2[0][1] - handleSize / 2;
+        return d.type[0] === "s" ? selection[1][1] - handleSize / 2 : selection[0][1] - handleSize / 2;
       }).attr("width", function(d) {
-        return d.type === "n" || d.type === "s" ? selection2[1][0] - selection2[0][0] + handleSize : handleSize;
+        return d.type === "n" || d.type === "s" ? selection[1][0] - selection[0][0] + handleSize : handleSize;
       }).attr("height", function(d) {
-        return d.type === "e" || d.type === "w" ? selection2[1][1] - selection2[0][1] + handleSize : handleSize;
+        return d.type === "e" || d.type === "w" ? selection[1][1] - selection[0][1] + handleSize : handleSize;
       });
     } else {
       group2.selectAll(".selection,.handle").style("display", "none").attr("x", null).attr("y", null).attr("width", null).attr("height", null);
@@ -2813,7 +1027,7 @@ function brush(dim) {
       return this;
     },
     emit: function(type2, event, mode2) {
-      var d = select_default2(this.that).datum();
+      var d = select_default(this.that).datum();
       listeners.call(
         type2,
         this.that,
@@ -2831,9 +1045,9 @@ function brush(dim) {
   function started(event) {
     if (touchending && !event.touches)
       return;
-    if (!filter3.apply(this, arguments))
+    if (!filter2.apply(this, arguments))
       return;
-    var that = this, type2 = event.target.__data__.type, mode2 = (keys && event.metaKey ? type2 = "overlay" : type2) === "selection" ? MODE_DRAG : keys && event.altKey ? MODE_CENTER : MODE_HANDLE, signX = dim === Y ? null : signsX[type2], signY = dim === X ? null : signsY[type2], state = local2(that), extent3 = state.extent, selection2 = state.selection, W = extent3[0][0], w0, w1, N = extent3[0][1], n0, n1, E = extent3[1][0], e0, e1, S = extent3[1][1], s0, s1, dx = 0, dy = 0, moving, shifting = signX && signY && keys && event.shiftKey, lockX, lockY, points = Array.from(event.touches || [event], (t) => {
+    var that = this, type2 = event.target.__data__.type, mode2 = (keys && event.metaKey ? type2 = "overlay" : type2) === "selection" ? MODE_DRAG : keys && event.altKey ? MODE_CENTER : MODE_HANDLE, signX = dim === Y ? null : signsX[type2], signY = dim === X ? null : signsY[type2], state = local2(that), extent3 = state.extent, selection = state.selection, W = extent3[0][0], w0, w1, N = extent3[0][1], n0, n1, E = extent3[1][0], e0, e1, S = extent3[1][1], s0, s1, dx = 0, dy = 0, moving, shifting = signX && signY && keys && event.shiftKey, lockX, lockY, points = Array.from(event.touches || [event], (t) => {
       const i = t.identifier;
       t = pointer_default(t, that);
       t.point0 = t.slice();
@@ -2843,10 +1057,10 @@ function brush(dim) {
     interrupt_default(that);
     var emit = emitter(that, arguments, true).beforestart();
     if (type2 === "overlay") {
-      if (selection2)
+      if (selection)
         moving = true;
       const pts = [points[0], points[1] || points[0]];
-      state.selection = selection2 = [[
+      state.selection = selection = [[
         w0 = dim === Y ? W : min2(pts[0][0], pts[1][0]),
         n0 = dim === X ? N : min2(pts[0][1], pts[1][1])
       ], [
@@ -2856,22 +1070,22 @@ function brush(dim) {
       if (points.length > 1)
         move(event);
     } else {
-      w0 = selection2[0][0];
-      n0 = selection2[0][1];
-      e0 = selection2[1][0];
-      s0 = selection2[1][1];
+      w0 = selection[0][0];
+      n0 = selection[0][1];
+      e0 = selection[1][0];
+      s0 = selection[1][1];
     }
     w1 = w0;
     n1 = n0;
     e1 = e0;
     s1 = s0;
-    var group2 = select_default2(that).attr("pointer-events", "none");
+    var group2 = select_default(that).attr("pointer-events", "none");
     var overlay = group2.selectAll(".overlay").attr("cursor", cursors[type2]);
     if (event.touches) {
       emit.moved = moved;
       emit.ended = ended;
     } else {
-      var view = select_default2(event.view).on("mousemove.brush", moved, true).on("mouseup.brush", ended, true);
+      var view = select_default(event.view).on("mousemove.brush", moved, true).on("mouseup.brush", ended, true);
       if (keys)
         view.on("keydown.brush", keydowned, true).on("keyup.brush", keyupped, true);
       nodrag_default(event.view);
@@ -2953,12 +1167,12 @@ function brush(dim) {
           overlay.attr("cursor", cursors[type2 = flipY[type2]]);
       }
       if (state.selection)
-        selection2 = state.selection;
+        selection = state.selection;
       if (lockX)
-        w1 = selection2[0][0], e1 = selection2[1][0];
+        w1 = selection[0][0], e1 = selection[1][0];
       if (lockY)
-        n1 = selection2[0][1], s1 = selection2[1][1];
-      if (selection2[0][0] !== w1 || selection2[0][1] !== n1 || selection2[1][0] !== e1 || selection2[1][1] !== s1) {
+        n1 = selection[0][1], s1 = selection[1][1];
+      if (selection[0][0] !== w1 || selection[0][1] !== n1 || selection[1][0] !== e1 || selection[1][1] !== s1) {
         state.selection = [[w1, n1], [e1, s1]];
         redraw.call(that);
         emit.brush(event2, mode2.name);
@@ -2981,8 +1195,8 @@ function brush(dim) {
       group2.attr("pointer-events", "all");
       overlay.attr("cursor", cursors.overlay);
       if (state.selection)
-        selection2 = state.selection;
-      if (empty2(selection2))
+        selection = state.selection;
+      if (empty(selection))
         state.selection = null, redraw.call(that);
       emit.end(event2, mode2.name);
     }
@@ -3091,13 +1305,13 @@ function brush(dim) {
     return state;
   }
   brush2.extent = function(_) {
-    return arguments.length ? (extent2 = typeof _ === "function" ? _ : constant_default3(number2(_)), brush2) : extent2;
+    return arguments.length ? (extent2 = typeof _ === "function" ? _ : constant_default2(number2(_)), brush2) : extent2;
   };
   brush2.filter = function(_) {
-    return arguments.length ? (filter3 = typeof _ === "function" ? _ : constant_default3(!!_), brush2) : filter3;
+    return arguments.length ? (filter2 = typeof _ === "function" ? _ : constant_default2(!!_), brush2) : filter2;
   };
   brush2.touchable = function(_) {
-    return arguments.length ? (touchable = typeof _ === "function" ? _ : constant_default3(!!_), brush2) : touchable;
+    return arguments.length ? (touchable = typeof _ === "function" ? _ : constant_default2(!!_), brush2) : touchable;
   };
   brush2.handleSize = function(_) {
     return arguments.length ? (handleSize = +_, brush2) : handleSize;
@@ -3116,9 +1330,9 @@ function brush(dim) {
 var abs2 = Math.abs;
 var cos = Math.cos;
 var sin = Math.sin;
-var pi2 = Math.PI;
-var halfPi2 = pi2 / 2;
-var tau2 = pi2 * 2;
+var pi = Math.PI;
+var halfPi = pi / 2;
+var tau = pi * 2;
 var max3 = Math.max;
 var epsilon2 = 1e-12;
 
@@ -3154,8 +1368,8 @@ function chord(directed, transpose2) {
         x += matrix[i * n + j] + directed * matrix[j * n + i];
       k += groupSums[i] = x;
     }
-    k = max3(0, tau2 - padAngle * n) / k;
-    dx = k ? padAngle : tau2 / n;
+    k = max3(0, tau - padAngle * n) / k;
+    dx = k ? padAngle : tau / n;
     {
       let x = 0;
       if (sortGroups)
@@ -3225,7 +1439,7 @@ function chord(directed, transpose2) {
 var slice = Array.prototype.slice;
 
 // node_modules/d3-chord/src/constant.js
-function constant_default4(x) {
+function constant_default3(x) {
   return function() {
     return x;
   };
@@ -3256,7 +1470,7 @@ function defaultArrowheadRadius() {
 function ribbon(headRadius) {
   var source = defaultSource, target = defaultTarget, sourceRadius = defaultRadius, targetRadius = defaultRadius, startAngle = defaultStartAngle, endAngle = defaultEndAngle, padAngle = defaultPadAngle, context = null;
   function ribbon2() {
-    var buffer, s = source.apply(this, arguments), t = target.apply(this, arguments), ap = padAngle.apply(this, arguments) / 2, argv = slice.call(arguments), sr = +sourceRadius.apply(this, (argv[0] = s, argv)), sa0 = startAngle.apply(this, argv) - halfPi2, sa1 = endAngle.apply(this, argv) - halfPi2, tr = +targetRadius.apply(this, (argv[0] = t, argv)), ta0 = startAngle.apply(this, argv) - halfPi2, ta1 = endAngle.apply(this, argv) - halfPi2;
+    var buffer, s = source.apply(this, arguments), t = target.apply(this, arguments), ap = padAngle.apply(this, arguments) / 2, argv = slice.call(arguments), sr = +sourceRadius.apply(this, (argv[0] = s, argv)), sa0 = startAngle.apply(this, argv) - halfPi, sa1 = endAngle.apply(this, argv) - halfPi, tr = +targetRadius.apply(this, (argv[0] = t, argv)), ta0 = startAngle.apply(this, argv) - halfPi, ta1 = endAngle.apply(this, argv) - halfPi;
     if (!context)
       context = buffer = path();
     if (ap > epsilon2) {
@@ -3289,25 +1503,25 @@ function ribbon(headRadius) {
   }
   if (headRadius)
     ribbon2.headRadius = function(_) {
-      return arguments.length ? (headRadius = typeof _ === "function" ? _ : constant_default4(+_), ribbon2) : headRadius;
+      return arguments.length ? (headRadius = typeof _ === "function" ? _ : constant_default3(+_), ribbon2) : headRadius;
     };
   ribbon2.radius = function(_) {
-    return arguments.length ? (sourceRadius = targetRadius = typeof _ === "function" ? _ : constant_default4(+_), ribbon2) : sourceRadius;
+    return arguments.length ? (sourceRadius = targetRadius = typeof _ === "function" ? _ : constant_default3(+_), ribbon2) : sourceRadius;
   };
   ribbon2.sourceRadius = function(_) {
-    return arguments.length ? (sourceRadius = typeof _ === "function" ? _ : constant_default4(+_), ribbon2) : sourceRadius;
+    return arguments.length ? (sourceRadius = typeof _ === "function" ? _ : constant_default3(+_), ribbon2) : sourceRadius;
   };
   ribbon2.targetRadius = function(_) {
-    return arguments.length ? (targetRadius = typeof _ === "function" ? _ : constant_default4(+_), ribbon2) : targetRadius;
+    return arguments.length ? (targetRadius = typeof _ === "function" ? _ : constant_default3(+_), ribbon2) : targetRadius;
   };
   ribbon2.startAngle = function(_) {
-    return arguments.length ? (startAngle = typeof _ === "function" ? _ : constant_default4(+_), ribbon2) : startAngle;
+    return arguments.length ? (startAngle = typeof _ === "function" ? _ : constant_default3(+_), ribbon2) : startAngle;
   };
   ribbon2.endAngle = function(_) {
-    return arguments.length ? (endAngle = typeof _ === "function" ? _ : constant_default4(+_), ribbon2) : endAngle;
+    return arguments.length ? (endAngle = typeof _ === "function" ? _ : constant_default3(+_), ribbon2) : endAngle;
   };
   ribbon2.padAngle = function(_) {
-    return arguments.length ? (padAngle = typeof _ === "function" ? _ : constant_default4(+_), ribbon2) : padAngle;
+    return arguments.length ? (padAngle = typeof _ === "function" ? _ : constant_default3(+_), ribbon2) : padAngle;
   };
   ribbon2.source = function(_) {
     return arguments.length ? (source = _, ribbon2) : source;
@@ -3328,8 +1542,8 @@ function ribbonArrow() {
 }
 
 // node_modules/d3-contour/src/array.js
-var array2 = Array.prototype;
-var slice2 = array2.slice;
+var array = Array.prototype;
+var slice2 = array.slice;
 
 // node_modules/d3-contour/src/ascending.js
 function ascending_default2(a, b) {
@@ -3345,7 +1559,7 @@ function area_default3(ring) {
 }
 
 // node_modules/d3-contour/src/constant.js
-var constant_default5 = (x) => () => x;
+var constant_default4 = (x) => () => x;
 
 // node_modules/d3-contour/src/contains.js
 function contains_default2(ring, hole) {
@@ -3358,8 +1572,8 @@ function contains_default2(ring, hole) {
 function ringContains(ring, point2) {
   var x = point2[0], y = point2[1], contains = -1;
   for (var i = 0, n = ring.length, j = n - 1; i < n; j = i++) {
-    var pi3 = ring[i], xi = pi3[0], yi = pi3[1], pj = ring[j], xj = pj[0], yj = pj[1];
-    if (segmentContains(pi3, pj, point2))
+    var pi2 = ring[i], xi = pi2[0], yi = pi2[1], pj = ring[j], xj = pj[0], yj = pj[1];
+    if (segmentContains(pi2, pj, point2))
       return 0;
     if (yi > y !== yj > y && x < (xj - xi) * (y - yi) / (yj - yi) + xi)
       contains = -contains;
@@ -3473,7 +1687,7 @@ function contours_default() {
     }
     cases[t2 << 3].forEach(stitch);
     function stitch(line) {
-      var start2 = [line[0][0] + x, line[0][1] + y], end = [line[1][0] + x, line[1][1] + y], startIndex = index2(start2), endIndex = index2(end), f, g;
+      var start = [line[0][0] + x, line[0][1] + y], end = [line[1][0] + x, line[1][1] + y], startIndex = index2(start), endIndex = index2(end), f, g;
       if (f = fragmentByEnd[startIndex]) {
         if (g = fragmentByStart[endIndex]) {
           delete fragmentByEnd[f.end];
@@ -3501,11 +1715,11 @@ function contours_default() {
           }
         } else {
           delete fragmentByStart[f.start];
-          f.ring.unshift(start2);
+          f.ring.unshift(start);
           fragmentByStart[f.start = startIndex] = f;
         }
       } else {
-        fragmentByStart[startIndex] = fragmentByEnd[endIndex] = { start: startIndex, end: endIndex, ring: [start2, end] };
+        fragmentByStart[startIndex] = fragmentByEnd[endIndex] = { start: startIndex, end: endIndex, ring: [start, end] };
       }
     }
   }
@@ -3533,7 +1747,7 @@ function contours_default() {
     return dx = _0, dy = _1, contours;
   };
   contours.thresholds = function(_) {
-    return arguments.length ? (threshold2 = typeof _ === "function" ? _ : Array.isArray(_) ? constant_default5(slice2.call(_)) : constant_default5(_), contours) : threshold2;
+    return arguments.length ? (threshold2 = typeof _ === "function" ? _ : Array.isArray(_) ? constant_default4(slice2.call(_)) : constant_default4(_), contours) : threshold2;
   };
   contours.smooth = function(_) {
     return arguments.length ? (smooth = _ ? smoothLinear : noop_default, contours) : smooth === smoothLinear;
@@ -3567,7 +1781,7 @@ function defaultWeight() {
   return 1;
 }
 function density_default() {
-  var x = defaultX, y = defaultY, weight = defaultWeight, dx = 960, dy = 500, r = 20, k = 2, o = r * 3, n = dx + o * 2 >> k, m = dy + o * 2 >> k, threshold2 = constant_default5(20);
+  var x = defaultX, y = defaultY, weight = defaultWeight, dx = 960, dy = 500, r = 20, k = 2, o = r * 3, n = dx + o * 2 >> k, m = dy + o * 2 >> k, threshold2 = constant_default4(20);
   function grid(data) {
     var values = new Float32Array(n * m), pow2k = Math.pow(2, -k), i = -1;
     for (const d of data) {
@@ -3621,13 +1835,13 @@ function density_default() {
     return density;
   }
   density.x = function(_) {
-    return arguments.length ? (x = typeof _ === "function" ? _ : constant_default5(+_), density) : x;
+    return arguments.length ? (x = typeof _ === "function" ? _ : constant_default4(+_), density) : x;
   };
   density.y = function(_) {
-    return arguments.length ? (y = typeof _ === "function" ? _ : constant_default5(+_), density) : y;
+    return arguments.length ? (y = typeof _ === "function" ? _ : constant_default4(+_), density) : y;
   };
   density.weight = function(_) {
-    return arguments.length ? (weight = typeof _ === "function" ? _ : constant_default5(+_), density) : weight;
+    return arguments.length ? (weight = typeof _ === "function" ? _ : constant_default4(+_), density) : weight;
   };
   density.size = function(_) {
     if (!arguments.length)
@@ -3645,7 +1859,7 @@ function density_default() {
     return k = Math.floor(Math.log(_) / Math.LN2), resize();
   };
   density.thresholds = function(_) {
-    return arguments.length ? (threshold2 = typeof _ === "function" ? _ : Array.isArray(_) ? constant_default5(slice2.call(_)) : constant_default5(_), density) : threshold2;
+    return arguments.length ? (threshold2 = typeof _ === "function" ? _ : Array.isArray(_) ? constant_default4(slice2.call(_)) : constant_default4(_), density) : threshold2;
   };
   density.bandwidth = function(_) {
     if (!arguments.length)
@@ -3663,8 +1877,8 @@ function responseBlob(response) {
     throw new Error(response.status + " " + response.statusText);
   return response.blob();
 }
-function blob_default(input, init2) {
-  return fetch(input, init2).then(responseBlob);
+function blob_default(input, init) {
+  return fetch(input, init).then(responseBlob);
 }
 
 // node_modules/d3-fetch/src/buffer.js
@@ -3673,8 +1887,8 @@ function responseArrayBuffer(response) {
     throw new Error(response.status + " " + response.statusText);
   return response.arrayBuffer();
 }
-function buffer_default(input, init2) {
-  return fetch(input, init2).then(responseArrayBuffer);
+function buffer_default(input, init) {
+  return fetch(input, init).then(responseArrayBuffer);
 }
 
 // node_modules/d3-fetch/src/text.js
@@ -3683,25 +1897,25 @@ function responseText(response) {
     throw new Error(response.status + " " + response.statusText);
   return response.text();
 }
-function text_default3(input, init2) {
-  return fetch(input, init2).then(responseText);
+function text_default(input, init) {
+  return fetch(input, init).then(responseText);
 }
 
 // node_modules/d3-fetch/src/dsv.js
 function dsvParse(parse) {
-  return function(input, init2, row) {
-    if (arguments.length === 2 && typeof init2 === "function")
-      row = init2, init2 = void 0;
-    return text_default3(input, init2).then(function(response) {
+  return function(input, init, row) {
+    if (arguments.length === 2 && typeof init === "function")
+      row = init, init = void 0;
+    return text_default(input, init).then(function(response) {
       return parse(response, row);
     });
   };
 }
-function dsv(delimiter, input, init2, row) {
-  if (arguments.length === 3 && typeof init2 === "function")
-    row = init2, init2 = void 0;
+function dsv(delimiter, input, init, row) {
+  if (arguments.length === 3 && typeof init === "function")
+    row = init, init = void 0;
   var format2 = dsv_default(delimiter);
-  return text_default3(input, init2).then(function(response) {
+  return text_default(input, init).then(function(response) {
     return format2.parse(response, row);
   });
 }
@@ -3709,11 +1923,11 @@ var csv = dsvParse(csvParse);
 var tsv = dsvParse(tsvParse);
 
 // node_modules/d3-fetch/src/image.js
-function image_default(input, init2) {
+function image_default(input, init) {
   return new Promise(function(resolve, reject) {
     var image = new Image();
-    for (var key in init2)
-      image[key] = init2[key];
+    for (var key in init)
+      image[key] = init[key];
     image.onerror = reject;
     image.onload = function() {
       resolve(image);
@@ -3730,13 +1944,13 @@ function responseJson(response) {
     return;
   return response.json();
 }
-function json_default(input, init2) {
-  return fetch(input, init2).then(responseJson);
+function json_default(input, init) {
+  return fetch(input, init).then(responseJson);
 }
 
 // node_modules/d3-fetch/src/xml.js
 function parser(type2) {
-  return (input, init2) => text_default3(input, init2).then((text) => new DOMParser().parseFromString(text, type2));
+  return (input, init) => text_default(input, init).then((text) => new DOMParser().parseFromString(text, type2));
 }
 var xml_default = parser("application/xml");
 var html = parser("text/html");
@@ -4580,7 +2794,7 @@ var inferno = ramp(colors_default("00000401000501010601010802010a02020c02020e030
 var plasma = ramp(colors_default("0d088710078813078916078a19068c1b068d1d068e20068f2206902406912605912805922a05932c05942e05952f059631059733059735049837049938049a3a049a3c049b3e049c3f049c41049d43039e44039e46039f48039f4903a04b03a14c02a14e02a25002a25102a35302a35502a45601a45801a45901a55b01a55c01a65e01a66001a66100a76300a76400a76600a76700a86900a86a00a86c00a86e00a86f00a87100a87201a87401a87501a87701a87801a87a02a87b02a87d03a87e03a88004a88104a78305a78405a78606a68707a68808a68a09a58b0aa58d0ba58e0ca48f0da4910ea3920fa39410a29511a19613a19814a099159f9a169f9c179e9d189d9e199da01a9ca11b9ba21d9aa31e9aa51f99a62098a72197a82296aa2395ab2494ac2694ad2793ae2892b02991b12a90b22b8fb32c8eb42e8db52f8cb6308bb7318ab83289ba3388bb3488bc3587bd3786be3885bf3984c03a83c13b82c23c81c33d80c43e7fc5407ec6417dc7427cc8437bc9447aca457acb4679cc4778cc4977cd4a76ce4b75cf4c74d04d73d14e72d24f71d35171d45270d5536fd5546ed6556dd7566cd8576bd9586ada5a6ada5b69db5c68dc5d67dd5e66de5f65de6164df6263e06363e16462e26561e26660e3685fe4695ee56a5de56b5de66c5ce76e5be76f5ae87059e97158e97257ea7457eb7556eb7655ec7754ed7953ed7a52ee7b51ef7c51ef7e50f07f4ff0804ef1814df1834cf2844bf3854bf3874af48849f48948f58b47f58c46f68d45f68f44f79044f79143f79342f89441f89540f9973ff9983ef99a3efa9b3dfa9c3cfa9e3bfb9f3afba139fba238fca338fca537fca636fca835fca934fdab33fdac33fdae32fdaf31fdb130fdb22ffdb42ffdb52efeb72dfeb82cfeba2cfebb2bfebd2afebe2afec029fdc229fdc328fdc527fdc627fdc827fdca26fdcb26fccd25fcce25fcd025fcd225fbd324fbd524fbd724fad824fada24f9dc24f9dd25f8df25f8e125f7e225f7e425f6e626f6e826f5e926f5eb27f4ed27f3ee27f3f027f2f227f1f426f1f525f0f724f0f921"));
 
 // node_modules/d3-zoom/src/constant.js
-var constant_default6 = (x) => () => x;
+var constant_default5 = (x) => () => x;
 
 // node_modules/d3-zoom/src/event.js
 function ZoomEvent(type2, {
@@ -4691,43 +2905,43 @@ function defaultConstrain(transform2, extent2, translateExtent) {
   );
 }
 function zoom_default2() {
-  var filter3 = defaultFilter3, extent2 = defaultExtent2, constrain = defaultConstrain, wheelDelta = defaultWheelDelta, touchable = defaultTouchable3, scaleExtent = [0, Infinity], translateExtent = [[-Infinity, -Infinity], [Infinity, Infinity]], duration = 250, interpolate = zoom_default, listeners = dispatch_default("start", "zoom", "end"), touchstarting, touchfirst, touchending, touchDelay = 500, wheelDelay = 150, clickDistance2 = 0, tapDistance = 10;
-  function zoom(selection2) {
-    selection2.property("__zoom", defaultTransform).on("wheel.zoom", wheeled, { passive: false }).on("mousedown.zoom", mousedowned).on("dblclick.zoom", dblclicked).filter(touchable).on("touchstart.zoom", touchstarted).on("touchmove.zoom", touchmoved).on("touchend.zoom touchcancel.zoom", touchended).style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
+  var filter2 = defaultFilter3, extent2 = defaultExtent2, constrain = defaultConstrain, wheelDelta = defaultWheelDelta, touchable = defaultTouchable3, scaleExtent = [0, Infinity], translateExtent = [[-Infinity, -Infinity], [Infinity, Infinity]], duration = 250, interpolate = zoom_default, listeners = dispatch_default("start", "zoom", "end"), touchstarting, touchfirst, touchending, touchDelay = 500, wheelDelay = 150, clickDistance2 = 0, tapDistance = 10;
+  function zoom(selection) {
+    selection.property("__zoom", defaultTransform).on("wheel.zoom", wheeled, { passive: false }).on("mousedown.zoom", mousedowned).on("dblclick.zoom", dblclicked).filter(touchable).on("touchstart.zoom", touchstarted).on("touchmove.zoom", touchmoved).on("touchend.zoom touchcancel.zoom", touchended).style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
   }
   zoom.transform = function(collection, transform2, point2, event) {
-    var selection2 = collection.selection ? collection.selection() : collection;
-    selection2.property("__zoom", defaultTransform);
-    if (collection !== selection2) {
+    var selection = collection.selection ? collection.selection() : collection;
+    selection.property("__zoom", defaultTransform);
+    if (collection !== selection) {
       schedule(collection, transform2, point2, event);
     } else {
-      selection2.interrupt().each(function() {
+      selection.interrupt().each(function() {
         gesture(this, arguments).event(event).start().zoom(null, typeof transform2 === "function" ? transform2.apply(this, arguments) : transform2).end();
       });
     }
   };
-  zoom.scaleBy = function(selection2, k, p, event) {
-    zoom.scaleTo(selection2, function() {
+  zoom.scaleBy = function(selection, k, p, event) {
+    zoom.scaleTo(selection, function() {
       var k0 = this.__zoom.k, k1 = typeof k === "function" ? k.apply(this, arguments) : k;
       return k0 * k1;
     }, p, event);
   };
-  zoom.scaleTo = function(selection2, k, p, event) {
-    zoom.transform(selection2, function() {
+  zoom.scaleTo = function(selection, k, p, event) {
+    zoom.transform(selection, function() {
       var e = extent2.apply(this, arguments), t0 = this.__zoom, p0 = p == null ? centroid(e) : typeof p === "function" ? p.apply(this, arguments) : p, p1 = t0.invert(p0), k1 = typeof k === "function" ? k.apply(this, arguments) : k;
       return constrain(translate(scale(t0, k1), p0, p1), e, translateExtent);
     }, p, event);
   };
-  zoom.translateBy = function(selection2, x, y, event) {
-    zoom.transform(selection2, function() {
+  zoom.translateBy = function(selection, x, y, event) {
+    zoom.transform(selection, function() {
       return constrain(this.__zoom.translate(
         typeof x === "function" ? x.apply(this, arguments) : x,
         typeof y === "function" ? y.apply(this, arguments) : y
       ), extent2.apply(this, arguments), translateExtent);
     }, null, event);
   };
-  zoom.translateTo = function(selection2, x, y, p, event) {
-    zoom.transform(selection2, function() {
+  zoom.translateTo = function(selection, x, y, p, event) {
+    zoom.transform(selection, function() {
       var e = extent2.apply(this, arguments), t = this.__zoom, p0 = p == null ? centroid(e) : typeof p === "function" ? p.apply(this, arguments) : p;
       return constrain(identity2.translate(p0[0], p0[1]).scale(t.k).translate(
         typeof x === "function" ? -x.apply(this, arguments) : -x,
@@ -4807,7 +3021,7 @@ function zoom_default2() {
       return this;
     },
     emit: function(type2) {
-      var d = select_default2(this.that).datum();
+      var d = select_default(this.that).datum();
       listeners.call(
         type2,
         this.that,
@@ -4823,7 +3037,7 @@ function zoom_default2() {
     }
   };
   function wheeled(event, ...args) {
-    if (!filter3.apply(this, arguments))
+    if (!filter2.apply(this, arguments))
       return;
     var g = gesture(this, args).event(event), t = this.__zoom, k = Math.max(scaleExtent[0], Math.min(scaleExtent[1], t.k * Math.pow(2, wheelDelta.apply(this, arguments)))), p = pointer_default(event);
     if (g.wheel) {
@@ -4847,9 +3061,9 @@ function zoom_default2() {
     }
   }
   function mousedowned(event, ...args) {
-    if (touchending || !filter3.apply(this, arguments))
+    if (touchending || !filter2.apply(this, arguments))
       return;
-    var currentTarget = event.currentTarget, g = gesture(this, args, true).event(event), v = select_default2(event.view).on("mousemove.zoom", mousemoved, true).on("mouseup.zoom", mouseupped, true), p = pointer_default(event, currentTarget), x0 = event.clientX, y0 = event.clientY;
+    var currentTarget = event.currentTarget, g = gesture(this, args, true).event(event), v = select_default(event.view).on("mousemove.zoom", mousemoved, true).on("mouseup.zoom", mouseupped, true), p = pointer_default(event, currentTarget), x0 = event.clientX, y0 = event.clientY;
     nodrag_default(event.view);
     nopropagation3(event);
     g.mouse = [p, this.__zoom.invert(p)];
@@ -4871,17 +3085,17 @@ function zoom_default2() {
     }
   }
   function dblclicked(event, ...args) {
-    if (!filter3.apply(this, arguments))
+    if (!filter2.apply(this, arguments))
       return;
     var t0 = this.__zoom, p0 = pointer_default(event.changedTouches ? event.changedTouches[0] : event, this), p1 = t0.invert(p0), k1 = t0.k * (event.shiftKey ? 0.5 : 2), t1 = constrain(translate(scale(t0, k1), p0, p1), extent2.apply(this, args), translateExtent);
     noevent_default3(event);
     if (duration > 0)
-      select_default2(this).transition().duration(duration).call(schedule, t1, p0, event);
+      select_default(this).transition().duration(duration).call(schedule, t1, p0, event);
     else
-      select_default2(this).call(zoom.transform, t1, p0, event);
+      select_default(this).call(zoom.transform, t1, p0, event);
   }
   function touchstarted(event, ...args) {
-    if (!filter3.apply(this, arguments))
+    if (!filter2.apply(this, arguments))
       return;
     var touches = event.touches, n = touches.length, g = gesture(this, args, event.changedTouches.length === n).event(event), started, i, t, p;
     nopropagation3(event);
@@ -4954,7 +3168,7 @@ function zoom_default2() {
       if (g.taps === 2) {
         t = pointer_default(t, this);
         if (Math.hypot(touchfirst[0] - t[0], touchfirst[1] - t[1]) < tapDistance) {
-          var p = select_default2(this).on("dblclick.zoom");
+          var p = select_default(this).on("dblclick.zoom");
           if (p)
             p.apply(this, arguments);
         }
@@ -4962,16 +3176,16 @@ function zoom_default2() {
     }
   }
   zoom.wheelDelta = function(_) {
-    return arguments.length ? (wheelDelta = typeof _ === "function" ? _ : constant_default6(+_), zoom) : wheelDelta;
+    return arguments.length ? (wheelDelta = typeof _ === "function" ? _ : constant_default5(+_), zoom) : wheelDelta;
   };
   zoom.filter = function(_) {
-    return arguments.length ? (filter3 = typeof _ === "function" ? _ : constant_default6(!!_), zoom) : filter3;
+    return arguments.length ? (filter2 = typeof _ === "function" ? _ : constant_default5(!!_), zoom) : filter2;
   };
   zoom.touchable = function(_) {
-    return arguments.length ? (touchable = typeof _ === "function" ? _ : constant_default6(!!_), zoom) : touchable;
+    return arguments.length ? (touchable = typeof _ === "function" ? _ : constant_default5(!!_), zoom) : touchable;
   };
   zoom.extent = function(_) {
-    return arguments.length ? (extent2 = typeof _ === "function" ? _ : constant_default6([[+_[0][0], +_[0][1]], [+_[1][0], +_[1][1]]]), zoom) : extent2;
+    return arguments.length ? (extent2 = typeof _ === "function" ? _ : constant_default5([[+_[0][0], +_[0][1]], [+_[1][0], +_[1][1]]]), zoom) : extent2;
   };
   zoom.scaleExtent = function(_) {
     return arguments.length ? (scaleExtent[0] = +_[0], scaleExtent[1] = +_[1], zoom) : [scaleExtent[0], scaleExtent[1]];
@@ -5423,8 +3637,8 @@ export {
   scheme18 as schemeYlGnBu,
   scheme20 as schemeYlOrBr,
   scheme21 as schemeYlOrRd,
-  select_default2 as select,
-  selectAll_default2 as selectAll,
+  select_default as select,
+  selectAll_default as selectAll,
   selection_default as selection,
   selector_default as selector,
   selectorAll_default as selectorAll,
@@ -5450,7 +3664,7 @@ export {
   sum,
   superset,
   svg,
-  Symbol2 as symbol,
+  Symbol as symbol,
   asterisk_default as symbolAsterisk,
   circle_default as symbolCircle,
   cross_default as symbolCross,
@@ -5468,7 +3682,7 @@ export {
   symbolsFill as symbols,
   symbolsFill,
   symbolsStroke,
-  text_default3 as text,
+  text_default as text,
   thresholdFreedmanDiaconis,
   thresholdScott,
   thresholdSturges,

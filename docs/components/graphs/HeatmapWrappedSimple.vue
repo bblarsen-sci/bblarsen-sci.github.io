@@ -1,88 +1,9 @@
 <template>
-  <div class="flex flex-col justify-evenly items-center text-center gap-10 font-medium text-sm">
-    <div class="">
-      <label for="fileInput" class="mr-2">Upload CSV:</label>
-      <input type="file" id="fileInput" @change="handleFileUpload" accept=".csv" class="p-1 ring-1 ring-slate-400">
-    </div>
-    <div class="flex flex-row justify-between gap-10">
-      <div class="">
-        <label for="paddingSelect" class="mr-2">Select Padding:</label>
-        <select id="paddingSelect" v-model="paddingValue" class="p-1 ring-1 ring-slate-400">
-          <option class="" value="0">none</option>
-          <option value="0.05">medium</option>
-          <option value="0.1">large</option>
-        </select>
-      </div>
-      <div class="">
-        <label for="strokeSelect" class="mr-2">Select Stroke Size:</label>
-        <select id="strokeSelect" v-model="strokeWidthValue" class="p-1 ring-1 ring-slate-400">
-          <option value="0">0</option>
-          <option value="0.25">0.25</option>
-          <option value="0.5">0.5</option>
-          <option value="1.0">1.0</option>
-        </select>
-      </div>
-      <div class="">
-        <label for="rowsSelect" class="mr-2">Select rows:</label>
-        <select id="rowsSelect" v-model="rows" class="p-1 ring-1 ring-slate-400">
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="8">8</option>
-        </select>
-      </div>
-    </div>
-    <div class="flex flex-row justify-between gap-10">
-      <div class="">
-        <label for="cutoffs" class="mr-2">Select color cutoff values:</label>
-        <select id="cutoffs" v-model="cutoffs" class="p-1 ring-1 ring-slate-400">
-          <option value="1">-1 to 1</option>
-          <option value="2">-2 to 2</option>
-          <option value="4">-4 to 4</option>
-        </select>
-      </div>
-    </div>
-    <div class="flex flex-row align-middle justify-between gap-4">
-      <label class=" my-2">Change color:</label>
-      <div class="">
-        <button @click="changeColorScale('interpolateRdBu')" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Red Blue</button>
-      </div>
-      <div class="">
-        <button @click="changeColorScale('interpolateBrBG')" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Brown Green</button>
-      </div>
-      <div class="">
-        <button @click="changeColorScale('interpolatePRGn')" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Purple Green</button>
-      </div>
-      <div class="">
-        <button @click="changeColorScale('interpolatePiYG')" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Pink Yellow Green</button>
-      </div>
-    </div>
-    <div class="flex flex-row gap-6">
-      <div class="pl-4">
-        <button @click="downloadSVG" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Download SVG</button>
-      </div>
-      <div class="">
-        <button @click="downloadImage('png')" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Download PNG</button>
-      </div>
-      <div class="">
-        <button @click="downloadImage('jpg')" class="p-2  ring-2 ring-slate-400 rounded-lg  hover:ring-sky-400">Download JPG</button>
-      </div>
-    </div>
-  </div>
-  <div class="flex flex-col overflow-visible justify-between gap-4 lg:items-center mt-10 ">
-    <div class="py-2">
-      <div class="" ref="svgContainer"></div>
-    </div>
-    <div class="">
-      <div class="" ref="legendContainer"></div>
-    </div>
-  </div>
-  
+      <div class="mx-auto p-6" ref="svgContainer"></div>
 </template>
 
 <script setup>
 import { ref, watch, onMounted} from 'vue';
-import { saveAs } from 'file-saver';
 import * as d3 from 'd3';
 
 // DEFINE VARIABLES
@@ -93,7 +14,6 @@ const strokeWidthValue = ref(0.0);
 const selectedAminoAcid = ref('');
 const selectedSites = ref([]);
 const data = ref(null);
-const legendContainer = ref(null);
 const uploadedFile = ref(null);
 const selectedColorScale = ref('interpolateRdBu');
 const cutoffs = ref(4);
@@ -109,66 +29,6 @@ watch([paddingValue, strokeWidthValue, selectedAminoAcid, selectedSites, rows, s
   updateHeatmap(data.value);
 });
 
-// DEFINE NORMAL FUNCTIONS
-// Function to download the image
-function downloadImage(format) {
-  const svgElement = document.querySelector('svg');
-  const serializer = new XMLSerializer();
-  const svgString = serializer.serializeToString(svgElement);
-
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-
-  const svgWidth = svgElement.getAttribute('width');
-  const svgHeight = svgElement.getAttribute('height');
-
-  
-  canvas.width = (svgWidth * 4) + 20;
-  canvas.height = (svgHeight * 4) + 20;
-
-  // Set the canvas background color to white
-  ctx.fillStyle = 'white';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  const img = new Image();
-  img.onload = () => {
-    // Draw the image on the canvas with double the size for higher resolution
-    ctx.drawImage(img, 0, 0, (canvas.width - 20), (canvas.height - 20));
-
-    canvas.toBlob((blob) => {
-      saveAs(blob, `heatmap.${format}`);
-    }, `image/${format}`);
-  };
-
-  img.src = `data:image/svg+xml;base64,${btoa(svgString)}`;
-}
-
-// Function to download the SVG
-function downloadSVG() {
-    const svgElement = document.querySelector('svg'); 
-    const serializer = new XMLSerializer();
-    const svgBlob = new Blob([serializer.serializeToString(svgElement)], {type: 'image/svg+xml'});
-    const url = URL.createObjectURL(svgBlob);
-    const downloadLink = document.createElement('a');
-    downloadLink.href = url;
-    downloadLink.download = 'heatmap.svg'; 
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink); 
-    URL.revokeObjectURL(url); 
-};
-
-// Function to handle file upload
-function handleFileUpload(event) {
-  uploadedFile.value = event.target.files[0];
-  fetchData();
-}
-
-// Function to change the color scale
-function changeColorScale(scale) {
-  selectedColorScale.value = scale;
-  updateHeatmap(data.value);
-}
 
 // DEFINE D3 FUNCTIONS
 const margin = { top: 20, right: 20, bottom: 30, left: 50 }; // margin for the SVG
@@ -196,15 +56,11 @@ function updateHeatmap(data) {
   const height = squareSize * amino_acids.length * rows.value + margin.top + margin.bottom + rowPadding * (rows.value - 1) + margin.bottom; // height of the SVG
   const innerHeight = height - margin.top - margin.bottom; // height of the heatmap
 
-  const allCombinations = sites.flatMap(site => // Create all combinations of sites and amino acids to fill in gray for sites not found
-    amino_acids.map(mutant => ({ site, mutant }))
-  );
-
   // D3 FIGURE MAKING
   // Create the color scale
   const maxAbsValue = Math.abs(cutoffs.value);
   let colorScale = d3.scaleDiverging(d3[selectedColorScale.value])
-    .domain([-maxAbsValue, 0, maxAbsValue]);
+    .domain([-4, 0, 4]);
 
   // SETUP THE SCALES
   // Setup the Y-scale
@@ -335,73 +191,7 @@ function updateHeatmap(data) {
     .attr('font-size', '18px')
     .text('Amino Acid');
 
-  // MAKE THE LEGEND
-  d3.select(legendContainer.value).html('');
-  const legendWidth = 300;
-  const legendHeight = 60;
-
-  // Create the legend SVG
-  const legend = d3.select(legendContainer.value)
-    .append('svg')
-    .attr('width', legendWidth)
-    .attr('height', legendHeight);
-
-  // Create the legend scale
-  const legendScale = d3.scaleLinear()
-    .domain([-maxAbsValue, maxAbsValue])
-    .range([30, legendWidth - 20]);
-
-  // Create the legend axis
-  const legendAxis = d3.axisBottom(legendScale)
-    .tickValues([-maxAbsValue, 0, maxAbsValue])
-    .tickFormat(d => d === 0 ? '0' : (d > 0 ? '+' : '-') + d3.format('.0f')(Math.abs(d)))
-    .tickSize(5);
-
-  // Create the legend gradient
-  const legendGradient = legend.append('defs')
-    .append('linearGradient')
-    .attr('id', 'legendGradient')
-    .attr('x1', '0%')
-    .attr('y1', '0%')
-    .attr('x2', '100%')
-    .attr('y2', '0%');
-
-  // Create the legend gradient stops
-  const numStops = 100;
-  const stopDomain = d3.range(-maxAbsValue, maxAbsValue, (2 * maxAbsValue) / (numStops - 1));
-
-  // Add the legend gradient stops
-  legendGradient.selectAll('stop')
-    .data(stopDomain)
-    .enter()
-    .append('stop')
-    .attr('offset', (d, i) => `${(i / (numStops - 1)) * 100}%`)
-    .attr('stop-color', d => colorScale(d));
-
-  // Add the legend rectangle
-  legend.append('rect')
-    .attr('x', 30)
-    .attr('y', 30)
-    .attr('width', legendWidth-50)
-    .attr('height', 10)
-    .style('fill', 'url(#legendGradient)');
-
-  // Add the legend axis
-  legend.append('g')
-    .attr('class', 'legend-axis')
-    .attr('transform', `translate(0, 40)`)
-    .call(legendAxis)
-    .selectAll('text')
-    .attr('font-size', '12px');
-
-  // Add the legend title
-  legend.append('text')
-    .attr('class', 'legend-title')
-    .attr('x', (legendWidth) / 2)
-    .attr('y', 15)
-    .attr('text-anchor', 'middle')
-    //.attr('font-size', '14px')
-    .text('Effect of mutation on cell entry');
+  
 });
 };
 
