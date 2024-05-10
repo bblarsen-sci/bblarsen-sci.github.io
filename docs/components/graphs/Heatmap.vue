@@ -3,7 +3,7 @@
         <div class="m-2 text-xs">
             <label for="siteInput">Enter Specific Sites:</label>
             <input type="text" id="siteInput" v-model="siteInputValue" class="mx-2 px-2 py-2 rounded-md ring-1 ring-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="e.g., 555-560, 590-600">
-            <button id="updateSites" @click="selectedSites = parseSites(siteInputValue)" class="ml-2 px-4 py-2 shadow-md bg-sky-800 shadow-md shadow-sky-800 text-white rounded-lg hover:ring-2 ring-sky-500 text-white rounded-xl">Update</button>
+            <button id="updateSites" @click="selectedSites = parseSites(siteInputValue)" class="ml-2 px-4 py-2 bg-sky-800 shadow-md shadow-sky-800 text-white rounded-lg hover:ring-2 ring-sky-500 text-white rounded-xl">Update</button>
         </div>
         <div class="m-2 text-xs">
             <label for="paddingSelect" class="mr-2">Select Padding:</label>

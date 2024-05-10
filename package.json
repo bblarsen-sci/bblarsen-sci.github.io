@@ -15,7 +15,8 @@
     "vitepress": "^1.0.0-rc.35",
     "vue": "^3.4.5",
     "vue-select": "^4.0.0-beta.6",
-    "file-saver": "2.0.5"
+    "file-saver": "2.0.5",
+    "lodash.debounce": "4.0.8"
 
   },
   "postcss": {

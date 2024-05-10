@@ -1,13 +1,23 @@
 <template>
-      <div class="mx-auto px-2 lg:px-24 font-extralight text-2xl " ref="svgContainer"></div>
+      <div class="mx-auto px-2 lg:px-8 font-light " ref="svgContainer"></div>
 </template>
 
+<script>
+async function fetchData() {
+  const file = await fetch('/data/default_heatmap.csv');
+  const file_text = await file.text();
+  const test = d3.csvParse(file_text);
+  return test
+}
+</script>
+
 <script setup>
-import { ref, watch, onMounted} from 'vue';
+import { ref, computed, onMounted} from 'vue';
 import * as d3 from 'd3';
 
 // DEFINE VARIABLES
 const svgContainer = ref(null);
+const data = ref([]);
 
 // DEFINE AMINO ACIDS- this is the order (from top to bottom) in which the amino acids will be displayed
 const amino_acids = [
@@ -15,207 +25,196 @@ const amino_acids = [
   "W", "F", "A", "I", "L", "M", "V", "G", "P", "C"
 ];
 
-// VUE FUNCTION - UPDATE HEATMAP IF ANY OF THE DATA CHANGES FOR THESE VARIABLES
-//watch([], () => {
-//  updateHeatmap();
-//});
+// DEFINE D3 FUNCTIONS
+const margin = { top: 20, right: 20, bottom: 50, left: 50 }; // margin for the SVG
+const rowPadding = 30; // amount of padding between the rows
+let rows = 4; // number of rows in the heatmap
+let paddingValue = 0.1; // padding between the squares in the heatmap
+const squareSize = 9;
 
+const colorScale = computed(() => {
+  return d3.scaleDiverging(d3['interpolateRdBu']).domain([-4, 0, 4]);
+});
 
+const sites = computed(() => Array.from(new Set(data.value.map(d => +d.site))));
 
-// main plotting function
-function updateHeatmap(data) {
-  let filteredData = data; // assign data to filtered data, otherwise it gets overwritten when filtering
+const sitesPerRow = computed(() => Math.ceil(sites.value.length / rows));
 
-  // DEFINE D3 FUNCTIONS
-  const margin = { top: 20, right: 20, bottom: 50, left: 50 }; // margin for the SVG
-  const rowPadding = 30; // amount of padding between the rows
-  let rows = 4; // number of rows in the heatmap
-  let paddingValue = 0.1; // padding between the squares in the heatmap
-  let selectedColorScale = 'interpolateRdBu'; // default color scale
+const siteRows = computed(() =>
+  Array.from({ length: rows }, (_, i) =>
+    sites.value.slice(i * sitesPerRow.value, (i + 1) * sitesPerRow.value)
+  )
+);
 
-  // Filter the data based on the selected amino acid and sites
-  // These are the sites we will show
-  const sites = Array.from(new Set(filteredData.map(d => +d.site)));
-  // How many sites will we have in each row?
-  const sitesPerRow = Math.ceil(sites.length / rows);
-  // Split the sites into rows
-  const siteRows = Array.from({ length: rows }, (_, i) =>
-    sites.slice(i * sitesPerRow, (i + 1) * sitesPerRow)
-  );
+const maxSitesInRow = computed(() => Math.max(...siteRows.value.map(row => row.length)));
 
-  // Get the maximum number of sites in a row
-  const maxSitesInRow = Math.max(...siteRows.map(row => row.length));
-  const squareSize = 9; // size of each square in the heatmap
-  const innerWidth = squareSize * maxSitesInRow; // width of the heatmap
-  const width = innerWidth + margin.left + margin.right; // width of the SVG
-  const height = squareSize * amino_acids.length * rows + margin.top + margin.bottom + rowPadding * (rows - 1) + margin.bottom; // height of the SVG
-  const innerHeight = height - margin.top - margin.bottom; // height of the heatmap
+const innerWidth = computed(() => squareSize * maxSitesInRow.value);
 
-  // D3 FIGURE MAKING
-  // Create the color scale
-  let colorScale = d3.scaleDiverging(d3[selectedColorScale])
-    .domain([-4, 0, 4]);
+const width = computed(() => innerWidth.value + margin.left + margin.right);
 
-  // SETUP THE SCALES
-  // Setup the Y-scale
-  const yScale = d3.scaleBand()
-    .domain(amino_acids)
-    .range([0, squareSize * amino_acids.length])
-    .padding(paddingValue);
-  
-  // Setup the X-scale
-  const xScale = d3.scaleBand()
-    .domain(Array.from({ length: maxSitesInRow }, (_, i) => i))
-    .range([0, innerWidth])
-    .padding(paddingValue);
-  
-  const svg = d3.select(svgContainer.value); // Select the SVG container
+const height = computed(() =>
+  squareSize * amino_acids.length * rows +
+  margin.top +
+  margin.bottom +
+  rowPadding * (rows - 1) +
+  margin.bottom
+);
 
-  // Append a new SVG element to the container
-  const svgElement = svg.append('svg') 
-    .attr('width', '100%')
-    .attr('height', height)
-    .attr('viewBox', `0 0 ${width} ${height}`)
-    .append('g')
-    .attr('transform', `translate(${margin.left}, ${margin.top})`);
+const innerHeight = computed(() => height.value - margin.top - margin.bottom);
 
-  // This code creates a lookup table for the data, so we can easily find the data for a specific site and amino acid and vastly improves performance.
-  const dataLookup = filteredData.reduce((lookup, dataPoint) => {
+const dataLookup = computed(() =>
+  data.value.reduce((lookup, dataPoint) => {
     lookup[`${dataPoint.site}-${dataPoint.mutant}`] = dataPoint;
     return lookup;
-  }, {});
+  }, {})
+);
 
-  // This code creates a lookup table for the wildtype amino acid at each site, so we can easily find the wildtype for a specific site and vastly improves performance.
-  const wildtypeLookup = filteredData.reduce((lookup, dataPoint) => {
+const wildtypeLookup = computed(() =>
+  data.value.reduce((lookup, dataPoint) => {
     lookup[dataPoint.site] = dataPoint.wildtype;
     return lookup;
-  }, {});
+  }, {})
+);
+
+const xScale = computed(() =>
+  d3.scaleBand()
+    .domain(Array.from({ length: maxSitesInRow.value }, (_, i) => i))
+    .range([0, innerWidth.value])
+    .padding(paddingValue)
+);
+
+const yScale = computed(() =>
+  d3.scaleBand()
+    .domain(amino_acids)
+    .range([0, squareSize * amino_acids.length])
+    .padding(paddingValue)
+);
+
+
+function updateHeatmap() {
+  
+  function zoomed(event) {
+    chartGroup.attr("transform", event.transform);
+  }
+  
+  const svg = d3.select(svgContainer.value); // Select the SVG container
+  // Append a new SVG element to the container
+  const svgElement = svg.append('svg') 
+  .attr('width', '100%')
+  .attr('height', height.value)
+  .attr('preserveAspectRatio', "xMinYMin meet")
+  .attr('viewBox', `0 0 ${width.value} ${height.value}`)
+  .call(d3.zoom().on("zoom", zoomed)); // Add zoom behavior to the SVG
+
+const chartGroup = svgElement.append('g')
+  .attr('transform', `translate(${margin.left}, ${margin.top})`)
     
   //Plot heatmap squares by row for wrapping
-  siteRows.forEach((siteRow, rowIndex) => {
-  svgElement.selectAll(`rect-row-${rowIndex}`)
+  siteRows.value.forEach((siteRow, rowIndex) => {
+    chartGroup.selectAll(`rect-row-${rowIndex}`)
     .data(siteRow.flatMap(site => amino_acids.map(mutant => ({ site, mutant }))))
-    .join('rect')
-    .attr('x', d => xScale(siteRow.indexOf(d.site)))
-    .attr('y', d => yScale(d.mutant) + (yScale.range()[1] + rowPadding) * rowIndex)
-    .attr('width', xScale.bandwidth())
-    .attr('height', yScale.bandwidth())
+    .enter()
+    .append('rect')
+    .attr('x', d => xScale.value(siteRow.indexOf(d.site)))
+    .attr('y', d => yScale.value(d.mutant) + (yScale.value.range()[1] + rowPadding) * rowIndex)
+    .attr('width', xScale.value.bandwidth())
+    .attr('height', yScale.value.bandwidth())
     .attr('fill', d => {
       const key = `${d.site}-${d.mutant}`;
-      if (dataLookup[key]) {
-        return colorScale(+dataLookup[key].effect);
+      if (dataLookup.value[key]) {
+        return colorScale.value(+dataLookup.value[key].effect);
       } else {
-        return wildtypeLookup[d.site] === d.mutant ? 'white' : 'lightgray';
+        return wildtypeLookup.value[d.site] === d.mutant ? 'white' : 'lightgray';
       }
     })
     
-    
-
   // Add the wildtype 'X' text to the boxes
-  svgElement.selectAll(`.wildtype-row-${rowIndex}`)
-    .data(filteredData.filter(d => siteRow.includes(+d.site)))
-    .join('text')
-    .attr('class', `wildtype-row-${rowIndex}`)
-    .attr('x', d => xScale(siteRow.indexOf(+d.site)) + xScale.bandwidth() / 2)
-    .attr('y', d => yScale(d.wildtype) + (yScale.range()[1] + rowPadding) * rowIndex + yScale.bandwidth() / 2 + 3)
+  chartGroup.selectAll(`.wildtype-row-${rowIndex}`)
+    .data(data.value.filter(d => siteRow.includes(+d.site)))
+    .enter()
+    .append('text')
+    .attr('class', `wildtype-row`)
+    .attr('x', d => xScale.value(siteRow.indexOf(+d.site)) + xScale.value.bandwidth() / 2)
+    .attr('y', d => yScale.value(d.wildtype) + (yScale.value.range()[1] + rowPadding) * rowIndex + yScale.value.bandwidth() / 2 + 3)
     .attr('text-anchor', 'middle')
     .text('X');
 
-  // Add the site numbers to the x-axis, only plotting every 10 sites
-  const xAxis = d3.axisBottom(xScale).tickSizeOuter(0);
-  if (siteRow.length <= 50) {
-    xAxis.tickFormat(d => siteRow[d]);
-  } else {
-    xAxis.tickFormat((d, i) => i % 10 === 0 ? siteRow[d] : '');
-  }
+  const xAxis = d3.axisBottom(xScale.value).tickSizeOuter(0);
+    if (siteRow.length <= 50) {
+      xAxis.tickFormat(d => siteRow[d]);
+    } else {
+      xAxis.tickFormat((d, i) => i % 10 === 0 ? siteRow[d] : '');
+    }
 
   // ADD THE X AND Y AXES
   // Add the site numbers to the x-axis
-  svgElement.append('g')
-    .attr('class', `x-axis-row-${rowIndex}`)
-    .attr('transform', `translate(0, ${(yScale.range()[1] + rowPadding) * rowIndex + yScale.range()[1]})`)
+  chartGroup.append('g')
+    .attr('class', `x-axis-row`)
+    .attr('transform', `translate(0, ${(yScale.value.range()[1] + rowPadding) * rowIndex + yScale.value.range()[1]})`)
     .call(xAxis)
     .selectAll('text')
-    .attr('transform', 'rotate(-90)')
-    .attr('text-anchor', 'end')
     .attr('dx', '-7px')
     .attr('dy', '-5px');
+    
 
   // Add the amino acids to the y-axis
-  svgElement.append('g')
-    .attr('class', `y-axis-row-${rowIndex}`)
-    .attr('transform', `translate(0, ${(yScale.range()[1] + rowPadding) * rowIndex})`)
-    .call(d3.axisLeft(yScale).tickSizeOuter(0));
+  chartGroup.append('g')
+    .attr('class', `y-axis-row`)
+    .attr('transform', `translate(0, ${(yScale.value.range()[1] + rowPadding) * rowIndex})`)
+    .call(d3.axisLeft(yScale.value).tickSizeOuter(0));
 
   // ADD THE AXES TITLES
   // Add the row title
-  svgElement.append('text')
-    .attr('class', 'x-axis-title')
-    .attr('x', innerWidth / 2)
-    .attr('y', innerHeight + margin.bottom - 50)
-    .attr('text-anchor', 'middle')
+  chartGroup.append('text')
+    .attr('class', 'axis-title-x')
+    .attr('x', innerWidth.value / 2)
+    .attr('y', innerHeight.value -10)
     .text('Site');
       
   // Add the column title
-  svgElement.append('text')
-    .attr('class', 'y-axis-title')
-    .attr('transform', 'rotate(-90)')
-    .attr('x', -innerHeight / 2)
+  chartGroup.append('text')
+    .attr('class', 'axis-title-y')
+    //.attr('transform', 'rotate(-90)')
+    .attr('x', -innerHeight.value / 2)
     .attr('y', -margin.left)
     .attr('dy', '1em')
-    .attr('text-anchor', 'middle')
     .text('Amino Acid');
 
   
 });
 };
 
+
 // Function to fetch the data. Checks if a file is uploaded, if not, fetches the default data which in this case is Nipah DMS entry data
-async function fetchData() {
-    const file = await fetch('/data/default_heatmap.csv');
-    const file_text = await file.text();
-    const csv = d3.csvParse(file_text);
-    const data = csv;
-    updateHeatmap(data);
-
-  }
-
 
 // FETCH DATA ON MOUNT USING A VUE FUNCTION
-onMounted(() => {
-    fetchData();
+onMounted(async() => {
+    data.value = await fetchData()
+    updateHeatmap();
 });
 </script>
 
 
 <style>
-.wildtype-row-0 {
+.wildtype-row {
   font-size: 8px;
   fill: black;
 }
-
-.wildtype-row-1 {
-  font-size: 8px;
-  fill: black;
+.x-axis-row text {
+  text-anchor: end;
+  transform: rotate(-90deg);
 }
 
-.wildtype-row-2 {
-  font-size: 8px;
-  fill: black;
-}
-
-.wildtype-row-3 {
-  font-size: 8px;
-  fill: black;
-}
-
-.x-axis-title  {
+.axis-title-x {
   font-size: 18px;
   fill: black;
+  text-anchor: middle;
 }
-
-.y-axis-title  {
+.axis-title-y {
   font-size: 18px;
   fill: black;
+  text-anchor: middle;
+  transform: rotate(-90deg);
 }
+
 </style>
