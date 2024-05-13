@@ -1,12 +1,17 @@
 <template>
-    <div ref="svgContainer" class="mx-auto mt-24 container flex flex-col "></div>
+  <div class="container mx-auto border-2 text-xs font-roboto">
+    <button @click="scaled = !scaled">Toggle Scaling</button>
+    <div ref="svgContainer" class=""></div>
+  </div>
 </template>
 
 <script setup>
 import * as d3 from 'd3'; 
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, computed, watch} from 'vue';
 
 const svgContainer = ref(null);
+const data = ref(null);
+const scaled = ref(true);
 
 function parseNewick(a) {
   for (var e = [], r = {}, s = a.split(/\s*(;|\(|\)|,|:)\s*/), t = 0; t < s.length; t++) {
@@ -43,20 +48,17 @@ function parseNewick(a) {
 }
 
 function projection(d) {
-        // reversed projection - horizontal tree instead of vertical
-        return [parseInt(d.y), parseInt(d.x)];
+  // reversed projection - horizontal tree instead of vertical
+  return [parseInt(d.y), parseInt(d.x)];
 }
 
 function diagonal(diagonalPath, i) {
-        // draw the hooked paths between nodes
-        var source = diagonalPath.source,
-            target = diagonalPath.target,
-            pathData = [source, {x: target.x, y: source.y}, target];
-            pathData = pathData.map(projection);
+  var source = diagonalPath.source,
+      target = diagonalPath.target,
+      pathData = [source, {x: target.x, y: source.y}, target].map(projection);
 
-        return "M" + pathData[0] + ' ' + pathData[1] + " " + pathData[2];
-    }
-
+  return "M" + pathData[0] + ' ' + pathData[1] + " " + pathData[2];
+}
 
 function scaleBranchLengths(nodes, w) {
     function visitPreOrder(root, callback) {
@@ -72,7 +74,7 @@ function scaleBranchLengths(nodes, w) {
       node.rootDist = (node.parent ? node.parent.rootDist : 0) + (node.value || 0)
     });
 
-    var rootDists = nodes.map(function(n) { 
+    var rootDists = Array.from(nodes, function(n) { 
       return n.rootDist; 
     });
 
@@ -86,124 +88,137 @@ function scaleBranchLengths(nodes, w) {
     return yscale
 }
 
-
-function drawChart(data) {
-  var margin = { top: 20, right: 20, bottom: 20, left: 20 };
-  var width = 1000 
-  var height = 400 
-  
-  //SETUP TREE
-  const root = d3.hierarchy(data, d => d.branchset)
+const root = computed(() =>
+  d3.hierarchy(data.value, d => d.branchset)
     .sort((a, b) => b.height - a.height || d3.ascending(a.id, b.id))
-    .sum((d) => d.branchLength || 0);
-    
-  const tree = d3.cluster()
+    .sum((d) => d.branchLength || 0)
+);
+
+const tree = computed(() =>
+  d3.cluster()
     .size([height - margin.top - margin.bottom, width - margin.right - margin.left])
     .separation(function separation(a, b) {
       return a.parent == b.parent ? 1 : 1;
     })
-  
-  //SETUP COLOR SCALE OF LEAVES
-  const countries = Array.from(new Set(root.descendants().map(d => d.data.country))).filter(Boolean);
-  const colorScale = d3.scaleOrdinal(d3.schemeTableau10).domain(countries);
-  
-  //ROOT TO GET X,Y POSITIONS, THEN SCALE BRANCH LENGTHS
-  tree(root); 
-  scaleBranchLengths(root.descendants(), width -  margin.right - margin.left)
+);
 
-  //DRAW SVG
-  const svg = d3.select(svgContainer.value).append("svg")
-   .attr('width', '100%')
-   .attr('height', '100%')
-   .attr('viewBox', [0, 0, width , height ])
-   .append("g")
-   .attr("transform", `translate(${margin.left - 200}, ${margin.top})`);
+const countries = computed(() =>
+  Array.from(new Set(root.value.descendants().map(d => d.data.country))).filter(Boolean)
+);
 
+const colorScale = computed(() =>
+  d3.scaleOrdinal()
+  .domain(countries.value)
+  .range(d3.schemeCategory10)
+);
 
-  //DRAW LINKS
-  svg.selectAll(".link")
-    .data(root.links())
-    .enter().append("path")
-    .attr("class", "link")
-    .attr("fill", "none")
-    .attr("stroke", "darkgray")
-    .attr("stroke-width", 1.25)
-    
-    .join("path")
-    .attr("d", diagonal)
-    .append('g')
+function setColor(d) {
+  if (d.children) {
+    const childColors = d.children.map(child => setColor(child));
+    const uniqueColors = [...new Set(childColors)];
+    d.color = uniqueColors.length === 1 ? uniqueColors[0] : '#ccc'; // Set gray color for mixed descendants
+  } else {
+    const country = d.data.country;
+    d.color = colorScale.value.domain().indexOf(country) >= 0 ? colorScale.value(country) : null;
+  }
+  return d.color;
+}
 
-  svg.append("rect")
-    .attr("width", "100%")
-    .attr("height", "100%")
-    //.attr("stroke", "black")
-    //.attr("stroke-width", "2px")
-    .attr("fill", "none");
-
-    
-  //DRAW NODES
-  var node = svg.selectAll(".node")
-    .data(root.descendants())
-    .enter()
-    .append("g")
-    .attr("class", function(d) { return "node" + (d.children ? " node--internal" : " node--leaf"); })
-    .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
-
-  //DRAW CIRCLES
-  node.filter(".node--leaf")
-    .append("circle")
-    .attr("r", 4)
-    .attr("stroke", "currentColor")
-    .attr("stroke-width", 1.5)
-    .attr("fill", d => colorScale(d.data.country));
-
-  //MAKE LEGEND
-  const legend = svg.append("g")
+const legend = svg => {
+  const g = svg
+    .selectAll("g")
     .attr("class", "legend")
-    .attr("transform", `translate(${margin.left + 275}, ${margin.top})`);
+    .data(colorScale.value.domain())
+    .join("g")
+    .attr("transform", (d, i) => `translate(${margin.left + 275}, ${i * 20})`);
 
-  // ADD LEGEND OPTIONS
-  const legendItems = legend.selectAll(".legend-item")
-    .data(countries)
-    .enter()
-    .append("g")
-    .attr("class", "legend-item")
-    .attr("transform", (d, i) => `translate(0, ${i * 20})`);
-
-  // Add circles to legend items
-  legendItems.append("circle")
-    .attr("r", 4)
+  g.append("circle")
     .attr("class", "legendcircle")
-    .attr("stroke", "currentColor") 
-    .attr("stroke-width", 1)
-    .attr("fill", d => colorScale(d))
-
-  // Add country labels to legend items
-  legendItems.append("text")
+    .attr("r", 5)
+    .attr("stroke", "currentColor")
+    .attr("fill", colorScale.value);
+  
+  g.append("text")
     .attr("class", "legend-text")
-    .attr("x", 6)
-    .style("fill","currentColor")
-    .attr("font-size", "10px")
-    .attr("y", 3)
-    .attr("dy", "0em")
+    .attr("x", 10)
+    .attr("dy", "0.1em")
     .text(d => d);
 }
 
+watch (scaled, () => {
+  drawChart();
+});
+
+const margin = {top: 20, right: 20, bottom: 20, left: 20};
+const width = 800 
+const height = 400
+
+function drawChart() {
+  d3.select(svgContainer.value).selectAll("*").remove();
+
+  // ROOT TO GET X,Y POSITIONS
+  tree.value(root.value);
+  setColor(root.value);
+  
+  // SCALE BRANCH LENGTHS IF SCALED
+  if (scaled.value) {
+    scaleBranchLengths(root.value.descendants(), width);
+  }
+
+  //DRAW SVG
+  var svg = d3.select(svgContainer.value).append("svg")
+   .attr('width', '100%')
+   .attr('height', 800)
+   .attr('viewBox', [0, 0, width , height])
+   .append("g")
+   .attr("transform", `translate(${margin.left - 200}, ${margin.top})`);
+
+  svg.append("g")
+    .call(legend);
+
+  //DRAW LINKS
+  svg.append("g")
+    .attr("class", "link")
+    .selectAll("path")
+    .data(root.value.links())
+    .join("path")
+    .attr("d", diagonal)
+    .attr("stroke", d => d.target.color)
+
+  //DRAW NODES
+  svg.append("g")
+    .selectAll("circle")
+    .data(root.value.descendants().filter(d => !d.children))
+    .join("circle")
+    .attr("r", 3)
+    .attr("stroke", "currentColor")
+    .attr("fill", d => colorScale.value(d.data.country))
+    .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+}
+
 async function fetchData() {
-  try {
   const file = await fetch('/data/nipah_whole_genome_phylo.tre');
   const csv = await file.text();
-  const parsedData = parseNewick(csv); 
-  drawChart(parsedData); 
-  } catch (error) {
-    console.error('Error in fetchData:', error);
-  }
+  const parsedNewick = parseNewick(csv); 
+  return parsedNewick;
 };
-onMounted(() => {
-  fetchData();
+onMounted(async() => {
+  data.value = await fetchData();
+  drawChart();
 });
 </script>
 
 <style>
-
+.legend-text {
+  text-anchor: start;
+  alignment-baseline: middle;
+}
+.legendcircle {
+  stroke-width: 1;
+}
+.link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5;
+}
 </style>

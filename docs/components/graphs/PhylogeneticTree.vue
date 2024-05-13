@@ -102,7 +102,6 @@ function drawChart(data) {
       .attr("d", linkConstant)
       .attr("stroke-width", 1.5)
       
-  
   svg.append("g")
     .selectAll("circle")
     .data(root.leaves())

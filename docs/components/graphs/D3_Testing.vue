@@ -8,24 +8,21 @@
 import { ref, onMounted, computed } from 'vue';
 import * as d3 from 'd3';
 
-const arraysize = ref(20);
-const dataset = ref([5,10,15,20,25]);
+const dataset = ref([5,10,15,20,25,30]);
 const svgContainer = ref(null);
 
-let svg;
-let svgElement;
 
 
 onMounted(() => {
-  svg = d3.select(svgContainer.value); // Select the SVG container
+  const svg = d3.select(svgContainer.value); // Select the SVG container
   
   // Append a new SVG element to the container
-  svgElement = svg.append('svg')
+  const svgElement = svg.append('svg')
     .attr('width', 600)
     .attr('height', 150)
 
   // Bind data and append circles
-  const circles = svgElement.selectAll('circle')
+  svgElement.selectAll('circle')
     .data(dataset.value)
     .join(
         enter => (
