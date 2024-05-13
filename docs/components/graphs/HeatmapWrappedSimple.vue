@@ -32,9 +32,9 @@ let rows = 4; // number of rows in the heatmap
 let paddingValue = 0.1; // padding between the squares in the heatmap
 const squareSize = 9;
 
-const colorScale = computed(() => {
-  return d3.scaleDiverging(d3['interpolateRdBu']).domain([-4, 0, 4]);
-});
+function colorScale(effect) {
+  return d3.scaleDiverging(d3['interpolateRdBu']).domain([-4, 0, 4])(effect);
+}
 
 const sites = computed(() => Array.from(new Set(data.value.map(d => +d.site))));
 
@@ -106,8 +106,8 @@ function updateHeatmap() {
   .attr('viewBox', `0 0 ${width.value} ${height.value}`)
   .call(d3.zoom().on("zoom", zoomed)); // Add zoom behavior to the SVG
 
-const chartGroup = svgElement.append('g')
-  .attr('transform', `translate(${margin.left}, ${margin.top})`)
+  const chartGroup = svgElement.append('g')
+    .attr('transform', `translate(${margin.left}, ${margin.top})`)
     
   //Plot heatmap squares by row for wrapping
   siteRows.value.forEach((siteRow, rowIndex) => {
@@ -122,7 +122,7 @@ const chartGroup = svgElement.append('g')
     .attr('fill', d => {
       const key = `${d.site}-${d.mutant}`;
       if (dataLookup.value[key]) {
-        return colorScale.value(+dataLookup.value[key].effect);
+        return colorScale(+dataLookup.value[key].effect);
       } else {
         return wildtypeLookup.value[d.site] === d.mutant ? 'white' : 'lightgray';
       }
@@ -202,8 +202,10 @@ onMounted(async() => {
 }
 .x-axis-row text {
   text-anchor: end;
+  align: center;
   transform: rotate(-90deg);
 }
+
 
 .axis-title-x {
   font-size: 18px;

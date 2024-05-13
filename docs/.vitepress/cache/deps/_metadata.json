@@ -1,67 +1,61 @@
 {
-  "hash": "43829292",
+  "hash": "64f3dbad",
   "configHash": "2f267fac",
-  "lockfileHash": "b5190e29",
-  "browserHash": "dfe49ff2",
+  "lockfileHash": "1785e4bd",
+  "browserHash": "c78c20db",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "d75cc04d",
+      "fileHash": "e9b0ed1b",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "d2ac39c5",
+      "fileHash": "39ffb87b",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "1e0bf73b",
+      "fileHash": "de5b454f",
       "needsInterop": false
     },
     "vue-select": {
       "src": "../../../../node_modules/vue-select/dist/vue-select.es.js",
       "file": "vue-select.js",
-      "fileHash": "c6e9f336",
+      "fileHash": "206b8a65",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "d0fce840",
+      "fileHash": "a6a230ee",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "57525fca",
+      "fileHash": "52d1fee1",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "44890d5f",
+      "fileHash": "0a344c85",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "a000bd40",
+      "fileHash": "b4a4c383",
       "needsInterop": false
-    },
-    "lodash.debounce": {
-      "src": "../../../../node_modules/lodash.debounce/index.js",
-      "file": "lodash__debounce.js",
-      "fileHash": "cca95272",
-      "needsInterop": true
     },
     "file-saver": {
       "src": "../../../../node_modules/file-saver/dist/FileSaver.min.js",
       "file": "file-saver.js",
-      "fileHash": "2905b538",
+      "fileHash": "141f2511",
       "needsInterop": true
     }
   },

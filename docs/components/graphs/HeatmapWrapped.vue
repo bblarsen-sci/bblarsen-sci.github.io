@@ -1,61 +1,64 @@
 <template>
-  <div class="p-6">
-    <div class="flex flex-col justify-evenly items-center text-center gap-6">
-      <div>
-        <label for="fileInput" class="mr-2">Upload CSV:</label>
-        <input type="file" id="fileInput" @change="handleFileUpload" accept=".csv" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-      </div>
-
-      <div class="flex flex-col sm:flex-row justify-between gap-4 sm:gap-8">
-        <div>
-          <label for="paddingSelect" class="mr-2">Select Padding:</label>
-          <select id="paddingSelect" v-model="paddingValue" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option value="0">none</option>
-            <option value="0.05">medium</option>
-            <option value="0.1">large</option>
-          </select>
+  <div class="container mx-auto">
+    <div class="flex flex-row flex-wrap py-4">
+      <aside class="w-full sm:w-1/4 md:w-1/5">
+        <div class="sticky top-0 p-4 w-full overflow-hidden border-2 justify-center items-center inline-block">
+          <div class="flex flex-col gap-6 text-xs font-light">
+            <div class="font-bold text-xl">Heatmap Options</div>
+            <div class="flex flex-col">
+              <p for="fileInput" class="mr-2 font-semibold">Upload CSV:</p>
+              <input type="file" id="fileInput" @change="handleFileUpload" accept=".csv" class="">
+            </div>
+            <div class="flex flex-col gap-2">
+              <label class="font-semibold" for="siteInput">Enter Specific Sites:</label>
+              <input type="text" id="siteInput" v-model="siteInputValue" class="p-2 rounded-md ring-1 ring-slate-500" placeholder="e.g., 1-2,3">
+              <div id="updateSites" @click="selectedSites = parseSites(siteInputValue)" class="p-1 bg-sky-500 shadow-md shadow-sky-500 text-white rounded-md hover:ring-2 ring-sky-700 text-center ">Update Sites</div>
+            </div>
+            <div class="flex flex-col">
+              <label for="paddingSelect" class="mr-2 font-semibold">Select Padding:</label>
+              <select id="paddingSelect" v-model="paddingValue" class="p-2 rounded-md bg-slate-200">
+                <option value="0">none</option>
+                <option value="0.05">small</option>
+                <option value="0.1">large</option>
+              </select>
+            </div>
+            <div class="flex flex-col">
+              <label for="strokeSelect" class="mr-2 font-semibold">Select Stroke:</label>
+              <select id="strokeSelect" v-model="strokeWidthValue" class="p-2 rounded-md bg-slate-200">
+                <option value="0">0</option>
+                <option value="0.25">0.25</option>
+                <option value="0.5">0.5</option>
+                <option value="1.0">1.0</option>
+              </select>
+            </div>
+            <div class="flex flex-col">
+              <label for="rowsSelect" class="mr-2 font-semibold">Select Rows:</label>
+              <select id="rowsSelect" v-model="rows" class="p-2 rounded-md bg-slate-200">
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="8">8</option>
+              </select>
+            </div>
+            <div class="flex flex-col">
+            <label class="mr-2 font-semibold">Change Color:</label>
+            <select v-model="selectedColorScale" class="p-2 rounded-md bg-slate-200">
+              <option value="interpolateRdBu">Red Blue</option>
+              <option value="interpolateBrBG">Brown Green</option>
+              <option value="interpolatePRGn">Purple Green</option>
+              <option value="interpolatePiYG">Pink Yellow Green</option>
+            </select>
+            </div>
+            <div class="flex flex-col gap-2">
+              <button @click="downloadSVG" class="px-3 py-2 bg-sky-500 shadow-md shadow-sky-500 text-white rounded-md hover:bg-sky-600">Download SVG</button>
+              <button @click="downloadImage('png')" class="px-3 py-2 bg-sky-500 shadow-md shadow-sky-500 text-white rounded-md hover:bg-sky-600">Download PNG</button>
+            </div>
+          </div>
         </div>
-
-        <div>
-          <label for="strokeSelect" class="mr-2">Select Stroke Size:</label>
-          <select id="strokeSelect" v-model="strokeWidthValue" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option value="0">0</option>
-            <option value="0.25">0.25</option>
-            <option value="0.5">0.5</option>
-            <option value="1.0">1.0</option>
-          </select>
-        </div>
-
-        <div>
-          <label for="rowsSelect" class="mr-2">Select rows:</label>
-          <select id="rowsSelect" v-model="rows" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="8">8</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="flex flex-col sm:flex-row items-center gap-4">
-        <label class="mb-2 sm:mb-0">Change color:</label>
-        <select v-model="selectedColorScale" class="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-          <option value="interpolateRdBu">Red Blue</option>
-          <option value="interpolateBrBG">Brown Green</option>
-          <option value="interpolatePRGn">Purple Green</option>
-          <option value="interpolatePiYG">Pink Yellow Green</option>
-        </select>
-      </div>
-
-      <div class="flex flex-col sm:flex-row gap-4">
-        <button @click="downloadSVG" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Download SVG</button>
-        <button @click="downloadImage('png')" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Download PNG</button>
-        <button @click="downloadImage('jpg')" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Download JPG</button>
-      </div>
-    </div>
-
-    <div class="mt-8">
-      <div class="mx-auto" ref="svgContainer"></div>
+      </aside>
+      <main class="w-full sm:w-3/4 md:w-4/5 px-2 align-top">
+        <div class="block text-xs font-extralight" ref="svgContainer"></div>
+      </main>
     </div>
   </div>
 </template>
@@ -66,13 +69,16 @@ import { saveAs } from 'file-saver';
 import * as d3 from 'd3';
 
 // DEFINE VARIABLES
-const rows = ref(4);
-const svgContainer = ref(null);
-const strokeWidthValue = ref(0.0);
 const data = ref([]);
+const svgContainer = ref(null);
+
 const uploadedFile = ref(null);
 const paddingValue = ref(0.1);
+const strokeWidthValue = ref(0.0);
+const rows = ref(4);
 const selectedColorScale = ref('interpolateRdBu');
+const siteInputValue = ref('');
+const selectedSites = ref([]);
 
 
 // DEFINE AMINO ACIDS- this is the order (from top to bottom) in which the amino acids will be displayed
@@ -93,10 +99,9 @@ function downloadImage(format) {
 
   const svgWidth = svgElement.getAttribute('width');
   const svgHeight = svgElement.getAttribute('height');
-
-  
-  canvas.width = (svgWidth * 4);
-  canvas.height = (svgHeight * 4);
+  console.log(svgWidth, svgHeight)
+  canvas.width = svgWidth * 4;
+  canvas.height = svgHeight * 4;
 
   // Set the canvas background color to white
   ctx.fillStyle = 'white';
@@ -105,11 +110,11 @@ function downloadImage(format) {
   const img = new Image();
   img.onload = () => {
     // Draw the image on the canvas with double the size for higher resolution
-    ctx.drawImage(img, 0, 0, (canvas.width - 20), (canvas.height - 20));
+    ctx.drawImage(img, 0, 0, canvas.width - 20, canvas.height - 20);
 
     canvas.toBlob((blob) => {
-      saveAs(blob, `heatmap.${format}`);
-    }, `image/${format}`);
+      saveAs(blob, `heatmap.png`);
+    }, `image/.png`);
   };
 
   img.src = `data:image/svg+xml;base64,${btoa(svgString)}`;
@@ -136,34 +141,76 @@ function handleFileUpload(event) {
   fetchData();
 }
 
-// DEFINE D3 FUNCTIONS
+// Function to parse sites entered by the user
+function parseSites(input) {
+  const ranges = input.split(',').map(s => s.trim());
+  let sites = [];
+  ranges.forEach(range => {
+      if (range.includes('-')) {
+          const [start, end] = range.split('-').map(Number);
+          sites = sites.concat(Array.from({ length: end - start + 1 }, (_, i) => start + i));
+      } else {
+          sites.push(Number(range));
+      }
+  });
+  return sites;
+};
+
+// DEFINE D3 CONSTANTS
 const margin = { top: 20, right: 20, bottom: 50, left: 50 }; // margin for the SVG
 const rowPadding = 30; // amount of padding between the rows
 const squareSize = 9; // size of each square in the heatmap
 
-const sites = computed(() => Array.from(new Set(data.value.map(d => +d.site))));
+// COMPUTED PROPERTIES
+const sites = computed(() => {
+  if (selectedSites.value.length > 0) {
+    return Array.from(new Set(data.value.map(d => +d.site))).filter(site => selectedSites.value.includes(site));
+  } else {
+    return Array.from(new Set(data.value.map(d => +d.site)));
+  }
+});
 
 const sitesPerRow = computed(() => Math.ceil(sites.value.length / rows.value));
 
-const siteRows = computed(() =>
-  Array.from({ length: rows.value }, (_, i) =>
-    sites.value.slice(i * sitesPerRow.value, (i + 1) * sitesPerRow.value)
-  )
-);
+const siteRows = computed(() => {
+  if (selectedSites.value.length > 0) {
+    return [sites.value];
+  } else {
+    return Array.from({ length: rows.value }, (_, i) =>
+      sites.value.slice(i * sitesPerRow.value, (i + 1) * sitesPerRow.value)
+    );
+  }
+});
 
-const maxSitesInRow = computed(() => Math.max(...siteRows.value.map(row => row.length)));
-
+const maxSitesInRow = computed(() => {
+  if (selectedSites.value.length > 0) {
+    return selectedSites.value.length;
+  } else {
+    return Math.max(...siteRows.value.map(row => row.length));
+  }
+});
 const innerWidth = computed(() => squareSize * maxSitesInRow.value);
 
 const width = computed(() => innerWidth.value + margin.left + margin.right);
 
-const height = computed(() =>
-  squareSize * amino_acids.length * rows.value +
-  margin.top +
-  margin.bottom +
-  rowPadding * (rows.value - 1) +
-  margin.bottom
-);
+const height = computed(() => {
+  if (selectedSites.value.length > 0) {
+    return (
+      squareSize * amino_acids.length +
+      margin.top +
+      margin.bottom +
+      margin.bottom
+    );
+  } else {
+    return (
+      squareSize * amino_acids.length * rows.value +
+      margin.top +
+      margin.bottom +
+      rowPadding * (rows.value - 1) +
+      margin.bottom
+    );
+  }
+});
 
 const innerHeight = computed(() => height.value - margin.top - margin.bottom);
 
@@ -217,18 +264,12 @@ function updateColorScale() {
     });
 }
 ///
-watch([paddingValue, rows], () => {
+watch([data.value, paddingValue, rows, strokeWidthValue, selectedSites], () => {
   updateHeatmap();
 });
 
 
-////////////// UPDATING FUNCTIONS ////////////////////////
-
-
-
-
-
-
+////////////// UPDATING HEATMAP ////////////////////////
 function updateHeatmap() {
   const svg = d3.select(svgContainer.value); // Select the SVG container
   svg.selectAll('*').remove();
@@ -238,7 +279,6 @@ function updateHeatmap() {
     .attr('width', width.value)
     .attr('height', height.value)
     .attr('viewBox', `0 0 ${width.value} ${height.value}`)
-    //.call(zoom)
     .append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`);
 
@@ -249,6 +289,7 @@ function updateHeatmap() {
     .data(siteRow.flatMap(site => amino_acids.map(mutant => ({ site, mutant }))))
     .enter()
     .append('rect')
+    .attr('class', `rect-row`)
     .attr('x', d => xScale.value(siteRow.indexOf(d.site)))
     .attr('y', d => yScale.value(d.mutant) + (yScale.value.range()[1] + rowPadding) * rowIndex)
     .attr('width', xScale.value.bandwidth())
@@ -270,7 +311,11 @@ function updateHeatmap() {
     .data(data.value.filter(d => siteRow.includes(+d.site)))
     .enter()
     .append('text')
-    .attr('class', `wildtype-row`)
+   // .attr('class', `wildtype-row`)
+    .attr('font-size', '8px')
+    .attr('text-anchor', 'middle')
+    .attr('text-align', 'center')
+    //.attr('font-weight', 'ultralight')
     .attr('x', d => xScale.value(siteRow.indexOf(+d.site)) + xScale.value.bandwidth() / 2)
     .attr('y', d => yScale.value(d.wildtype) + (yScale.value.range()[1] + rowPadding) * rowIndex + yScale.value.bandwidth() / 2 + 3)
     .text('X');
@@ -283,37 +328,48 @@ function updateHeatmap() {
     xAxis.tickFormat((d, i) => i % 10 === 0 ? siteRow[d] : '');
   }
 
+
+
+
   // ADD THE X AND Y AXES
   // Add the site numbers to the x-axis
   svgElement.append('g')
-    .attr('class', `x-axis-row`)
+    //.attr('class', `x-axis-row`)
     .attr('transform', `translate(0, ${(yScale.value.range()[1] + rowPadding) * rowIndex + yScale.value.range()[1]})`)
     .call(xAxis)
     .selectAll('text')
     .attr('dx', '-7px')
+    .attr('transform', 'rotate(-90)')
+    .attr('text-anchor', 'end')
     .attr('dy', '-5px');
 
   // Add the amino acids to the y-axis
   svgElement.append('g')
-    .attr('class', `y-axis-row`)
+    //.attr('class', `y-axis-row`)
     .attr('transform', `translate(0, ${(yScale.value.range()[1] + rowPadding) * rowIndex})`)
     .call(d3.axisLeft(yScale.value).tickSizeOuter(0));
 
   // ADD THE AXES TITLES
   // Add the row title
   svgElement.append('text')
-    .attr('class', 'axis-title-x')
+    //.attr('class', 'axis-title-x')
     .attr('x', innerWidth.value / 2)
-    .attr('y', innerHeight.value + margin.bottom-10)
+    .attr('y', innerHeight.value -10)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '16px')
     .text('Site');
-      
+
   // Add the column title
   svgElement.append('text')
-    .attr('class', 'axis-title-y')
+    //.attr('class', 'axis-title-y')
     .attr('x', -innerHeight.value / 2)
-    .attr('y', -margin.left)
-    .attr('dy', '1em')
+    .attr('y', margin.left - 80)
+    .attr('dx', '1em')
+    .attr('text-anchor', 'middle')
+    .attr('transform', 'rotate(-90)')
+    .attr('font-size', '16px')
     .text('Amino Acid');
+
 
 
 });
@@ -347,24 +403,8 @@ onMounted(async() => {
 
 
 <style>
-.wildtype-row {
-  font-size: 8px;
-  fill: black;
-}
-.x-axis-row text {
-  text-anchor: end;
-  transform: rotate(-90deg);
-}
 
-.axis-title-x {
-  font-size: 18px;
-  fill: black;
-  text-anchor: middle;
-}
-.axis-title-y {
-  font-size: 18px;
-  fill: black;
-  text-anchor: middle;
-  transform: rotate(-90deg);
-}
+
+
+
 </style>

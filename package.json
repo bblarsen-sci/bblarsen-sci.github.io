@@ -16,7 +16,8 @@
     "vue": "^3.4.5",
     "vue-select": "^4.0.0-beta.6",
     "file-saver": "2.0.5",
-    "lodash.debounce": "4.0.8"
+    "@vueuse/core": "10.9.0",
+    "@vueuse/motion": "2.1.0"
 
   },
   "postcss": {
