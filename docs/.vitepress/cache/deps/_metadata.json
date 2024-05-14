@@ -1,70 +1,76 @@
 {
-  "hash": "75e1d7e4",
-  "configHash": "1e2cb65f",
-  "lockfileHash": "1785e4bd",
-  "browserHash": "3b9e4f8a",
+  "hash": "d2de5713",
+  "configHash": "2f267fac",
+  "lockfileHash": "9f2cbb67",
+  "browserHash": "fe87ba34",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "05e6e5d6",
+      "fileHash": "904606e0",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "f1807b77",
+      "fileHash": "d7db52a5",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "31209db6",
+      "fileHash": "bcf604e0",
       "needsInterop": false
     },
     "vue-select": {
       "src": "../../../../node_modules/vue-select/dist/vue-select.es.js",
       "file": "vue-select.js",
-      "fileHash": "1eed84ce",
+      "fileHash": "57dcd351",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "65264428",
+      "fileHash": "4615c68a",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "126fde06",
+      "fileHash": "a7266f4c",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "318b424f",
+      "fileHash": "0c0c136c",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "0e524d8d",
+      "fileHash": "37a4c8ad",
+      "needsInterop": false
+    },
+    "@juggle/resize-observer": {
+      "src": "../../../../node_modules/@juggle/resize-observer/lib/exports/resize-observer.js",
+      "file": "@juggle_resize-observer.js",
+      "fileHash": "e1a32f7f",
       "needsInterop": false
     }
   },
   "chunks": {
+    "chunk-AUTOGC5R": {
+      "file": "chunk-AUTOGC5R.js"
+    },
+    "chunk-HUQGSQ4Q": {
+      "file": "chunk-HUQGSQ4Q.js"
+    },
+    "chunk-NTP5MXPO": {
+      "file": "chunk-NTP5MXPO.js"
+    },
     "chunk-O4XWQMLZ": {
       "file": "chunk-O4XWQMLZ.js"
-    },
-    "chunk-5UV7SUN4": {
-      "file": "chunk-5UV7SUN4.js"
-    },
-    "chunk-XJDZ4BQV": {
-      "file": "chunk-XJDZ4BQV.js"
-    },
-    "chunk-AVDKQJKK": {
-      "file": "chunk-AVDKQJKK.js"
     },
     "chunk-ZS7NZCD4": {
       "file": "chunk-ZS7NZCD4.js"

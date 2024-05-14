@@ -1,6 +1,5 @@
 <template>
-  <div class="container mx-auto border-2 text-xs font-roboto">
-    <button @click="scaled = !scaled">Toggle Scaling</button>
+  <div class="container mx-auto text-xs font-light font-roboto">
     <div ref="svgContainer" class=""></div>
   </div>
 </template>
@@ -11,7 +10,6 @@ import { onMounted, ref, computed, watch} from 'vue';
 
 const svgContainer = ref(null);
 const data = ref(null);
-const scaled = ref(true);
 
 function parseNewick(a) {
   for (var e = [], r = {}, s = a.split(/\s*(;|\(|\)|,|:)\s*/), t = 0; t < s.length; t++) {
@@ -145,33 +143,28 @@ const legend = svg => {
     .text(d => d);
 }
 
-watch (scaled, () => {
-  drawChart();
-});
 
 const margin = {top: 20, right: 20, bottom: 20, left: 20};
 const width = 800 
-const height = 400
+const height = 500
 
 function drawChart() {
   d3.select(svgContainer.value).selectAll("*").remove();
 
   // ROOT TO GET X,Y POSITIONS
   tree.value(root.value);
-  setColor(root.value);
+  //setColor(root.value);
   
   // SCALE BRANCH LENGTHS IF SCALED
-  if (scaled.value) {
-    scaleBranchLengths(root.value.descendants(), width);
-  }
+  scaleBranchLengths(root.value.descendants(), width);
 
   //DRAW SVG
   var svg = d3.select(svgContainer.value).append("svg")
    .attr('width', '100%')
-   .attr('height', 800)
-   .attr('viewBox', [0, 0, width , height])
+   .attr('height', height)
+   .attr('viewBox', [0, 0, width, height])
    .append("g")
-   .attr("transform", `translate(${margin.left - 200}, ${margin.top})`);
+   .attr("transform", `translate(-200, ${margin.top})`);
 
   svg.append("g")
     .call(legend);
@@ -183,14 +176,14 @@ function drawChart() {
     .data(root.value.links())
     .join("path")
     .attr("d", diagonal)
-    .attr("stroke", d => d.target.color)
+    //.attr("stroke", d => d.target.color)
 
   //DRAW NODES
   svg.append("g")
     .selectAll("circle")
     .data(root.value.descendants().filter(d => !d.children))
     .join("circle")
-    .attr("r", 3)
+    .attr("r", 4)
     .attr("stroke", "currentColor")
     .attr("fill", d => colorScale.value(d.data.country))
     .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
@@ -218,7 +211,7 @@ onMounted(async() => {
 }
 .link {
   fill: none;
-  stroke: #ccc;
-  stroke-width: 1.5;
+  stroke: black;
+  stroke-width: 1.25;
 }
 </style>

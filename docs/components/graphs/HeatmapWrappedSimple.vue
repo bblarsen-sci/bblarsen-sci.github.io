@@ -92,7 +92,6 @@ const yScale = computed(() =>
 
 
 function updateHeatmap() {
-  
   function zoomed(event) {
     chartGroup.attr("transform", event.transform);
   }
