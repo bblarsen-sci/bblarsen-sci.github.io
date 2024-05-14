@@ -1,11 +1,11 @@
 ---
 layout: page
-title: D3 heatmap wrapped but simple
+title: Zoomable D3 Heatmap
 aside: false
 date: 2024-05-08
 keywords:
     - D3
-subtext: Heatmap of deep mutational scanning data that is wrapped in multiple rows but remove all the additional stuff
+subtext: Demonstration of using D3 zoom function to make heatmap zoomable and draggable inside container. Scales with screen size.
 ---
 
 

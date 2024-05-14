@@ -1,62 +1,62 @@
 {
-  "hash": "d2de5713",
-  "configHash": "2f267fac",
+  "hash": "fc46d2b8",
+  "configHash": "1e2cb65f",
   "lockfileHash": "9f2cbb67",
-  "browserHash": "fe87ba34",
+  "browserHash": "d1ca5f27",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "904606e0",
+      "fileHash": "cc79c469",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "d7db52a5",
+      "fileHash": "b7e55c05",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "bcf604e0",
+      "fileHash": "b29aaf28",
       "needsInterop": false
     },
     "vue-select": {
       "src": "../../../../node_modules/vue-select/dist/vue-select.es.js",
       "file": "vue-select.js",
-      "fileHash": "57dcd351",
+      "fileHash": "9121df4c",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "4615c68a",
+      "fileHash": "10c6f154",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "a7266f4c",
+      "fileHash": "f9d055cf",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "0c0c136c",
+      "fileHash": "2f8087fc",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "37a4c8ad",
+      "fileHash": "ff6d9357",
       "needsInterop": false
     },
-    "@juggle/resize-observer": {
-      "src": "../../../../node_modules/@juggle/resize-observer/lib/exports/resize-observer.js",
-      "file": "@juggle_resize-observer.js",
-      "fileHash": "e1a32f7f",
-      "needsInterop": false
+    "file-saver": {
+      "src": "../../../../node_modules/file-saver/dist/FileSaver.min.js",
+      "file": "file-saver.js",
+      "fileHash": "0af8d7d9",
+      "needsInterop": true
     }
   },
   "chunks": {

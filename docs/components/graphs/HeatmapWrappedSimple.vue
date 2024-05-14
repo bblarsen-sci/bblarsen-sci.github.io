@@ -1,5 +1,6 @@
 <template>
-      <div class="mx-auto px-2 lg:px-8 font-light " ref="svgContainer"></div>
+      <div class="text-center font-semibold p-6 text-xl">Zoomable Heatmap</div>
+      <div class="container mx-auto max-w-6xl mb-20 max-h-screen font-light border-2 align-top" ref="svgContainer"></div>
 </template>
 
 <script>
@@ -100,7 +101,7 @@ function updateHeatmap() {
   // Append a new SVG element to the container
   const svgElement = svg.append('svg') 
   .attr('width', '100%')
-  .attr('height', height.value)
+  //.attr('height', height.value)
   .attr('preserveAspectRatio', "xMinYMin meet")
   .attr('viewBox', `0 0 ${width.value} ${height.value}`)
   .call(d3.zoom().on("zoom", zoomed)); // Add zoom behavior to the SVG
@@ -167,7 +168,7 @@ function updateHeatmap() {
   chartGroup.append('text')
     .attr('class', 'axis-title-x')
     .attr('x', innerWidth.value / 2)
-    .attr('y', innerHeight.value -10)
+    .attr('y', innerHeight.value - 10)
     .text('Site');
       
   // Add the column title
@@ -208,14 +209,14 @@ onMounted(async() => {
 
 .axis-title-x {
   font-size: 18px;
-  fill: black;
   text-anchor: middle;
+  fill: currentColor;
 }
 .axis-title-y {
   font-size: 18px;
-  fill: black;
   text-anchor: middle;
   transform: rotate(-90deg);
+  fill: currentColor;
 }
 
 </style>

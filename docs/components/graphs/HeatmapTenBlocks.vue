@@ -1,12 +1,14 @@
 <template>
-  <div ref="container" class="flex flex-col justify-center items-center">
-    <div class="" ref="svgContainer"></div>
-  </div>
+  <d3PlotContainer>
+    <div ref="svgContainer" class="flex flex-col items-center"></div>
+  </d3PlotContainer>
 </template>
 
 
 <script setup>
 import { ref, watch, onMounted, onUnmounted } from 'vue';
+import d3PlotContainer from '/components/layouts/d3PlotContainer.vue';
+
 import * as d3 from 'd3';
   
   // Define constants
@@ -94,7 +96,7 @@ function autoMove() {
     const svgElement = svg.append('svg') // Append a new SVG element
       .attr('width', width)
       .attr('height', height)
-      .attr('viewBox', `0 0 ${width} ${height}`)
+      //.attr('viewBox', `0 0 ${width} ${height}`)
       .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`);
   
@@ -160,6 +162,8 @@ function autoMove() {
       .attr('x', innerWidth / 2)
       .attr('y', innerHeight + margin.bottom)
       .attr('text-anchor', 'middle')
+      .attr('fill', 'currentColor')
+
       .text('Site');
 
     svgElement.append('text')
@@ -169,6 +173,7 @@ function autoMove() {
       .attr('y', -margin.left)
       .attr('dy', '1em')
       .attr('text-anchor', 'middle')
+      .attr('fill', 'currentColor')
       .text('Amino Acid');
 
     const rectSelection = svgElement.selectAll('rect')
@@ -190,11 +195,11 @@ function autoMove() {
       .attr('text-anchor', 'middle')
       .attr('font-size', '10px')
       .attr('font-weight', '100')
-      .attr('fill', 'white')
+      .attr('fill', 'currentColor')
       .text('X');
 
     rectSelection.transition()
-      .duration(200)
+      .duration(1000)
       .attr('transform', 'scale(0)')
       .delay(() => Math.random() * 1000)
       .attr('fill', d => {
