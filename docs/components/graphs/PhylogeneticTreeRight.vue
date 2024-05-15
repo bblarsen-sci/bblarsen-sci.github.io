@@ -1,6 +1,6 @@
 <template>
   <d3PlotContainer>
-    <div ref="svgContainer" class="border-2"></div>
+    <div ref="svgContainer" class=""></div>
   </d3PlotContainer>
 </template>
 

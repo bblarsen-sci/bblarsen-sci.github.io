@@ -1,5 +1,33 @@
 <template>
-  <d3PlotContainer>
+  
+  <d3PlotContainer class="max-w-2xl">
+    <div class="flex flex-row items-center justify-center">
+      <label for="easingRef" class="mr-2 font-semibold">Select Enter Easing:</label>
+      <select id="easingRef" v-model="easingRef" class="px-6 rounded-md bg-slate-200">
+        <option value="easeLinear">easeLinear</option>
+        <option value="easeExp">easeExp</option>
+        <option value="easeExpInOut">easeExpInOut</option>
+        <option value="easePoly">easePoly</option>
+        <option value="easeQuad">easeQuad</option>
+        <option value="easeCubic">easeCubic</option>
+        <option value="easeElastic">easeElastic</option>
+        <option value="easeBounce">easeBounce</option>
+        <option value="easeElasticInOut">easeElasticInOut</option>
+      </select>
+      <label for="delayMultiplier" class="mx-2 font-semibold">Select Delay:</label>
+      <select id="delayMultiplier" v-model="delayMultiplier" class="px-6 rounded-md bg-slate-200">
+        <option value="0">0</option>
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="6">6</option>
+      </select>
+      <div class="flex flex-col items-center ml-4">
+        <input type="checkbox" id="delayByIndex" v-model="delayByIndex" class="mr-2">
+        <label for="delayByIndex" class="font-semibold">Delay by Index</label>
+        <input type="checkbox" id="delayByRandom" v-model="delayByRandom" class="mt-6">
+        <label for="delayByRandom" class="font-semibold">Delay by Random</label>
+      </div>
+    </div>
     <div ref="svgContainer" class="flex flex-col items-center"></div>
   </d3PlotContainer>
 </template>
@@ -17,14 +45,19 @@ const amino_acids = [
 const svgContainer = ref(null);
 const data = ref(null);
 const currentIndex = ref(0);
-const sitesPerView = 25;
-const height = 300;
-const margin = { top: 20, right: 20, bottom: 40, left: 40 };
-const innerHeight = height - margin.top - margin.bottom;
-const squareSize = Math.min(innerHeight / amino_acids.length, 20);
-const innerWidth = squareSize * sitesPerView;
-const width = innerWidth + margin.left + margin.right;
+const easingRef = ref('easeLinear');
+const delayMultiplier = ref(0);
+const delayByIndex = ref(false);
+const delayByRandom = ref(false);
+const sitesPerView = 20;
 
+const margin = { top: 20, right: 20, bottom: 40, left: 40 };
+const squareSize = 10;
+const innerWidth = squareSize * sitesPerView;
+const innerHeight = innerWidth
+const width = innerWidth + margin.left + margin.right;
+const height = innerHeight + margin.top + margin.bottom;
+console.log(height,width)
 let intervalId = null;
 
 onUnmounted(() => {
@@ -58,19 +91,38 @@ const wildtypeLookup = computed(() => {
   }, {});
 });
 
+const allCombinations = computed(() => {
+  return visibleSites.value.flatMap(site => amino_acids.map(mutant => ({ site, mutant })));
+});
+
+const filteredData = computed(() => {
+  return data.value.filter(d => visibleSites.value.includes(+d.site));
+});
+
+const getFillColor = computed(() => {
+  return (site, mutant) => {
+    const key = `${site}-${mutant}`;
+    if (dataLookup.value[key]) {
+      return colorScale.value(+dataLookup.value[key].entry_CHO_bEFNB2);
+    } else {
+      return wildtypeLookup.value[site] === mutant ? 'white' : 'lightgray';
+    }
+  };
+});
+
 function autoMove() {
   const totalSites = allSites.value.length;
   const totalPages = Math.ceil(totalSites / sitesPerView);
   intervalId = setInterval(() => {
     currentIndex.value = (currentIndex.value + 1) % totalPages;
-  }, 4000);
+  }, 5000);
 }
 
 function createSvg() {
-  const svg = d3.select(svgContainer.value);
-  const svgElement = svg.append('svg')
-    .attr('width', width)
-    .attr('height', height)
+  const svgElement = d3.select(svgContainer.value).append('svg')
+    //.attr('width', width)
+    //.attr('height', height)
+    .attr("viewBox", `0 0 300 300`)
     .append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`);
   return svgElement;
@@ -106,73 +158,65 @@ function createAxes(svgElement, xScale, yScale) {
     .call(d3.axisLeft(yScale).tickSizeOuter(0));
 }
 
-function updateRects(svgElement, xScale, yScale) {
-  const allCombinations = visibleSites.value.flatMap(site =>
-    amino_acids.map(mutant => ({ site, mutant })));
+function updateHeatmap(svgElement, xScale, yScale) {
+  
+  const t = svgElement.transition().duration(1000);
 
-  const rect = svgElement.selectAll('rect')
-    .data(allCombinations, d => `${d.site}-${d.mutant}`);
+  svgElement.selectAll('rect')
+    .data(allCombinations.value, d => `${d.site}-${d.mutant}`)
+    .join(
+      enter => enter.append('rect')
+        .attr('fill', d => getFillColor.value(d.site, d.mutant))
+        .attr('x', width)
+        .attr('y', d => yScale(d.mutant))
+        .attr('width', xScale.bandwidth())
+        .attr('height', yScale.bandwidth())
+        .call(enter => enter.transition(t).delay((d, i) => delayByIndex.value ? (delayByRandom.value ? i * +delayMultiplier.value * Math.random() : i * +delayMultiplier.value) : (delayByRandom.value ? Math.random() * +delayMultiplier.value : +delayMultiplier.value)).ease(d3[easingRef.value])
+          .attr('x', d => xScale(d.site)),
+        ),
+        update => update,
+        exit => exit
+          .call(exit => exit.transition(t).delay((d, i) => delayByIndex.value ? (delayByRandom.value ? i * +delayMultiplier.value * Math.random() : i * +delayMultiplier.value) : (delayByRandom.value ? Math.random() * +delayMultiplier.value : +delayMultiplier.value)).ease(d3.easeBackIn)
+            .attr('y', height)
+            .attr('fill', 'white')
+            .remove())
+    )
 
-  rect.enter().append('rect')
-    .attr('fill', 'white')
-    .attr('x', d => xScale(d.site))
-    .attr('y', d => yScale(d.mutant))
-    .attr('width', xScale.bandwidth())
-    .attr('height', yScale.bandwidth())
-    .merge(rect)
-    .transition().delay((d,i) => i)
-    .duration(500)
-    //.ease(d3.easeLinear)
-    .attr('x', d => xScale(d.site))
-    .attr('fill', d => {
-      const key = `${d.site}-${d.mutant}`;
-      if (dataLookup.value[key]) {
-        return colorScale.value(+dataLookup.value[key].entry_CHO_bEFNB2);
-      } else {
-        return wildtypeLookup.value[d.site] === d.mutant ? 'white' : 'transparent';
-      }
-    });
 
-  rect.exit()
-    .transition().delay(0)
-    .duration(1000)
-    .attr('x', -xScale.bandwidth() * 2)
-    .attr('transform', 'scale(0)')
-    .remove();
-}
+    const uniqueWildtypes = new Map();
+      filteredData.value.forEach(d => {
+        if (!uniqueWildtypes.has(+d.site)) {
+          uniqueWildtypes.set(+d.site, d);
+        }
+      });
 
-function updateWildtypeLabels(svgElement, xScale, yScale) {
-  const filteredData = data.value.filter(d => visibleSites.value.includes(+d.site));
-  const xText = svgElement.selectAll('.wildtype')
-    .data(filteredData, d => d.site);
+    svgElement.selectAll('.wildtype')
+      .data(Array.from(uniqueWildtypes.values()), d => d.site)
+      .join(
+      enter => enter.append('text')
+        .attr('class', 'wildtype')
+        .attr('fill', 'transparent')
+        .attr('x', d => xScale(+d.site) + xScale.bandwidth() * 10)
+        .attr('y', d => yScale(d.wildtype) + yScale.bandwidth() /2)
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline', 'middle')
+        .attr('font-size', '8px')
+        .attr('font-weight', '100')
+        .text('X')
+        .call(enter => enter.transition(t).delay((d, i) => delayByIndex.value ? (delayByRandom.value ? i * +delayMultiplier.value * Math.random() : i * +delayMultiplier.value) : (delayByRandom.value ? Math.random() * +delayMultiplier.value : +delayMultiplier.value)).ease(d3[easingRef.value])
+          .attr('x', d => xScale(+d.site) + xScale.bandwidth() / 2)
+          .attr('fill', 'black')
+        ),
+      update => update,
+      exit => exit
+        .call(exit => exit.transition(t).delay((d, i) => delayByIndex.value ? (delayByRandom.value ? i * +delayMultiplier.value * Math.random() : i * +delayMultiplier.value) : (delayByRandom.value ? Math.random() * +delayMultiplier.value : +delayMultiplier.value)).ease(d3.easeBackIn)
+              .attr('y', height)
+              .attr('fill', 'white')
+              .remove())
+    );
 
-  xText.enter().append('text')
-    .attr('class', 'wildtype')
-    .attr('x', d => xScale(+d.site) + xScale.bandwidth() / 2)
-    .attr('y', d => yScale(d.wildtype) + yScale.bandwidth() /2)
-    .attr('text-anchor', 'middle')
-    .attr('dominant-baseline', 'middle')
-    .attr('font-size', '8px')
-    .attr('font-weight', '100')
-    .text('X')
-    .merge(xText)
-    .transition()
-    .duration(2000)
-    .attr('x', d => xScale(+d.site) + xScale.bandwidth() / 2)
-    .attr('y', d => yScale(d.wildtype) + yScale.bandwidth() / 2)
-
-  xText.exit()
-    .transition()
-    .duration(2000)
-    .attr('opacity', 0)
-    .attr('x', -xScale.bandwidth() * 10)
-    .remove();
-}
-
-function updateAxes(svgElement, xScale) {
   svgElement.select('.x-axis')
     .transition()
-    .duration(1000)
     .call(d3.axisBottom(xScale).tickSizeOuter(0))
     .selectAll('text')
     .attr('transform', 'rotate(-90)')
@@ -180,25 +224,45 @@ function updateAxes(svgElement, xScale) {
     .attr('dx', '-7px')
     .attr('dy', '-5px');
 }
+//Create reactive variables to store the data and loading state
+const loaded = ref(false);
+// Create a separate async function to fetch and process the data
+async function loadData() {
+  data.value = await fetchData();
+  loaded.value = true;
+}
+// Call the loadData function immediately
+loadData();
 
 onMounted(async () => {
-  data.value = await fetchData();
+  // Wait for the data to be loaded before creating the chart
+  if (!loaded.value) {
+    await new Promise(resolve => {
+      const interval = setInterval(() => {
+        if (loaded.value) {
+          clearInterval(interval);
+          resolve();
+        }
+      }, 100);
+    });
+  }
+
   const svgElement = createSvg();
   createAxes(svgElement, createScales().xScale, createScales().yScale);
   const { xScale, yScale } = createScales();
-  updateRects(svgElement, xScale, yScale);
-  updateWildtypeLabels(svgElement, xScale, yScale);
-  updateAxes(svgElement, xScale);
+
+  updateHeatmap(svgElement, xScale, yScale);
+
   autoMove();
-  watch([currentIndex], () => {
+  watch([currentIndex, easingRef, delayMultiplier, delayByIndex,delayByRandom], () => {
+    console.log('watching');
     const { xScale, yScale } = createScales();
-    updateRects(svgElement, xScale, yScale);
-    updateWildtypeLabels(svgElement, xScale, yScale);
-    updateAxes(svgElement, xScale);
+    updateHeatmap(svgElement, xScale, yScale);
   });
 });
 
 async function fetchData() {
+  console.log('fetching data')
   const file = await fetch('https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB2.csv');
   const file_text = await file.text();
   const csv = d3.csvParse(file_text);
