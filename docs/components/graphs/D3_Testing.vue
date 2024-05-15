@@ -1,63 +1,61 @@
 <template>
-  <div class="container mx-auto">
-    <div ref="svgContainer"></div>
-  </div>
+  <d3PlotContainer>
+    <div ref="svgContainer" class="border-2"></div>
+  </d3PlotContainer>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 import * as d3 from 'd3';
+import d3PlotContainer from '/components/layouts/d3PlotContainer.vue';
 
-const dataset = ref([5, 10, 15, 20, 25, 30]);
+const dataset = ref([10,10,10,10,10,10]);
 const svgContainer = ref(null);
+const width = 600;
+const height = 200;
+const delay = 1000; // Delay in milliseconds
+
 
 onMounted(() => {
-  const svg = d3.select(svgContainer.value); // Select the SVG container
-
-  // Append a new SVG element to the container
+  const svg = d3.select(svgContainer.value);
   const svgElement = svg.append('svg')
-    .attr('width', 600)
-    .attr('height', 150);
+    .attr('viewBox', [0, 0, width, height]);
 
-  // Function to update the circles
-  const updateCircles = () => {
-    svgElement.selectAll('circle')
-      .data(dataset.value)
-      .join(
-        enter => (
-          enter.append("circle")
-            .attr("cx", d => d * 15 + 10)
-            .attr("cy", 0)
-            .attr("r", 0)
-            .attr("fill", "cornflowerblue")
-            .call(enter => (
-              enter.transition().duration(1200)
-                .attr("cy", 50)
-                .attr("r", 20)
-                .style("opacity", 1)
-            ))
+  function update() {
+    let blue = svgElement.selectAll('.blue-circle').data(dataset.value, d => d);
+    blue.join(
+      enter => enter.append('circle')
+        .attr('class', 'blue-circle')
+        .attr('cx',(d, i) => i * 100 + 50 )
+        .attr('cy', height / 2)
+        .attr('r', 0)
+        .attr('fill', 'steelblue')
+        .call(enter => enter.transition().delay(delay).duration(1000)
+          .attr('r', (d, i) => d)
         ),
-        update => (
-          update.attr("fill", "lightgrey")
-        ),
-        exit => (
-          exit.attr("fill", "tomato")
-            .call(exit => (
-              exit.transition().duration(1200)
-                .attr("r", 0)
-                .style("opacity", 0)
-                .remove()
-            ))
-        ),
-      );
-  };
+      update => update,
+      exit => exit
+        .call(exit => exit.transition().duration(1000)
+          .attr('fill', 'indianred')
+          .attr('r', 0)
+          .remove()
+        )
+    )
 
-  // Call the updateCircles function initially
-  updateCircles();
+  }
 
-  // Update the dataset every 2 seconds
+  update(); // Call update initially to render the circles
+
   setInterval(() => {
-    dataset.value = Array.from({ length: 6 }, () => Math.floor(Math.random() * 30) + 5);
+    dataset.value = [
+      Math.random() * 30,
+      Math.random() * 30,
+      Math.random() * 30,
+      Math.random() * 30,
+      Math.random() * 30,
+      Math.random() * 30
+    ];
+    update();
   }, 2000);
 });
 </script>

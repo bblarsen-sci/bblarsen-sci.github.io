@@ -12,8 +12,7 @@ subtext: Just playing around
 
 <script setup>
 import D3Testing from "/components/graphs/D3_Testing.vue";
-import resizeContainer from "/components/resizeContainer.vue";
 </script>
 
-<resizeContainer/>
+<D3Testing/>
 

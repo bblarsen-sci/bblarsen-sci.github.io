@@ -34,6 +34,8 @@
             <div class="flex flex-col">
               <label for="rowsSelect" class="mr-2 font-semibold">Select Rows:</label>
               <select id="rowsSelect" v-model="rows" class="p-2 rounded-md bg-slate-200">
+                <option value="1">1</option>
+                <option value="2">2</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
                 <option value="6">6</option>

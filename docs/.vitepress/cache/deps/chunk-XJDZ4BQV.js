@@ -9,9 +9,9 @@ import {
   ascending,
   azimuthalEqualArea_default,
   azimuthalEquidistant_default,
-  basisClosed_default,
+  basisClosed_default2 as basisClosed_default,
   basisOpen_default,
-  basis_default,
+  basis_default2 as basis_default,
   binary_default,
   bisectLeft,
   bisectRight,
@@ -143,7 +143,7 @@ import {
   value_default,
   x_default,
   y_default
-} from "./chunk-NTP5MXPO.js";
+} from "./chunk-AVDKQJKK.js";
 import {
   __export
 } from "./chunk-ZS7NZCD4.js";
@@ -8880,8 +8880,8 @@ var ts = (item) => item.size || 1;
 var def = (item) => !(item.defined === false);
 var type = (item) => symbols2(item.shape || "circle");
 var arcShape = arc_default().startAngle(sa).endAngle(ea).padAngle(pa).innerRadius(ir).outerRadius(or).cornerRadius(cr);
-var areavShape = area_default().x(x).y1(y).y0(yh).defined(def);
-var areahShape = area_default().y(y).x1(x).x0(xw).defined(def);
+var areavShape = area_default2().x(x).y1(y).y0(yh).defined(def);
+var areahShape = area_default2().y(y).x1(x).x0(xw).defined(def);
 var lineShape = line_default().x(x).y(y).defined(def);
 var rectShape = vg_rect().x(x).y(y).width(w).height(h).cornerRadius(tl, tr, br, bl);
 var symbolShape = Symbol2().type(type).size(sz);
@@ -20594,7 +20594,7 @@ function geoMethod(methodName, globalMethod) {
     }
   };
 }
-var geoArea = geoMethod("area", area_default2);
+var geoArea = geoMethod("area", area_default);
 var geoBounds = geoMethod("bounds", bounds_default);
 var geoCentroid = geoMethod("centroid", centroid_default);
 function geoScale(projection3, group2) {
@@ -26273,4 +26273,4 @@ export {
   version,
   vega_module_exports
 };
-//# sourceMappingURL=chunk-HUQGSQ4Q.js.map
+//# sourceMappingURL=chunk-XJDZ4BQV.js.map

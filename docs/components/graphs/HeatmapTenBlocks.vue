@@ -195,12 +195,13 @@ function autoMove() {
       .attr('text-anchor', 'middle')
       .attr('font-size', '10px')
       .attr('font-weight', '100')
+      .attr('opacity', 0)
       .attr('fill', 'currentColor')
       .text('X');
 
     rectSelection.transition()
-      .duration(1000)
-      .attr('transform', 'scale(0)')
+      .duration(100)
+      .attr('opacity', 0)
       .delay(() => Math.random() * 1000)
       .attr('fill', d => {
         const key = `${d.site}-${d.mutant}`;
@@ -210,32 +211,19 @@ function autoMove() {
           return wildtypeLookup[d.site] === d.mutant ? 'white' : 'lightgray';
         }
       })
-      .attr('transform', 'scale(1)');
+      .attr('opacity', 1);
 
     wildtypeSelection.transition()
-      //.duration(500)
+      .attr('opacity', 0)
+      .duration(1000)
       .delay(() => Math.random() * 1000)
-      .ease(d3.easeLinear)
-      .attr('fill', 'white')
       .transition()
-      .attr('fill', 'black');
+      .attr('opacity', 1);
 
 
 
   }
-  
-  function nextSites() {
-    const sites = Array.from(new Set(data.value.map(d => +d.site)));
-    if ((currentIndex.value + 1) * sitesPerView < sites.length) {
-      currentIndex.value++;
-    }
-  }
-  
-  function prevSites() {
-    if (currentIndex.value > 0) {
-      currentIndex.value--;
-    }
-  }
+
   
   async function fetchData() {
     const file = await fetch('https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB2.csv');
