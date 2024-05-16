@@ -1,5 +1,5 @@
 <template>
-    <div ref="svgContainer" class=""></div>
+    <div ref="svgContainer" class="flex flex-col justify-center items-center"></div>
 </template>
 
 <script setup>
@@ -20,13 +20,13 @@ const delayByIndex = ref(true);
 const delayByRandom = ref(true);
 const sitesPerView = 20;
 
+const height = 300;
 const margin = { top: 20, right: 20, bottom: 40, left: 40 };
-const squareSize = 10;
-const innerWidth = squareSize * sitesPerView;
-const innerHeight = innerWidth
-const width = innerWidth + margin.left + margin.right;
-const height = innerHeight + margin.top + margin.bottom;
-console.log(height, width)
+const innerHeight = height - margin.top - margin.bottom;
+const squareSize = Math.min(innerHeight / amino_acids.length, 20); // Define the square size based on the height and number of amino acids
+const innerWidth = squareSize * sitesPerView; // Define the inner width based on the square size and number of visible sites
+const width = innerWidth + margin.left + margin.right; // Define the total width based on the inner width and margins
+
 let intervalId = null;
 
 onUnmounted(() => {
@@ -87,13 +87,15 @@ function autoMove() {
   }, 5000);
 }
 
+
 function createSvg() {
   const svgElement = d3.select(svgContainer.value).append('svg')
-    //.attr('width', width)
-    //.attr('height', height)
-    .attr("viewBox", `0 0 300 300`)
+    .attr('width', width)
+    .attr('height', height)
+    //.attr("viewBox", `0 0 300 300`)
     .append('g')
-    .attr('transform', `translate(${margin.left}, ${margin.top})`);
+    .attr('transform', `translate(${margin.left + (width - margin.left - margin.right - innerWidth) / 2}, ${margin.top})`);
+    //.attr("style", "max-width: 100%; height: auto;");
   return svgElement;
 }
 
@@ -112,19 +114,36 @@ function createScales() {
 }
 
 function createAxes(svgElement, xScale, yScale) {
+  
   svgElement.append('g')
     .attr('class', 'x-axis')
     .attr('transform', `translate(0, ${innerHeight})`)
-    .call(d3.axisBottom(xScale).tickSizeOuter(0))
-    .selectAll('text')
-    .attr('transform', 'rotate(-90)')
-    .attr('text-anchor', 'end')
-    .attr('dx', '-7px')
-    .attr('dy', '-5px');
 
+    .call(d3.axisBottom(xScale).ticks().tickSizeOuter(0))
+    .call(d => d.select(".domain").remove())
+    .call(d => d.append('text')
+      //.attr('transform', 'rotate(-90)')
+      .attr('x', innerWidth / 2)
+      .attr('y', margin.bottom -10)
+      .attr('dy', '1em')
+      .attr('text-anchor', 'middle')
+      .attr('fill', 'currentColor')
+      .text('Site')
+    )
+    
   svgElement.append('g')
     .attr('class', 'y-axis')
-    .call(d3.axisLeft(yScale).tickSizeOuter(0));
+    .call(d3.axisLeft(yScale).tickSizeOuter(0))
+    .call(d => d.select(".domain").remove())
+    .call(d => d.append('text')
+      .attr('transform', 'rotate(-90)')
+      .attr('x', -innerHeight / 2)
+      .attr('y', -margin.left)
+      .attr('dy', '1em')
+      .attr('text-anchor', 'middle')
+      .attr('fill', 'currentColor')
+      .text('Amino Acid')
+    );
 }
 
 function updateHeatmap(svgElement, xScale, yScale) {
@@ -188,34 +207,15 @@ function updateHeatmap(svgElement, xScale, yScale) {
     .transition()
     .call(d3.axisBottom(xScale).tickSizeOuter(0))
     .selectAll('text')
-    .attr('transform', 'rotate(-90)')
+    //.attr('transform', 'rotate(-90)')
     .attr('text-anchor', 'end')
     .attr('dx', '-7px')
     .attr('dy', '-5px');
 }
-//Create reactive variables to store the data and loading state
-const loaded = ref(false);
-// Create a separate async function to fetch and process the data
-async function loadData() {
-  data.value = await fetchData();
-  loaded.value = true;
-}
-// Call the loadData function immediately
-loadData();
+
 
 onMounted(async () => {
-  // Wait for the data to be loaded before creating the chart
-  if (!loaded.value) {
-    await new Promise(resolve => {
-      const interval = setInterval(() => {
-        if (loaded.value) {
-          clearInterval(interval);
-          resolve();
-        }
-      }, 100);
-    });
-  }
-
+  data.value = await fetchData();
   const svgElement = createSvg();
   createAxes(svgElement, createScales().xScale, createScales().yScale);
   const { xScale, yScale } = createScales();
@@ -223,7 +223,7 @@ onMounted(async () => {
   updateHeatmap(svgElement, xScale, yScale);
 
   autoMove();
-  watch([currentIndex, easingRef, delayMultiplier, delayByIndex, delayByRandom], () => {
+  watch([currentIndex], () => {
     console.log('watching');
     const { xScale, yScale } = createScales();
     updateHeatmap(svgElement, xScale, yScale);
