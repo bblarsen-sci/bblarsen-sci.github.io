@@ -1,10 +1,11 @@
 <template>
-    <div ref="treeContainer"></div>
+  <div ref="treeContainer"></div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 import * as d3 from 'd3';
+
 
 const treeContainer = ref(null);
 
@@ -39,22 +40,22 @@ async function fetchData() {
 
   const svg = d3.select(treeContainer.value)
     .append('svg')
-    .attr('width', width)
-    .attr('height', height)
+    //.attr('width', width)
+    //.attr('height', height)
     .attr("viewBox", [-dy / 3, x0 - dx, width, height])
-    .attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
+    //.attr("style", "max-width: 100%; height: auto; font: 10px sans-serif;");
 
   svg.append("g")
-      .attr("fill", "none")
-      .attr("stroke", "#555")
-      .attr("stroke-opacity", 0.3)
-      .attr("stroke-width", 1.5)
+    .attr("fill", "none")
+    .attr("stroke", "currentColor")
+    .attr("stroke-opacity", 0.3)
+    .attr("stroke-width", 1.5)
     .selectAll()
-      .data(root.links())
-      .join("path")
-        .attr("d", d3.linkHorizontal()
-            .x(d => d.y)
-            .y(d => d.x));
+    .data(root.links())
+    .join("path")
+    .attr("d", d3.linkHorizontal()
+      .x(d => d.y)
+      .y(d => d.x));
 
   const node = svg.append("g")
     .attr("stroke-linejoin", "round")
@@ -65,11 +66,12 @@ async function fetchData() {
     .attr("transform", d => `translate(${d.y},${d.x})`);
 
   node.append("circle")
-    .attr("fill", d => d.children ? "#555" : "#999")
+    .attr("fill", d => d.children ? "currentColor" : "currentColor")
     .attr("r", 3);
 
   node.append("text")
     .attr("dy", "0.31em")
+    .attr("fill", "currentColor")
     .attr("x", d => d.children ? -5 : 5)
     .attr("text-anchor", d => d.children ? "end" : "start")
     .text(d => {
@@ -84,7 +86,7 @@ async function fetchData() {
         return d.data.entry_CHO_bEFNB2; // Label for entry_CHO_bEFNB2
       }
     });
-  
+
 }
 
 onMounted(() => {
@@ -93,19 +95,6 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.node circle {
-  fill: #fff;
-  stroke: steelblue;
-  stroke-width: 2px;
-}
 
-.node text {
-  font-size: 12px;
-}
 
-.link {
-  fill: none;
-  stroke: #ccc;
-  stroke-width: 1.5px;
-}
 </style>

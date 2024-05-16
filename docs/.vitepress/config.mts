@@ -26,7 +26,7 @@ export default defineConfig({
       { text: 'Home', link: '/' },
       { text: 'About', link: '/about' },
       { text: 'Publications', link: '/publications' },
-      { text: 'Code', link: '/code_pages/code_index' }
+      { text: 'Visualizations', link: '/code_pages/code_index' }
     ],
     socialLinks: [
       { icon: 'github', link: 'https://github.com/bblarsen-sci' },

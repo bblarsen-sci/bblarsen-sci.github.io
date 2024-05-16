@@ -8,10 +8,11 @@ keywords:
 subtext: Demonstration of using D3 zoom function to make heatmap zoomable and draggable inside container. Scales with screen size.
 ---
 
-
-
 <script setup>
 import HeatmapWrappedSimple from "/components/graphs/HeatmapWrappedSimple.vue";
 </script>
 
+<FigureTitle title="Zoomable and draggable heatmap"/>
+<D3PlotContainer>
 <HeatmapWrappedSimple />
+</D3PlotContainer>

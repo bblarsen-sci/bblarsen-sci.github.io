@@ -1,6 +1,6 @@
 ---
 layout: page
-title: D3 phylogeny left/right
+title: D3 phylogeny linear
 aside: false
 date: 2024-05-06
 keywords:
@@ -9,9 +9,11 @@ subtext: Nipah phylogeny built with D3
 ---
 
 <script setup>
-import PhylogeneticTreeRight from "/components/graphs/PhylogeneticTreeRight.vue";
-import FigureHeader from "/components/layouts/FigureHeader.vue"
+import PhylogeneticTreeRight from "/components/graphs/phylogeneticTreeRight.vue";
 </script>
 
-<FigureHeader title="Nipah Phylogeny Built with D3"/>
-<PhylogeneticTreeRight/>
+<FigureTitle title="Nipah Phylogeny Built with D3"/>
+<D3PlotContainer>
+    <PhylogeneticTreeRight/>
+</D3PlotContainer>
+

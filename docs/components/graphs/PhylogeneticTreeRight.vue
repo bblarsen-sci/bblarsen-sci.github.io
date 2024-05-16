@@ -1,13 +1,10 @@
 <template>
-  <d3PlotContainer>
     <div ref="svgContainer" class=""></div>
-  </d3PlotContainer>
 </template>
 
 <script setup>
-import * as d3 from 'd3'; 
+import * as d3 from 'd3';
 import { onMounted, ref, computed } from 'vue';
-import d3PlotContainer from '/components/layouts/d3PlotContainer.vue';
 import { parseNewick, projection, diagonal, scaleBranchLengths } from '/components/treeUtilities.js'
 
 const svgContainer = ref(null);
@@ -46,8 +43,8 @@ const countries = computed(() =>
 
 const colorScale = computed(() =>
   d3.scaleOrdinal()
-  .domain(countries.value)
-  .range(d3.schemeCategory10)
+    .domain(countries.value)
+    .range(d3.schemeCategory10)
 );
 
 const legend = svg => {
@@ -63,7 +60,7 @@ const legend = svg => {
     .attr("r", 5)
     .attr("stroke", "currentColor")
     .attr("fill", colorScale.value);
-  
+
   g.append("text")
     .attr("class", "legend-text")
     .attr("x", 10)
@@ -71,8 +68,8 @@ const legend = svg => {
     .text(d => d);
 }
 
-const margin = {top: 20, right: 20, bottom: 20, left: 20};
-const width = 800 
+const margin = { top: 20, right: 20, bottom: 20, left: 20 };
+const width = 800
 const height = 600
 
 function drawChart() {
@@ -81,18 +78,18 @@ function drawChart() {
   // ROOT TO GET X,Y POSITIONS
   tree.value(root.value);
   setColor(root.value);
-  
+
   // SCALE BRANCH LENGTHS IF SCALED
   scaleBranchLengths(root.value.descendants(), width);
 
   //DRAW SVG
   var svg = d3.select(svgContainer.value).append("svg")
-   //.attr('width', '100%')
-   //.attr('height', height)
-   .attr("preserveAspectRatio", "xMinYMin meet")
-   .attr('viewBox', [0, 0, width, height])
-   .append("g")
-   .attr("transform", `translate(-200, ${margin.top})`);
+    //.attr('width', '100%')
+    //.attr('height', height)
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr('viewBox', [0, 0, width, height])
+    .append("g")
+    .attr("transform", `translate(-200, ${margin.top})`);
 
   svg.append("g")
     .call(legend);
@@ -114,16 +111,16 @@ function drawChart() {
     .attr("r", 4)
     .attr("stroke", "currentColor")
     .attr("fill", d => colorScale.value(d.data.country))
-    .attr("transform", function(d) { return "translate(" + d.y + "," + d.x + ")"; });
+    .attr("transform", function (d) { return "translate(" + d.y + "," + d.x + ")"; });
 }
 
 async function fetchData() {
   const file = await fetch('/data/nipah_whole_genome_phylo.tre');
   const csv = await file.text();
-  const parsedNewick = parseNewick(csv); 
+  const parsedNewick = parseNewick(csv);
   return parsedNewick;
 };
-onMounted(async() => {
+onMounted(async () => {
   data.value = await fetchData();
   drawChart();
 });
@@ -135,9 +132,11 @@ onMounted(async() => {
   alignment-baseline: middle;
   fill: currentColor;
 }
+
 .legendcircle {
   stroke-width: 1;
 }
+
 .link {
   fill: none;
   stroke: black;

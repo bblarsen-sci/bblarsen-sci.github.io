@@ -11,10 +11,10 @@ subtext: Heatmap showing mutational effects in blocks of sites with a transistio
 
 
 <script setup>
-import FigureHeader from "/components/layouts/FigureHeader.vue"
-import HeatmapTenBlocks from "/components/graphs/HeatmapTenBlocks.vue";
-import HeatmapTenBlocksTest from "/components/graphs/HeatmapTenBlocksTest.vue";
+import heatmapBlocksAnimated from "/components/graphs/heatmapBlocksAnimatedExtended.vue";
 </script>
 
-<FigureHeader title="Heatmap of mutational effects in blocks of sites with a transition animation on repeat"/>
-<HeatmapTenBlocksTest />
+<FigureTitle title="Heatmap of mutational effects in blocks of sites with a transition animation on repeat"/>
+<D3PlotContainer>
+    <heatmapBlocksAnimated />
+</D3PlotContainer>

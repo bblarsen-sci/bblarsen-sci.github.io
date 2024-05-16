@@ -1,7 +1,7 @@
 // posts.data.js
 import { createContentLoader } from "vitepress";
 
-export default createContentLoader("./**/**/posts/*.md", {
+export default createContentLoader("/code_pages/posts/**.md", {
   transform: (raw) => {
     return raw
       .map(({ url, frontmatter, subtext }) => ({

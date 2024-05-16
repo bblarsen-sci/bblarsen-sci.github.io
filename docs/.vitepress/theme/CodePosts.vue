@@ -1,30 +1,35 @@
 <template>
     <div class=" px-6 pb-6">
         <div class="flex flex-col items-center justify-between py-4">
-            <p class="text-3xl tracking-tight leading-8 font-bold text-slate-700 dark:text-slate-300">Visualizing Biological Data</p>
-            <p class="py-4 text-lg">With <a href="https://d3js.org/" class="text-sky-600 hover:text-sky-800">D3</a>, <a href="https://altair-viz.github.io/" class="text-sky-600 hover:text-sky-800">Altair</a>, and <a href="https://www.cgl.ucsf.edu/chimerax/" class="text-sky-600 hover:text-sky-800">ChimeraX</a></p>
+            <p class="text-3xl tracking-tight leading-8 font-bold text-slate-700 dark:text-slate-300">Visualizing
+                Biological Data</p>
+            <p class="py-4 text-lg">With <a href="https://d3js.org/" class="text-sky-600 hover:text-sky-800">D3</a>, <a
+                    href="https://altair-viz.github.io/" class="text-sky-600 hover:text-sky-800">Altair</a>, and <a
+                    href="https://www.cgl.ucsf.edu/chimerax/" class="text-sky-600 hover:text-sky-800">ChimeraX</a></p>
         </div>
         <div>
-            <v-select class="mb-10 max-w-96 border border-gray-300 dark:border-slate-700 rounded-md shadow-sm text-gray-700 dark:text-slate-300 text-base"
-                v-model="selectedKeywords"
-                :options="filteredKeywords"
-                multiple
-                placeholder="Filter by keywords">
+            <v-select
+                class="mb-10 max-w-96 border border-gray-300 dark:border-slate-700 rounded-md shadow-sm text-gray-700 dark:text-slate-300 text-base"
+                v-model="selectedKeywords" :options="filteredKeywords" multiple placeholder="Filter by keywords">
             </v-select>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 <div v-for="(post, index) in filteredPosts" :key="index" class="card">
                     <a :href="post.url" class="block h-full">
-                        <article class="h-full flex flex-col justify-between space-y-2 p-6 bg-white dark:bg-slate-800 rounded-lg shadow-md">
+                        <article
+                            class="h-full flex flex-col justify-between space-y-2 p-6 bg-white dark:bg-slate-800 rounded-lg shadow-md">
                             <div class="space-y-4">
-                                <p class="text-2xl leading-8 text-slate-700 dark:text-slate-300 font-bold tracking-tight">{{ post.title }}</p>
-                                <div v-if="post.subtext" class="text-slate-600 dark:text-slate-400" v-html="post.subtext"></div>
+                                <p
+                                    class="text-2xl leading-8 text-slate-700 dark:text-slate-300 font-bold tracking-tight">
+                                    {{ post.title }}</p>
+                                <div v-if="post.subtext" class="text-slate-600 dark:text-slate-400"
+                                    v-html="post.subtext"></div>
                                 <div v-if="post.keywords" class="keywords">
                                     <span><strong>Keywords: </strong></span>
-                                    <span v-for="(keyword, kIndex) in post.keywords" :key="kIndex">{{ keyword }}<span v-if="kIndex < post.keywords.length - 1">, </span></span>
+                                    <span v-for="(keyword, kIndex) in post.keywords" :key="kIndex">{{ keyword }}<span
+                                            v-if="kIndex < post.keywords.length - 1">, </span></span>
                                 </div>
                             </div>
                             <div class="mt-4 text-sky-600">
-                                <DateComponent :dateString="post.date" />
                             </div>
                         </article>
                     </a>
