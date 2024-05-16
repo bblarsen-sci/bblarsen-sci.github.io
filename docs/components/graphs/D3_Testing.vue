@@ -11,8 +11,8 @@ import d3PlotContainer from '/components/layouts/d3PlotContainer.vue';
 
 const dataset = ref([10,10,10,10,10,10]);
 const svgContainer = ref(null);
-const width = 600;
-const height = 200;
+const width = 500;
+const height = 100;
 const delay = 1000; // Delay in milliseconds
 
 
@@ -30,12 +30,12 @@ onMounted(() => {
         .attr('cy', height / 2)
         .attr('r', 0)
         .attr('fill', 'steelblue')
-        .call(enter => enter.transition().delay(delay).duration(1000)
+        .call(enter => enter.transition().delay(delay).duration(2000)
           .attr('r', (d, i) => d)
         ),
       update => update,
       exit => exit
-        .call(exit => exit.transition().duration(1000)
+        .call(exit => exit.transition().duration(2000)
           .attr('fill', 'indianred')
           .attr('r', 0)
           .remove()
@@ -53,9 +53,8 @@ onMounted(() => {
       Math.random() * 30,
       Math.random() * 30,
       Math.random() * 30,
-      Math.random() * 30
     ];
     update();
-  }, 2000);
+  }, 4000);
 });
 </script>

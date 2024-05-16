@@ -1,6 +1,6 @@
 <template>
       <div class="text-center font-semibold p-6 text-xl">Zoomable Heatmap</div>
-      <div class="container mx-auto max-w-6xl mb-20 max-h-screen font-light border-2 align-top" ref="svgContainer"></div>
+      <div class="container mx-auto max-w-4xl mb-20 max-h-screen font-light border-2 align-top shadow-lg" ref="svgContainer"></div>
 </template>
 
 <script>
