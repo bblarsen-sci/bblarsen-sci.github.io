@@ -1,5 +1,7 @@
 <template>
+  <d3PlotContainer class="p-10">
     <div ref="svgContainer" class="flex flex-col items-center"></div>
+  </d3PlotContainer>
 </template>
 
 <script setup>
@@ -10,53 +12,69 @@ import * as d3 from 'd3';
 const svgContainer = ref(null);
 const dataset = ref(null);
 
-const width = 928;
-const height = 500;
+const width = 800;
+const height = 600;
 const marginTop = 30;
-const marginRight = 0;
-const marginBottom = 30;
+const marginRight = 20;
+const marginBottom = 20;
 const marginLeft = 40;
 
 //Scales
-const colorScale = computed(() => {
-  return d3.scaleDiverging(d3.interpolateRdBu)
-    .domain([-4, 0, 4]);
-});
-
-//SVG
-function createSvg() {
-  const svgElement = d3.select(svgContainer.value).append('svg')
-    //.attr('width', width)
-    //.attr('height', height)
-    .attr("viewBox", [0, 0, width, height])
-    //.append('g')
-    //.attr('transform', `translate(${margin.left}, ${margin.top})`);
-  return svgElement;
-}
-
-
-function makePlot(svgElement) {
-  const xAxis = d3.scaleBand()
+const x = computed(() => {
+  return d3.scaleBand()
     .domain(d3.groupSort(dataset.value, ([d]) => -d.frequency, d => d.letter))
     .range([marginLeft, width - marginRight])
     .padding(0.1);
-
-  const yAxis = d3.scaleLinear()
+});
+const y = computed(() => {
+  return d3.scaleLinear()
     .domain([0, d3.max(dataset.value, d => d.frequency)])
     .range([height - marginBottom, marginTop]);
+});
+//SVG
+function createSvg() {
+  const svgElement = d3.select(svgContainer.value).append('svg')
+    .attr('preserveAspectRatio', "xMinYMin meet")
+    .attr("viewBox", [0, 0, width, height])
+    .attr("style", "max-width: 100%; height: auto;");
+  return svgElement;
+}
 
-  svgElement.append("g")
-    .attr("fill", "steelblue")
-    .selectAll()
+function makePlot(svgElement) {
+
+  svgElement.selectAll('g')
     .data(dataset.value)
-    .join("rect")
-    .attr("x", (d) => xAxis(d.letter))
-    .attr("y", (d) => yAxis(d.frequency))
-    .attr("height", (d) => yAxis(0) - yAxis(d.frequency))
-    .attr("width", xAxis.bandwidth());
+    .enter()
+    .append('rect')
+    .attr("fill", "black")
+    .attr("x", (d) => x.value(d.letter))
+    .attr("y", (d) => y.value(d.frequency))
+    .attr("height", (d) => y.value(0) - y.value(d.frequency))
+    .attr("width", x.value.bandwidth());
+
+  // Add the x-axis and label.
+  svgElement.append("g")
+      .attr("transform", `translate(0,${height - marginBottom})`)
+      .call(d3.axisBottom(x.value).tickSizeOuter(0))
+      .attr('class', 'text')
+      .attr('font-size', '16px')
+      .call(g => g.select(".domain").remove())
+
+  // Add the y-axis and label, and remove the domain line.
+  svgElement.append("g")
+      .attr("transform", `translate(${marginLeft},0)`)
+      .call(d3.axisLeft(y.value).tickFormat((y) => (y * 100).toFixed()))
+      .attr('font-size', '16px')
+      .call(g => g.select(".domain").remove())
+      .call(g => g.append("text")
+          .attr('font-size', '16px')
+          .attr("x", -marginLeft)
+          .attr("y", 10)
+          .attr("fill", "currentColor")
+          .attr("text-anchor", "start")
+          .text("(%)"));
 }
 async function fetchData() {
-  console.log('fetching data')
   const file = await fetch('/data/alphabet.csv');
   const file_text = await file.text();
   const csv = d3.csvParse(file_text);
