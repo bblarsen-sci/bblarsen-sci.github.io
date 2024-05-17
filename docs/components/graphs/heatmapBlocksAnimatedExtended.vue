@@ -1,5 +1,5 @@
 <template>
-    <div ref="svgContainer" class="flex flex-col justify-center items-center"></div>
+  <div ref="svgContainer" class="flex flex-col justify-center items-center"></div>
 </template>
 
 <script setup>
@@ -14,24 +14,19 @@ const amino_acids = [
 const svgContainer = ref(null);
 const data = ref(null);
 const currentIndex = ref(0);
-const easingRef = ref('easeCubic');
-const delayMultiplier = ref(5);
-const delayByIndex = ref(true);
-const delayByRandom = ref(true);
+const easingRef = ref('easeCubicInOut');
+const delayByIndex = ref(5);
+const intervalId = ref(null);
 const sitesPerView = 20;
 
+
 const height = 300;
-const margin = { top: 20, right: 20, bottom: 40, left: 40 };
+const margin = { top: 20, right: 50, bottom: 50, left: 40 };
 const innerHeight = height - margin.top - margin.bottom;
 const squareSize = Math.min(innerHeight / amino_acids.length, 20); // Define the square size based on the height and number of amino acids
 const innerWidth = squareSize * sitesPerView; // Define the inner width based on the square size and number of visible sites
 const width = innerWidth + margin.left + margin.right; // Define the total width based on the inner width and margins
 
-let intervalId = null;
-
-onUnmounted(() => {
-  clearInterval(intervalId);
-});
 
 const allSites = computed(() => {
   return Array.from(new Set(data.value.map(d => +d.site)));
@@ -79,13 +74,19 @@ const getFillColor = computed(() => {
   };
 });
 
-function autoMove() {
-  const totalSites = allSites.value.length;
-  const totalPages = Math.ceil(totalSites / sitesPerView);
-  intervalId = setInterval(() => {
-    currentIndex.value = (currentIndex.value + 1) % totalPages;
-  }, 5000);
-}
+const yScale = computed(() => {
+  return d3.scaleBand()
+    .domain(amino_acids)
+    .range([0, innerHeight])
+    .padding(0.1);
+});
+
+const xScale = computed(() => {
+  return d3.scaleBand()
+    .domain(visibleSites.value)
+    .range([0, innerWidth])
+    .padding(0.1);
+});
 
 function createSvg() {
   const svgElement = d3.select(svgContainer.value).append('svg')
@@ -96,45 +97,28 @@ function createSvg() {
   return svgElement;
 }
 
-function createScales() {
-  const yScale = d3.scaleBand()
-    .domain(amino_acids)
-    .range([0, innerHeight])
-    .padding(0.1);
+function createAxes(svgElement) {
 
-  const xScale = d3.scaleBand()
-    .domain(visibleSites.value)
-    .range([0, innerWidth])
-    .padding(0.1);
+  //make ticks for x-axis
+  const xAxisGroup = svgElement.append('g')
+    .attr('class', 'x-axis')
+    .attr('transform', `translate(0, ${innerHeight})`);
 
-  return { xScale, yScale };
-}
-
-function createAxes(svgElement, xScale, yScale) {
-  svgElement.append('g')
-    .attr('class', 'x-axis-label')
-    .attr('transform', `translate(0, ${innerHeight})`)
-    .call(d3.axisBottom(xScale).tickSizeOuter(0))
-    .call(d => d.select(".domain").remove())
-    .call(d => d.selectAll("text")
-      .attr("transform", "rotate(-90)")
-      .attr("dx", "-0.8em")
-      .attr("dy", "0.15em")
-      .style("text-anchor", "end")
-    )
+  //make title for x-axis
   svgElement.append('g')
     .call(d => d.append('text')
       .attr('x', innerWidth / 2)
-      .attr('y', margin.bottom + 235 )
+      .attr('y', height - margin.bottom + 25 )
       .attr('text-anchor', 'middle')
       .attr('fill', 'currentColor')
-      .attr('font-size', '10px')
+      .attr('font-size', '12px')
       .text('Site')
     );
-    
+
+  //make ticks for y-axis
   svgElement.append('g')
     .attr('class', 'y-axis')
-    .call(d3.axisLeft(yScale).tickSizeOuter(0))
+    .call(d3.axisLeft(yScale.value).tickSizeOuter(0))
     .call(d => d.select(".domain").remove())
     .call(d => d.append('text')
       .attr('transform', 'rotate(-90)')
@@ -143,32 +127,54 @@ function createAxes(svgElement, xScale, yScale) {
       .attr('dy', '1em')
       .attr('text-anchor', 'middle')
       .attr('fill', 'currentColor')
+      .attr('font-size', '12px')
       .text('Amino Acid')
     );
 }
 
-function updateHeatmap(svgElement, xScale, yScale) {
+function updateHeatmap(svgElement) {
+  
+  const totalSites = allSites.value.length;
+  const totalPages = Math.ceil(totalSites / sitesPerView);
+  intervalId.value = currentIndex.value = (currentIndex.value + 1) % totalPages;
 
   const t = svgElement.transition().duration(750);
 
+  const gx = svgElement.select('.x-axis')
+    .call(d3.axisBottom(xScale.value).tickSizeOuter(0))
+    .attr('transform', `translate(1000,${innerHeight})`)
+    .call(d => d.select(".domain").remove())
+    
+
+  gx.transition(t).delay(100)
+    .ease(d3.easeCubicInOut)
+    .attr('transform', `translate(0,${innerHeight})`)
+    .selectAll('text')
+    .attr('transform', 'rotate(-90)')
+    .attr('text-anchor', 'end')
+    .attr('alignment-baseline', 'middle')
+    .attr('dy', '-0.7em')
+    .attr('dx', '-0.7em')
+  
+  
   svgElement.selectAll('rect')
     .data(allCombinations.value, d => `${d.site}-${d.mutant}`)
     .join(
       enter => enter.append('rect')
         .attr('fill', d => getFillColor.value(d.site, d.mutant))
-        .attr('opacity', 1)
+        .attr('opacity', 0)
         .attr('x', width)
-        .attr('y', d => yScale(d.mutant))
-        .attr('width', xScale.bandwidth())
-        .attr('height', yScale.bandwidth())
+        .attr('y', d => yScale.value(d.mutant))
+        .attr('width', xScale.value.bandwidth())
+        .attr('height', yScale.value.bandwidth())
         .call(enter => enter.transition(t).delay((d, i) => i * delayByIndex.value * Math.random()).ease(d3[easingRef.value])
-          .attr('x', d => xScale(d.site)),
+          .attr('x', d => xScale.value(d.site))
+          .attr('opacity', 1)
         ),
       update => update,
       exit => exit
-        .call(exit => exit.transition(t).delay((d, i) => i * 1).ease(d3.easeLinear)
+        .call(exit => exit.transition(t).delay((d, i) => i * (delayByIndex.value / 2) * Math.random()).ease(d3.easePolyInOut)
           .attr('y', height)
-          //.attr('fill', 'white')
           .attr('opacity', 0)
           .remove())
     )
@@ -186,9 +192,8 @@ function updateHeatmap(svgElement, xScale, yScale) {
     .join(
       enter => enter.append('text')
         .attr('class', 'wildtype')
-        //.attr('fill', 'transparent')
-        .attr('x', d => xScale(+d.site) + xScale.bandwidth() * 10)
-        .attr('y', d => yScale(d.wildtype) + yScale.bandwidth() / 2)
+        .attr('x', d => xScale.value(+d.site) + xScale.value.bandwidth() * 10)
+        .attr('y', d => yScale.value(d.wildtype) + yScale.value.bandwidth() / 2)
         .attr('text-anchor', 'middle')
         .attr('opacity', 0)
         .attr('dominant-baseline', 'middle')
@@ -197,41 +202,36 @@ function updateHeatmap(svgElement, xScale, yScale) {
         .attr('font-weight', '100')
         .text('X')
         .call(enter => enter.transition(t).delay((d, i) => i * delayByIndex.value * Math.random()).ease(d3[easingRef.value])
-          .attr('x', d => xScale(+d.site) + xScale.bandwidth() / 2)
+          .attr('x', d => xScale.value(+d.site) + xScale.value.bandwidth() / 2)
           .attr('fill', 'black')
           .attr('opacity', 1)
         ),
       update => update,
       exit => exit
-          .call(exit => exit.transition(t).delay((d, i) => i * 1).ease(d3.easeLinear)
+        .call(exit => exit.transition(t).delay((d, i) => i * 1).ease(d3.easeLinear)
           .attr('y', height)
           .attr('opacity', 0)
           .remove())
     );
 
-  svgElement.select('.x-axis-label')
-    .transition()
-    .call(d3.axisBottom(xScale).tickSizeOuter(0))
-    .selectAll('text')
-    .attr('transform', 'rotate(-90)')
-    .attr('text-anchor', 'end')
-    .attr('dx', '-7px')
-    .attr('dy', '-5px');
+  
+
+  setTimeout(() => {
+    createAxes(svgElement);
+    updateHeatmap(svgElement);
+  }, 5000);
 }
 
 
 onMounted(async () => {
   data.value = await fetchData();
   const svgElement = createSvg();
-  const { xScale, yScale } = createScales();
-  createAxes(svgElement, xScale, yScale);
-  updateHeatmap(svgElement, xScale, yScale);
-  autoMove();
+  createAxes(svgElement);
+  updateHeatmap(svgElement);
+});
 
-  watch([visibleSites], () => {
-    const { xScale, yScale } = createScales();
-    updateHeatmap(svgElement, xScale, yScale);
-  });
+onUnmounted(() => {
+  clearInterval(intervalId.value);
 });
 
 async function fetchData() {

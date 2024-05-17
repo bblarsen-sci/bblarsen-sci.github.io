@@ -73,7 +73,7 @@ function makePlot() {
       if (d.depth === 3) {
         return colorScale(d.data.entry_CHO_bEFNB2);
       }
-      //return "currentColor";
+      return "currentColor";
     })
     .attr("r", 5);
 

@@ -97,7 +97,7 @@ function makePlot(svg) {
             .attr('fill', d => colorScale(d.serum))
             .attr('cx', d => x.value(d.concentration))
             .attr('cy', d => y.value(d.measurement))
-            .attr('r', 3)
+            .attr('r', 4)
             .style('opacity', 0);
 
         circles.transition()
@@ -169,7 +169,7 @@ function makePlot(svg) {
             .attr("x", -(height) / 2)
             .attr("y", -marginLeft + 15)
             .attr("fill", "currentColor")
-            .attr('font-size', '14px')
+            //.attr('font-size', '14px')
             .attr("text-anchor", "middle")
             .text("Infectivity (%)"));
 
@@ -192,10 +192,10 @@ function makePlot(svg) {
 
     legendItems.append('text')
         .attr('x', 6)
-        .attr('y', -41)
+        .attr('y', -42)
         .attr('fill', 'currentColor')
         .attr('text-anchor', 'start')
-        .attr('font-size', '12px')
+        .attr('font-size', '8px')
         .text(d => d);
 }
 

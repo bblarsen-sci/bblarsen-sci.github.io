@@ -1,7 +1,10 @@
 <template>
-    <div class="font-semibold container mx-auto text-center text-2xl py-6">{{ title }}</div>
+    <div class="container mx-auto font-roboto max-w-screen-lg">
+        <div class="flex justify-start py-10">
+            <div class="text-left text-2xl">{{ title }}</div>
+        </div>
+    </div>
 </template>
-
 <script setup>
 defineProps(['title'])
 </script>

@@ -31,7 +31,7 @@
         </div>
     </div>
     <div id="section-3"
-        class="grid grid-cols-12 lg:rounded-xl bg-sky-light bg-no-repeat my-10 text-white px-2 max-w-screen-md items-center mx-auto">
+        class="grid grid-cols-12 lg:rounded-xl bg-sky-light bg-no-repeat my-10 text-white px-2 max-w-screen-md items-center mx-auto shadow-md shadow-slate-500">
         <div class="col-start-1 col-span-12 mt-4 px-4 items-center pb-4">
             <div class="text-2xl font-extrabold align-middle items-center text-left">Interests</div>
             <div class="flex flex-col justify-center pt-4 gap-8 text-center">

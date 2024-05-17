@@ -366,6 +366,7 @@ function updateHeatmap() {
       .attr('y', innerHeight.value - 10)
       .attr('text-anchor', 'middle')
       .attr('font-size', '16px')
+      .attr('fill', 'currentColor')
       .text('Site');
 
     // Add the column title
@@ -375,6 +376,7 @@ function updateHeatmap() {
       .attr('y', margin.left - 80)
       .attr('dx', '1em')
       .attr('text-anchor', 'middle')
+      .attr('fill', 'currentColor')
       .attr('transform', 'rotate(-90)')
       .attr('font-size', '16px')
       .text('Amino Acid');

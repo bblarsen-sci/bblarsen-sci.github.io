@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen mx-auto flex flex-col justify-center items-center text-center ">
-    <HeatmapTenBlocks />
+    <heatmapTenBlocks/>
     <div class="max-w-screen-xl mt-12">
       <div class="text-2xl font-semibold">Brendan Larsen</div>
       <div
@@ -10,13 +10,13 @@
     <div class=" mt-12 text-sm md:text-lg flex flex-row justify-center gap-10 lg:gap-20 uppercase">
       <a class="tracking-wider opacity-70 hover:text-sky-500" href="/about">About</a>
       <a class="tracking-wider opacity-70 hover:text-sky-500" href="/publications">Publications</a>
-      <a class="tracking-wider opacity-70 hover:text-sky-500" href="/code_pages/code_index">Code</a>
+      <a class="tracking-wider opacity-70 hover:text-sky-500" href="/code_pages/code_index">Visualizations</a>
     </div>
   </div>
 </template>
 
 <script setup>
-import HeatmapTenBlocks from "/components/graphs/heatmapBlocksAnimatedExtended.vue";
+import heatmapTenBlocks from "/components/graphs/heatmapBlocksAnimatedExtended.vue";
 </script>
 
 <style>

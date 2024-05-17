@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto align-top items-center justify-center shadow-sm shadow-slate-400 font-roboto">
+  <div class="container mx-auto shadow-md shadow-slate-500 p-6 mb-20 rounded-lg font-roboto max-w-screen-lg">
     <slot></slot>
   </div>
 </template>
