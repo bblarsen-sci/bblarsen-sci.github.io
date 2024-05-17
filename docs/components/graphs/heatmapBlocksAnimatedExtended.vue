@@ -15,7 +15,7 @@ const svgContainer = ref(null);
 const data = ref(null);
 const currentIndex = ref(0);
 const easingRef = ref('easeCubic');
-const delayMultiplier = ref(4);
+const delayMultiplier = ref(5);
 const delayByIndex = ref(true);
 const delayByRandom = ref(true);
 const sitesPerView = 20;
@@ -87,15 +87,12 @@ function autoMove() {
   }, 5000);
 }
 
-
 function createSvg() {
   const svgElement = d3.select(svgContainer.value).append('svg')
     .attr('width', width)
     .attr('height', height)
-    //.attr("viewBox", `0 0 300 300`)
     .append('g')
     .attr('transform', `translate(${margin.left + (width - margin.left - margin.right - innerWidth) / 2}, ${margin.top})`);
-    //.attr("style", "max-width: 100%; height: auto;");
   return svgElement;
 }
 
@@ -114,22 +111,26 @@ function createScales() {
 }
 
 function createAxes(svgElement, xScale, yScale) {
-  
   svgElement.append('g')
-    .attr('class', 'x-axis')
+    .attr('class', 'x-axis-label')
     .attr('transform', `translate(0, ${innerHeight})`)
-
-    .call(d3.axisBottom(xScale).ticks().tickSizeOuter(0))
+    .call(d3.axisBottom(xScale).tickSizeOuter(0))
     .call(d => d.select(".domain").remove())
+    .call(d => d.selectAll("text")
+      .attr("transform", "rotate(-90)")
+      .attr("dx", "-0.8em")
+      .attr("dy", "0.15em")
+      .style("text-anchor", "end")
+    )
+  svgElement.append('g')
     .call(d => d.append('text')
-      //.attr('transform', 'rotate(-90)')
       .attr('x', innerWidth / 2)
-      .attr('y', margin.bottom -10)
-      .attr('dy', '1em')
+      .attr('y', margin.bottom + 235 )
       .attr('text-anchor', 'middle')
       .attr('fill', 'currentColor')
+      .attr('font-size', '10px')
       .text('Site')
-    )
+    );
     
   svgElement.append('g')
     .attr('class', 'y-axis')
@@ -148,25 +149,27 @@ function createAxes(svgElement, xScale, yScale) {
 
 function updateHeatmap(svgElement, xScale, yScale) {
 
-  const t = svgElement.transition().duration(1000);
+  const t = svgElement.transition().duration(750);
 
   svgElement.selectAll('rect')
     .data(allCombinations.value, d => `${d.site}-${d.mutant}`)
     .join(
       enter => enter.append('rect')
         .attr('fill', d => getFillColor.value(d.site, d.mutant))
+        .attr('opacity', 1)
         .attr('x', width)
         .attr('y', d => yScale(d.mutant))
         .attr('width', xScale.bandwidth())
         .attr('height', yScale.bandwidth())
-        .call(enter => enter.transition(t).delay((d, i) => delayByIndex.value ? (delayByRandom.value ? i * +delayMultiplier.value * Math.random() : i * +delayMultiplier.value) : (delayByRandom.value ? Math.random() * +delayMultiplier.value : +delayMultiplier.value)).ease(d3[easingRef.value])
+        .call(enter => enter.transition(t).delay((d, i) => i * delayByIndex.value * Math.random()).ease(d3[easingRef.value])
           .attr('x', d => xScale(d.site)),
         ),
       update => update,
       exit => exit
-        .call(exit => exit.transition(t).delay((d, i) => delayByIndex.value ? (delayByRandom.value ? i * +delayMultiplier.value * Math.random() : i * +delayMultiplier.value) : (delayByRandom.value ? Math.random() * +delayMultiplier.value : +delayMultiplier.value)).ease(d3.easeBackIn)
+        .call(exit => exit.transition(t).delay((d, i) => i * 1).ease(d3.easeLinear)
           .attr('y', height)
-          .attr('fill', 'white')
+          //.attr('fill', 'white')
+          .attr('opacity', 0)
           .remove())
     )
 
@@ -183,31 +186,34 @@ function updateHeatmap(svgElement, xScale, yScale) {
     .join(
       enter => enter.append('text')
         .attr('class', 'wildtype')
-        .attr('fill', 'transparent')
+        //.attr('fill', 'transparent')
         .attr('x', d => xScale(+d.site) + xScale.bandwidth() * 10)
         .attr('y', d => yScale(d.wildtype) + yScale.bandwidth() / 2)
         .attr('text-anchor', 'middle')
+        .attr('opacity', 0)
         .attr('dominant-baseline', 'middle')
-        .attr('font-size', '8px')
+        .attr('dy', '0.05em')
+        .attr('font-size', '10px')
         .attr('font-weight', '100')
         .text('X')
-        .call(enter => enter.transition(t).delay((d, i) => delayByIndex.value ? (delayByRandom.value ? i * +delayMultiplier.value * Math.random() : i * +delayMultiplier.value) : (delayByRandom.value ? Math.random() * +delayMultiplier.value : +delayMultiplier.value)).ease(d3[easingRef.value])
+        .call(enter => enter.transition(t).delay((d, i) => i * delayByIndex.value * Math.random()).ease(d3[easingRef.value])
           .attr('x', d => xScale(+d.site) + xScale.bandwidth() / 2)
           .attr('fill', 'black')
+          .attr('opacity', 1)
         ),
       update => update,
       exit => exit
-        .call(exit => exit.transition(t).delay((d, i) => delayByIndex.value ? (delayByRandom.value ? i * +delayMultiplier.value * Math.random() : i * +delayMultiplier.value) : (delayByRandom.value ? Math.random() * +delayMultiplier.value : +delayMultiplier.value)).ease(d3.easeBackIn)
+          .call(exit => exit.transition(t).delay((d, i) => i * 1).ease(d3.easeLinear)
           .attr('y', height)
-          .attr('fill', 'white')
+          .attr('opacity', 0)
           .remove())
     );
 
-  svgElement.select('.x-axis')
+  svgElement.select('.x-axis-label')
     .transition()
     .call(d3.axisBottom(xScale).tickSizeOuter(0))
     .selectAll('text')
-    //.attr('transform', 'rotate(-90)')
+    .attr('transform', 'rotate(-90)')
     .attr('text-anchor', 'end')
     .attr('dx', '-7px')
     .attr('dy', '-5px');
@@ -217,14 +223,12 @@ function updateHeatmap(svgElement, xScale, yScale) {
 onMounted(async () => {
   data.value = await fetchData();
   const svgElement = createSvg();
-  createAxes(svgElement, createScales().xScale, createScales().yScale);
   const { xScale, yScale } = createScales();
-
+  createAxes(svgElement, xScale, yScale);
   updateHeatmap(svgElement, xScale, yScale);
-
   autoMove();
-  watch([currentIndex], () => {
-    console.log('watching');
+
+  watch([visibleSites], () => {
     const { xScale, yScale } = createScales();
     updateHeatmap(svgElement, xScale, yScale);
   });

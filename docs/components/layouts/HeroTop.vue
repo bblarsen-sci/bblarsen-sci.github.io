@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-import HeatmapTenBlocks from "/components/graphs/heatmapBlocksAnimated.vue";
+import HeatmapTenBlocks from "/components/graphs/heatmapBlocksAnimatedExtended.vue";
 </script>
 
 <style>

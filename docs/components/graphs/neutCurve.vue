@@ -104,7 +104,7 @@ function makePlot(svg) {
             .duration(duration)
             .ease(d3.easeCubicInOut)
             .style('opacity', d => d.measurement ? 1 : 0)
-            .delay((d, i) => i * (duration / dataset.value.length));
+            .delay((d, i) => i * (duration / dataset.value.length / 2));
     }
 
     // Draw the error lines
