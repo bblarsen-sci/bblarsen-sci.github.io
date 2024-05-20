@@ -27,17 +27,26 @@ function generateData(start, stop, numPoints) {
 // Generate initial data points
 let data = generateData(0, 100, 11);
 
-
+const x = d3.scaleLinear().domain([0, 100]).range([marginLeft, width - marginRight - marginLeft]);
 // Scales
-const x = computed(() => {
-    return d3.scaleLinear().domain([0, 100]).range([marginLeft, width - marginRight - marginLeft]);
-});
-const y = computed(() => {
-    return d3.scaleLinear().domain([0, 100]).range([height - marginBottom, marginTop]);
-});
+const y = d3.scaleLinear().domain([0, 100]).range([height - marginBottom, marginTop]);
 
-const color = d3.scaleSequential(d3.interpolateReds).domain([100, 0]);  //.domain([0, data.length - 1])
-//const color = d3.scaleDiverging(d3.interpolateRdBu).domain([0, 50,100]);  //.domain([0, data.length - 1])
+const color = d3.scaleSequential(d3.interpolateRdBu).domain([0, 100]);
+
+
+// Generate random coordinates for middle points
+function generateRandomCoordinates() {
+  const newData = [...data];
+  for (let i = 1; i < data.length - 1; i++) {
+    newData[i] = {
+      ...newData[i],
+      y: Math.random() * 120,
+    };
+  }
+  return newData;
+}
+
+
 
 // Create the SVG element
 function createSvg() {
@@ -59,8 +68,8 @@ function makePlot(svg) {
         .attr('stroke', 'currentColor')
         .attr('stroke-width', 1.5)
         .attr('d', d3.line().curve(d3.curveBasis)
-            .x(d => x.value(d.x))
-            .y(d => y.value(d.y)))
+            .x(d => x(d.x))
+            .y(d => y(d.y)))
     
     const circles = svg.append('g')
         .selectAll('circle')
@@ -68,24 +77,24 @@ function makePlot(svg) {
         .enter()
         .append('circle')
         .attr('fill', 'currentColor')
-        .attr('cx', d => x.value(d.x))
-        .attr('cy', d => y.value(d.y))
+        .attr('cx', d => x(d.x))
+        .attr('cy', d => y(d.y))
         .attr('fill', d => color(d.y))
         .attr('stroke', 'currentColor')
         .attr('r', 3);
 }
 
-// Generate random coordinates for middle points
-function generateRandomCoordinates() {
-  const newData = [...data];
-  for (let i = 1; i < data.length - 1; i++) {
-    newData[i] = {
-      ...newData[i],
-      //x: Math.random() * 100,
-      y: Math.random() * 120,
-    };
-  }
-  return newData;
+function updateCircle(svg) {
+  svg.selectAll('circle')
+    .data(data)
+    .join('circle')
+    .transition()
+    .duration(1000)
+    .ease(d3.easePolyInOut)
+    .attr('cx', d => x(d.x))
+    .attr('cy', d => y(d.y))
+    .attr('fill', d => color(d.y))
+    .attr('stroke', 'currentColor')
 }
 
 // Update the plot with new data
@@ -97,23 +106,11 @@ function updatePlot(svg) {
         .duration(1000)
         .ease(d3.easePolyInOut)
         .attr('d', d3.line().curve(d3.curveBasis) //MonotoneX
-            .x(d => x.value(d.x))
-            .y(d => y.value(d.y)))
+            .x(d => x(d.x))
+            .y(d => y(d.y)))
 
 }
-function updateCircle(svg) {
-    svg.selectAll('circle')
-        .data(data)
-        .join('circle')
-        .transition()
-        .duration(1000)
-        //.delay((d, i) => i * 100)
-        .ease(d3.easePolyInOut)
-        .attr('cx', d => x.value(d.x))
-        .attr('cy', d => y.value(d.y))
-        .attr('fill', d => color(d.y))
-        .attr('stroke', 'currentColor')
-}
+
 
 // Run the code when the component is mounted
 onMounted(() => {

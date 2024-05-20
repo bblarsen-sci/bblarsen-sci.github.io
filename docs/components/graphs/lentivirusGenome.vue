@@ -113,7 +113,6 @@ onMounted(() => {
     .text(d => d.name);
 
   const gx = svg.append('g')
-    //.attr('transform', `translate(1000,${height / 2 + 10})`)
     .call(d3.axisBottom(x).ticks(10).tickSizeInner(4))
     .call(g => g.select(".domain").remove())
     .attr('font-size', '6px')

@@ -1,62 +1,56 @@
 {
-  "hash": "f55cc958",
-  "configHash": "2f267fac",
+  "hash": "1c699e3c",
+  "configHash": "1e2cb65f",
   "lockfileHash": "b5885bb2",
-  "browserHash": "b7be4e7b",
+  "browserHash": "89033067",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "c25c6c49",
+      "fileHash": "4fb9c386",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "a4efa066",
+      "fileHash": "0ecc9f6f",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "481262d8",
+      "fileHash": "3bb18609",
       "needsInterop": false
     },
     "vue-select": {
       "src": "../../../../node_modules/vue-select/dist/vue-select.es.js",
       "file": "vue-select.js",
-      "fileHash": "521323d5",
+      "fileHash": "6ce2b3b8",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "254e77e9",
+      "fileHash": "69ec0dec",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "15daf67d",
+      "fileHash": "2ae67420",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "2b58b260",
+      "fileHash": "79882059",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "1b052878",
+      "fileHash": "7cb7d5d2",
       "needsInterop": false
-    },
-    "file-saver": {
-      "src": "../../../../node_modules/file-saver/dist/FileSaver.min.js",
-      "file": "file-saver.js",
-      "fileHash": "5baa2d71",
-      "needsInterop": true
     }
   },
   "chunks": {
