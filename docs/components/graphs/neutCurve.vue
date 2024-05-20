@@ -178,6 +178,7 @@ function makePlot(svg) {
         .attr('class', 'legend')
         .attr('transform', `translate(${width - marginRight - 120}, ${marginTop})`);
 
+    console.log()
     const legendItems = legend.selectAll('.legend-item')
         .data(serumDomain)
         .join('g')
