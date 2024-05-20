@@ -115,11 +115,10 @@ function createAxes(svgElement) {
       .text('Site')
     );
 
-  //make ticks for y-axis
-  svgElement.append('g')
-    .attr('class', 'y-axis')
+  yAxisGroup
     .call(d3.axisLeft(yScale.value).tickSizeOuter(0))
     .call(d => d.select(".domain").remove())
+    //.call(d => d.select('text').remove()) // Remove the existing text element
     .call(d => d.append('text')
       .attr('transform', 'rotate(-90)')
       .attr('x', -innerHeight / 2)
@@ -217,15 +216,22 @@ function updateHeatmap(svgElement) {
   
 
   setTimeout(() => {
-    createAxes(svgElement);
+    //createAxes(svgElement);
     updateHeatmap(svgElement);
   }, 5000);
 }
 
 
+let yAxisGroup;
+
 onMounted(async () => {
   data.value = await fetchData();
   const svgElement = createSvg();
+
+  // Create the y-axis group and store it in a variable
+  yAxisGroup = svgElement.append('g')
+    .attr('class', 'y-axis');
+
   createAxes(svgElement);
   updateHeatmap(svgElement);
 });

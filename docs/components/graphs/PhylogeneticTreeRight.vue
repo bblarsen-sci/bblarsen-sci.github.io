@@ -10,7 +10,6 @@ import { parseNewick, projection, diagonal, scaleBranchLengths } from '/componen
 const svgContainer = ref(null);
 const data = ref(null);
 
-
 function setColor(d) {
   if (d.children) {
     const childColors = d.children.map(child => setColor(child));
@@ -53,7 +52,7 @@ const legend = svg => {
     .attr("class", "legend")
     .data(colorScale.value.domain())
     .join("g")
-    .attr("transform", (d, i) => `translate(${margin.left + 275}, ${i * 20})`);
+    .attr("transform", (d, i) => `translate(${margin.left + 50}, ${i * 20})`);
 
   g.append("circle")
     .attr("class", "legendcircle")
@@ -69,27 +68,24 @@ const legend = svg => {
 }
 
 const margin = { top: 20, right: 20, bottom: 20, left: 20 };
-const width = 800
-const height = 600
+const width = 500
+const height = 400
 
 function drawChart() {
-  d3.select(svgContainer.value).selectAll("*").remove();
 
   // ROOT TO GET X,Y POSITIONS
   tree.value(root.value);
-  setColor(root.value);
+  //setColor(root.value);
 
   // SCALE BRANCH LENGTHS IF SCALED
-  scaleBranchLengths(root.value.descendants(), width);
+  scaleBranchLengths(root.value.descendants(), width-margin.left-margin.right);
 
   //DRAW SVG
   var svg = d3.select(svgContainer.value).append("svg")
-    //.attr('width', '100%')
-    //.attr('height', height)
     .attr("preserveAspectRatio", "xMinYMin meet")
     .attr('viewBox', [0, 0, width, height])
     .append("g")
-    .attr("transform", `translate(-200, ${margin.top})`);
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
   svg.append("g")
     .call(legend);
@@ -101,7 +97,7 @@ function drawChart() {
     .data(root.value.links())
     .join("path")
     .attr("d", diagonal)
-    .attr("stroke", d => d.target.color)
+    //.attr("stroke", d => d.target.color)
 
   //DRAW NODES
   svg.append("g")

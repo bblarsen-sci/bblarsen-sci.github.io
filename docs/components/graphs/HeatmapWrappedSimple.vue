@@ -6,8 +6,8 @@
 async function fetchData() {
   const file = await fetch('/data/default_heatmap.csv');
   const file_text = await file.text();
-  const test = d3.csvParse(file_text);
-  return test
+  const csv = d3.csvParse(file_text);
+  return csv
 }
 </script>
 
@@ -30,7 +30,7 @@ const margin = { top: 20, right: 20, bottom: 50, left: 50 }; // margin for the S
 const rowPadding = 30; // amount of padding between the rows
 let rows = 4; // number of rows in the heatmap
 let paddingValue = 0.1; // padding between the squares in the heatmap
-const squareSize = 9;
+const squareSize = 10;
 
 function colorScale(effect) {
   return d3.scaleDiverging(d3['interpolateRdBu']).domain([-4, 0, 4])(effect);
@@ -92,6 +92,7 @@ const yScale = computed(() =>
 
 
 function updateHeatmap() {
+  
   function zoomed(event) {
     chartGroup.attr("transform", event.transform);
   }
@@ -99,8 +100,6 @@ function updateHeatmap() {
   const svg = d3.select(svgContainer.value); // Select the SVG container
   // Append a new SVG element to the container
   const svgElement = svg.append('svg')
-    .attr('width', '100%')
-    //.attr('height', height.value)
     .attr('preserveAspectRatio', "xMinYMin meet")
     .attr('viewBox', `0 0 ${width.value} ${height.value}`)
     .call(d3.zoom().on("zoom", zoomed)); // Add zoom behavior to the SVG
@@ -205,7 +204,6 @@ onMounted(async () => {
   align: center;
   transform: rotate(-90deg);
 }
-
 
 .axis-title-x {
   font-size: 18px;

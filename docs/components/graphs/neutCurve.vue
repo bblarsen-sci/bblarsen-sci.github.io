@@ -154,7 +154,7 @@ function makePlot(svg) {
             .attr("x", width / 2)
             .attr("y", marginBottom - 2)
             .attr("fill", "currentColor")
-            .attr('font-size', '14px')
+            .attr('font-size', '12px')
             .attr("text-anchor", "middle")
             .text("Concentration (µM)"));
 
@@ -169,7 +169,7 @@ function makePlot(svg) {
             .attr("x", -(height) / 2)
             .attr("y", -marginLeft + 15)
             .attr("fill", "currentColor")
-            //.attr('font-size', '14px')
+            .attr('font-size', '12px')
             .attr("text-anchor", "middle")
             .text("Infectivity (%)"));
 
