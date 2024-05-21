@@ -28,11 +28,8 @@ function generateData(start, stop, numPoints) {
 let data = generateData(0, 100, 11);
 
 const x = d3.scaleLinear().domain([0, 100]).range([marginLeft, width - marginRight - marginLeft]);
-// Scales
 const y = d3.scaleLinear().domain([0, 100]).range([height - marginBottom, marginTop]);
-
-const color = d3.scaleSequential(d3.interpolateRdBu).domain([0, 100]);
-
+const color = d3.scaleSequential().domain([0, 100]).interpolator(d3.interpolateViridis);
 
 // Generate random coordinates for middle points
 function generateRandomCoordinates() {
@@ -45,8 +42,6 @@ function generateRandomCoordinates() {
   }
   return newData;
 }
-
-
 
 // Create the SVG element
 function createSvg() {
@@ -62,26 +57,27 @@ function createSvg() {
 
 // Draw the plot
 function makePlot(svg) {
-    svg.append('path')
-        .datum(data)
-        .attr('fill', 'none')
-        .attr('stroke', 'currentColor')
-        .attr('stroke-width', 1.5)
-        .attr('d', d3.line().curve(d3.curveBasis)
-            .x(d => x(d.x))
-            .y(d => y(d.y)))
     
-    const circles = svg.append('g')
-        .selectAll('circle')
-        .data(data)
-        .enter()
-        .append('circle')
-        .attr('fill', 'currentColor')
-        .attr('cx', d => x(d.x))
-        .attr('cy', d => y(d.y))
-        .attr('fill', d => color(d.y))
-        .attr('stroke', 'currentColor')
-        .attr('r', 3);
+  svg.append('path')
+    .datum(data)
+    .attr('fill', 'none')
+    .attr('stroke', 'currentColor')
+    .attr('stroke-width', 1.5)
+    .attr('d', d3.line().curve(d3.curveBasis)
+        .x(d => x(d.x))
+        .y(d => y(d.y)))
+    
+  const circles = svg.append('g')
+    .selectAll('circle')
+    .data(data)
+    .enter()
+    .append('circle')
+    .attr('fill', 'currentColor')
+    .attr('cx', d => x(d.x))
+    .attr('cy', d => y(d.y))
+    .attr('fill', d => color(d.y))
+    .attr('stroke', 'currentColor')
+    .attr('r', 3);
 }
 
 function updateCircle(svg) {

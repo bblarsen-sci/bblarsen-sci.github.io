@@ -1,5 +1,5 @@
 <template>
-  <div ref="svgContainer" class="text-xs"></div>
+  <div ref="svgContainer"></div>
 </template>
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -32,10 +32,10 @@ const x = d3.scaleLinear()
 const color = d3.scaleOrdinal(d3.schemeTableau10);
 
 function startAnimation(svg, gRects, gLabels, gx, xTitle, backboneText) {
-  gRects.attr("x", 1000);
-  gLabels.attr("x", 1000);
-  gx.attr('transform', `translate(1000,${height /2 + 10})`);
-  xTitle.attr('x', 1000);
+  gRects.attr("x", width + 50);
+  gLabels.attr("x", width + 50);
+  gx.attr('transform', `translate(0,${height + 50})`);
+  xTitle.attr('y', height + 50);
   backboneText.attr('opacity', 1);
 
   gRects.transition()
@@ -47,7 +47,7 @@ function startAnimation(svg, gRects, gLabels, gx, xTitle, backboneText) {
     .duration(3000)
     .ease(d3.easeCubicInOut)
     .attr("x", d => (x(d.start) + x(d.stop)) / 2);
-
+  
   gx.transition()
     .duration(3000)
     .ease(d3.easeCubicInOut)
@@ -56,7 +56,7 @@ function startAnimation(svg, gRects, gLabels, gx, xTitle, backboneText) {
   xTitle.transition()
     .duration(3000)
     .ease(d3.easeCubicInOut)
-    .attr('x', width / 2);
+    .attr('y', height - 50)
 
   backboneText.transition()
     .duration(3000)
@@ -120,8 +120,8 @@ onMounted(() => {
 
   const xTitle = svg.append('text')
     .attr('class', 'axis-title')
-    .attr('x', 1000)
-    .attr('y', height / 2 + 40)
+    .attr('x', width/2)
+    .attr('y', height - 50)
     .attr('text-anchor', 'middle')
     .attr('font-size', '6px')
     .attr('fill', 'currentColor')
