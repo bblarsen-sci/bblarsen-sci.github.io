@@ -3,8 +3,8 @@
         <div class="px-0 lg:px-12 xl:px-24">
             <div
                 class="flex items-center mx-auto gap-2 justify-between pb-4 text-sm md:text-lg tracking-wider uppercase opacity-70 text-center">
-                <a class="inline-flex flex-1 justify-center hover:text-sky-500" href="#section-1">Current Projects</a>
-                <a class="inline-flex flex-1 justify-center hover:text-sky-500" href="#section-2">Past Projects</a>
+                <a class="inline-flex flex-1 justify-center hover:text-sky-600" href="#section-1">Current Projects</a>
+                <a class="inline-flex flex-1 justify-center hover:text-sky-600" href="#section-2">Past Projects</a>
             </div>
             <div class="p-4 lg:p-10 lg:rounded-2xl bg-sky-dark bg-no-repeat text-slate-200">
                 <div class="col-start-1 col-span-12 lg:col-span-10 mt-4">
@@ -33,7 +33,7 @@
                         <div class="flex flex-row justify-center items-center text-center py-16 gap-2">
                             <img src="/images/entry_tetramer_better.png" class="max-w-96 ">
                         </div>
-                        <p class="text-sm font-light text-center">Structure of the tetrameric receptor binding protein
+                        <p class="text-sm font-light text-center opacity-60">Structure of the tetrameric receptor binding protein
                             colored by
                             the mean effect of mutations on cell entry. Darker red indicates sites with low tolerance
                             for mutations.</p>
@@ -92,7 +92,7 @@
                                 between hosts and their viruses.</p>
                         </div>
                         <div class="flex flex-row items-center justify-center pt-14 ">
-                            <img class="shadow-lg shadow-slate-400" src="/images/pmv_co_phylogeny.jpg"></img>
+                            <img class="" src="/images/pmv_co_phylogeny.jpg"></img>
                         </div>
                         <nav class="flex justify-center text-center pt-14 pb-4 tracking-wider uppercase">
                             <a class=" hover:text-sky-600 " href="https://pubmed.ncbi.nlm.nih.gov/34668771/">Link to

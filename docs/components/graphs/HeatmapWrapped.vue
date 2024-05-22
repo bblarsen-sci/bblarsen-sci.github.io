@@ -6,6 +6,7 @@
           <div class="flex flex-col gap-6 text-xs font-light">
             <div class="font-bold text-xl">Heatmap Options</div>
             <div class="flex flex-col">
+              <p>File must have four columns in csv: site, mutant, wildtype,effect</p>
               <p for="fileInput" class="mr-2 font-semibold">Upload CSV:</p>
               <input type="file" id="fileInput" @change="handleFileUpload" accept=".csv" class="">
             </div>
@@ -58,7 +59,7 @@
               <button @click="downloadSVG"
                 class="px-3 py-2 bg-sky-500 shadow-md shadow-sky-500 text-white rounded-md hover:bg-sky-600">Download
                 SVG</button>
-              <button @click="downloadImage('png')"
+              <button @click="downloadImage"
                 class="px-3 py-2 bg-sky-500 shadow-md shadow-sky-500 text-white rounded-md hover:bg-sky-600">Download
                 PNG</button>
             </div>
@@ -74,8 +75,8 @@
 
 <script setup>
 import { ref, watch, onMounted, computed } from 'vue';
-import { saveAs } from 'file-saver';
 import * as d3 from 'd3';
+import html2canvas from 'html2canvas';
 
 // DEFINE VARIABLES
 const data = ref([]);
@@ -98,35 +99,54 @@ const amino_acids = [
 
 // DEFINE NORMAL FUNCTIONS
 // Function to download the image
-function downloadImage(format) {
-  const svgElement = document.querySelector('svg');
-  const serializer = new XMLSerializer();
-  const svgString = serializer.serializeToString(svgElement);
+async function downloadImage() {
+  try {
+    const plotContainer = svgContainer.value;
 
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
+    if (!plotContainer) {
+      console.error('SVG element not found');
+      return;
+    }
 
-  const svgWidth = svgElement.getAttribute('width');
-  const svgHeight = svgElement.getAttribute('height');
-  console.log(svgWidth, svgHeight)
-  canvas.width = svgWidth * 4;
-  canvas.height = svgHeight * 4;
+    const clone = plotContainer.cloneNode(true);
+    const dpi = 150; // Desired DPI
+    const scaleFactor = dpi / 96; // Assume the browser is set to 96 DPI (typical browser setting)
 
-  // Set the canvas background color to white
-  ctx.fillStyle = 'white';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Scale the cloned plot container
+    clone.style.transform = `scale(${scaleFactor})`;
+    clone.style.transformOrigin = "top left";
 
-  const img = new Image();
-  img.onload = () => {
-    // Draw the image on the canvas with double the size for higher resolution
-    ctx.drawImage(img, 0, 0, canvas.width - 20, canvas.height - 20);
+    // Append the cloned container to the body, offscreen
+    clone.style.position = "fixed";
+    clone.style.top = "-10000px";
+    document.body.appendChild(clone);
 
-    canvas.toBlob((blob) => {
-      saveAs(blob, `heatmap.png`);
-    }, `image/.png`);
-  };
+    // Render the cloned plot as a canvas element
+    const canvas = await html2canvas(clone, {
+      scale: scaleFactor,
+      useCORS: true,
+      logging: true,
+    });
 
-  img.src = `data:image/svg+xml;base64,${btoa(svgString)}`;
+    // Remove the cloned plot container
+    document.body.removeChild(clone);
+
+    // Convert the canvas to a blob
+    const blob = await new Promise((resolve) =>
+      canvas.toBlob(resolve, "image/png")
+    );
+
+    // Create a link to download the image
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `heatmap.png`;
+    link.click();
+
+    // Remove the link
+    link.remove();
+  } catch (error) {
+    console.error('Error downloading image:', error);
+  }
 }
 
 // Function to download the SVG
@@ -236,7 +256,15 @@ const wildtypeLookup = computed(() =>
     return lookup;
   }, {})
 );
-
+const uniqueWildtypes = computed(() => {
+  const map = new Map();
+  data.value.forEach(d => {
+    if (!map.has(+d.site)) {
+      map.set(+d.site, d);
+    }
+  });
+  return map;
+});
 const xScale = computed(() =>
   d3.scaleBand()
     .domain(Array.from({ length: maxSitesInRow.value }, (_, i) => i))
@@ -260,7 +288,6 @@ watch(selectedColorScale, () => {
   updateColorScale();
 });
 
-
 function updateColorScale() {
   d3.selectAll('rect')
     .attr('fill', d => {
@@ -272,11 +299,11 @@ function updateColorScale() {
       }
     });
 }
-///
+
+///WATCH
 watch([data.value, paddingValue, rows, strokeWidthValue, selectedSites], () => {
   updateHeatmap();
 });
-
 
 ////////////// UPDATING HEATMAP ////////////////////////
 function updateHeatmap() {
@@ -315,16 +342,18 @@ function updateHeatmap() {
       .attr('stroke-width', strokeWidthValue.value)
 
 
+
     // Add the wildtype 'X' text to the boxes
     svgElement.selectAll(`.wildtype-row-${rowIndex}`)
-      .data(data.value.filter(d => siteRow.includes(+d.site)))
+      .data(Array.from(uniqueWildtypes.value.values()).filter(d => siteRow.includes(+d.site))) // Only plot the wildtype once per site
+      //.data(data.value.filter(d => siteRow.includes(+d.site)))
       .enter()
       .append('text')
-      // .attr('class', `wildtype-row`)
+      .attr('class', `wildtype-row`)
       .attr('font-size', '8px')
       .attr('text-anchor', 'middle')
       .attr('text-align', 'center')
-      //.attr('font-weight', 'ultralight')
+      .attr('font-weight', 'light')
       .attr('x', d => xScale.value(siteRow.indexOf(+d.site)) + xScale.value.bandwidth() / 2)
       .attr('y', d => yScale.value(d.wildtype) + (yScale.value.range()[1] + rowPadding) * rowIndex + yScale.value.bandwidth() / 2 + 3)
       .text('X');
@@ -336,9 +365,6 @@ function updateHeatmap() {
     } else {
       xAxis.tickFormat((d, i) => i % 10 === 0 ? siteRow[d] : '');
     }
-
-
-
 
     // ADD THE X AND Y AXES
     // Add the site numbers to the x-axis

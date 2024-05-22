@@ -3,8 +3,9 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onUnmounted, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed } from 'vue';
 import * as d3 from 'd3';
+import { Legend } from '/components/legend.js';
 
 const amino_acids = [
   "R", "K", "H", "D", "E", "Q", "N", "S", "T", "Y",
@@ -18,7 +19,6 @@ const easingRef = ref('easeCubicInOut');
 const delayByIndex = ref(5);
 const intervalId = ref(null);
 const sitesPerView = 20;
-
 
 const height = 300;
 const margin = { top: 20, right: 50, bottom: 50, left: 40 };
@@ -231,7 +231,12 @@ onMounted(async () => {
   // Create the y-axis group and store it in a variable
   yAxisGroup = svgElement.append('g')
     .attr('class', 'y-axis');
-
+  Legend(d3.scaleDiverging([-4, 0, 4], d3.interpolateRdBu), {
+    svgRef: svgContainer.value,
+    title: "Cell Entry",
+    width: 250,
+    tickValues: [-4, -2, 0, 2, 4],
+  })
   createAxes(svgElement);
   updateHeatmap(svgElement);
 });
@@ -247,4 +252,6 @@ async function fetchData() {
   const csv = d3.csvParse(file_text);
   return csv;
 }
+
+
 </script>

@@ -11,24 +11,25 @@ const svgContainer = ref(null);
 const width = 300;
 const height = 100;
 const marginTop = 10;
-const marginRight = 20;
-const marginBottom = 20;
-const marginLeft = 20;
+const marginRight = 10;
+const marginBottom = 10;
+const marginLeft = 10;
 
 // Function to generate data points
 function generateData(start, stop, numPoints) {
   const step = (stop - start) / (numPoints - 1);
   return Array.from({ length: numPoints }, (_, i) => ({
     x: start + i * step,
-    y: 50,
+    y: height/2,
   }));
 }
 
 // Generate initial data points
-let data = generateData(0, 100, 11);
+let data = generateData(0, width, 10);
 
-const x = d3.scaleLinear().domain([0, 100]).range([marginLeft, width - marginRight - marginLeft]);
-const y = d3.scaleLinear().domain([0, 100]).range([height - marginBottom, marginTop]);
+const x = d3.scaleLinear().domain([0, width]).range([marginLeft, width - marginRight - marginLeft]);
+const y = d3.scaleLinear().domain([0, height]).range([height - marginBottom, marginTop]);
+const yAxis = d3.axisLeft(y).tickSizeOuter(0);
 const color = d3.scaleSequential().domain([0, 100]).interpolator(d3.interpolateViridis);
 
 // Generate random coordinates for middle points
@@ -37,7 +38,7 @@ function generateRandomCoordinates() {
   for (let i = 1; i < data.length - 1; i++) {
     newData[i] = {
       ...newData[i],
-      y: Math.random() * 120,
+      y: Math.random() * height,
     };
   }
   return newData;
@@ -51,78 +52,70 @@ function createSvg() {
         .attr('preserveAspectRatio', 'xMinYMin meet')
         .attr('viewBox', [0, 0, width, height])
         .append('g')
-        .attr('transform', `translate(${marginLeft},${marginTop})`);
+        .attr('transform', `translate(${marginLeft-10},${marginTop - 10})`);
     return svg;
 }
 
-// Draw the plot
-function makePlot(svg) {
-    
-  svg.append('path')
-    .datum(data)
-    .attr('fill', 'none')
-    .attr('stroke', 'currentColor')
-    .attr('stroke-width', 1.5)
-    .attr('d', d3.line().curve(d3.curveBasis)
-        .x(d => x(d.x))
-        .y(d => y(d.y)))
-    
-  const circles = svg.append('g')
-    .selectAll('circle')
-    .data(data)
-    .enter()
-    .append('circle')
-    .attr('fill', 'currentColor')
-    .attr('cx', d => x(d.x))
-    .attr('cy', d => y(d.y))
-    .attr('fill', d => color(d.y))
-    .attr('stroke', 'currentColor')
-    .attr('r', 3);
-}
+function updatePath(svg) {
 
-function updateCircle(svg) {
-  svg.selectAll('circle')
-    .data(data)
-    .join('circle')
-    .transition()
-    .duration(1000)
-    .ease(d3.easePolyInOut)
-    .attr('cx', d => x(d.x))
-    .attr('cy', d => y(d.y))
-    .attr('fill', d => color(d.y))
-    .attr('stroke', 'currentColor')
-}
-
-// Update the plot with new data
-function updatePlot(svg) {
-    svg.select('path')
-        .datum(data)
-        .join('path')
+  svg.selectAll('path')
+    .data([data])
+    .join(
+      enter => enter.append('path')
+        .attr('mix-blend-mode', 'multiply')
+        .attr('fill', 'none')
+        .attr('stroke', 'currentColor')
+        .attr('stroke-width', 1.5)
+        .attr('d', d3.line().curve(d3.curveBasis)
+          .x(d => x(d.x))
+          .y(d => y(d.y))),
+      update => update
         .transition()
         .duration(1000)
-        .ease(d3.easePolyInOut)
-        .attr('d', d3.line().curve(d3.curveBasis) //MonotoneX
-            .x(d => x(d.x))
-            .y(d => y(d.y)))
+        .attr('d', d3.line().curve(d3.curveBasis)
+          .x(d => x(d.x))
+          .y(d => y(d.y))),
+      exit => exit.remove()
+    );
+}
+function updateCircle(svg) {
 
+  svg.selectAll('circle')
+    .data(data)
+    .join(
+      enter => enter.append('circle')
+        .attr('mix-blend-mode', 'multiply')
+        .attr('cx', d => x(d.x))
+        .attr('cy', d => y(d.y))
+        .attr('r', 3)
+        .attr('fill', d => color(d.y))
+        .attr('stroke', 'currentColor'),
+      update => update
+        .transition()
+        .duration(1000)
+        .attr('fill', d => color(d.y))
+        .attr('cx', d => x(d.x))
+        .attr('cy', d => y(d.y)),
+      exit => exit.remove()
+    )
 }
 
-
-// Run the code when the component is mounted
 onMounted(() => {
   const svg = createSvg();
-  makePlot(svg);
 
-  // Start the transition loop
-  setInterval(() => {
-    data = generateRandomCoordinates();
-    updateCircle(svg);
-
-    // Add a pause before running updatePlot
-    setTimeout(() => {
-      updatePlot(svg);
-    }, 1000); // Adjust the delay as needed (in milliseconds)
-
-  }, 3000);
+  updatePath(svg);
+  updateCircle(svg);
+  
+    setInterval(() => {
+      data = generateRandomCoordinates();
+      updateCircle(svg);
+      
+      setTimeout(() => {
+        updatePath(svg);
+      }, 1000);
+      
+      
+      
+    }, 3000);
 });
 </script>

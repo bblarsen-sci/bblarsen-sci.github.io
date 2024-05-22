@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen mx-auto flex flex-col justify-center items-center text-center ">
-    <heatmapTenBlocks/>
+    <heatmapTenBlocks />
     <div class="max-w-screen-xl mt-12">
       <div class="text-2xl font-semibold">Brendan Larsen</div>
       <div

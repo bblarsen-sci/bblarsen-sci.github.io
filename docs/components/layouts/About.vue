@@ -1,5 +1,8 @@
 <template>
-    <div class="mx-auto max-w-screen-md ">
+    <div class=" w-full max-h-96 overflow-clip">
+        <steamgraph />
+    </div>
+    <div class="mx-auto max-w-screen-md">
         <div class="h-36 flex items-center mx-2">
             <div class="text-left">
                 <div class="font-semibold text-4xl">About</div>
@@ -43,3 +46,7 @@
         </div>
     </div>
 </template>
+
+<script setup>
+import steamgraph from "/components/graphs/steamgraph.vue";
+</script>

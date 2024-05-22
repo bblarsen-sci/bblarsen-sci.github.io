@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -13,11 +15,9 @@ export default {
         'sky-dark': 'linear-gradient(220deg, #0C4A6E, #1E293B)', //sky-900 to slate-800
         'nipah': "url('/images/nipah.png')",
         'red' : 'linear-gradient(220deg, #1e293b, #450a0a)',
-
-
       },
       fontFamily: {
-        "roboto": "Roboto, sans-serif",
+        sans: ['Open sans','Inter var', ...defaultTheme.fontFamily.sans],
       }
     },
   },
