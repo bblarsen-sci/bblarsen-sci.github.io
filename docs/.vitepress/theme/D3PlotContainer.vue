@@ -1,6 +1,6 @@
 <template>
-  <div class="p-2 md:p-6">
-    <div class="container mx-auto md:shadow-md p-2 mb-12 rounded-lg max-w-screen-lg">
+  <div class="px-2 md:px-4">
+    <div class="container mx-auto md:shadow-lg p-2 mb-12 rounded-lg max-w-screen-lg md:border-2">
       <slot></slot>
     </div>
   </div>

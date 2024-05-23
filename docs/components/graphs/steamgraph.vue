@@ -53,7 +53,7 @@ function randomize(stack, y, bumps) {
 
 function updateChart(svg, area, stack, y, z, bumps) {
   const transition = svg.transition()
-    .duration(3000)
+    .duration(2000)
     .ease(d3.easePolyInOut);
 
   const path = svg.selectAll("path")

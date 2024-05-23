@@ -13,7 +13,7 @@ subtext: playing around with D3 animations
 import newAnimation from "/components/graphs/newAnimation.vue";
 </script>
 
-<FigureTitle/>
+<FigureTitle title='D3 circle animation'/>
 <D3PlotContainer>
 <newAnimation/>
 </D3PlotContainer>

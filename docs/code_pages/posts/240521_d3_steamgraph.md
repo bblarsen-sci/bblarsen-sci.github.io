@@ -13,7 +13,7 @@ subtext:
 import steamgraph from "/components/graphs/steamgraph.vue";
 </script>
 
-<FigureTitle/>
+<FigureTitle title='D3 steamgraph'/>
 <D3PlotContainer>
 <steamgraph/>
 </D3PlotContainer>

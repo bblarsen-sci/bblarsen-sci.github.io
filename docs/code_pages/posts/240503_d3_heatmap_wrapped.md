@@ -13,7 +13,6 @@ subtext: Heatmap of deep mutational scanning data that is wrapped in multiple ro
 import HeatmapWrapped from "/components/graphs/heatmapWrapped.vue";
 </script>
 
-
 <HeatmapWrapped />
 
 

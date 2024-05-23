@@ -13,7 +13,7 @@ subtext: Animated phylogenetic tree
 import phyloRightAnimated from "/components/graphs/phylogeneticTreeRightAnimated.vue";
 </script>
 
-<FigureTitle/>
+<FigureTitle title='D3 phylogenetic tree linear with animation'/>
 <D3PlotContainer>
 <phyloRightAnimated/>
 </D3PlotContainer>

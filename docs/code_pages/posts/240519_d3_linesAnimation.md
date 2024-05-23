@@ -13,7 +13,7 @@ subtext: AnimatedLines
 import linesAnimation from "/components/graphs/linesAnimation.vue";
 </script>
 
-<FigureTitle/>
+<FigureTitle title='D3 line animation'/>
 <D3PlotContainer>
 <linesAnimation/>
 </D3PlotContainer>

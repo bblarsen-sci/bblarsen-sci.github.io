@@ -13,7 +13,7 @@ subtext:
 import forceTree from "/components/graphs/forceTree.vue";
 </script>
 
-<FigureTitle/>
+<FigureTitle title='D3 force tree'/>
 <D3PlotContainer>
 <forceTree/>
 </D3PlotContainer>

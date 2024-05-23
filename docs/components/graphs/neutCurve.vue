@@ -1,5 +1,5 @@
 <template>
-    <div ref="svgContainer"></div>
+    <div class="flex flex-col items-center" ref="svgContainer"></div>
 </template>
 
 <script setup>
@@ -8,7 +8,6 @@
 
     const svgContainer = ref(null);
     const dataset = ref(null);
-
     const width = 600;
     const height = 400;
     const marginTop = 50;
@@ -46,6 +45,8 @@
     // Create the SVG element
     function createSvg() {
         const svg = d3.select(svgContainer.value).append('svg')
+            .attr('width', width)
+            .attr('height', height)
             .attr('preserveAspectRatio', "xMinYMin meet")
             .attr("viewBox", [0, 0, width, height]);
         return svg;
@@ -61,6 +62,7 @@
 
         const duration = 3000; // Duration of the animation in milliseconds
         const pauseDuration = 5000;
+
 
         // Draw the lines
         function drawLines() {
@@ -176,43 +178,43 @@
         // Add the legend
         const legend = svg.append('g')
             .attr('class', 'legend')
-        //.attr('transform', `translate(${width - marginRight}, ${marginTop})`);
-
-        const textPositions = {
-            'dimeric-bEFNB2': { x: 30, y: 325 },
-            'monomeric-bEFNB2': { x: 250, y: 200 },
-            'dimeric-bEFNB3': { x: 150, y: 250 },
-            'monomeric-bEFNB3': { x: 400, y: 40 }
-        };
-
+            .attr('transform', `translate(${width - marginRight - 120}, ${marginTop})`);
         const legendItems = legend.selectAll('.legend-item')
             .data(serumDomain)
             .join('g')
-            .attr('class', 'legend-item');
-
+            .attr('class', 'legend-item')
+            .attr('transform', (d, i) => `translate(0, ${i * 20})`);
+        legendItems.append('circle')
+            .attr('cx', 0)
+            .attr('cy', -45)
+            .attr('r', 4)
+            .attr('fill', d => colorScale(d));
         legendItems.append('text')
-            .attr('x', d => textPositions[d].x)
-            .attr('y', d => textPositions[d].y)
-            .attr('fill', d => colorScale(d))
+            .attr('x', 6)
+            .attr('y', -42)
+            .attr('fill', 'currentColor')
             .attr('text-anchor', 'start')
-            .attr('font-size', '12px')
+            .attr('font-size', '10px')
             .text(d => d);
     }
 
-    // Fetch data from the CSV file
-    async function fetchData() {
-        const file = await fetch('/data/ephrin_neutcurve_df.csv');
-        const file_text = await file.text();
-        const csv = d3.csvParse(file_text);
-        const csv_formatted = formatFile(csv);
-        return csv_formatted;
-    }
 
+
+    const fetchData = async () => {
+        try {
+            const response = await fetch('/data/ephrin_neutcurve_df.csv');
+            const result = await response.text();
+            const csv =  d3.csvParse(result);
+            dataset.value =  await formatFile(csv);
+            const svg = createSvg();
+            makePlot(svg);
+        } catch (error) {
+            console.error(error);
+        }
+    }
     // Run the code when the component is mounted
-    onMounted(async () => {
-        dataset.value = await fetchData();
-        console.log(dataset.value);
-        const svg = createSvg();
-        makePlot(svg);
+    onMounted( () => {
+        fetchData();
+        
     });
 </script>

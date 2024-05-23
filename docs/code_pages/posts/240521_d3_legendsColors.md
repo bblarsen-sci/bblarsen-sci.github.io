@@ -13,9 +13,9 @@ subtext:
 import legendColor from "/components/graphs/legendColor.vue";
 </script>
 
-<FigureTitle/>
-<div class="flex flex-col justify-center items-center">
+<FigureTitle title='D3 legend experiment'/>
+<D3PlotContainer>
 <legendColor/>
-</div>
+</D3PlotContainer>
 
 

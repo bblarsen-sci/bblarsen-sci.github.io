@@ -16,7 +16,7 @@ const x = d3.scaleLinear().domain([0, width]).range([0, width]);
 const y = d3.scaleLinear().domain([0, height]).range([0, height]);
 
 const generateDataset = () => (
-  Array(50).fill(0).map(() => ([
+  Array(20).fill(0).map(() => ([
     d3.randomNormal(width/2, width/6)(),
     d3.randomNormal(height/2, height/8)(),
   ]))
@@ -56,7 +56,7 @@ function update(svg) {
         .duration(2000)
         .ease(d3.easePolyInOut)
         .attr('stroke', 'slategray')
-       //.style('mix-blend-mode', 'multiply')
+        .style('mix-blend-mode', 'multiply')
         .attr('stroke-width', 0.5)
         .attr("r", 4)
         .attr('fill', d => colorScale(d[0])),

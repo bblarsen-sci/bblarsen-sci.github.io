@@ -1,5 +1,5 @@
 <template>
-  <div ref="svgContainer"></div>
+  <div class='flex flex-col items-center' ref="svgContainer"></div>
 </template>
 <script setup>
 import { ref, onMounted } from 'vue';

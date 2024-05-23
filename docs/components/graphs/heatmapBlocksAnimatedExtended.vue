@@ -198,7 +198,7 @@ function updateHeatmap(svgElement) {
         .attr('dominant-baseline', 'middle')
         .attr('dy', '0.05em')
         .attr('font-size', '10px')
-        .attr('font-weight', '100')
+        //.attr('font-weight', '100')
         .text('X')
         .call(enter => enter.transition(t).delay((d, i) => i * delayByIndex.value * Math.random()).ease(d3[easingRef.value])
           .attr('x', d => xScale.value(+d.site) + xScale.value.bandwidth() / 2)
