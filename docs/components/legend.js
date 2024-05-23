@@ -8,10 +8,10 @@ export function Legend(color, {
     tickSize = 6,
     width = 320,
     height = 44 + tickSize,
-    marginTop = 18,
-    marginRight = 0,
+    marginTop = 15,
+    marginRight = 15,
     marginBottom = 16 + tickSize,
-    marginLeft = 0,
+    marginLeft = 15,
     ticks = width / 64,
     tickFormat,
     tickValues

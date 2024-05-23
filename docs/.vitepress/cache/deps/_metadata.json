@@ -1,67 +1,61 @@
 {
-  "hash": "7fcbfc8c",
-  "configHash": "2f267fac",
+  "hash": "49504661",
+  "configHash": "1e2cb65f",
   "lockfileHash": "06d9c89e",
-  "browserHash": "1e764138",
+  "browserHash": "d825b496",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "2862d303",
+      "fileHash": "a98b1aba",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "61f2b49e",
+      "fileHash": "6f0cd41c",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "d9f52c6a",
+      "fileHash": "9329dc00",
       "needsInterop": false
     },
     "vue-select": {
       "src": "../../../../node_modules/vue-select/dist/vue-select.es.js",
       "file": "vue-select.js",
-      "fileHash": "fbabc0a8",
+      "fileHash": "1d4ba3dc",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "647ce3b3",
+      "fileHash": "65e9c5d7",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "848bb7ea",
+      "fileHash": "fda539e4",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "ac9433ad",
+      "fileHash": "b79d369b",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "3d36b810",
-      "needsInterop": false
-    },
-    "htl": {
-      "src": "../../../../node_modules/htl/src/index.js",
-      "file": "htl.js",
-      "fileHash": "3d45c295",
+      "fileHash": "055b3e50",
       "needsInterop": false
     },
     "html2canvas": {
       "src": "../../../../node_modules/html2canvas/dist/html2canvas.esm.js",
       "file": "html2canvas.js",
-      "fileHash": "b4681b8a",
+      "fileHash": "43ba8dca",
       "needsInterop": false
     }
   },

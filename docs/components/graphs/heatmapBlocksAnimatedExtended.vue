@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { ref, onMounted, onUnmounted, computed, shallowRef } from 'vue';
 import * as d3 from 'd3';
 import { Legend } from '/components/legend.js';
 
@@ -12,8 +12,8 @@ const amino_acids = [
   "W", "F", "A", "I", "L", "M", "V", "G", "P", "C"
 ];
 
-const svgContainer = ref(null);
-const data = ref(null);
+const svgContainer = shallowRef(null);
+const data = shallowRef(null);
 const currentIndex = ref(0);
 const easingRef = ref('easeCubicInOut');
 const delayByIndex = ref(5);
