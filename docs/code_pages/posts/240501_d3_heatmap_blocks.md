@@ -6,6 +6,7 @@ date: 2024-05-01
 keywords:
     - D3
 subtext: Heatmap showing mutational effects in blocks of sites with a transistion animation on repeat.
+thumbnail: /code_pages/thumbnails/d3_heatmap_blocks.png
 ---
 
 

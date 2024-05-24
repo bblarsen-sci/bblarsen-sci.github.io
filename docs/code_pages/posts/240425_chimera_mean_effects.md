@@ -5,6 +5,7 @@ date: 2024-04-25
 keywords:
     - ChimeraX
 subtext: How to map aggregate deep mutational scanning measurements on a protein structure using ChimeraX.
+thumbnail: /code_pages/thumbnails/chimera_mean_effects.png
 ---
 
 # {{$frontmatter.title}}

@@ -5,6 +5,7 @@ date: 2024-04-28
 keywords:
     - D3
 subtext: Radial Nipah Phylogeny
+thumbnail: /code_pages/thumbnails/d3_phylogeny_radial.png
 ---
 
 <script setup>

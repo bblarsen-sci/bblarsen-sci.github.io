@@ -6,6 +6,7 @@ date: 2024-05-06
 keywords:
     - D3
 subtext: Nipah phylogeny built with D3
+thumbnail: /code_pages/thumbnails/phylogeny_right.png
 ---
 
 <script setup>

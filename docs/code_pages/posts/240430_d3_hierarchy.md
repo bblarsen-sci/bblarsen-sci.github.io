@@ -5,6 +5,7 @@ date: 2024-04-30
 keywords:
     - D3
 subtext: Convert a .csv into a D3 hierarchy
+thumbnail: /code_pages/thumbnails/d3_hierarchy.png
 ---
 
 <script setup>

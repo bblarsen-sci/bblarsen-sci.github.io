@@ -14,7 +14,9 @@ export function Legend(color, {
     marginLeft = 15,
     ticks = width / 64,
     tickFormat,
-    tickValues
+    tickValues,
+    xcoord = 0,
+    ycoord = 0
 } = {}) {
 
     
@@ -36,7 +38,8 @@ export function Legend(color, {
         .attr("height", height)
         .attr("viewBox", [0, 0, width, height])
         .style("overflow", "visible")
-        .style("display", "block");
+        .style("display", "block")
+        .attr("transform", `translate(${xcoord}, ${ycoord})`);
 
     let tickAdjust = g => g.selectAll(".tick line").attr("y1", marginTop + marginBottom - height);
     let x;

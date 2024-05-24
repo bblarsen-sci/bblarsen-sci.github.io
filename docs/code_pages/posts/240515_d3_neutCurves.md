@@ -6,6 +6,7 @@ date: 2024-05-15
 keywords:
     - D3
 subtext: Animated neutralization curves
+thumbnail: /code_pages/thumbnails/d3_neutCurves.png
 ---
 
 <script setup>

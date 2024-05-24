@@ -5,6 +5,7 @@ date: 2024-05-03
 keywords:
     - Altair
 subtext: How to use Altair themes.
+thumbnail: /code_pages/thumbnails/altair_theme.png
 ---
 
 # {{$frontmatter.title}}

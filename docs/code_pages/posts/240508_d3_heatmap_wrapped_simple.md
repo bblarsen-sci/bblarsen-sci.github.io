@@ -6,6 +6,7 @@ date: 2024-05-08
 keywords:
     - D3
 subtext: Demonstration of using D3 zoom function to make heatmap zoomable and draggable inside container. Scales with screen size.
+thumbnail: /code_pages/thumbnails/d3_zoom_heatmap.png
 ---
 
 <script setup>

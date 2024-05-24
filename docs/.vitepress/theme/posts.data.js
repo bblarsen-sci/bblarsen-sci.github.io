@@ -11,6 +11,7 @@ export default createContentLoader("/code_pages/posts/**.md", {
         // author: frontmatter.author,
         keywords: frontmatter.keywords,
         date: frontmatter.date,
+        thumbnail: frontmatter.thumbnail,
       }))
       .sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by date assuming date is in a standard format
   },
