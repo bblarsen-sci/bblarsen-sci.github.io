@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-  import { ref, watch, onMounted, computed, shallowRef } from 'vue';
+  import { ref, watch, onMounted, computed, shallowRef, onBeforeMount } from 'vue';
   import sidebar from '/components/sidebar.vue';
   import * as d3 from 'd3';
   import html2canvas from 'html2canvas';
@@ -39,6 +39,7 @@
   const siteInputValue = ref('');
   const selectedSites = ref([]);
   const tooltip = ref(null);
+
   const min = ref(-4);
   const max = ref(4);
 
@@ -371,7 +372,7 @@
       ycoord: 0,
     })
   };
-
+  fetchData();
   async function fetchData() {
     try {
       const response = await fetch('/data/default_heatmap.csv');
@@ -385,7 +386,7 @@
 
   // FETCH DATA ON MOUNT USING A VUE FUNCTION
   onMounted(() => {
-    fetchData()
+    
     updateHeatmap();
   });
 </script>

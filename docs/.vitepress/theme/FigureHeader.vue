@@ -1,6 +1,6 @@
 <template>
-    <div class="px-2 md:px-6">
-        <div class="container mx-auto max-w-screen-lg">
+    <div class="px-0 md:px-10">
+        <div class="max-w-screen-xl mx-auto">
             <div class="flex justify-start py-4">
                 <div class="text-left text-2xl">{{ title }}</div>
             </div>

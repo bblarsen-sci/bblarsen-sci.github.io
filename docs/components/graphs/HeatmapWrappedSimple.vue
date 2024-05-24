@@ -2,22 +2,17 @@
   <div class="" ref="svgContainer"></div>
 </template>
 
-<script>
-async function fetchData() {
-  const file = await fetch('/data/default_heatmap.csv');
-  const file_text = await file.text();
-  const csv = d3.csvParse(file_text);
-  return csv
-}
-</script>
+
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import * as d3 from 'd3';
 
 // DEFINE VARIABLES
 const svgContainer = ref(null);
 const data = ref([]);
+
+const dataFile = '/data/default_heatmap.csv';
 
 // DEFINE AMINO ACIDS- this is the order (from top to bottom) in which the amino acids will be displayed
 const amino_acids = [
@@ -76,6 +71,16 @@ const wildtypeLookup = computed(() =>
   }, {})
 );
 
+const uniqueWildtypes = computed(() => {
+  const map = new Map();
+  data.value.forEach(d => {
+    if (!map.has(+d.site)) {
+      map.set(+d.site, d);
+    }
+  });
+  return map;
+});
+
 const xScale = computed(() =>
   d3.scaleBand()
     .domain(Array.from({ length: maxSitesInRow.value }, (_, i) => i))
@@ -92,7 +97,7 @@ const yScale = computed(() =>
 
 
 function updateHeatmap() {
-  
+
   function zoomed(event) {
     chartGroup.attr("transform", event.transform);
   }
@@ -128,7 +133,7 @@ function updateHeatmap() {
 
     // Add the wildtype 'X' text to the boxes
     chartGroup.selectAll(`.wildtype-row-${rowIndex}`)
-      .data(data.value.filter(d => siteRow.includes(+d.site)))
+      .data(Array.from(uniqueWildtypes.value.values()).filter(d => siteRow.includes(+d.site)))
       .enter()
       .append('text')
       .attr('class', `wildtype-row`)
@@ -182,13 +187,22 @@ function updateHeatmap() {
   });
 };
 
+async function fetchData() {
+  try {
+    const response = await fetch(dataFile);
+    const file_text = await response.text();
+    const csv = d3.csvParse(file_text);
+    data.value = csv
+  } catch (error) {
+    console.error('Error fetching CSV file:', error);
+  }
+}
+fetchData();
 
-// Function to fetch the data. Checks if a file is uploaded, if not, fetches the default data which in this case is Nipah DMS entry data
-
-// FETCH DATA ON MOUNT USING A VUE FUNCTION
-onMounted(async () => {
-  data.value = await fetchData()
-  updateHeatmap();
+onMounted(() => {
+  watch(data, () => {
+    updateHeatmap();
+  });
 });
 </script>
 
@@ -201,7 +215,7 @@ onMounted(async () => {
 
 .x-axis-row text {
   text-anchor: end;
-  align: center;
+  text-align: center;
   transform: rotate(-90deg);
 }
 

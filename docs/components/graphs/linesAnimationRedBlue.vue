@@ -3,40 +3,40 @@
 </template>
 
 <script setup>
-  import { ref, onMounted, computed } from 'vue';
-  import * as d3 from 'd3';
+import { ref, onMounted, computed } from 'vue';
+import * as d3 from 'd3';
 
-  const svgContainer = ref(null);
+const svgContainer = ref(null);
 
-  const width = 300;
-  const height = 125;
+const width = 300;
+const height = 125;
 
 
-  // Function to generate data points
-  function generateData(start, stop, numPoints) {
-    const step = (stop - start) / (numPoints - 1);
-    return Array.from({ length: numPoints }, (_, i) => ({
-      x: start + i * step,
-      y: height / 2,
-    }));
-  }
+// Function to generate data points
+function generateData(start, stop, numPoints) {
+  const step = (stop - start) / (numPoints - 1);
+  return Array.from({ length: numPoints }, (_, i) => ({
+    x: start + i * step,
+    y: height / 2,
+  }));
+}
 
-  // Generate initial data points
-  let data = generateData(0, width, 11);
+// Generate initial data points
+let data = generateData(0, width, 11);
 // Generate initial data points for multiple lines
 
 const numLines = 10;
 let datasets = Array.from({ length: numLines }, () => generateData(0, width, 11));
-  
-const x = d3.scaleLinear().domain([0, width]).range([0, width ]);
-  const y = d3.scaleLinear().domain([0, height]).range([height , 0]);
-  const yAxis = d3.axisLeft(y).tickSizeOuter(0);
-  const color = d3.scaleSequential().domain([0, 100]).interpolator(d3.interpolateViridis);
 
-  function generateRandomCoordinates() {
+const x = d3.scaleLinear().domain([0, width]).range([0, width]);
+const y = d3.scaleLinear().domain([0, height]).range([height, 0]);
+const yAxis = d3.axisLeft(y).tickSizeOuter(0);
+const color = d3.scaleSequential().domain([0, 100]).interpolator(d3.interpolateViridis);
+
+function generateRandomCoordinates() {
   return datasets.map(data => {
     const newData = [...data];
-    for (let i = 1; i < data.length - 1; i+=2) {
+    for (let i = 1; i < data.length - 1; i += 2) {
       newData[i] = {
         ...newData[i],
         y: Math.random() * height,
@@ -46,8 +46,8 @@ const x = d3.scaleLinear().domain([0, width]).range([0, width ]);
   });
 }
 
-  // Create the SVG element
-  function createSvg() {
+// Create the SVG element
+function createSvg() {
   const svg = d3
     .select(svgContainer.value)
     .append('svg')
@@ -116,14 +116,14 @@ function updatePath(svg) {
 }
 
 
-  onMounted(() => {
-    const svg = createSvg();
+onMounted(() => {
+  const svg = createSvg();
 
-    updatePath(svg);
-    
-    setInterval(() => {
-  datasets = generateRandomCoordinates();
   updatePath(svg);
-}, 3000);
-  });
+
+  setInterval(() => {
+    datasets = generateRandomCoordinates();
+    updatePath(svg);
+  }, 3000);
+});
 </script>

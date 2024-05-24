@@ -1,5 +1,5 @@
 <template>
-  <div ref="svgContainer" class="flex flex-col justify-center items-center"></div>
+  <div ref="svgContainer"></div>
 </template>
 
 <script setup>
@@ -18,9 +18,6 @@ const colorScale = ref(null);
 
 function createSvg() {
   const svg = d3.select(svgContainer.value).append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .attr("preserveAspectRatio", "xMinYMin meet")
     .attr('viewBox', [0, 0, width, height])
     .append("g")
     .attr("transform", `translate(${margin.left-100}, ${margin.top})`);
@@ -154,5 +151,14 @@ async function fetchData() {
 </script>
 
 <style>
-
+svg {
+  /* important for responsiveness */
+  display: block;
+  fill: none;
+  stroke: none;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  background: #eee;
+}
 </style>
