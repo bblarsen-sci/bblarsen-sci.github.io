@@ -8,8 +8,8 @@ import * as d3 from 'd3';
 
 const svgContainer = ref(null);
 
-const width = 300;
-const height = 125;
+const width = 1000;
+const height = 100;
 
 
 // Function to generate data points
@@ -22,21 +22,19 @@ function generateData(start, stop, numPoints) {
 }
 
 // Generate initial data points
-let data = generateData(0, width, 11);
+let data = generateData(0, width, 3);
 // Generate initial data points for multiple lines
 
 const numLines = 10;
-let datasets = Array.from({ length: numLines }, () => generateData(0, width, 11));
+let datasets = Array.from({ length: numLines }, () => generateData(0, width, 10));
 
 const x = d3.scaleLinear().domain([0, width]).range([0, width]);
 const y = d3.scaleLinear().domain([0, height]).range([height, 0]);
-const yAxis = d3.axisLeft(y).tickSizeOuter(0);
-const color = d3.scaleSequential().domain([0, 100]).interpolator(d3.interpolateViridis);
 
 function generateRandomCoordinates() {
   return datasets.map(data => {
     const newData = [...data];
-    for (let i = 1; i < data.length - 1; i += 2) {
+    for (let i = 1; i < data.length - 1; i += 1) {
       newData[i] = {
         ...newData[i],
         y: Math.random() * height,
@@ -48,9 +46,7 @@ function generateRandomCoordinates() {
 
 // Create the SVG element
 function createSvg() {
-  const svg = d3
-    .select(svgContainer.value)
-    .append('svg')
+  const svg = d3.select(svgContainer.value).append('svg')
     .attr('preserveAspectRatio', 'xMinYMin meet')
     .attr('viewBox', [0, 0, width, height])
 
@@ -59,26 +55,19 @@ function createSvg() {
 
   const colorSchemes = [
     d3.interpolateBlues,
-    d3.interpolateBlues,
     d3.interpolateReds,
-    d3.interpolateReds,
-    d3.interpolateBlues,
-    d3.interpolateBlues,
-    d3.interpolateReds,
-    d3.interpolateReds,
-
   ];
 
   colorSchemes.forEach((scheme, i) => {
     const gradient = defs.append('linearGradient')
       .attr('id', `lineGradient-${i}`)
       .attr('gradientUnits', 'userSpaceOnUse')
-      .attr('x1', x(0))
-      .attr('y1', 0)
-      .attr('x2', x(width))
-      .attr('y2', 0);
+      .attr('x1', 0)
+      .attr('y1', y(0))
+      .attr('x2', 0)
+      .attr('y2', y(height));
 
-    const color = d3.scaleSequential().domain([0, 100]).interpolator(scheme);
+    const color = d3.scaleSequential().domain([0, height]).interpolator(scheme);
 
     gradient.selectAll('stop')
       .data(color.ticks().map((t, i, n) => ({ offset: `${100 * i / (n.length - 1)}%`, color: color(t) })))
@@ -95,7 +84,7 @@ function updatePath(svg) {
     .data(datasets)
     .join(
       enter => enter.append('path')
-        .attr('mix-blend-mode', 'darken')
+        .attr('mix-blend-mode', 'multiply')
         .attr('fill', 'none')
         .attr('stroke', (d, i) => `url(#lineGradient-${i})`)
         .attr('stroke-width', 1)
@@ -106,15 +95,13 @@ function updatePath(svg) {
       update => update
         .transition()
         .duration(3000)
-        .ease(d3.easeCubicInOut)
-        .delay((d, i) => i * 100)
+        .ease(d3.easeLinear)
         .attr('d', d3.line().curve(d3.curveBasis)
           .x(d => x(d.x))
           .y(d => y(d.y))),
       exit => exit.remove()
     );
 }
-
 
 onMounted(() => {
   const svg = createSvg();

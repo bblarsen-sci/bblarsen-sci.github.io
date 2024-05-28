@@ -24,10 +24,5 @@ export default defineConfig({
       noExternal: ["vue-select"],
     },
   },
-  vue: {
-    config: {
-      performance: true,
-    },
-  },
 });
 

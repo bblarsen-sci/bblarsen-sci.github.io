@@ -1,8 +1,8 @@
 ---
 layout: page
-title: hello?
+title: Data Wrangling
 aside: false
-date: 2024-05-24
+date: 2024-05-27
 keywords:
     - D3
 subtext: 
@@ -10,12 +10,12 @@ thumbnail:
 ---
 
 
+
 <script setup>
-import thing from "/components/graphs/template.vue";
+import dataWrangling from "/components/graphs/dataWrangling.vue";
 </script>
 
 <D3PlotContainer>
-<thing />
+<dataWrangling />
 </D3PlotContainer>
-
 

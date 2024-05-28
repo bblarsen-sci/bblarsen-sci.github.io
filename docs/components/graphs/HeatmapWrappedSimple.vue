@@ -2,10 +2,8 @@
   <div class="" ref="svgContainer"></div>
 </template>
 
-
-
 <script setup>
-import { ref, computed, onMounted, watch } from 'vue';
+import { ref, computed, onMounted, watch, watchEffect } from 'vue';
 import * as d3 from 'd3';
 
 // DEFINE VARIABLES
@@ -14,7 +12,22 @@ const data = ref([]);
 
 const dataFile = '/data/default_heatmap.csv';
 
-// DEFINE AMINO ACIDS- this is the order (from top to bottom) in which the amino acids will be displayed
+async function fetchData() {
+  try {
+    console.log('fetching data')
+    const response = await fetch(dataFile);
+    const file_text = await response.text();
+    const csv = d3.csvParse(file_text);
+    data.value = csv
+  } catch (error) {
+    console.error('Error fetching CSV file:', error);
+  }
+}
+fetchData();
+
+
+
+
 const amino_acids = [
   "R", "K", "H", "D", "E", "Q", "N", "S", "T", "Y",
   "W", "F", "A", "I", "L", "M", "V", "G", "P", "C"
@@ -26,9 +39,12 @@ const rowPadding = 30; // amount of padding between the rows
 let rows = 4; // number of rows in the heatmap
 let paddingValue = 0.1; // padding between the squares in the heatmap
 const squareSize = 10;
+const color = 'interpolateRdBu'
+const min = -4
+const max = 4
 
 function colorScale(effect) {
-  return d3.scaleDiverging(d3['interpolateRdBu']).domain([-4, 0, 4])(effect);
+  return d3.scaleDiverging(d3[color]).domain([min, 0, max])(effect);
 }
 
 const sites = computed(() => Array.from(new Set(data.value.map(d => +d.site))));
@@ -95,9 +111,29 @@ const yScale = computed(() =>
     .padding(paddingValue)
 );
 
+const legend = svg => {
+  const g = svg
+    .selectAll("g")
+    .attr("class", "legend")
+    .data(colorScale.value.domain())
+    .join("g")
+    .attr("transform", (d, i) => `translate(${margin.left + 50}, ${i * 20})`);
+
+  g.append("circle")
+    .attr("class", "legendcircle")
+    .attr("r", 5)
+    .attr("stroke", "currentColor")
+    .attr("fill", colorScale.value);
+
+  g.append("text")
+    .attr("class", "legend-text")
+    .attr("x", 10)
+    .attr("dy", "0.1em")
+    .text(d => d);
+}
 
 function updateHeatmap() {
-
+  console.log('updating heatmap')
   function zoomed(event) {
     chartGroup.attr("transform", event.transform);
   }
@@ -148,9 +184,8 @@ function updateHeatmap() {
     } else {
       xAxis.tickFormat((d, i) => i % 10 === 0 ? siteRow[d] : '');
     }
-
-    // ADD THE X AND Y AXES
-    // Add the site numbers to the x-axis
+    
+    // add the x-axis to the chart
     chartGroup.append('g')
       .attr('class', `x-axis-row`)
       .attr('transform', `translate(0, ${(yScale.value.range()[1] + rowPadding) * rowIndex + yScale.value.range()[1]})`)
@@ -159,14 +194,12 @@ function updateHeatmap() {
       .attr('dx', '-7px')
       .attr('dy', '-5px');
 
-
-    // Add the amino acids to the y-axis
+    // add the y-axis to the chart
     chartGroup.append('g')
       .attr('class', `y-axis-row`)
       .attr('transform', `translate(0, ${(yScale.value.range()[1] + rowPadding) * rowIndex})`)
       .call(d3.axisLeft(yScale.value).tickSizeOuter(0));
-
-    // ADD THE AXES TITLES
+    });
     // Add the row title
     chartGroup.append('text')
       .attr('class', 'axis-title-x')
@@ -177,27 +210,14 @@ function updateHeatmap() {
     // Add the column title
     chartGroup.append('text')
       .attr('class', 'axis-title-y')
-      //.attr('transform', 'rotate(-90)')
       .attr('x', -innerHeight.value / 2)
       .attr('y', -margin.left)
       .attr('dy', '1em')
       .text('Amino Acid');
-
-
-  });
+  
 };
 
-async function fetchData() {
-  try {
-    const response = await fetch(dataFile);
-    const file_text = await response.text();
-    const csv = d3.csvParse(file_text);
-    data.value = csv
-  } catch (error) {
-    console.error('Error fetching CSV file:', error);
-  }
-}
-fetchData();
+
 
 onMounted(() => {
   watch(data, () => {

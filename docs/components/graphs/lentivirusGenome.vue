@@ -1,6 +1,7 @@
 <template>
   <div ref="svgContainer"></div>
 </template>
+
 <script setup>
 import { ref, onMounted } from 'vue';
 import * as d3 from 'd3';
@@ -20,6 +21,9 @@ let dataSet = [
   { start: 7065, stop: 7698, name: 'LTR' },
 
 ];
+
+
+
 const width = 400;
 const height = 200;
 const margin = { top: 20, right: 20, bottom: 40, left: 20 };

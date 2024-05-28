@@ -17,22 +17,8 @@ export default {
         'red' : 'linear-gradient(220deg, #1e293b, #450a0a)',
       },
       fontFamily: {
-        sans: ['Open sans','Inter var', ...defaultTheme.fontFamily.sans],
+        sans: ['Inter var','Open sans', ...defaultTheme.fontFamily.sans],
       },
-      'cerulean-blue': {
-        '50': '#f1f3fd',
-        '100': '#dfe5fa',
-        '200': '#c6d1f7',
-        '300': '#a0b4f0',
-        '400': '#728ce8',
-        '500': '#5167e0',
-        '600': '#3e4bd4',
-        '700': '#3339c2',
-        '800': '#2f309e',
-        '900': '#2b2d7d',
-        '950': '#1e1e4d',
-    },
-    
     },
   },
   plugins: [

@@ -151,14 +151,5 @@ async function fetchData() {
 </script>
 
 <style>
-svg {
-  /* important for responsiveness */
-  display: block;
-  fill: none;
-  stroke: none;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  background: #eee;
-}
+
 </style>

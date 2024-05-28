@@ -1,6 +1,6 @@
 <template>
-  <div class="px-0 md:px-10">
-    <div class="mx-auto mb-12 rounded-lg max-w-screen-xl md:border-2 md:shadow-md">
+  <div class="px-6 mx:px-8">
+    <div class="mx-auto mb-12 rounded-lg md:border-2 md:shadow-md">
       <slot></slot>
     </div>
   </div>
@@ -9,4 +9,6 @@
 <script setup>
 </script>
 
-<style scoped></style>
+<style scoped>
+  
+</style>

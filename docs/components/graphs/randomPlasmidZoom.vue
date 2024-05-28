@@ -46,7 +46,7 @@ onMounted(() => {
             endAngle: Math.PI
           }));
 
-        const randomColor = d3.interpolateRainbow(Math.random());
+        const randomColor = d3.interpolateSpectral(d3.randomUniform()(0, 1));
         const arcGroup = g.append("g")
           .attr("transform", `translate(${x},${y})`);
 

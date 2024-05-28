@@ -85,8 +85,8 @@ function drawChart(data) {
   // Initialize SVG properly
   const svg = d3.select(svgContainer.value)
     .append('svg')
-    .attr('width', width)
-    .attr('height', width)
+    //.attr('width', width)
+    //.attr('height', width)
     .attr("viewBox", [-outerRadius, -outerRadius, width, width])
     .attr("class", "max-w-full h-auto");
 
