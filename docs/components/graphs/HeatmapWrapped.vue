@@ -27,6 +27,9 @@
   import { Legend } from '/components/legend.js';
   import Tooltip from '/components/tooltip.vue';
 
+const dataFile =
+  '/data/default_heatmap.csv'
+
 
   // DEFINE REACTIVE VARIABLES
   const data = shallowRef([]);
@@ -375,20 +378,17 @@
   fetchData();
   async function fetchData() {
     try {
-      const response = await fetch('/data/default_heatmap.csv');
-      const file_text = await response.text();
-      const csv = d3.csvParse(file_text);
+      const csv = await d3.csv(dataFile);
       data.value = csv;
     } catch (error) {
       console.error('Error fetching CSV file:', error);
     }
   }
 
-  // FETCH DATA ON MOUNT USING A VUE FUNCTION
-  onMounted(() => {
-    
+  watch(data, () => {
     updateHeatmap();
   });
+  
 </script>
 
 

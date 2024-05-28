@@ -1,6 +1,6 @@
 <template>
   <div ref="bigContainer" class="container h-screen w-full mx-auto">
-    <div xmlns="http://www.w3.org/2000/svg" ref="svgContainer"></div>
+    <div ref="svgContainer"></div>
   </div>
 </template>
 

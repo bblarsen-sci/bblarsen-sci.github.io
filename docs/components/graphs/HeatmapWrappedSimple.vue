@@ -3,30 +3,22 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch, watchEffect } from 'vue';
+import { ref, computed, onMounted, watch, watchEffect, shallowRef } from 'vue';
 import * as d3 from 'd3';
+import { Legend } from '/components/legend.js';
+
 
 // DEFINE VARIABLES
 const svgContainer = ref(null);
-const data = ref([]);
+const data = shallowRef([]);
 
 const dataFile = '/data/default_heatmap.csv';
 
 async function fetchData() {
-  try {
-    console.log('fetching data')
-    const response = await fetch(dataFile);
-    const file_text = await response.text();
-    const csv = d3.csvParse(file_text);
-    data.value = csv
-  } catch (error) {
-    console.error('Error fetching CSV file:', error);
-  }
+  const csv = await d3.csv(dataFile);
+  data.value = csv  
 }
 fetchData();
-
-
-
 
 const amino_acids = [
   "R", "K", "H", "D", "E", "Q", "N", "S", "T", "Y",
@@ -215,15 +207,21 @@ function updateHeatmap() {
       .attr('dy', '1em')
       .text('Amino Acid');
   
+  Legend(d3.scaleDiverging([min, 0, max], d3[color]).clamp(true), {
+    svgRef: svgContainer.value,
+    title: "Cell Entry",
+    width: 200,
+    tickValues: [min, 0, max],
+    xcoord: 0,
+    ycoord: 10,
+  })
 };
 
-
-
-onMounted(() => {
-  watch(data, () => {
-    updateHeatmap();
-  });
+watch(data, () => {
+  updateHeatmap();
 });
+
+
 </script>
 
 

@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted, computed, shallowRef } from 'vue';
+import { ref, watch, onUnmounted, computed, shallowRef } from 'vue';
 import * as d3 from 'd3';
 import { Legend } from '/components/legend.js';
 
@@ -20,7 +20,8 @@ const delayByIndex = ref(5);
 const intervalId = ref(null);
 const sitesPerView = 20;
 
-const height = 300;
+const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB2.csv'
+const height = 400;
 const margin = { top: 20, right: 50, bottom: 50, left: 40 };
 const innerHeight = height - margin.top - margin.bottom;
 const squareSize = Math.min(innerHeight / amino_acids.length, 20); // Define the square size based on the height and number of amino acids
@@ -109,14 +110,15 @@ function createAxes(svgElement) {
     .call(d => d.append('text')
       .attr('x', innerWidth / 2)
       .attr('y', height - margin.bottom + 25 )
-      .attr('text-anchor', 'middle')
+      .attr('text-anchor', 'end')
       .attr('fill', 'currentColor')
-      .attr('font-size', '12px')
+      .attr('font-size', '14px')
       .text('Site')
     );
 
   yAxisGroup
     .call(d3.axisLeft(yScale.value).tickSizeOuter(0))
+    .attr('font-size', '12px')
     .call(d => d.select(".domain").remove())
     //.call(d => d.select('text').remove()) // Remove the existing text element
     .call(d => d.append('text')
@@ -126,7 +128,7 @@ function createAxes(svgElement) {
       .attr('dy', '1em')
       .attr('text-anchor', 'middle')
       .attr('fill', 'currentColor')
-      .attr('font-size', '12px')
+      .attr('font-size', '14px')
       .text('Amino Acid')
     );
 }
@@ -142,6 +144,7 @@ function updateHeatmap(svgElement) {
   const gx = svgElement.select('.x-axis')
     .call(d3.axisBottom(xScale.value).tickSizeOuter(0))
     .attr('transform', `translate(1000,${innerHeight})`)
+    .attr('font-size', '12px')
     .call(d => d.select(".domain").remove())
     
 
@@ -172,8 +175,8 @@ function updateHeatmap(svgElement) {
         ),
       update => update,
       exit => exit
-        .call(exit => exit.transition(t).delay((d, i) => i * (delayByIndex.value / 2) * Math.random()).ease(d3.easePolyInOut)
-          .attr('y', height)
+        .call(exit => exit.transition(t)
+          //.attr('y', -height)
           .attr('opacity', 0)
           .remove())
     )
@@ -197,7 +200,7 @@ function updateHeatmap(svgElement) {
         .attr('opacity', 0)
         .attr('dominant-baseline', 'middle')
         .attr('dy', '0.05em')
-        .attr('font-size', '10px')
+        .attr('font-size', '12px')
         //.attr('font-weight', '100')
         .text('X')
         .call(enter => enter.transition(t).delay((d, i) => i * delayByIndex.value * Math.random()).ease(d3[easingRef.value])
@@ -207,8 +210,8 @@ function updateHeatmap(svgElement) {
         ),
       update => update,
       exit => exit
-        .call(exit => exit.transition(t).delay((d, i) => i * 1).ease(d3.easeLinear)
-          .attr('y', height)
+        .call(exit => exit.transition(t)
+          //.attr('y', height)
           .attr('opacity', 0)
           .remove())
     );
@@ -224,19 +227,21 @@ function updateHeatmap(svgElement) {
 
 let yAxisGroup;
 
-onMounted(async () => {
-  data.value = await fetchData();
+watch(data, () => {
+  
   const svgElement = createSvg();
 
   // Create the y-axis group and store it in a variable
   yAxisGroup = svgElement.append('g')
     .attr('class', 'y-axis');
+
   Legend(d3.scaleDiverging([-4, 0, 4], d3.interpolateRdBu), {
     svgRef: svgContainer.value,
     title: "Cell Entry",
     width: 250,
     tickValues: [-4, -2, 0, 2, 4],
   })
+  
   createAxes(svgElement);
   updateHeatmap(svgElement);
 });
@@ -245,12 +250,10 @@ onUnmounted(() => {
   clearInterval(intervalId.value);
 });
 
+fetchData();
 async function fetchData() {
-  console.log('fetching data')
-  const file = await fetch('https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB2.csv');
-  const file_text = await file.text();
-  const csv = d3.csvParse(file_text);
-  return csv;
+  const csv = await d3.csv(dataFile);
+  data.value = csv;
 }
 
 

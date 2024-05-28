@@ -3,7 +3,11 @@
     import { ref, watchEffect } from "vue";
 
     // define component props for the slider component
-    const { min, max, step, modelValue } = defineProps({
+const { id, min, max, step, modelValue } = defineProps({
+    id: {
+        type: String,
+        required: true,
+    },
         min: {
             type: Number,
             default: 0,

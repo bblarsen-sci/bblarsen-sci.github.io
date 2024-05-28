@@ -3,31 +3,39 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch, computed} from 'vue';
 import * as d3 from 'd3';
 
-const data = ref(null);
+const root = ref(null);
 const treeContainer = ref(null);
 
-function makePlot() {
-  
-  const group = d3.group(data.value, d => d.site, d => d.mutant);
-  const root = d3.hierarchy(group);
+const width = 800;
+const dx = 7;
 
-  const width = 800;
-  const dx = 10;
-  const dy = width / (root.height + 1);
+const dataFile = 
+  'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB3.csv';
+
+const colorScale = computed(() => {
+  return d3.scaleDiverging()
+    .domain([-4, 0, 2])
+    .interpolator(d3.interpolateRdBu);
+});
+
+function makePlot() {
+
+
+  const dy = width / (root.value.height + 1);
 
   // Create a tree layout.
   const tree = d3.tree().nodeSize([dx, dy]);
 
   // Sort the tree and apply the layout.
-  root.sort((a, b) => d3.ascending(a.data.name, b.data.name));
-  tree(root);
-
+  root.value.sort((a, b) => d3.ascending(a.data.name, b.data.name));
+  tree(root.value);
+  
   let x0 = Infinity;
   let x1 = -x0;
-  root.each(d => {
+  root.value.each(d => {
     if (d.x > x1) x1 = d.x;
     if (d.x < x0) x0 = d.x;
   });
@@ -45,7 +53,7 @@ function makePlot() {
     .attr("stroke-opacity", 0.3)
     .attr("stroke-width", 1.5)
     .selectAll()
-    .data(root.links())
+    .data(root.value.links())
     .join("path")
     .attr("d", d3.linkHorizontal()
       .x(d => d.y)
@@ -55,26 +63,12 @@ function makePlot() {
     .attr("stroke-linejoin", "round")
     .attr("stroke-width", 3)
     .selectAll()
-    .data(root.descendants()) // Change to root.descendants() to include all nodes
+    .data(root.value.descendants()) 
     .join("g")
     .attr("transform", d => `translate(${d.y},${d.x})`);
 
-  // Find the minimum and maximum values of entry_CHO_bEFNB2
-  const minValue = d3.min(data.value, d => parseFloat(d.entry_CHO_bEFNB2));
-  const maxValue = d3.max(data.value, d => parseFloat(d.entry_CHO_bEFNB2));
-
-  // Create a color scale using d3.scaleSequential and d3.interpolateRdBu
-  const colorScale = d3.scaleDiverging()
-    .domain([-4, 0, 2])
-    .interpolator(d3.interpolateRdBu);
-
   node.append("circle")
-    .attr("fill", d => {
-      if (d.depth === 3) {
-        return colorScale(d.data.entry_CHO_bEFNB2);
-      }
-      return "currentColor";
-    })
+    .attr("fill", 'gray')
     .attr("r", 5);
 
   node.append("text")
@@ -85,29 +79,51 @@ function makePlot() {
     .text(d => {
       // Assuming depth 0 = root, depth 1 = site, depth 2 = mutant, depth 3 = entry_CHO_bEFNB2
       if (d.depth === 0) {
-        return "Root"; // Label for root node
+        return "Sites"; // Label for root node
       } else if (d.depth === 1) {
         return d.data[0]; // Label for site
       } else if (d.depth === 2) {
         return d.data[0]; // Label for mutant
-      } else if (d.depth === 3) {
-        return d3.format(".2f")(parseFloat(d.data.entry_CHO_bEFNB2));
-      }
+      } 
     });
 
 }
 async function fetchData() {
-  console.log('fetching data')
-  const file = await fetch(`/data/CHO_bEFNB2_entry.csv`);
-  const file_text = await file.text();
-  const csv = d3.csvParse(file_text);
-  return csv;
+  const csv = await d3.csv(dataFile);
+
+  const array = csv.map((d) => ({
+    site: +d.site,
+    wildtype: d.wildtype,
+    mutant: d.mutant,
+    entry: +d.entry_CHO_bEFNB3,
+  }));
+
+  const filteredArray = array.filter(d => d.site <= 100);
+
+  const group = d3.group(filteredArray, d => d.site, d => d.mutant);
+
+  const test = d3.hierarchy(group);
+
+  const groupWithEntry = Array.from(group, ([site, mutants]) => [
+    site,
+    Array.from(mutants, ([mutant, entries]) => ({
+      mutant,
+      entry: entries[0].entry
+    }))
+  ]);
+
+  console.log(groupWithEntry);
+  
+  root.value = test;
 }
 
-onMounted(async() => {
-  data.value = await fetchData()
+fetchData()
+
+
+watch (root, () => {
   makePlot()
-});
+})
+
 </script>
 
 <style scoped>
