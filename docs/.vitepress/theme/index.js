@@ -8,6 +8,7 @@ import CodePosts from "./CodePosts.vue";
 import vSelect from "vue-select";
 import "vue-select/dist/vue-select.css";
 import FigureTitle from "./FigureHeader.vue";
+import SubtitleHeader from "./SubtitleHeader.vue";
 import D3PlotContainer from "./D3PlotContainer.vue";
 
 export default {
@@ -24,6 +25,7 @@ export default {
     app.component("v-select", vSelect)
     app.component("FigureTitle", FigureTitle);
     app.component("D3PlotContainer", D3PlotContainer);
+    app.component("SubtitleHeader", SubtitleHeader);
 
   },
 };

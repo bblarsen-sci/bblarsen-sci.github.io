@@ -5,7 +5,7 @@ date: 2024-04-26
 keywords:
     - Altair
 subtext: How to make a simple interactive plot with Altair
-thumbnail: /code_pages/thumbnails/altair_letter_scatter.png
+thumbnail: /thumbnails/altair_letter_scatter.png
 ---
 
 # {{$frontmatter.title}}

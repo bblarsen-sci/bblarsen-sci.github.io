@@ -10,8 +10,8 @@ export default createContentLoader("/code_pages/posts/**.md", {
         subtext: frontmatter.subtext,
         keywords: frontmatter.keywords,
         date: frontmatter.date,
-        thumbnail: frontmatter.thumbnail,
+        thumbnail: frontmatter.thumbnail 
       }))
-      .sort((a, b) => new Date(b.date) - new Date(a.date)); 
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
   },
 });

@@ -37,8 +37,8 @@ export function Legend(color, {
         //.attr("width", width)
         //.attr("height", height)
         //.attr("viewBox", [0, 0, width, height])
-        .style("overflow", "visible")
-        .style("display", "block")
+        //.style("overflow", "visible")
+        //.style("display", "block")
         .append("g")
         .attr("transform", `translate(${xcoord}, ${ycoord})`);
 

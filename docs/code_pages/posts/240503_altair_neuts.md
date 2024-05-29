@@ -5,7 +5,7 @@ date: 2024-05-03
 keywords:
     - Altair
 subtext: How to plot nice neutralization curves using Altair.
-thumbnail: /code_pages/thumbnails/altair_neut_curve.png
+thumbnail: /thumbnails/altair_neut_curve.png
 ---
 
 # {{$frontmatter.title}}

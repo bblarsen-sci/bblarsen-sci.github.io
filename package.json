@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "@vueuse/core": "10.9.0",
-    "@vueuse/motion": "2.1.0",
     "bootstrap-icons": "^1.11.3",
     "d3": "^7.8.5",
     "file-saver": "2.0.5",
@@ -17,10 +16,7 @@
     "vega-lite": "^5.16.3",
     "vitepress": "^1.2.2",
     "vue": "^3.4.27",
-    "vue-select": "^4.0.0-beta.6",
-    "html2canvas": "1.4.1",
-    "htl":"0.3.1"
-
+    "vue-select": "^4.0.0-beta.6"
   },
   "postcss": {
     "plugins": {

@@ -1,14 +1,9 @@
 <template>
-  <div class="px-6 mx:px-8">
-    <div class="mx-auto mb-12 rounded-lg md:border-2 md:shadow-md">
-      <slot></slot>
-    </div>
+  <div class=" max-w-screen-md mx-auto mb-10 px-6 py-2 md:py-10 rounded-md md:border-2 md:shadow-md">
+    <slot></slot>
   </div>
 </template>
 
 <script setup>
 </script>
 
-<style scoped>
-  
-</style>
