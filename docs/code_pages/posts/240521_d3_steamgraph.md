@@ -6,7 +6,7 @@ date: 2024-05-21
 keywords:
     - D3
 subtext: 
-thumbnail: /code_pages/thumbnails/steamgraph.png
+thumbnail: ./thumbnails/steamgraph.png
 ---
 
 

@@ -112,7 +112,6 @@ async function fetchData() {
     }))
   ]);
 
-  console.log(groupWithEntry);
   
   root.value = test;
 }

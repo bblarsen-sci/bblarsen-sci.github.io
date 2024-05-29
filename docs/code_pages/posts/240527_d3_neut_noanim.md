@@ -6,7 +6,7 @@ date: 2024-05-27
 keywords:
     - D3
 subtext: Add a static neut curve with a download button
-thumbnail: /code_pages/thumbnails/d3_neutCurve_static.png
+thumbnail: /code_posts/thumbnails/d3_neutCurve_static.png
 ---
 
 

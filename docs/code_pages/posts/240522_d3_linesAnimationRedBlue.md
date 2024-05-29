@@ -6,7 +6,7 @@ date: 2024-05-22
 keywords:
     - D3
 subtext: 
-thumbnail: /code_pages/thumbnails/d3_lines_redblue.png
+thumbnail: ./thumbnails/d3_lines_redblue.png
 ---
 
 

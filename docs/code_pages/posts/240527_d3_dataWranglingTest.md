@@ -6,7 +6,7 @@ date: 2024-05-28
 keywords:
     - D3
 subtext: Play around with data wrangling methods in D3
-thumbnail: /code_pages/thumbnails/data_wrangling.png
+thumbnail: /code_posts/thumbnails/data_wrangling.png
 ---
 
 

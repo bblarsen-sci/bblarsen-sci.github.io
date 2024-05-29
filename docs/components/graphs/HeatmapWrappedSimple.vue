@@ -12,11 +12,17 @@ import { Legend } from '/components/legend.js';
 const svgContainer = ref(null);
 const data = shallowRef([]);
 
-const dataFile = '/data/default_heatmap.csv';
+const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB3.csv';
 
 async function fetchData() {
   const csv = await d3.csv(dataFile);
-  data.value = csv  
+  const array = csv.map((d) => ({
+      site: +d.site,
+      wildtype: d.wildtype,
+      mutant: d.mutant,
+      effect: +d.entry_CHO_bEFNB3,
+    }));
+  data.value = array  
 }
 fetchData();
 

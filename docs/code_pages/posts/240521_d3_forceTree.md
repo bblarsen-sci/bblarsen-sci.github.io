@@ -6,7 +6,7 @@ date: 2024-05-21
 keywords:
     - D3
 subtext: force phylogenetic tree
-thumbnail: /code_pages/thumbnails/d3_forceTree.png
+thumbnail: ./thumbnails/d3_forceTree.png
 ---
 
 

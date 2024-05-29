@@ -6,7 +6,7 @@ date: 2024-05-17
 keywords:
     - D3
 subtext: Connecting sliders to values to manipulate d3 objects reactively
-thumbnail: /code_pages/thumbnails/slider_test.png
+thumbnail: ./thumbnails/slider_test.png
 ---
 
 

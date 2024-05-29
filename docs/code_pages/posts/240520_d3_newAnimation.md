@@ -6,7 +6,7 @@ date: 2024-05-20
 keywords:
     - D3
 subtext: playing around with D3 animations
-thumbnail: /code_pages/thumbnails/circle_animation.png
+thumbnail: ./thumbnails/circle_animation.png
 ---
 
 

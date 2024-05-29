@@ -6,7 +6,7 @@ date: 2024-05-27
 keywords:
     - D3
 subtext: Test putting more of the code in <template> to use vue features. 
-thumbnail: /code_pages/thumbnails/data_wrangling.png
+thumbnail: ./thumbnails/data_wrangling.png
 ---
 
 

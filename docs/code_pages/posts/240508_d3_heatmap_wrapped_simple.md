@@ -10,7 +10,7 @@ thumbnail: /code_pages/thumbnails/d3_zoom_heatmap.png
 ---
 
 <script setup>
-import HeatmapWrappedSimple from "/components/graphs/HeatmapWrappedSimple.vue";
+import HeatmapWrappedSimple from "/components/graphs/heatmapWrappedSimple.vue";
 </script>
 
 <FigureTitle title="Zoomable and draggable heatmap"/>

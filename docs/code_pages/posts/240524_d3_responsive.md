@@ -6,7 +6,7 @@ date: 2024-05-24
 keywords:
     - D3
 subtext: Test using vue dimension watchers rather than viewbox to responsively adjust plot size
-thumbnail: /code_pages/thumbnails/responsive.png
+thumbnail: ./thumbnails/responsive.png
 ---
 
 

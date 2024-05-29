@@ -33,12 +33,13 @@ export function Legend(color, {
         return canvas;
     }
 
-    const svg = d3.select(svgRef).append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .attr("viewBox", [0, 0, width, height])
+    const svg = d3.select('svg')
+        //.attr("width", width)
+        //.attr("height", height)
+        //.attr("viewBox", [0, 0, width, height])
         .style("overflow", "visible")
         .style("display", "block")
+        .append("g")
         .attr("transform", `translate(${xcoord}, ${ycoord})`);
 
     let tickAdjust = g => g.selectAll(".tick line").attr("y1", marginTop + marginBottom - height);
@@ -148,8 +149,8 @@ export function Legend(color, {
             .attr("y", marginTop + marginBottom - height - 6)
             .attr("fill", "currentColor")
             .attr("text-anchor", "start")
-            .attr("font-weight", "bold")
-            .attr("class", "title")
+            //.attr("font-weight", "bold")
+            .attr("class", "text")
             .text(title));
 
     return svg.node();

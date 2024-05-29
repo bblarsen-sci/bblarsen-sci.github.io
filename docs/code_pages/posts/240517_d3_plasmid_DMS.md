@@ -6,7 +6,7 @@ date: 2024-05-17
 keywords:
     - D3
 subtext: Testing different animations and shape movement transistions
-thumbnail: /code_pages/thumbnails/lenti_genome.png
+thumbnail: ./thumbnails/lenti_genome.png
 ---
 
 

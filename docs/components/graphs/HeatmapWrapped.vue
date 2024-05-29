@@ -11,8 +11,9 @@
           @downloadSVG="downloadSVG" @downloadImage="downloadImage" />
       </aside>
       <main class="w-full sm:w-3/4 md:w-5/6 px-2">
-        <div class="font-light " ref="svgContainer"></div>
-
+        <div ref="svgContainer">
+          <svg></svg>
+        </div>
       </main>
     </div>
     <Tooltip ref="tooltip" />
@@ -27,12 +28,12 @@
   import { Legend } from '/components/legend.js';
   import Tooltip from '/components/tooltip.vue';
 
-const dataFile =
-  '/data/default_heatmap.csv'
+const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB3.csv';
 
 
   // DEFINE REACTIVE VARIABLES
   const data = shallowRef([]);
+  const legend = shallowRef(null);
   const svgContainer = shallowRef(null);
 
   const paddingValue = ref(0.1);
@@ -263,7 +264,7 @@ const dataFile =
   });
 
   function makeSvg() {
-    const svgElement = d3.select(svgContainer.value).append('svg')
+    const svgElement = d3.select('svg')
       .attr('width', width.value)
       .attr('height', height.value)
       .append('g')
@@ -273,7 +274,7 @@ const dataFile =
   }
 
   function updateHeatmap() {
-    const svg = d3.select(svgContainer.value); // Select the SVG container
+    const svg = d3.select('svg'); // Select the SVG container
     svg.selectAll('*').remove(); // Clear the SVG container. This is necessary to update the plot when the data changes.
 
     svgElement = makeSvg();
@@ -367,19 +368,27 @@ const dataFile =
 
 
     Legend(d3.scaleDiverging([min.value, 0, max.value], d3[selectedColorScale.value]).clamp(true), {
-      svgRef: svgContainer.value,
+      //svgRef: legend.value,
       title: "Cell Entry",
       width: 200,
       tickValues: [min.value, 0, max.value],
       xcoord: 0,
-      ycoord: 0,
+      ycoord: height.value - 25,
     })
   };
   fetchData();
   async function fetchData() {
     try {
-      const csv = await d3.csv(dataFile);
-      data.value = csv;
+      const response = await fetch(dataFile);
+      const file_text = await response.text();
+      const csv = d3.csvParse(file_text);
+      const array = csv.map((d) => ({
+      site: +d.site,
+      wildtype: d.wildtype,
+      mutant: d.mutant,
+      effect: +d.entry_CHO_bEFNB3,
+    }));
+      data.value = array;
     } catch (error) {
       console.error('Error fetching CSV file:', error);
     }

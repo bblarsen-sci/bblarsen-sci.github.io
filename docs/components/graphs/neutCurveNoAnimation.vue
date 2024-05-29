@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col items-center" ref="svgContainer"></div>
+    <div class="flex flex-col items-center font-light" ref="svgContainer"></div>
     <div class="flex flex-col gap-2 mt-10">
         <button class="btn-primary" @click="downloadImage">Download PNG</button>
       </div>
