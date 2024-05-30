@@ -1,20 +1,23 @@
-const defaultTheme = require('tailwindcss/defaultTheme')
+//const defaultTheme = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    './docs/.vitepress/**/*.{vue,js,vue,html,md}',
+    './docs/.vitepress/**/*.{vue,js,html,md}',
     './docs/components/**/*.vue',
+    './docs/code_pages/*.md',
+    './docs/code_pages/posts/*.md',
     './docs/**.md',
   ],
-  darkMode: 'selector',
+  darkMode: 'class',
+  important: true,
   theme: {
     extend: {
       typography: (theme) => ({
         DEFAULT: {
           css: {
             maxWidth: 'none',
-            color: theme('colors.slate.700'),
+            color: theme('colors.slate.800'),
             hr: {
               borderColor: theme('colors.slate.100'),
               marginTop: '3em',
@@ -95,7 +98,7 @@ export default {
             a: {
               fontWeight: theme('fontWeight.semibold'),
               textDecoration: 'none',
-              borderBottom: `1px solid ${theme('colors.sky.300')}`,
+              borderBottom: `1px solid ${theme('colors.red.400')}`,
             },
             'a:hover': {
               borderBottomWidth: '2px',
@@ -182,8 +185,8 @@ export default {
         },
         dark: {
           css: {
-            //color: theme('colors.slate.400'),
-            '--tw-prose-lead': theme('colors.slate.400'),
+            color: theme('colors.slate.300'),
+            '--tw-prose-lead': theme('colors.slate.300'),
             'h2, h3, h4, thead th': {
               color: theme('colors.slate.200'),
             },
@@ -208,7 +211,7 @@ export default {
             '--tw-prose-bullets': theme('colors.slate.500'),
             a: {
               color: theme('colors.white'),
-              borderBottomColor: theme('colors.sky.400'),
+              borderBottomColor: theme('colors.red.400'),
             },
             strong: {
               color: theme('colors.slate.200'),
@@ -229,16 +232,10 @@ export default {
       backgroundImage: {
         'sky-light': 'linear-gradient(150deg, #1E293B, #0C4A6E)', //slate-800 to sky-900
         'sky-dark': 'linear-gradient(220deg, #0C4A6E, #1E293B)', //sky-900 to slate-800
-        'nipah': "url('/images/nipah.png')",
-        'red' : 'linear-gradient(220deg, #1e293b, #450a0a)',
-      },
-      fontFamily: {
-        sans: ['Inter var','Open sans', ...defaultTheme.fontFamily.sans],
+        nipah: "url('/images/nipah.png')",
+        red: 'linear-gradient(220deg, #1e293b, #450a0a)',
       },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography')
-  ],
-}
-
+  plugins: [require('@tailwindcss/typography')],
+};

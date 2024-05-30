@@ -11,7 +11,7 @@ thumbnail: /thumbnails/d3_heatmap_blocks.png
 
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
-<D3PlotContainer>
+<D3PlotContainer class="flex flex-col items-center">
   <svg></svg>
 </D3PlotContainer>
 
@@ -126,13 +126,13 @@ function createAxes(svgElement) {
       .attr('y', height - margin.bottom + 35 )
       .attr('text-anchor', 'end')
       .attr('fill', 'currentColor')
-      .attr('font-size', '14px')
+      .attr('font-size', '13px')
       .text('Site')
     );
 
   yAxisGroup
     .call(d3.axisLeft(yScale.value).tickSizeOuter(0))
-    .attr('font-size', '12px')
+    .attr('font-size', '11px')
     .call(d => d.select(".domain").remove())
     //.call(d => d.select('text').remove()) // Remove the existing text element
     .call(d => d.append('text')
@@ -142,7 +142,7 @@ function createAxes(svgElement) {
       .attr('dy', '1em')
       .attr('text-anchor', 'middle')
       .attr('fill', 'currentColor')
-      .attr('font-size', '14px')
+      .attr('font-size', '13px')
       .text('Amino Acid')
     );
 }
@@ -158,7 +158,7 @@ function updateHeatmap(svgElement) {
   const gx = svgElement.select('.x-axis')
     .call(d3.axisBottom(xScale.value).tickSizeOuter(0))
     .attr('transform', `translate(1000,${innerHeight})`)
-    .attr('font-size', '12px')
+    .attr('font-size', '11px')
     .call(d => d.select(".domain").remove())
     
 

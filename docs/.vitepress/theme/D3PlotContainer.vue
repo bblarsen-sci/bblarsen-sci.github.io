@@ -1,5 +1,5 @@
 <template>
-  <div class="font-sans font-light max-w-screen-md mx-auto mb-10 px-6 py-2 md:py-10 rounded-md md:border-2 md:shadow-md">
+  <div class="font-light text-slate-950 dark:text-slate-200 max-w-screen-lg mx-auto p-4 mb-10 rounded-lg md:shadow-lg">
     <slot></slot>
   </div>
 </template>

@@ -1,112 +1,103 @@
 <template>
-    <div class="px-24 pb-6 mx-auto max-w-screen-lg">
-        <div class="flex flex-col items-center justify-between py-4">
-            <div class="prose dark:prose-invert">
-            <h1 class="">Visualizing
-                Biological Data</h1>
+  <div class="container mx-auto max-w-screen-lg px-2">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div v-for="(post, index) in filteredPosts" :key="index" class="card">
+        <a :href="post.url" class="block h-full">
+          <article
+            class="dark:prose-dark prose flex h-full flex-col justify-between gap-2 rounded-lg border-2 border-slate-100 p-2 px-4 shadow-md hover:border-slate-300 dark:border-slate-500 dark:shadow-slate-500 dark:hover:border-slate-100"
+          >
+            <h2 class="">
+              {{ post.title }}
+            </h2>
+            <div
+              v-if="post.thumbnail"
+              class="mx-auto aspect-square h-36 w-36 rounded-lg pb-6 shadow-lg"
+            >
+              <img :src="post.thumbnail" alt="Thumbnail" class="h-full w-full object-cover" />
             </div>
-            <p class="py-4 text-lg">With <a href="https://d3js.org/" class="text-sky-500 hover:text-sky-600">D3</a>, <a
-                    href="https://altair-viz.github.io/" class="text-sky-500 hover:text-sky-600">Altair</a>, and <a
-                    href="https://www.cgl.ucsf.edu/chimerax/" class="text-sky-500 hover:text-sky-600">ChimeraX</a></p>
-        </div>
-        <div>
-            <v-select class="mb-10 max-w-48 border-2 rounded-md shadow-sm text-base" v-model="selectedKeywords"
-                :options="filteredKeywords" multiple placeholder="Filter by keywords">
-            </v-select>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div v-for="(post, index) in filteredPosts" :key="index" class="card">
-                    <a :href="post.url" class="block h-full">
-                        <article
-                            class="h-full flex flex-col justify-between space-y-2 p-6 dark:bg-white/10 rounded-md shadow-md border-2">
-                            <div class="space-y-4">
-                                <p class="text-xl leading-8 tracking-tight">
-                                    {{ post.title }}</p>
-                                <div v-if="post.thumbnail" class="h-36 w-36 border-2 mx-auto rounded-lg">
-                                    <img :src="post.thumbnail" alt="Thumbnail" class="object-cover w-full h-full">
-                                </div>
-                                <div v-if="post.subtext" class="text-sm keywords" v-html="post.subtext"></div>
-                                <div v-if="post.keywords" class="keywords">
-                                    <span><strong>Keywords: </strong></span>
-                                    <span v-for="(keyword, kIndex) in post.keywords" :key="kIndex">{{ keyword }}<span
-                                            v-if="kIndex < post.keywords.length - 1">, </span></span>
-                                </div>
-                            </div>
-                        </article>
-                    </a>
-                </div>
-            </div>
-        </div>
+            <p v-if="post.subtext" class="keywords text-sm" v-html="post.subtext"></p>
+            <p v-if="post.keywords" class="keywords">
+              <span><strong>Software: </strong></span>
+              <span v-for="(keyword, kIndex) in post.keywords" :key="kIndex"
+                >{{ keyword }}<span v-if="kIndex < post.keywords.length - 1">, </span></span
+              >
+            </p>
+          </article>
+        </a>
+      </div>
     </div>
+  </div>
 </template>
+
 <script>
-    import { ref, computed } from 'vue';
-    import { data as postsData } from './posts.data.js';
-    import { useData } from 'vitepress';
-    import DateComponent from './Date.vue';
+import { ref, computed } from 'vue';
+import { data as postsData } from './posts.data.js';
+import { useData } from 'vitepress';
+import DateComponent from './Date.vue';
 
-    export default {
-        components: {
-            DateComponent,
-        },
-        props: {
-            currentDirectory: {
-                type: String,
-                required: true
-            }
-        },
-        setup(props) {
-            const { frontmatter } = useData();
-            const selectedKeywords = ref([]);
+export default {
+  components: {
+    DateComponent,
+  },
+  props: {
+    currentDirectory: {
+      type: String,
+      required: true,
+    },
+  },
+  setup(props) {
+    const { frontmatter } = useData();
+    const selectedKeywords = ref([]);
 
-            const filteredPosts = computed(() => {
-                const currentDirectory = props.currentDirectory;
+    const filteredPosts = computed(() => {
+      const currentDirectory = props.currentDirectory;
 
-                return postsData.filter(post => {
-                    const parentDirectory = post.url.split('/').slice(-3, -2)[0];
-                    const isInCurrentDirectory = parentDirectory === currentDirectory;
-                    const hasSelectedKeywords = selectedKeywords.value.length === 0 ||
-                        post.keywords?.some(keyword => selectedKeywords.value.includes(keyword));
+      return postsData.filter((post) => {
+        const parentDirectory = post.url.split('/').slice(-3, -2)[0];
+        const isInCurrentDirectory = parentDirectory === currentDirectory;
+        const hasSelectedKeywords =
+          selectedKeywords.value.length === 0 ||
+          post.keywords?.some((keyword) => selectedKeywords.value.includes(keyword));
 
-                    return isInCurrentDirectory && hasSelectedKeywords;
-                });
-            });
+        return isInCurrentDirectory && hasSelectedKeywords;
+      });
+    });
 
-            const filteredKeywords = computed(() => {
-                const keywords = new Set();
-                filteredPosts.value.forEach(post => {
-                    if (post.keywords) {
-                        post.keywords.forEach(keyword => keywords.add(keyword));
-                    }
-                });
-                return Array.from(keywords);
-            });
-
-            return {
-                frontmatter,
-                selectedKeywords,
-                filteredKeywords,
-                filteredPosts,
-                currentDirectory: props.currentDirectory,
-            };
+    const filteredKeywords = computed(() => {
+      const keywords = new Set();
+      filteredPosts.value.forEach((post) => {
+        if (post.keywords) {
+          post.keywords.forEach((keyword) => keywords.add(keyword));
         }
-    }
+      });
+      return Array.from(keywords);
+    });
+
+    return {
+      frontmatter,
+      selectedKeywords,
+      filteredKeywords,
+      filteredPosts,
+      currentDirectory: props.currentDirectory,
+    };
+  },
+};
 </script>
 <style scoped>
-    a {
-        text-decoration: none;
-    }
+a {
+  text-decoration: none;
+}
 
-    .card {
-        transition: transform 0.3s ease;
-    }
+.card {
+  transition: transform 0.3s ease;
+}
 
-    .card:hover {
-        transform: translateY(-5px);
-    }
+.card:hover {
+  transform: translateY(-5px);
+}
 
-    .keywords {
-        font-size: 0.875rem;
-        color: var(--vp-c-text-2);
-    }
+.keywords {
+  font-size: 0.875rem;
+  color: var(--vp-c-text-2);
+}
 </style>

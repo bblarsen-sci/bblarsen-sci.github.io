@@ -1,6 +1,6 @@
 <template>
-    <div class="max-w-screen-md mx-auto prose dark:prose-invert">
-        <h3 class="flex justify-start pb-6 text-left font-light  ">
+    <div class="max-w-screen-lg mx-auto prose dark:prose-invert px-2">
+        <h3 class="pb-6 font-light opacity-80">
             <slot></slot>
         </h3>
     </div>

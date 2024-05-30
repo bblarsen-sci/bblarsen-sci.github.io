@@ -87,7 +87,7 @@ function updatePath(svg) {
         .attr('mix-blend-mode', 'multiply')
         .attr('fill', 'none')
         .attr('stroke', (d, i) => `url(#lineGradient-${i})`)
-        .attr('stroke-width', 1)
+        .attr('stroke-width', 1.5)
         .attr('opacity', 1)
         .attr('d', d3.line().curve(d3.curveBasis)
           .x(d => x(d.x))

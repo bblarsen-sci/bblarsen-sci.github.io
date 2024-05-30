@@ -1,6 +1,6 @@
 <template>
-    <div class="max-w-screen-md mx-auto prose dark:prose-invert">
-        <h1 class="flex justify-start pt-6 text-left ">
+    <div class="max-w-screen-lg mx-auto prose prose-dark dark:prose-invert px-2">
+        <h1 class="pt-6">
             <slot></slot>
         </h1>
     </div>
