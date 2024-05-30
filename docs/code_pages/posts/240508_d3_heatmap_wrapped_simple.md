@@ -12,7 +12,7 @@ thumbnail: /thumbnails/d3_zoom_heatmap.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-  <div ref="svgContainer"></div>
+  <svg></svg>
 </D3PlotContainer>
 
 
@@ -124,26 +124,7 @@ const yScale = computed(() =>
     .padding(paddingValue)
 );
 
-const legend = svg => {
-  const g = svg
-    .selectAll("g")
-    .attr("class", "legend")
-    .data(colorScale.value.domain())
-    .join("g")
-    .attr("transform", (d, i) => `translate(${margin.left + 50}, ${i * 20})`);
 
-  g.append("circle")
-    .attr("class", "legendcircle")
-    .attr("r", 5)
-    .attr("stroke", "currentColor")
-    .attr("fill", colorScale.value);
-
-  g.append("text")
-    .attr("class", "legend-text")
-    .attr("x", 10)
-    .attr("dy", "0.1em")
-    .text(d => d);
-}
 
 function updateHeatmap() {
   console.log('updating heatmap')
@@ -151,9 +132,8 @@ function updateHeatmap() {
     chartGroup.attr("transform", event.transform);
   }
 
-  const svg = d3.select(svgContainer.value); // Select the SVG container
   // Append a new SVG element to the container
-  const svgElement = svg.append('svg')
+  const svgElement = d3.select('svg')
     .attr('preserveAspectRatio', "xMinYMin meet")
     .attr('viewBox', `0 0 ${width.value} ${height.value}`)
     .call(d3.zoom().on("zoom", zoomed)); // Add zoom behavior to the SVG
@@ -229,12 +209,12 @@ function updateHeatmap() {
       .text('Amino Acid');
   
   Legend(d3.scaleDiverging([min, 0, max], d3[color]).clamp(true), {
-    svgRef: svgContainer.value,
+    //svgRef: svgContainer.value,
     title: "Cell Entry",
     width: 200,
     tickValues: [min, 0, max],
     xcoord: 0,
-    ycoord: 10,
+    ycoord: height.value - 50,
   })
 };
 

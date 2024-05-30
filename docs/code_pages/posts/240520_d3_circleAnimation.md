@@ -13,7 +13,7 @@ thumbnail: /thumbnails/circle_animation.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-  <div ref="svgContainer" class="bg-white"></div>
+  <svg></svg>
 </D3PlotContainer>
 
 
@@ -40,11 +40,11 @@ const generateDataset = () => (
 // Create the SVG element
 function createSvg() {
   const svg = d3
-    .select(svgContainer.value)
-    .append('svg')
+    .select('svg')
     .attr('preserveAspectRatio', 'xMinYMin meet')
     .attr('viewBox', [0, 0, width, height])
-    .attr('style', 'max-width: 100%; height: auto;')
+    //.style('background-color', 'white');
+    
   return svg;
 }
 
@@ -71,10 +71,10 @@ function update(svg) {
         .transition()
         .duration(2000)
         .ease(d3.easePolyInOut)
-        .attr('stroke', 'slategray')
+        .attr('stroke', 'currentColor')
         .style('mix-blend-mode', 'multiply')
         .attr('stroke-width', 0.5)
-        .attr("r", 4)
+        .attr("r", 5)
         .attr('fill', d => colorScale(d[0])),
       update => update
         .transition()

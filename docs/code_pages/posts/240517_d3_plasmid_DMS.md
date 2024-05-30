@@ -12,7 +12,7 @@ thumbnail:
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-  <div ref="svgContainer" class="p-24"></div>
+  <svg></svg>
 </D3PlotContainer>
 
 
@@ -21,13 +21,12 @@ thumbnail:
 import { ref, onMounted } from 'vue';
 import * as d3 from 'd3';
 
-const svgContainer = ref(null);
 
 onMounted(() => {
   const width = 500;
   const height = 500;
 
-  const svg = d3.select(svgContainer.value).append('svg')
+  const svg = d3.select('svg')
     .attr('preserveAspectRatio', "xMinYMin meet")
     .attr("viewBox", [0, 0, width, height]);
 

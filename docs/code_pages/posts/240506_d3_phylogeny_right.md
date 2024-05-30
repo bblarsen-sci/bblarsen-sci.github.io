@@ -12,7 +12,7 @@ thumbnail: /thumbnails/phylogeny_right.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-    <div ref="svgContainer" class=""></div>
+    <svg></svg>
 </D3PlotContainer>
 
 
@@ -21,7 +21,6 @@ import * as d3 from 'd3';
 import { onMounted, ref, computed } from 'vue';
 import { parseNewick, projection, diagonal, scaleBranchLengths } from '/components/treeUtilities.js'
 
-const svgContainer = ref(null);
 const data = ref(null);
 
 function setColor(d) {
@@ -66,11 +65,11 @@ const legend = svg => {
     .attr("class", "legend")
     .data(colorScale.value.domain())
     .join("g")
-    .attr("transform", (d, i) => `translate(${margin.left + 50}, ${i * 20})`);
+    .attr("transform", (d, i) => `translate(${margin.left + 100}, ${i * 20})`);
 
   g.append("circle")
     .attr("class", "legendcircle")
-    .attr("r", 5)
+    .attr("r", 4)
     .attr("stroke", "currentColor")
     .attr("fill", colorScale.value);
 
@@ -95,11 +94,11 @@ function drawChart() {
   scaleBranchLengths(root.value.descendants(), width-margin.left-margin.right);
 
   //DRAW SVG
-  var svg = d3.select(svgContainer.value).append("svg")
+  var svg = d3.select('svg')
     .attr("preserveAspectRatio", "xMinYMin meet")
     .attr('viewBox', [0, 0, width, height])
     .append("g")
-    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+    .attr("transform", `translate(${margin.left-100}, ${margin.top})`);
 
   svg.append("g")
     .call(legend);
@@ -141,6 +140,7 @@ onMounted(async () => {
   text-anchor: start;
   alignment-baseline: middle;
   fill: currentColor;
+  font-size: 12px;
 }
 
 .legendcircle {
@@ -149,7 +149,7 @@ onMounted(async () => {
 
 .link {
   fill: none;
-  stroke: black;
+  stroke: currentColor;
   stroke-width: 1.25;
 }
 </style>

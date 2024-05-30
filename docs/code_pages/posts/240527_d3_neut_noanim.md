@@ -12,7 +12,7 @@ thumbnail: /thumbnails/d3_neutCurve_static.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-<div class="flex flex-col items-center font-light" ref="svgContainer"></div>
+<svg></svg>
 </D3PlotContainer>
 
 
@@ -24,8 +24,8 @@ thumbnail: /thumbnails/d3_neutCurve_static.png
 
     const svgContainer = ref(null);
     const dataset = ref(null);
-    const width = 600;
-    const height = 400;
+    const width = 500;
+    const height = 300;
     const marginTop = 20;
     const marginRight = 30;
     const marginBottom = 40;
@@ -45,7 +45,7 @@ thumbnail: /thumbnails/d3_neutCurve_static.png
 
     // Create the SVG element
     function createSvg() {
-        const svg = d3.select(svgContainer.value).append('svg')
+        const svg = d3.select('svg')
             //.attr('width', width)
             //.attr('height', height)
             .attr('preserveAspectRatio', "xMinYMin meet")
@@ -159,6 +159,28 @@ thumbnail: /thumbnails/d3_neutCurve_static.png
             .attr('font-size', '12px')
             .attr("text-anchor", "middle")
             .html("Infectivity (%)");
+
+        const legend = svg.append('g')
+            .attr('class', 'legend')
+            .attr('transform', `translate(${width - marginRight - 120}, ${marginTop+40})`);
+        const legendItems = legend.selectAll('.legend-item')
+            .data(serumDomain)
+            .join('g')
+            .attr('class', 'legend-item')
+            .attr('transform', (d, i) => `translate(0, ${(i+10) * 14})`);
+        legendItems.append('circle')
+            .attr('cx', 0)
+            .attr('cy', -45)
+            .attr('r', 4)
+            .attr('fill', d => colorScale(d));
+        legendItems.append('text')
+            .attr('class', 'text')
+            .attr('x', 6)
+            .attr('y', -42)
+            .attr('fill', 'currentColor')
+            .attr('text-anchor', 'start')
+            .attr('font-size', 10)
+            .text(d => d);
     }
 
     const fetchData = async () => {

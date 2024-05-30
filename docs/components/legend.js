@@ -9,8 +9,8 @@ export function Legend(color, {
     width = 320,
     height = 40 + tickSize,
     marginTop = 15,
-    marginRight = 21,
-    marginBottom = 16 + tickSize,
+    marginRight = 10,
+    marginBottom = 18 + tickSize,
     marginLeft = 15,
     ticks = width / 64,
     tickFormat,
@@ -18,8 +18,6 @@ export function Legend(color, {
     xcoord = 0,
     ycoord = 0
 } = {}) {
-
-    
 
     function ramp(color, n = 256) {
         const canvas = document.createElement("canvas");

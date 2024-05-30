@@ -12,15 +12,13 @@ thumbnail: /thumbnails/slider_test.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-    <div class="container mx-auto max-w-screen-lg border-0">
     <div class="flex flex-wrap gap-4 justify-evenly pb-10 border-0">
       <div v-for="(slider, index) in sliders" :key="index">
         <h3>{{ slider.label }}: {{ slider.value }}</h3>
         <CustomSlider :min="slider.min" :max="slider.max" v-model="slider.value" />
       </div>
     </div>
-      <div ref="svgContainer"></div>
-  </div>
+      <svg></svg>
 </D3PlotContainer>
 
 
@@ -30,7 +28,6 @@ import * as d3 from 'd3';
 import CustomSlider from "/components/CustomSlider.vue";
 
 // DEFINE VARIABLES
-const svgContainer = ref(null);
 let circle = null;
 
 // DEFINE D3 FUNCTIONS
@@ -45,7 +42,7 @@ const sliders = ref([
 ]);
 
 onMounted(() => {
-  const svgElement = d3.select(svgContainer.value).append('svg')
+  const svgElement = d3.select('svg')
     .attr('viewBox', `0 0 ${width} ${height}`)
     .append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`);

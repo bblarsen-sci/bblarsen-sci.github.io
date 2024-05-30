@@ -12,7 +12,7 @@ thumbnail: /thumbnails/d3_heatmap_blocks.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-  <div ref="svgContainer" class="flex flex-col justify-center items-center"></div>
+  <svg></svg>
 </D3PlotContainer>
 
 
@@ -36,7 +36,7 @@ const sitesPerView = 20;
 
 const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB2.csv'
 const height = 300;
-const margin = { top: 20, right: 50, bottom: 50, left: 40 };
+const margin = { top: 10, right: 50, bottom: 90, left: 40 };
 const innerHeight = height - margin.top - margin.bottom;
 const squareSize = Math.min(innerHeight / amino_acids.length, 20); // Define the square size based on the height and number of amino acids
 const innerWidth = squareSize * sitesPerView; // Define the inner width based on the square size and number of visible sites
@@ -104,11 +104,11 @@ const xScale = computed(() => {
 });
 
 function createSvg() {
-  const svgElement = d3.select(svgContainer.value).append('svg')
+  const svgElement = d3.select('svg')
     .attr('width', width)
     .attr('height', height)
     .append('g')
-    .attr('transform', `translate(${margin.left + (width - margin.left - margin.right - innerWidth) / 2}, ${margin.top})`);
+    .attr('transform', `translate(${margin.left}, ${margin.top})`);
   return svgElement;
 }
 
@@ -123,7 +123,7 @@ function createAxes(svgElement) {
   svgElement.append('g')
     .call(d => d.append('text')
       .attr('x', innerWidth / 2)
-      .attr('y', height - margin.bottom + 25 )
+      .attr('y', height - margin.bottom + 35 )
       .attr('text-anchor', 'end')
       .attr('fill', 'currentColor')
       .attr('font-size', '14px')
@@ -214,7 +214,7 @@ function updateHeatmap(svgElement) {
         .attr('opacity', 0)
         .attr('dominant-baseline', 'middle')
         .attr('dy', '0.05em')
-        .attr('font-size', '12px')
+        .attr('font-size', '10px')
         //.attr('font-weight', '100')
         .text('X')
         .call(enter => enter.transition(t).delay((d, i) => i * delayByIndex.value * Math.random()).ease(d3[easingRef.value])
@@ -250,10 +250,12 @@ watch(data, () => {
     .attr('class', 'y-axis');
 
   Legend(d3.scaleDiverging([-4, 0, 4], d3.interpolateRdBu), {
-    svgRef: svgContainer.value,
+    //svgRef: svgContainer.value,
     title: "Cell Entry",
-    width: 250,
+    width: 150,
     tickValues: [-4, -2, 0, 2, 4],
+    xcoord: innerWidth - 70,
+    ycoord: innerHeight + 60,
   })
   
   createAxes(svgElement);

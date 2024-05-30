@@ -5,14 +5,14 @@ aside: false
 date: 2024-05-19
 keywords:
     - D3
-subtext: AnimatedLines
+subtext: Animation of points with random y-coordinates with fitted line
 thumbnail: /thumbnails/lines_animation.png
 ---
 
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-    <div ref="svgContainer"></div>
+    <svg></svg>
 </D3PlotContainer>
 
 
@@ -62,8 +62,7 @@ function generateRandomCoordinates() {
 // Create the SVG element
 function createSvg() {
     const svg = d3
-        .select(svgContainer.value)
-        .append('svg')
+        .select('svg')
         .attr('preserveAspectRatio', 'xMinYMin meet')
         .attr('viewBox', [0, 0, width, height])
         .append('g')

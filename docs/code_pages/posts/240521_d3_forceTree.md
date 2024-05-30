@@ -12,7 +12,8 @@ thumbnail: /thumbnails/d3_forceTree.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-<div ref="svgContainer"></div></D3PlotContainer>
+<svg></svg>
+</D3PlotContainer>
 
 
 <script setup>
@@ -22,7 +23,7 @@ import { parseNewick, projection, diagonal, scaleBranchLengths } from '/componen
 
 const svgContainer = ref(null);
 
-const width = 928;
+const width = 800;
 const height = 600;
 let data = null;
 let svg = null;
@@ -30,10 +31,10 @@ const colorScale = ref(null);
 let simulation = null;
 
 function createSvg() {
-  const svg = d3.select(svgContainer.value).append("svg")
+  const svg = d3.select('svg')
     .attr("preserveAspectRatio", "xMinYMin meet")
     .attr('viewBox', [-width / 2, -height / 2, width, height])
-    .attr("style", "max-width: 100%; height: auto;");
+    //.attr("style", "max-width: 100%; height: auto;");
   return svg;
 }
 

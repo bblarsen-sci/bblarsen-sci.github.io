@@ -11,7 +11,7 @@ thumbnail: /thumbnails/d3_hierarchy.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-  <div ref="treeContainer"></div>
+  <svg></svg>
 </D3PlotContainer>
 
 
@@ -20,9 +20,8 @@ import { ref, onMounted, watch, computed} from 'vue';
 import * as d3 from 'd3';
 
 const root = ref(null);
-const treeContainer = ref(null);
 
-const width = 800;
+const width = 600;
 const dx = 7;
 
 const dataFile = 
@@ -56,8 +55,7 @@ function makePlot() {
   // Compute the adjusted height of the tree.
   const height = x1 - x0 + dx * 2;
 
-  const svg = d3.select(treeContainer.value)
-    .append('svg')
+  const svg = d3.select('svg')
     .attr("viewBox", [-dy / 3, x0 - dx, width, height])
 
   svg.append("g")

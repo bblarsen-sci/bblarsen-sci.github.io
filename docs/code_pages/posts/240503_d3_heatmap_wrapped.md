@@ -81,7 +81,7 @@ const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_D
 
   let svgElement = null;
 
-  const margin = { top: 20, right: 20, bottom: 30, left: 50 }; // margin for the SVG
+  const margin = { top: 20, right: 20, bottom: 50, left: 50 }; // margin for the SVG
   const rowPadding = 30; // amount of padding between the rows
   const squareSize = 9; // size of each square in the heatmap
 
@@ -365,7 +365,7 @@ const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_D
       svgElement.append('text')
         .attr('class', 'axis-title-x')
         .attr('x', innerWidth.value / 2)
-        .attr('y', innerHeight.value + 10)
+        .attr('y', innerHeight.value)
         .text('Site');
 
       // Add the column title
@@ -380,10 +380,10 @@ const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_D
     Legend(d3.scaleDiverging([min.value, 0, max.value], d3[selectedColorScale.value]).clamp(true), {
       //svgRef: legend.value,
       title: "Cell Entry",
-      width: 200,
+      width: 150,
       tickValues: [min.value, 0, max.value],
       xcoord: 0,
-      ycoord: height.value - 25,
+      ycoord: innerHeight.value + 20,
     })
   };
   fetchData();

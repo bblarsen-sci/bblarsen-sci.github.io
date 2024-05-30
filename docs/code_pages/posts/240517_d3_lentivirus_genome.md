@@ -12,7 +12,7 @@ thumbnail: /thumbnails/lenti_genome.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-  <div ref="svgContainer"></div>
+  <svg></svg>
 </D3PlotContainer>
 
 
@@ -86,7 +86,7 @@ function startAnimation(svg, gRects, gLabels, gx, xTitle, backboneText) {
 }
 
 onMounted(() => {
-  const svg = d3.select(svgContainer.value).append('svg')
+  const svg = d3.select('svg')
     .attr('preserveAspectRatio', "xMinYMin meet")
     .attr("viewBox", [0, 0, width, height]);
   

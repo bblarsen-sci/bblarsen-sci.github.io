@@ -12,7 +12,7 @@ thumbnail: /thumbnails/responsive.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-<div ref="bigContainer" class="container h-screen w-full mx-auto">
+<div ref="bigContainer" class="container h-screen w-screen mx-auto">
     <div ref="svgContainer"></div>
   </div>
 </D3PlotContainer>

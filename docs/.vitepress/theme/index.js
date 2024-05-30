@@ -12,6 +12,7 @@ import SubtitleHeader from "./SubtitleHeader.vue";
 import D3PlotContainer from "./D3PlotContainer.vue";
 
 export default {
+  
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {

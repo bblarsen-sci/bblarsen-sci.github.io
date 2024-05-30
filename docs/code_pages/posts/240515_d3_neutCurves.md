@@ -5,7 +5,7 @@ aside: false
 date: 2024-05-15
 keywords:
     - D3
-subtext: Animated neutralization curves
+subtext: Transitioning lines and circles with error bars showing neutralization of pseudovirus with soluble receptors
 thumbnail: /thumbnails/d3_neutCurves.png
 ---
 

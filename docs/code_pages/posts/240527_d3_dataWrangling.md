@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Data wrangling
+title: Test different code style
 aside: false
 date: 2024-05-27
 keywords:

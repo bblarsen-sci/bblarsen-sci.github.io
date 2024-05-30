@@ -5,13 +5,13 @@ aside: false
 date: 2024-05-19
 keywords:
     - D3
-subtext: Animated phylogenetic tree 
+subtext: Messing with transitions and animations in D3 on a phylogenetic tree. 
 ---
 
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-<div ref="svgContainer"></div>
+<svg></svg>
 </D3PlotContainer>
 
 
@@ -20,7 +20,6 @@ import * as d3 from 'd3';
 import { onMounted, ref, computed } from 'vue';
 import { parseNewick, projection, diagonal, scaleBranchLengths } from '/components/treeUtilities.js';
 
-const svgContainer = ref(null);
 
 const margin = { top: 20, right: 20, bottom: 20, left: 20 };
 const width = 600;
@@ -30,10 +29,10 @@ let svg = null;
 const colorScale = ref(null);
 
 function createSvg() {
-  const svg = d3.select(svgContainer.value).append("svg")
+  const svg = d3.select('svg')
     .attr('viewBox', [0, 0, width, height])
     .append("g")
-    .attr("transform", `translate(${margin.left-100}, ${margin.top})`);
+    .attr("transform", `translate(${margin.left-200}, ${margin.top})`);
 
   svg.append('g').attr('class', 'links');
   svg.append('g').attr('class', 'nodes');

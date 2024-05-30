@@ -5,7 +5,7 @@ aside: false
 date: 2024-05-22
 keywords:
     - D3
-subtext: Line animation
+subtext: Moving red/blue lines with gradient applied on y-axis
 thumbnail: /thumbnails/d3_lines_redblue.png
 ---
 
@@ -23,7 +23,7 @@ import * as d3 from 'd3';
 const svgContainer = ref(null);
 
 const width = 1000;
-const height = 200;
+const height = 250;
 
 
 // Function to generate data points
@@ -101,7 +101,7 @@ function updatePath(svg) {
         .attr('mix-blend-mode', 'multiply')
         .attr('fill', 'none')
         .attr('stroke', (d, i) => `url(#lineGradient-${i})`)
-        .attr('stroke-width', 1)
+        .attr('stroke-width', 1.5)
         .attr('opacity', 1)
         .attr('d', d3.line().curve(d3.curveBasis)
           .x(d => x(d.x))

@@ -1,8 +1,10 @@
 <template>
     <div class="px-24 pb-6 mx-auto max-w-screen-lg">
         <div class="flex flex-col items-center justify-between py-4">
-            <p class="text-3xl tracking-tight leading-8 font-bold ">Visualizing
-                Biological Data</p>
+            <div class="prose dark:prose-invert">
+            <h1 class="">Visualizing
+                Biological Data</h1>
+            </div>
             <p class="py-4 text-lg">With <a href="https://d3js.org/" class="text-sky-500 hover:text-sky-600">D3</a>, <a
                     href="https://altair-viz.github.io/" class="text-sky-500 hover:text-sky-600">Altair</a>, and <a
                     href="https://www.cgl.ucsf.edu/chimerax/" class="text-sky-500 hover:text-sky-600">ChimeraX</a></p>

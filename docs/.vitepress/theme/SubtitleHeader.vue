@@ -1,7 +1,7 @@
 <template>
-    <div class="max-w-screen-md mx-auto">
-        <div class="flex justify-start pb-6 text-left font-light text-opacity-70 text-[16px]">
+    <div class="max-w-screen-md mx-auto prose dark:prose-invert">
+        <h3 class="flex justify-start pb-6 text-left font-light  ">
             <slot></slot>
-        </div>
+        </h3>
     </div>
 </template>

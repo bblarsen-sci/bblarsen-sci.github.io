@@ -11,12 +11,12 @@ thumbnail: /thumbnails/steamgraph.png
 
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
-<D3PlotContainer>
-<select class="form-select" v-model="colorValue">
+<D3PlotContainer class="max-w-screen-2xl">
+  <svg></svg>
+  <select class="mt-10" v-model="colorValue">
     <option v-for="color in colorOptions">{{ color }}</option>
-  </select>
-  <div class="py-4"></div>
-  <div ref="svgContainer" class=""></div></D3PlotContainer>
+</select>
+</D3PlotContainer>
 
 
 <script setup>
@@ -32,7 +32,7 @@ thumbnail: /thumbnails/steamgraph.png
   const m = 500;
   const k = 10;
   const width = 928;
-  const height = 150;
+  const height = 300;
 
   let svg;
   let area;
@@ -41,7 +41,7 @@ thumbnail: /thumbnails/steamgraph.png
   let z;
 
   function createSvg() {
-    svg = d3.select(svgContainer.value).append("svg")
+    svg = d3.select('svg')
       .attr("preserveAspectRatio", "xMinYMin meet")
       .attr('viewBox', [0, 0, width, height]);
   }
@@ -122,3 +122,18 @@ thumbnail: /thumbnails/steamgraph.png
   });
 </script>
 
+<style scoped>
+  select {
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #333;
+    outline: none;
+  }
+
+  select:focus {
+    border-color: #888;
+  }
+</style>

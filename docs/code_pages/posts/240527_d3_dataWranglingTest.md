@@ -257,7 +257,7 @@ thumbnail: /thumbnails/data_wrangling.png
 
     // Update the y-axis label
     const yAxisLabel = svg.select('.y-axis-label');
-    const yAxisLabelText = selectedDataset.value.includes('binding') ? 'Mean Binding' : 'Mean Entry';
+    const yAxisLabelText = selectedDataset.value.includes('binding') ? 'Summed Binding' : 'Summed Entry';
     if (yAxisLabel.empty()) {
       svg.append('text')
         .attr('class', 'y-axis-label')
