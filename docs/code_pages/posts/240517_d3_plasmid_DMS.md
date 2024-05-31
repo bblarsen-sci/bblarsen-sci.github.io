@@ -1,21 +1,19 @@
 ---
-layout: page
+layout: doc
 title: D3 zoom and animations onto plasmids
 aside: false
 date: 2024-05-17
 keywords:
-    - D3
-subtext: Testing different zoom animations onto mutant plasmid library
-thumbnail: 
+  - D3
+subtext: Testing different zoom animations on a mutant plasmid library
+thumbnail: /thumbnails/plasmidZoom.jpg
 ---
 
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-  <svg></svg>
+<svg></svg>
 </D3PlotContainer>
-
-
 
 <script setup>
 import { ref, onMounted } from 'vue';

@@ -1,22 +1,19 @@
 ---
-layout: page
+layout: doc
 title: Circle animation Test
 aside: false
 date: 2024-05-20
 keywords:
-    - D3
+  - D3
 subtext: playing around with D3 animations
 thumbnail: /thumbnails/circle_animation.png
 ---
 
-
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-  <svg></svg>
+<svg></svg>
 </D3PlotContainer>
-
-
 
 <script setup>
 import { ref, onMounted } from 'vue';
@@ -88,5 +85,3 @@ function update(svg) {
     )
 }
 </script>
-
-

@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: doc
 title: D3 heatmap blocks + animation
 aside: false
 date: 2024-05-01
 keywords:
-    - D3
+  - D3
 subtext: Heatmap showing mutational effects in blocks of sites with a transistion animation on repeat.
 thumbnail: /thumbnails/d3_heatmap_blocks.png
 ---
@@ -12,9 +12,8 @@ thumbnail: /thumbnails/d3_heatmap_blocks.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer class="flex flex-col items-center">
-  <svg></svg>
+<svg></svg>
 </D3PlotContainer>
-
 
 <script setup>
 import { ref, watch, onUnmounted, computed, shallowRef } from 'vue';

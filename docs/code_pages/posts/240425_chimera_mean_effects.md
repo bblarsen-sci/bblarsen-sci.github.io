@@ -1,25 +1,25 @@
 ---
-title: Mapping quantitative values onto protein structures 
+title: Mapping quantitative values onto protein structures
 aside: false
 date: 2024-04-25
 keywords:
-    - ChimeraX
+  - ChimeraX
 subtext: How to map aggregate deep mutational scanning measurements on a protein structure using ChimeraX.
 thumbnail: /thumbnails/chimera_mean_effects.png
 ---
 
 # {{$frontmatter.title}}
-{{$frontmatter.subtext}}
 
+{{$frontmatter.subtext}}
 
 <div class="flex justify-center items-center">
     <img src="/images/entry_tetramer_better.png" class="sm:w-1/4 md:w-1/4 lg:w-1/2"/>
 </div>
 
-
 <div style="text-align: center; color: grey; font-size: smaller">Structure of the Nipah receptor binding protein colored by the average effects of mutations.</div>
 
-To map effects of DMS onto a protein in ChimeraX, you need a ```.defattr``` file in this format:
+To map effects of DMS onto a protein in ChimeraX, you need a `.defattr` file in this format:
+
 ```
 attribute: entry
 match mode: any
@@ -31,8 +31,8 @@ recipient: residues
 	:75	0.099
     ...
 ```
-Where the attribute is the **name** of what you are mapping, which will be called in ChimeraX, the match mode is how to match the residues, and the recipient is the residues. This is followed by the site number and the effect. Since the DMS data is in a ```.csv``` file, I wrote a Python script to aggregate the mean effects of mutations by site and then writes them to a ```.defattr``` file.
 
+Where the attribute is the **name** of what you are mapping, which will be called in ChimeraX, the match mode is how to match the residues, and the recipient is the residues. This is followed by the site number and the effect. Since the DMS data is in a `.csv` file, I wrote a Python script to aggregate the mean effects of mutations by site and then writes them to a `.defattr` file.
 
 ```python
 import math
@@ -43,14 +43,14 @@ import csv
 import subprocess
 def aggregate_entry_mean(infile,name,outfile):
     df = pd.read_csv(infile)
-    # Use pandas to calculate the mean at each site. 
+    # Use pandas to calculate the mean at each site.
     tmp_df = df.groupby('site')['effect'].mean().reset_index()
-    
+
     # Modify the dataframe to prepend a tab character and format as strings
     tmp_df['site'] = tmp_df['site'].astype(str)
     tmp_df['effect'] = tmp_df['effect'].astype(str)
     tmp_df['formatted'] = '\t' + ':' + tmp_df['site'] + '\t' + tmp_df['effect']
-    
+
     with open(outfile, 'w') as f:
         # Write header lines
         f.write(f'attribute: {name}\n')
@@ -66,13 +66,13 @@ aggregate_entry_mean(E2_func_infile,'E2_entry_mean',E2_func_output)
 aggregate_entry_mean(E3_func_infile,'E3_entry_mean',E3_func_output)
 ```
 
-Now that we have a file in the correct .defattr format, I load everything into ChimeraX using a ```.cxc``` file that can be interpreted by ChimeraX. Note, most of these parameters are highly flexible, this is just an example. It is possible to run these commands one at a time in ChimeraX, however I prefer to have most things automated. I will usually comment out the ```save``` command at the end to get the view I want, then run that command at the end once I'm ready to make a nice image. 
+Now that we have a file in the correct .defattr format, I load everything into ChimeraX using a `.cxc` file that can be interpreted by ChimeraX. Note, most of these parameters are highly flexible, this is just an example. It is possible to run these commands one at a time in ChimeraX, however I prefer to have most things automated. I will usually comment out the `save` command at the end to get the view I want, then run that command at the end once I'm ready to make a nice image.
 
 ```
 # open PDB file
 open 2vsm
 
-# setup the view so cartoons look nicer, and hide everything to start from scratch. 
+# setup the view so cartoons look nicer, and hide everything to start from scratch.
 preset cartoons/nucleotides licorice/ovals
 hide atoms
 hide cartoon
@@ -100,7 +100,7 @@ color /a dimgray
 # Open the .defattr file we made earlier with the mean effects of mutations.
 open ../input/entry_mean.defattr
 
-# Color the surface of the protein by the mean effects of mutations. Can adjust the domain or the colors used. 
+# Color the surface of the protein by the mean effects of mutations. Can adjust the domain or the colors used.
 color byattr entry palette -4,#AA2531:0,white:2,#134B85
 
 # Save the image with a transparent background and a high resolution.
@@ -108,6 +108,7 @@ save output.png supersample 3 transparentBackground true height 3000 width 3000
 ```
 
 If you want to label certain amino acids, you can select them, then use the label command with custom formatting (i.e. V444 or S555).
+
 ```
 sel :119-139,162-180,198-217,251-272,317-334,579-592
 

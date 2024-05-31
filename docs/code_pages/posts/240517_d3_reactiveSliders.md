@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: doc
 title: Vue/D3 Slider Test
 aside: false
 date: 2024-05-17
 keywords:
-    - D3
+  - D3
 subtext: Connecting sliders to values to manipulate d3 objects reactively
 thumbnail: /thumbnails/slider_test.png
 ---
@@ -12,15 +12,14 @@ thumbnail: /thumbnails/slider_test.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-    <div class="flex flex-wrap gap-4 justify-evenly pb-10 border-0">
-      <div v-for="(slider, index) in sliders" :key="index">
-        <h3>{{ slider.label }}: {{ slider.value }}</h3>
-        <CustomSlider :min="slider.min" :max="slider.max" v-model="slider.value" />
-      </div>
-    </div>
-      <svg></svg>
+<div class="flex flex-wrap gap-4 justify-evenly pb-10 border-0">
+<div v-for="(slider, index) in sliders" :key="index">
+<h3>{{ slider.label }}: {{ slider.value }}</h3>
+<CustomSlider :min="slider.min" :max="slider.max" v-model="slider.value" />
+</div>
+</div>
+<svg></svg>
 </D3PlotContainer>
-
 
 <script setup>
 import { ref, onMounted, watch } from 'vue';
@@ -76,6 +75,3 @@ sliders.value.forEach((slider, index) => {
 
 <style scoped>
 </style>
-
-
-

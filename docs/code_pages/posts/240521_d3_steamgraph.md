@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: doc
 title: Steamgraph
 aside: false
 date: 2024-05-21
 keywords:
-    - D3
+  - D3
 subtext: Make an animated steamgraph in D3 with color selections
 thumbnail: /thumbnails/steamgraph.png
 ---
@@ -12,12 +12,11 @@ thumbnail: /thumbnails/steamgraph.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer class="max-w-screen-2xl">
-  <svg></svg>
-  <select class="mt-10" v-model="colorValue">
-    <option v-for="color in colorOptions">{{ color }}</option>
+<svg></svg>
+<select class="mt-10" v-model="colorValue">
+<option v-for="color in colorOptions">{{ color }}</option>
 </select>
 </D3PlotContainer>
-
 
 <script setup>
   import * as d3 from 'd3';

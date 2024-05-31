@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: doc
 title: D3 lentivirus genome
 aside: false
 date: 2024-05-17
 keywords:
-    - D3
+  - D3
 subtext: Testing slide animations
 thumbnail: /thumbnails/lenti_genome.png
 ---
@@ -12,9 +12,8 @@ thumbnail: /thumbnails/lenti_genome.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-  <svg></svg>
+<svg></svg>
 </D3PlotContainer>
-
 
 <script setup>
 import { ref, onMounted } from 'vue';

@@ -3,7 +3,7 @@ title: D3 phylogeny radial
 aside: false
 date: 2024-04-28
 keywords:
-    - D3
+  - D3
 subtext: Radial Nipah Phylogeny
 thumbnail: /thumbnails/d3_phylogeny_radial.png
 ---
@@ -11,10 +11,8 @@ thumbnail: /thumbnails/d3_phylogeny_radial.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-    <div class="" ref="svgContainer"></div>
+<div class="" ref="svgContainer"></div>
 </D3PlotContainer>
-
-
 
 <script setup>
 //some code based on example here: https://observablehq.com/@d3/tree-of-life?intent=fork

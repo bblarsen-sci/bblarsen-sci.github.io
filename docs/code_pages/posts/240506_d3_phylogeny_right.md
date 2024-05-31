@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: doc
 title: D3 phylogeny linear
 aside: false
 date: 2024-05-06
 keywords:
-    - D3
+  - D3
 subtext: Nipah phylogeny built with D3
 thumbnail: /thumbnails/phylogeny_right.png
 ---
@@ -12,9 +12,8 @@ thumbnail: /thumbnails/phylogeny_right.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-    <svg></svg>
+<svg></svg>
 </D3PlotContainer>
-
 
 <script setup>
 import * as d3 from 'd3';
@@ -153,4 +152,3 @@ onMounted(async () => {
   stroke-width: 1.25;
 }
 </style>
-

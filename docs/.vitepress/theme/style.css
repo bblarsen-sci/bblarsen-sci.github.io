@@ -3,6 +3,27 @@
 @tailwind utilities;
 
 
+@media (min-width: 960px) {
+  .VPDoc:not(.has-sidebar) .container {
+    max-width: 900x !important;
+  }
+
+  .VPDoc:not(.has-sidebar) .content {
+    max-width: 700px !important;
+    padding: 0 12px 128px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .VPDoc:not(.has-sidebar) .container {
+    max-width: 1400px !important;
+  }
+
+  .VPDoc:not(.has-sidebar) .content {
+    max-width: 1200px !important;
+    padding: 0 12px 128px;
+  }
+}
 
 /**
  * Colors: Solid
@@ -267,18 +288,17 @@
  * -------------------------------------------------------------------------- */
 
 :root {
-  --vp-font-family-base: 'Inter', ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --vp-font-family-mono: ui-monospace, 'Menlo', 'Monaco', 'Consolas',
-    'Liberation Mono', 'Courier New', monospace;
+  --vp-font-family-base: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --vp-font-family-mono: ui-monospace, 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono',
+    'Courier New', monospace;
   font-optical-sizing: auto;
 }
 
 :root:where(:lang(zh)) {
-  --vp-font-family-base: 'Punctuation SC', 'Inter', ui-sans-serif, system-ui,
-    'PingFang SC', 'Noto Sans CJK SC', 'Noto Sans SC', 'Heiti SC',
-    'Microsoft YaHei', 'DengXian', sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --vp-font-family-base: 'Punctuation SC', 'Inter', ui-sans-serif, system-ui, 'PingFang SC',
+    'Noto Sans CJK SC', 'Noto Sans SC', 'Heiti SC', 'Microsoft YaHei', 'DengXian', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 /**
@@ -546,5 +566,3 @@
   --vp-badge-danger-text: var(--vp-c-danger-1);
   --vp-badge-danger-bg: var(--vp-c-danger-soft);
 }
-
-

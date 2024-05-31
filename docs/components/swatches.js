@@ -5,7 +5,9 @@
 import * as d3 from 'd3';
 import * as htl from 'htl';
 
-export function Swatches(color, {
+export function Swatches(
+  color,
+  {
     svgRef,
     columns = null,
     format,
@@ -13,19 +15,21 @@ export function Swatches(color, {
     swatchSize = 15,
     swatchWidth = swatchSize,
     swatchHeight = swatchSize,
-    marginLeft = 0
-  } = {}) {
-    const id = `-swatches-${Math.random().toString(16).slice(2)}`;
-    const unknown = formatUnknown == null ? undefined : color.unknown();
-    const unknowns = unknown == null || unknown === d3.scaleImplicit ? [] : [unknown];
-    const domain = color.domain().concat(unknowns);
-    if (format === undefined) format = x => x === unknown ? formatUnknown : x;
-  
-    function entity(character) {
-      return `&#${character.charCodeAt(0).toString()};`;
-    }
-  
-    if (columns !== null) return htl.html`<div style="display: flex; align-items: center; margin-left: ${+marginLeft}px; min-height: 33px; font: 10px sans-serif;">
+    marginLeft = 0,
+  } = {}
+) {
+  const id = `-swatches-${Math.random().toString(16).slice(2)}`;
+  const unknown = formatUnknown == null ? undefined : color.unknown();
+  const unknowns = unknown == null || unknown === d3.scaleImplicit ? [] : [unknown];
+  const domain = color.domain().concat(unknowns);
+  if (format === undefined) format = (x) => (x === unknown ? formatUnknown : x);
+
+  function entity(character) {
+    return `&#${character.charCodeAt(0).toString()};`;
+  }
+
+  if (columns !== null)
+    return htl.html`<div style="display: flex; align-items: center; margin-left: ${+marginLeft}px; min-height: 33px; font: 10px sans-serif;">
     <style>
   
   .${id}-item {
@@ -49,17 +53,17 @@ export function Swatches(color, {
   }
   
     </style>
-    <div style=${{width: "100%", columns}}>${domain.map(value => {
+    <div style=${{ width: '100%', columns }}>${domain.map((value) => {
       const label = `${format(value)}`;
       return htl.html`<div class=${id}-item>
-        <div class=${id}-swatch style=${{background: color(value)}}></div>
+        <div class=${id}-swatch style=${{ background: color(value) }}></div>
         <div class=${id}-label title=${label}>${label}</div>
       </div>`;
     })}
     </div>
   </div>`;
-  
-    return htl.html`<div style="display: flex; align-items: center; min-height: 33px; margin-left: ${+marginLeft}px; font: 10px sans-serif;">
+
+  return htl.html`<div style="display: flex; align-items: center; min-height: 33px; margin-left: ${+marginLeft}px; font: 10px sans-serif;">
     <style>
   
   .${id} {
@@ -77,5 +81,5 @@ export function Swatches(color, {
   }
   
     </style>
-    <div>${domain.map(value => htl.html`<span class="${id}" style="--color: ${color(value)}">${format(value)}</span>`)}</div>`;
-  }
+    <div>${domain.map((value) => htl.html`<span class="${id}" style="--color: ${color(value)}">${format(value)}</span>`)}</div>`;
+}

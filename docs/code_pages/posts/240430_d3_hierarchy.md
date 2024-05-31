@@ -3,7 +3,7 @@ title: D3 hierarchy
 aside: false
 date: 2024-04-30
 keywords:
-    - D3
+  - D3
 subtext: Convert a .csv into a D3 hierarchy
 thumbnail: /thumbnails/d3_hierarchy.png
 ---
@@ -11,9 +11,8 @@ thumbnail: /thumbnails/d3_hierarchy.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-  <svg></svg>
+<svg></svg>
 </D3PlotContainer>
-
 
 <script setup>
 import { ref, onMounted, watch, computed} from 'vue';
@@ -21,8 +20,8 @@ import * as d3 from 'd3';
 
 const root = ref(null);
 
-const width = 600;
-const dx = 7;
+const width = 500;
+const dx = 6;
 
 const dataFile = 
   'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB3.csv';
@@ -56,6 +55,8 @@ function makePlot() {
   const height = x1 - x0 + dx * 2;
 
   const svg = d3.select('svg')
+    .attr('width', width)
+    .attr('height', height)
     .attr("viewBox", [-dy / 3, x0 - dx, width, height])
 
   svg.append("g")
@@ -79,14 +80,20 @@ function makePlot() {
     .attr("transform", d => `translate(${d.y},${d.x})`);
 
   node.append("circle")
-    .attr("fill", 'gray')
+    .attr("fill", d => {
+      if (d.depth === 3) {
+        return colorScale.value(d.data.entry);
+      }
+      return "currentColor";
+    })
     .attr("r", 5);
 
   node.append("text")
     .attr("dy", "0.31em")
     .attr("fill", "currentColor")
-    .attr("x", d => d.children ? -10 :50)
-    .attr("text-anchor", d => d.children ? "end" : "end")
+    .attr("x", d => d.children ? -10 :22)
+    .attr("text-anchor", d => d.children ? "end" : "middle")
+    .attr('font-size', '12px')
     .text(d => {
       // Assuming depth 0 = root, depth 1 = site, depth 2 = mutant, depth 3 = entry_CHO_bEFNB2
       if (d.depth === 0) {
@@ -95,7 +102,9 @@ function makePlot() {
         return d.data[0]; // Label for site
       } else if (d.depth === 2) {
         return d.data[0]; // Label for mutant
-      } 
+      } else if (d.depth === 3) {
+        return d3.format(".1f")(parseFloat(d.data.entry));
+      }
     });
 
 }
@@ -109,7 +118,7 @@ async function fetchData() {
     entry: +d.entry_CHO_bEFNB3,
   }));
 
-  const filteredArray = array.filter(d => d.site <= 100);
+  const filteredArray = array.filter(d => d.site <= 73);
 
   const group = d3.group(filteredArray, d => d.site, d => d.mutant);
 
@@ -122,7 +131,6 @@ async function fetchData() {
       entry: entries[0].entry
     }))
   ]);
-
   
   root.value = test;
 }
@@ -133,8 +141,5 @@ fetchData()
 watch (root, () => {
   makePlot()
 })
-
 </script>
 
-<style scoped>
-</style>

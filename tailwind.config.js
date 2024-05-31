@@ -84,16 +84,6 @@ export default {
               marginTop: '0.75em',
               marginBottom: '0.75em',
             },
-            // 'ul > li::before': {
-            //   content: '""',
-            //   width: '0.75em',
-            //   height: '0.125em',
-            //   position: 'absolute',
-            //   top: 'calc(0.875em - 0.0625em)',
-            //   left: 0,
-            //   borderRadius: '999px',
-            //   backgroundColor: theme('colors.slate.300'),
-            // },
             '--tw-prose-bullets': theme('colors.slate.300'),
             a: {
               fontWeight: theme('fontWeight.semibold'),
@@ -135,7 +125,7 @@ export default {
               fontWeight: 650,
             },
             pre: {
-              color: theme('colors.slate.50'),
+              //color: theme('colors.slate.50'),
               borderRadius: theme('borderRadius.xl'),
               padding: theme('padding.5'),
               boxShadow: theme('boxShadow.md'),

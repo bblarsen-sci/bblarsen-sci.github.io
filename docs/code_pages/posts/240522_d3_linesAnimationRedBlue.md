@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: doc
 title: D3 animated lines
 aside: false
 date: 2024-05-22
 keywords:
-    - D3
+  - D3
 subtext: Moving red/blue lines with gradient applied on y-axis
 thumbnail: /thumbnails/d3_lines_redblue.png
 ---
@@ -12,9 +12,9 @@ thumbnail: /thumbnails/d3_lines_redblue.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
+
 <div class='' ref="svgContainer"></div>
 </D3PlotContainer>
-
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
@@ -128,4 +128,3 @@ onMounted(() => {
   }, 3000);
 });
 </script>
-

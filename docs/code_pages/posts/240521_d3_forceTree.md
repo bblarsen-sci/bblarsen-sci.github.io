@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: doc
 title: Force Tree
 aside: false
 date: 2024-05-21
 keywords:
-    - D3
+  - D3
 subtext: D3 force phylogenetic tree
 thumbnail: /thumbnails/d3_forceTree.png
 ---
@@ -14,7 +14,6 @@ thumbnail: /thumbnails/d3_forceTree.png
 <D3PlotContainer>
 <svg></svg>
 </D3PlotContainer>
-
 
 <script setup>
 import * as d3 from 'd3';

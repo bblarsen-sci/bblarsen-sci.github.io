@@ -2,7 +2,7 @@
 layout: page
 ---
 
-<div class="h-[400px] mx-auto flex flex-col justify-center items-center align-middle text-center prose dark:prose-dark dark:prose-invert">
+<div class="h-[600px] mx-auto flex flex-col justify-center items-center align-middle text-center prose dark:prose-dark dark:prose-invert">
     <h1 class="prose-2xl">Brendan Larsen</h1>
     <h1 class="bg-clip-text text-transparent bg-gradient-to-r from-red-700 to-sky-700 via-slate-300">Viral Evolution and Diversity</h1>    
     <div class="text-sm flex flex-row gap-6 uppercase tracking-wider">

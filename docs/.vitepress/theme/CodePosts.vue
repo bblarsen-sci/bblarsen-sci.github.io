@@ -4,20 +4,26 @@
       <div
         v-for="(post, index) in filteredPosts"
         :key="index"
-        class="card container block max-w-sm rounded-lg border border-slate-200 shadow dark:border-slate-700 hover:border-slate-400"
+        class="card container block max-w-sm rounded-lg border border-slate-200 shadow hover:border-slate-400 dark:border-slate-700"
       >
-        <a :href="post.url" class="flex flex-col h-full">
-          <div class="h-48" v-if="post.thumbnail">
-            <img :src="post.thumbnail" class="rounded-t-lg object-cover w-full h-full" />
+        <a :href="post.url" class="flex h-full flex-col">
+          <div class="h-36" v-if="post.thumbnail">
+            <img :src="post.thumbnail" class="h-full w-full rounded-t-lg object-cover" />
           </div>
-          <div class="p-5 flex-grow flex flex-col justify-between">
+          <div class="flex flex-grow flex-col justify-between p-5">
             <div>
-              <h2 class="mb-2 text-xl font-bold tracking-tight text-slate-900 dark:text-white">{{ post.title }}</h2>
+              <h2 class="mb-2 text-xl font-bold tracking-tight text-slate-900 dark:text-white">
+                {{ post.title }}
+              </h2>
               <p v-if="post.subtext" class="keywords mb-2 text-sm" v-html="post.subtext"></p>
             </div>
             <div v-if="post.keywords" class="keywords mt-4">
-              <span><strong class="font-bold text-slate-900 dark:text-white">Software: </strong></span>
-              <span v-for="(keyword, kIndex) in post.keywords" :key="kIndex">{{ keyword }}<span v-if="kIndex < post.keywords.length - 1">, </span></span>
+              <span
+                ><strong class="font-bold text-slate-900 dark:text-white">Software: </strong></span
+              >
+              <span v-for="(keyword, kIndex) in post.keywords" :key="kIndex"
+                >{{ keyword }}<span v-if="kIndex < post.keywords.length - 1">, </span></span
+              >
             </div>
           </div>
         </a>

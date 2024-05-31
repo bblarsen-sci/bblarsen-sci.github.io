@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: doc
 title: D3 neutralization curve non animated
 aside: false
 date: 2024-05-27
 keywords:
-    - D3
+  - D3
 subtext: Add a static neut curve plotted with D3
 thumbnail: /thumbnails/d3_neutCurve_static.png
 ---
@@ -14,7 +14,6 @@ thumbnail: /thumbnails/d3_neutCurve_static.png
 <D3PlotContainer>
 <svg></svg>
 </D3PlotContainer>
-
 
 <script setup>
     import { ref, onMounted, computed, watch } from 'vue';
@@ -200,4 +199,3 @@ thumbnail: /thumbnails/d3_neutCurve_static.png
         fetchData();
     });
 </script>
-

@@ -1,21 +1,19 @@
 ---
-layout: page
+layout: doc
 title: Animated D3 Neutralization Curves
 aside: false
 date: 2024-05-15
 keywords:
-    - D3
+  - D3
 subtext: Transitioning lines and circles with error bars showing neutralization of pseudovirus with soluble receptors
 thumbnail: /thumbnails/d3_neutCurves.png
 ---
 
-
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-    <div class="flex flex-col items-center" ref="svgContainer"></div>
+<div class="flex flex-col items-center" ref="svgContainer"></div>
 </D3PlotContainer>
-
 
 <script setup>
     import { ref, onMounted, computed } from 'vue';

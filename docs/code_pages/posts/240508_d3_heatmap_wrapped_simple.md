@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: doc
 title: Zoomable D3 Heatmap
 aside: false
 date: 2024-05-08
 keywords:
-    - D3
+  - D3
 subtext: Demonstration of using D3 zoom function to make heatmap zoomable and draggable inside container. Scales with screen size.
 thumbnail: /thumbnails/d3_zoom_heatmap.png
 ---
@@ -12,9 +12,8 @@ thumbnail: /thumbnails/d3_zoom_heatmap.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-  <svg></svg>
+<svg></svg>
 </D3PlotContainer>
-
 
 <script setup>
 import { ref, computed, onMounted, watch, watchEffect, shallowRef } from 'vue';
@@ -224,7 +223,6 @@ watch(data, () => {
 
 
 </script>
-
 
 <style>
 .wildtype-row {

@@ -230,11 +230,11 @@ import {
   zoomPow,
   zoomSymlog,
   zorder
-} from "./chunk-XJDZ4BQV.js";
+} from "./chunk-SXJFFO5I.js";
 import {
   path
-} from "./chunk-AVDKQJKK.js";
-import "./chunk-ZS7NZCD4.js";
+} from "./chunk-P5KQ2UN2.js";
+import "./chunk-UV5CTPV7.js";
 export {
   Bounds,
   CanvasHandler,

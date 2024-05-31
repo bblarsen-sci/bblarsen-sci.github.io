@@ -3,39 +3,40 @@ title: Plotting neutralization curves with Altair
 aside: false
 date: 2024-05-03
 keywords:
-    - Altair
+  - Altair
 subtext: How to plot nice neutralization curves using Altair.
 thumbnail: /thumbnails/altair_neut_curve.png
 ---
 
 # {{$frontmatter.title}}
+
 {{$frontmatter.subtext}}
 
 Example I will be using, showing inhibition of Nipah pseudovirus with different soluble receptor constructs.
+
 <div class="flex justify-center items-center">
     <img src="/images/code_posts/altair_neut_curve-01.png" />
 </div>
 
 ## Python code to make neutralization curves with Altair.
 
-We often want to know how well an antibody inhibits viral infection of cells. To do this, we make neutralization curves of virus with either antibodies or soluble receptor (could be anything that inhibits infection). Dilutions of neutralizing antibodies are added to virus for 1 hour, followed by infection of cells. After 48 hours, the amount of Luciferase signal is measured with a plate reader, as a proxy for the amount of virus that infected the cells. Viruses that were in the presence of higher concentrations of antibody are neutralized more, and cannot infect cells. 
+We often want to know how well an antibody inhibits viral infection of cells. To do this, we make neutralization curves of virus with either antibodies or soluble receptor (could be anything that inhibits infection). Dilutions of neutralizing antibodies are added to virus for 1 hour, followed by infection of cells. After 48 hours, the amount of Luciferase signal is measured with a plate reader, as a proxy for the amount of virus that infected the cells. Viruses that were in the presence of higher concentrations of antibody are neutralized more, and cannot infect cells.
 
-The [```neutcurve```](https://jbloomlab.github.io/neutcurve/){target="_self"} package we will be using to fit the actual curves also makes plots with ```matplotlib```, but I didn't really like the look of them, and wanted to make nice looking ones with ```Altair```. Heres an example of the default plot:
+The [`neutcurve`](https://jbloomlab.github.io/neutcurve/){target="\_self"} package we will be using to fit the actual curves also makes plots with `matplotlib`, but I didn't really like the look of them, and wanted to make nice looking ones with `Altair`. Heres an example of the default plot:
 
 <div class="flex justify-center items-center">
     <img src="/images/code_posts/ephrin_b2.pdf" />
 </div>
 
-
 ## Data
 
 The data we have are:
+
 - 'serum' - In this case we are actually measuring neutralization by soluble receptor, not sera, but the neutcurve package requires certain column names, so bear with me, we will fix later.
 - 'virus' - Again, neutcurve requires certain names. In this case we just used unmutated nipah pseudovirus.
 - 'replicate' - two replicates of the data.
 - 'concentration' - The concentration of antibody or soluble receptor that were added (in this specific example, micromolar)
 - 'fraction_infectivity' - The amount of infection at each concentration relative to conditions where **no** antibody or receptor were added.
-
 
 <div class="flex justify-center items-center">
     <img src="/images/code_posts/neut_curve_df.png" />
@@ -59,13 +60,15 @@ import altair as alt
 import re
 print(f"Using `neutcurve` version {neutcurve.__version__}")
 ```
-Read in the data as a ```.csv```. Here, I slightly adjust the names of some of the data.
+
+Read in the data as a `.csv`. Here, I slightly adjust the names of some of the data.
 
 ```python
 # First, load in the neut data
 df = pd.read_csv(ephrin_binding_neuts_file)
 ```
-Ok, so now that we have our data, lets fit the curves. I do this in a loop to extract curves for each 'serum' and 'virus', then concatante them all into a single dataframe. In order to get bars for the measurements, we have to do some calculations and assign them back to the ```curve``` dataframe. The function 'get_neutcurve' does all of this so we call it and assign it to 'neutcurve_df'.
+
+Ok, so now that we have our data, lets fit the curves. I do this in a loop to extract curves for each 'serum' and 'virus', then concatante them all into a single dataframe. In order to get bars for the measurements, we have to do some calculations and assign them back to the `curve` dataframe. The function 'get_neutcurve' does all of this so we call it and assign it to 'neutcurve_df'.
 
 ```python
 def get_neutcurve(df, replicate="average"):
@@ -79,7 +82,7 @@ def get_neutcurve(df, replicate="average"):
         fracinf_col="fraction infectivity",
         fixbottom=0,
     )
-    
+
     fitParams = fits.fitParams(ics=[50, 90, 95, 97, 98, 99])
 
     #get list of different sera and viruses that were tested
@@ -87,7 +90,7 @@ def get_neutcurve(df, replicate="average"):
     virus_list = list(df["virus"].unique())
 
     curves = [] #initialize an empty list to store neutralization curve data
-    
+
     # Loop over each serum type and retrieve the curve
     for serum in serum_list:
         for virus in virus_list:
@@ -101,14 +104,15 @@ def get_neutcurve(df, replicate="average"):
     combined_curve = pd.concat(curves, axis=0)
     combined_curve["upper"] = combined_curve["measurement"] + combined_curve["stderr"]
     combined_curve["lower"] = combined_curve["measurement"] - combined_curve["stderr"]
-    
+
     return combined_curve
 
 
 neutcurve_df = get_neutcurve(df)
 ```
 
-Now we have a pandas dataframe called ```neutcurve_df``` that contains all the data needed for plotting. Lets go ahead and plot these data with altair. We need to make three separate plots, then combine them together at the end.
+Now we have a pandas dataframe called `neutcurve_df` that contains all the data needed for plotting. Lets go ahead and plot these data with altair. We need to make three separate plots, then combine them together at the end.
+
 - A line plot with the fit
 - A circle plot that contains the actual data we collected.
 - Std deviation bars on each point.
@@ -172,7 +176,6 @@ def plot_neut_curve(df):
 ephrin_curve = plot_neut_curve(neutcurve_df)
 ephrin_curve.display()
 ```
-
 
 Running that, we get the following nice looking neut curve plot that was made with Altair. If you choose to run, you will likely see something slightly different, as I am applying a custom [theme](/code_pages/posts/240503_altair_theme) to the altair figure.
 

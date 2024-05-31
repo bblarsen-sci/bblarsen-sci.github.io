@@ -3,48 +3,50 @@ title: Altair CSS
 aside: false
 date: 2024-05-03
 keywords:
-    - Altair
+  - Altair
 subtext: How to inject custom CSS into Altair plots.
 ---
 
 # {{$frontmatter.title}}
+
 {{$frontmatter.subtext}}
 
 Although Altair offers incredible customization, there may be cases where you want to modify the appearance of the plots when embedding into a web page. I show how to do that here, using CSS.
 
 ## Altair .html files
 
-When making Altair plots, we can save them as an .html file with ```plotName.save(plotName.html)```. If we inspect the file, we see a typical ```.html``` format. 
-
+When making Altair plots, we can save them as an .html file with `plotName.save(plotName.html)`. If we inspect the file, we see a typical `.html` format.
 
 ```html
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <style>
-    #vis.vega-embed {
-      width: 100%;
-      display: flex;
-    }
+  <head>
+    <style>
+      #vis.vega-embed {
+        width: 100%;
+        display: flex;
+      }
 
-    #vis.vega-embed details,
-    #vis.vega-embed details summary {
-      position: relative;
-    }
-  </style>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.1"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
-</head>
-<body>
-...Rest of HTML file
+      #vis.vega-embed details,
+      #vis.vega-embed details summary {
+        position: relative;
+      }
+    </style>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-lite@5.15.1"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+  </head>
+  <body>
+    ...Rest of HTML file
+  </body>
+</html>
 ```
 
-Under style, we see some default CSS already, to ```#vis.vega-embed```.
+Under style, we see some default CSS already, to `#vis.vega-embed`.
 
 ## Replacing the default CSS with your own.
 
-Lets say we want to stylize the code with our own CSS. We can either manually remove and add CSS to the ```<style></style>```, or use the python package ```BeautifulSoup```. Here is an example where I overwrite the CSS and replace it with my own for a list of .html files. 
+Lets say we want to stylize the code with our own CSS. We can either manually remove and add CSS to the `<style></style>`, or use the python package `BeautifulSoup`. Here is an example where I overwrite the CSS and replace it with my own for a list of .html files.
 
 ```python
 import os
@@ -133,4 +135,4 @@ for specific_file in specific_files:
 
 Now, when we open the file, we find the figure has been centered on the page, the tooltip stylings have changed, and there is a nice fade-in animation of the altair heatmap. The possibilities are endless!
 
-[Click here](/htmls/E3_entry_heatmap.html){target="_self"} to see the custom CSS in action. Note-does not work for mobile devices.
+[Click here](/htmls/E3_entry_heatmap.html){target="\_self"} to see the custom CSS in action. Note-does not work for mobile devices.

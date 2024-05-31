@@ -44,5 +44,3 @@ layout: page
 <script setup>
     import lines from "/components/graphs/linesAnimationRedBlue.vue";
 </script>
-
-

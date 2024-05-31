@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: doc
 title: Lines animation
 aside: false
 date: 2024-05-19
 keywords:
-    - D3
+  - D3
 subtext: Animation of points with random y-coordinates with fitted line
 thumbnail: /thumbnails/lines_animation.png
 ---
@@ -12,10 +12,8 @@ thumbnail: /thumbnails/lines_animation.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-    <svg></svg>
+<svg></svg>
 </D3PlotContainer>
-
-
 
 <script setup>
 import { ref, onMounted, computed } from 'vue';
@@ -133,4 +131,3 @@ onMounted(() => {
     }, 3000);
 });
 </script>
-

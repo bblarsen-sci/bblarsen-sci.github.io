@@ -3,19 +3,20 @@ title: Altair themes
 aside: false
 date: 2024-05-03
 keywords:
-    - Altair
+  - Altair
 subtext: How to use Altair themes.
 thumbnail: /thumbnails/altair_theme.png
 ---
 
 # {{$frontmatter.title}}
+
 {{$frontmatter.subtext}}
 
 ## Make a theme file
 
 When using Altair to make plots, it is often useful to use consistent themes without having to specify everything in each plot manually. Enter themes!
 
-Here is what my ```theme.py``` file looks like, where I specify all the theme values I want to be consistently applied.
+Here is what my `theme.py` file looks like, where I specify all the theme values I want to be consistently applied.
 
 ```python
 import altair as alt
@@ -64,7 +65,7 @@ def main_theme():
                 "labelFontWeight": 'normal',
                 "labelPadding": 2,
                 #"labelAngle": 0,
-                
+
                 #ticks
                 "tickColor": axisColor,
                 "tickSize": 4,

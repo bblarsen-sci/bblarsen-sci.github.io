@@ -1,10 +1,10 @@
 ---
-layout: page
+layout: doc
 title: D3 Responsive breakpoints
 aside: false
 date: 2024-05-24
 keywords:
-    - D3
+  - D3
 subtext: Test using vue dimension watchers rather than viewbox to responsively adjust plot size
 thumbnail: /thumbnails/responsive.png
 ---
@@ -12,11 +12,11 @@ thumbnail: /thumbnails/responsive.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
+
 <div ref="bigContainer" class="container h-screen w-screen mx-auto">
     <div ref="svgContainer"></div>
   </div>
 </D3PlotContainer>
-
 
 <script setup>
   import { ref, onMounted, watchEffect, nextTick, watch } from 'vue';
@@ -169,4 +169,3 @@ thumbnail: /thumbnails/responsive.png
 
 <style scoped>
 </style>
-

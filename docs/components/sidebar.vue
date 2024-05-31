@@ -1,16 +1,25 @@
 <!-- sidebar.vue -->
 
 <template>
-  <div class="sticky top-0 p-4 w-full overflow-hidden border-2 justify-center items-center inline-block">
+  <div
+    class="sticky top-0 inline-block w-full items-center justify-center overflow-hidden border-2 p-4"
+  >
     <div class="flex flex-col gap-4 text-xs">
-      <div class="font-bold text-xl">Heatmap Options</div>
+      <div class="text-xl font-bold">Heatmap Options</div>
 
       <div class="flex flex-col">
         <label class="font-semibold" for="siteInput">Enter Specific Sites:</label>
-        <input class="form-input" @input="$emit('update:siteInputValue', $event.target.value)"
-          placeholder="e.g., 1-2,3">
-        <button class="mt-2 btn-primary" @click="$emit('update:selectedSites', parseSites(siteInputValue))">Update
-          Sites</button>
+        <input
+          class="form-input"
+          @input="$emit('update:siteInputValue', $event.target.value)"
+          placeholder="e.g., 1-2,3"
+        />
+        <button
+          class="btn-primary mt-2"
+          @click="$emit('update:selectedSites', parseSites(siteInputValue))"
+        >
+          Update Sites
+        </button>
       </div>
 
       <div class="flex flex-col">
@@ -41,7 +50,7 @@
         </select>
       </div>
 
-      <div class="flex flex-col gap-2 mt-10">
+      <div class="mt-10 flex flex-col gap-2">
         <button class="btn-primary" @click="$emit('downloadSVG')">Download SVG</button>
         <button class="btn-primary" @click="$emit('downloadImage')">Download PNG</button>
       </div>
@@ -55,50 +64,55 @@ const paddingValue = defineModel('paddingValue');
 const strokeWidthValue = defineModel('strokeWidthValue');
 const selectedColorScale = defineModel('selectedColorScale');
 
-const emit = defineEmits(['downloadSVG', 'downloadImage', 'update:selectedSites', 'update:siteInputValue']);
+const emit = defineEmits([
+  'downloadSVG',
+  'downloadImage',
+  'update:selectedSites',
+  'update:siteInputValue',
+]);
 
 const heatmapOptions = defineProps({
   strokeOptions: {
     type: Array,
-    required: true
+    required: true,
   },
   paddingOptions: {
     type: Array,
-    required: true
+    required: true,
   },
   colorOptions: {
     type: Array,
-    required: true
+    required: true,
   },
   rowOptions: {
     type: Array,
-    required: true
+    required: true,
   },
   siteInputValue: {
     type: String,
-    required: true
+    required: true,
   },
   selectedSites: {
     type: Array,
-    required: true
+    required: true,
   },
   parseSites: {
     type: Function,
-    required: true
-  }
+    required: true,
+  },
 });
 </script>
 
 <style scoped>
 .form-input {
-  @apply p-1 rounded-md ring-1 ring-slate-400;
+  @apply rounded-md p-1 ring-1 ring-slate-400;
 }
 
 .form-select {
-  @apply p-1 rounded-md ring-1 ring-slate-400;
+  @apply rounded-md p-1 ring-1 ring-slate-400;
 }
 
 .btn-primary {
-  @apply p-1 bg-sky-500 text-white rounded-md hover:bg-sky-600;
+  @apply rounded-md bg-sky-500 p-1 text-white hover:bg-sky-600;
 }
 </style>

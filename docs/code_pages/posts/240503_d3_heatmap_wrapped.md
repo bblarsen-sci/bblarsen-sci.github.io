@@ -1,16 +1,17 @@
 ---
-layout: page
+layout: doc
 title: D3 heatmap wrapped
 aside: false
 date: 2024-05-03
 keywords:
-    - D3
+  - D3
 subtext: Heatmap of deep mutational scanning data that is wrapped in multiple rows and allows customization.
 thumbnail: /thumbnails/d3_heatmap_wrapped.png
 ---
 
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
+
 <div class="w-full px-2 lg:px-6 ">
     <div class="flex flex-row py-4">
       <aside class="w-full sm:w-1/4 md:w-1/6">
@@ -29,7 +30,6 @@ thumbnail: /thumbnails/d3_heatmap_wrapped.png
     </div>
     <Tooltip ref="tooltip" />
   </div>
-
 
 <script setup>
   import { ref, watch, onMounted, computed, shallowRef, onBeforeMount } from 'vue';
@@ -410,7 +410,6 @@ const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_D
   
 </script>
 
-
 <style>
   .axis-title-y {
     font-size: 14px;
@@ -433,4 +432,3 @@ const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_D
     font-weight: light;
   }
 </style>
-

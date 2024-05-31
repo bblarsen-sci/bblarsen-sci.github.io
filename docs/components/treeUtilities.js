@@ -8,29 +8,29 @@ export function parseNewick(a) {
   for (var t = 0; t < s.length; t++) {
     var n = s[t];
     switch (n) {
-      case "(":
+      case '(':
         var c = {};
         r.branchset = [c];
         e.push(r);
         r = c;
         break;
-      case ",":
+      case ',':
         var c = {};
         e[e.length - 1].branchset.push(c);
         r = c;
         break;
-      case ")":
+      case ')':
         r = e.pop();
         break;
-      case ":":
+      case ':':
         break;
       default:
         var h = s[t - 1];
-        if (h === ")" || h === "(" || h === ",") {
+        if (h === ')' || h === '(' || h === ',') {
           const nameAndCountry = n.split(/\[|\]/);
           r.name = nameAndCountry[0];
           r.country = nameAndCountry[1];
-        } else if (h === ":") {
+        } else if (h === ':') {
           r.branchLength = parseFloat(n);
         }
     }
@@ -49,35 +49,34 @@ export function diagonal(diagonalPath, i) {
     target = diagonalPath.target,
     pathData = [source, { x: target.x, y: source.y }, target].map(projection);
 
-  return "M" + pathData[0] + ' ' + pathData[1] + " " + pathData[2];
+  return 'M' + pathData[0] + ' ' + pathData[1] + ' ' + pathData[2];
 }
 
 export function scaleBranchLengths(nodes, w) {
   function visitPreOrder(root, callback) {
-    callback(root)
+    callback(root);
     if (root.children) {
       for (var i = root.children.length - 1; i >= 0; i--) {
-        visitPreOrder(root.children[i], callback)
-      };
+        visitPreOrder(root.children[i], callback);
+      }
     }
   }
   visitPreOrder(nodes[0], function (node) {
     if (node.value < 0) node.value = -1 * node.value;
-    node.rootDist = (node.parent ? node.parent.rootDist : 0) + (node.value || 0)
+    node.rootDist = (node.parent ? node.parent.rootDist : 0) + (node.value || 0);
   });
 
   var rootDists = Array.from(nodes, function (n) {
     return n.rootDist;
   });
 
-  var yscale = d3.scaleLinear()
+  var yscale = d3
+    .scaleLinear()
     .domain([0, d3.max(rootDists)])
     .range([0, w]);
 
   visitPreOrder(nodes[0], function (node) {
     node.y = parseInt(yscale(node.rootDist));
   });
-  return yscale
+  return yscale;
 }
-
-
