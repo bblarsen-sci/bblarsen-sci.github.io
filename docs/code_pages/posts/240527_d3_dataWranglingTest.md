@@ -1,23 +1,28 @@
 ---
 layout: page
-title: Data wrangling and effects of mutations from DMS data
+title: Scatterplot with selectable DMS data
 aside: false
 date: 2024-05-28
 keywords:
 - D3
-subtext: Toggle between four types of DMS data in scatterplot with D3
+subtext: Toggle between four types of data in scatterplot with D3
 thumbnail: /thumbnails/data_wrangling.png
 ---
 
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-  <select v-model="selectedDataset" @change="changeDataset">
+  <div class='flex flex-wrap items-start justify-start'>
+  <form class="max-w-xs pb-4">
+  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option:</label>
+  <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="selectedDataset" @change="changeDataset">
     <option value="bEFNB2_entry">bEFNB2 Entry</option>
     <option value="bEFNB3_entry">bEFNB3 Entry</option>
     <option value="bEFNB2_binding">bEFNB2 Binding</option>
     <option value="bEFNB3_binding">bEFNB3 Binding</option>
   </select>
+</form>
+</div>
   <div class="flex flex-col items-center font-ultralight">
     <svg ref="svgContainer"></svg>
   </div>

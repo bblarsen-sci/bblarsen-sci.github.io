@@ -1,28 +1,25 @@
 <template>
-  <div class="container mx-auto max-w-screen-lg px-2">
+  <div class="container mx-auto max-w-screen-lg px-12">
     <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-      <div v-for="(post, index) in filteredPosts" :key="index" class="card">
-        <a :href="post.url" class="block h-full">
-          <article
-            class="dark:prose-dark prose flex h-full flex-col justify-between gap-2 rounded-lg border-2 border-slate-100 p-2 px-4 shadow-md hover:border-slate-300 dark:border-slate-500 dark:shadow-slate-500 dark:hover:border-slate-100"
-          >
-            <h2 class="">
-              {{ post.title }}
-            </h2>
-            <div
-              v-if="post.thumbnail"
-              class="mx-auto aspect-square h-36 w-36 rounded-lg pb-6 shadow-lg"
-            >
-              <img :src="post.thumbnail" alt="Thumbnail" class="h-full w-full object-cover" />
+      <div
+        v-for="(post, index) in filteredPosts"
+        :key="index"
+        class="card container block max-w-sm rounded-lg border border-slate-200 shadow dark:border-slate-700 hover:border-slate-400"
+      >
+        <a :href="post.url" class="flex flex-col h-full">
+          <div class="h-48" v-if="post.thumbnail">
+            <img :src="post.thumbnail" class="rounded-t-lg object-cover w-full h-full" />
+          </div>
+          <div class="p-5 flex-grow flex flex-col justify-between">
+            <div>
+              <h2 class="mb-2 text-xl font-bold tracking-tight text-slate-900 dark:text-white">{{ post.title }}</h2>
+              <p v-if="post.subtext" class="keywords mb-2 text-sm" v-html="post.subtext"></p>
             </div>
-            <p v-if="post.subtext" class="keywords text-sm" v-html="post.subtext"></p>
-            <p v-if="post.keywords" class="keywords">
-              <span><strong>Software: </strong></span>
-              <span v-for="(keyword, kIndex) in post.keywords" :key="kIndex"
-                >{{ keyword }}<span v-if="kIndex < post.keywords.length - 1">, </span></span
-              >
-            </p>
-          </article>
+            <div v-if="post.keywords" class="keywords mt-4">
+              <span><strong class="font-bold text-slate-900 dark:text-white">Software: </strong></span>
+              <span v-for="(keyword, kIndex) in post.keywords" :key="kIndex">{{ keyword }}<span v-if="kIndex < post.keywords.length - 1">, </span></span>
+            </div>
+          </div>
         </a>
       </div>
     </div>
