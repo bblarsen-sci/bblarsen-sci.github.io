@@ -170,7 +170,7 @@ export function Legend(
       g
         .append('text')
         .attr('x', marginLeft)
-        .attr('y', marginTop + marginBottom - height - 6)
+        .attr('y', marginTop + marginBottom - height -2)
         .attr('fill', 'currentColor')
         .attr('text-anchor', 'start')
         //.attr("font-weight", "bold")

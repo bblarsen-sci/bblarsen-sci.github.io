@@ -5,7 +5,7 @@ aside: false
 date: 2024-05-21
 keywords:
   - D3
-subtext: Make an animated steamgraph in D3 with color selections
+subtext: Make an animated steamgraph with color selections
 thumbnail: /thumbnails/steamgraph.png
 ---
 

@@ -1,10 +1,10 @@
 ---
-title: D3 hierarchy
+title: Hierarchial data 
 aside: false
 date: 2024-04-30
 keywords:
   - D3
-subtext: Convert a .csv into a D3 hierarchy
+subtext: Convert a .csv into a hierarchy using D3
 thumbnail: /thumbnails/d3_hierarchy.png
 ---
 

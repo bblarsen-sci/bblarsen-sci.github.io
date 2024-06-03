@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: Animated D3 Neutralization Curves
+title: Animated neutralization curves
 aside: false
 date: 2024-05-15
 keywords:

@@ -5,7 +5,7 @@ aside: false
 date: 2024-05-28
 keywords:
   - D3
-subtext: Toggle between four types of data in scatterplot with D3
+subtext: Toggle between four types of DMS data in scatterplot
 thumbnail: /thumbnails/data_wrangling.png
 ---
 

@@ -1,11 +1,11 @@
 ---
 layout: doc
-title: D3 lentivirus genome
+title: Lentivirus genome
 aside: false
 date: 2024-05-17
 keywords:
   - D3
-subtext: Testing slide animations
+subtext: Testing slide animations with a lentivirus genome
 thumbnail: /thumbnails/lenti_genome.png
 ---
 

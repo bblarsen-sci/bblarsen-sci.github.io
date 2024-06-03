@@ -1,11 +1,11 @@
 ---
 layout: doc
-title: D3 phylogeny linear
+title: Phylogeny linear
 aside: false
 date: 2024-05-06
 keywords:
   - D3
-subtext: Nipah phylogeny built with D3
+subtext: Nipah phylogeny that is linear and has scaled branch lengths
 thumbnail: /thumbnails/phylogeny_right.png
 ---
 

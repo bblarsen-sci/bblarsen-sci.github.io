@@ -1,6 +1,6 @@
 <template>
-  <div class="container mx-auto max-w-screen-lg px-12">
-    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+  <div class="container mx-auto max-w-screen-md px-12">
+    <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mb-10">
       <div
         v-for="(post, index) in filteredPosts"
         :key="index"

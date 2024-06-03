@@ -1,6 +1,6 @@
 import {
   src_exports
-} from "./chunk-BFTYZJGG.js";
+} from "./chunk-5UV7SUN4.js";
 import {
   isArray,
   isBoolean,
@@ -9,13 +9,13 @@ import {
   mergeConfig,
   vega_module_exports,
   writeConfig
-} from "./chunk-SXJFFO5I.js";
-import "./chunk-P5KQ2UN2.js";
+} from "./chunk-XJDZ4BQV.js";
+import "./chunk-AVDKQJKK.js";
 import {
   __commonJS,
   __export,
   __toESM
-} from "./chunk-UV5CTPV7.js";
+} from "./chunk-ZS7NZCD4.js";
 
 // node_modules/json-stringify-pretty-compact/index.js
 var require_json_stringify_pretty_compact = __commonJS({

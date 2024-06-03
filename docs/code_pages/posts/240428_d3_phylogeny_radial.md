@@ -1,10 +1,10 @@
 ---
-title: D3 phylogeny radial
+title: Radial Phylogeny
 aside: false
 date: 2024-04-28
 keywords:
   - D3
-subtext: Radial Nipah Phylogeny
+subtext: Testing making a Nipah Phylogeny
 thumbnail: /thumbnails/d3_phylogeny_radial.png
 ---
 

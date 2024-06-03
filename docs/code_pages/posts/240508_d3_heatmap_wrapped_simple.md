@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: Zoomable D3 Heatmap
+title: Zoomable heatmap
 aside: false
 date: 2024-05-08
 keywords:

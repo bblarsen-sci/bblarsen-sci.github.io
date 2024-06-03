@@ -1,11 +1,11 @@
 ---
 layout: doc
-title: Force Tree
+title: Force phylogenetic tree
 aside: false
 date: 2024-05-21
 keywords:
   - D3
-subtext: D3 force phylogenetic tree
+subtext: Force phylogenetic tree that is draggable
 thumbnail: /thumbnails/d3_forceTree.png
 ---
 

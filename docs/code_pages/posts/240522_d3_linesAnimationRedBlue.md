@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: D3 animated lines
+title: Animated lines
 aside: false
 date: 2024-05-22
 keywords:

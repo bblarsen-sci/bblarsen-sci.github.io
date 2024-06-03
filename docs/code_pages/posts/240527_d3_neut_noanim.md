@@ -1,11 +1,11 @@
 ---
 layout: doc
-title: D3 neutralization curve non animated
+title: Neutralization curve no animation
 aside: false
 date: 2024-05-27
 keywords:
   - D3
-subtext: Add a static neut curve plotted with D3
+subtext: Make a static neut curve plotted with D3
 thumbnail: /thumbnails/d3_neutCurve_static.png
 ---
 

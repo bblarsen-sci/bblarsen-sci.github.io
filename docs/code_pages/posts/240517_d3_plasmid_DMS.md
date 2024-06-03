@@ -1,11 +1,11 @@
 ---
 layout: doc
-title: D3 zoom and animations onto plasmids
+title: Zoom and animations
 aside: false
 date: 2024-05-17
 keywords:
   - D3
-subtext: Testing different zoom animations on a mutant plasmid library
+subtext: Testing different zoom animations on a hypothetical mutant plasmid library
 thumbnail: /thumbnails/plasmidZoom.jpg
 ---
 

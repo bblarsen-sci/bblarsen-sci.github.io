@@ -5,7 +5,7 @@ aside: false
 date: 2024-05-20
 keywords:
   - D3
-subtext: playing around with D3 animations
+subtext: Playing around with D3 animations and transitions
 thumbnail: /thumbnails/circle_animation.png
 ---
 

@@ -376,8 +376,8 @@ import {
   y_default,
   zip,
   zoom_default
-} from "./chunk-P5KQ2UN2.js";
-import "./chunk-UV5CTPV7.js";
+} from "./chunk-AVDKQJKK.js";
+import "./chunk-ZS7NZCD4.js";
 
 // node_modules/d3-axis/src/identity.js
 function identity_default2(x) {
@@ -5012,7 +5012,7 @@ export {
   Transform as ZoomTransform,
   active_default as active,
   arc_default as arc,
-  area_default as area,
+  area_default2 as area,
   areaRadial_default as areaRadial,
   ascending,
   autoType,
@@ -5056,8 +5056,8 @@ export {
   csvParseRows,
   cubehelix,
   cumsum,
-  basis_default as curveBasis,
-  basisClosed_default as curveBasisClosed,
+  basis_default2 as curveBasis,
+  basisClosed_default2 as curveBasisClosed,
   basisOpen_default as curveBasisOpen,
   bumpX as curveBumpX,
   bumpY as curveBumpY,
@@ -5145,16 +5145,16 @@ export {
   fsum,
   albers_default as geoAlbers,
   albersUsa_default as geoAlbersUsa,
-  area_default2 as geoArea,
+  area_default as geoArea,
   azimuthalEqualArea_default as geoAzimuthalEqualArea,
   azimuthalEqualAreaRaw as geoAzimuthalEqualAreaRaw,
   azimuthalEquidistant_default as geoAzimuthalEquidistant,
   azimuthalEquidistantRaw as geoAzimuthalEquidistantRaw,
   bounds_default as geoBounds,
   centroid_default as geoCentroid,
-  circle_default2 as geoCircle,
+  circle_default as geoCircle,
   antimeridian_default as geoClipAntimeridian,
-  circle_default3 as geoClipCircle,
+  circle_default2 as geoClipCircle,
   extent_default as geoClipExtent,
   clipRectangle as geoClipRectangle,
   conicConformal_default as geoConicConformal,
@@ -5208,8 +5208,8 @@ export {
   indexes,
   value_default as interpolate,
   array_default as interpolateArray,
-  basis_default2 as interpolateBasis,
-  basisClosed_default2 as interpolateBasisClosed,
+  basis_default as interpolateBasis,
+  basisClosed_default as interpolateBasisClosed,
   Blues_default as interpolateBlues,
   BrBG_default as interpolateBrBG,
   BuGn_default as interpolateBuGn,
@@ -5452,7 +5452,7 @@ export {
   svg,
   Symbol2 as symbol,
   asterisk_default as symbolAsterisk,
-  circle_default as symbolCircle,
+  circle_default3 as symbolCircle,
   cross_default as symbolCross,
   diamond_default as symbolDiamond,
   diamond2_default as symbolDiamond2,

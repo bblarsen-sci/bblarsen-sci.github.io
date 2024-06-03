@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: D3 Responsive breakpoints
+title: Responsive breakpoints
 aside: false
 date: 2024-05-24
 keywords:

@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: D3 heatmap wrapped
+title: Heatmap wrapped in rows
 aside: false
 date: 2024-05-03
 keywords:

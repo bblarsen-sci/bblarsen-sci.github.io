@@ -1,0 +1,106 @@
+[
+  {
+    "title": "Using archived and biocollection samples towards deciphering the DNA virus diversity associated with rodent species in the families cricetidae and heteromyidae",
+    "journal": "Virology",
+    "year": "2023",
+    "authors": "Michael C Lund, Brendan B Larsen, Dakota M Rowsey, Hans W Otto, Sophie Gryseels, et al.",
+    "link": "https://pubmed.ncbi.nlm.nih.gov/37276766/",
+    "abstract": "Rodentia is the most speciose order of mammals, and they are known to harbor a wide range of viruses. Although there has been significant research on zoonotic viruses in rodents, research on the diversity of other viruses has been limited, especially for rodents in the families Cricetidae and Heteromyidae. In fecal and liver samples of nine species of rodents, we identify 346 distinct circular DNA viral genomes. Of these, a large portion are circular, single-stranded DNA viruses in the families Anelloviridae (n = 3), Circoviridae (n = 5), Genomoviridae (n = 7), Microviridae (n = 297), Naryaviridae (n = 4), Vilyaviridae (n = 15) and in the phylum Cressdnaviricota (n = 13) that cannot be assigned established families. We also identified two large bacteriophages of 36 and 50 kb that are part of the class Caudoviricetes. Some of these viruses are clearly those that infect rodents, however, most of these likely infect various organisms associated with rodents, their environment or their diet."
+  },
+  {
+    "title": "Diverse DNA virus genomes identified in fecal samples of Mexican free-tailed bats (Tadarida brasiliensis) captured in Chiricahua Mountains of southeast Arizona (USA)",
+    "journal": "Virology",
+    "year": "2023",
+    "authors": "Ciara Harding, Brendan B Larsen, Hans W Otto, Ahva L Potticary, Simona Kraberger, et al.",
+    "link": "https://pubmed.ncbi.nlm.nih.gov/36801670/",
+    "abstract": "Bats (order Chiroptera) are some of the most abundant mammals on earth and their species ecology strongly influences zoonotic potential. While substantial research has been conducted on bat-associated viruses, particularly on those that can cause disease in humans and/or livestock, globally, limited research has focused on endemic bats in the USA. The southwest region of the US is of particular interest because of its high diversity of bat species. We identified 39 single-stranded DNA virus genomes in the feces of Mexican free-tailed bats (Tadarida brasiliensis) sampled in the Rucker Canyon (Chiricahua Mountains) of southeast Arizona (USA). Twenty-eight of these belong to the virus families Circoviridae (n = 6), Genomoviridae (n = 17), and Microviridae (n = 5). Eleven viruses cluster with other unclassified cressdnaviruses. Most of the viruses identified represent new species. Further research on identification of novel bat-associated cressdnaviruses and microviruses is needed to provide greater insights regarding their co-evolution and ecology relative to bats."
+  },
+  {
+    "title": "Discovery of three cycloviruses in fecal samples from silver-haired bats (Lasionycteris noctivagans) in Arizona (USA)",
+    "journal": "Archives of virology",
+    "year": "2022",
+    "authors": "Ciara Harding, Brendan B Larsen, Sophie Gryseels, Hans W Otto, et al.",
+    "link": "https://pubmed.ncbi.nlm.nih.gov/36045303/",
+    "abstract": "Bats harbour a diverse array of viruses, some of which are zoonotic, and are one of the most speciose groups of mammals on earth. As part of an ongoing bat-associated viral diversity research project, we identified three cycloviruses (family Circoviridae) in fecal samples of silver-haired bats (Lasionycteris noctivagans) caught in Cave Creek Canyon of Arizona (USA). Two of the three identified genomes represent two new species in the genus Cyclovirus. Cycloviruses have been found in a wide range of environments and hosts; however, little is known about their biology. These new genomes of cycloviruses are the first from silver-haired bats, adding to the broader knowledge of cyclovirus diversity. With continuing studies, it is likely that additional viruses of the family Circoviridae will be identified in Arizona bat populations."
+  },
+  {
+    "title": "Coevolutionary analysis implicates toll-like receptor 9 in papillomavirus restriction",
+    "journal": "MBio",
+    "year": "2023",
+    "authors": "Kelly King, Brendan B Larsen, Sophie Gryseels, Cécile Richet, Simona Kraberger, et al.",
+    "link": "https://pubmed.ncbi.nlm.nih.gov/35311536/",
+    "abstract": "Upon infection, DNA viruses can be sensed by pattern recognition receptors (PRRs), leading to the activation of type I and III interferons to block infection. Therefore, viruses must inhibit these signaling pathways, avoid being detected, or both. Papillomavirus virions are trafficked from early endosomes to the Golgi apparatus and wait for the onset of mitosis to complete nuclear entry. This unique subcellular trafficking strategy avoids detection by cytoplasmic PRRs, a property that may contribute to the establishment of infection. However, as the capsid uncoats within acidic endosomal compartments, the viral DNA may be exposed to detection by Toll-like receptor 9 (TLR9). In this study, we characterized two new papillomaviruses from bats and used molecular archeology to demonstrate that their genomes altered their nucleotide compositions to avoid detection by TLR9, providing evidence that TLR9 acts as a PRR during papillomavirus infection. Furthermore, we showed that TLR9, like other components of the innate immune system, is under evolutionary selection in bats, providing the first direct evidence for coevolution between papillomaviruses and their hosts. Finally, we demonstrated that the cancer-associated human papillomaviruses show a reduction in CpG dinucleotides within a TLR9 recognition complex."
+  },
+  {
+    "title": "Emergence and rapid transmission of SARS-CoV-2 B.1.1.7 in the United States",
+    "journal": "Cell",
+    "year": "2021",
+    "authors": "Nicole L Washington, Karthik Gangavarapu, Mark Zeller, Alexandre Bolze, Elizabeth T Cirulli, Kelly M Schiabor Barrett, Brendan B Larsen, et al.",
+    "link": "https://pubmed.ncbi.nlm.nih.gov/33861950/",
+    "abstract": "The highly transmissible B.1.1.7 variant of SARS-CoV-2, first identified in the United Kingdom, has gained a foothold across the world. Using S gene target failure (SGTF) and SARS-CoV-2 genomic sequencing, we investigated the prevalence and dynamics of this variant in the United States (US), tracking it back to its early emergence. We found that, while the fraction of B.1.1.7 varied by state, the variant increased at a logistic rate with a roughly weekly doubling rate and an increased transmission of 40%-50%. We revealed several independent introductions of B.1.1.7 into the US as early as late November 2020, with community transmission spreading it to most states within months. We show that the US is on a similar trajectory as other countries where B.1.1.7 became dominant, requiring immediate and decisive action to minimize COVID-19 morbidity and mortality."
+  },
+  {
+    "title": "The emergence of SARS-CoV-2 in Europe and North America",
+    "journal": "Science",
+    "year": "2020",
+    "authors": "Michael Worobey, Jonathan Pekar, Brendan B Larsen, Martha I Nelson, Verity Hill, et al.",
+    "link": "https://pubmed.ncbi.nlm.nih.gov/32912998/",
+    "abstract": "Accurate understanding of the global spread of emerging viruses is critical for public health responses and for anticipating and preventing future outbreaks. Here we elucidate when, where, and how the earliest sustained severe acute respiratory syndrome coronavirus 2 (SARS-CoV-2) transmission networks became established in Europe and North America. Our results suggest that rapid early interventions successfully prevented early introductions of the virus from taking hold in Germany and the United States. Other, later introductions of the virus from China to both Italy and Washington state, United States, founded the earliest sustained European and North America transmission networks. Our analyses demonstrate the effectiveness of public health measures in preventing onward transmission and show that intensive testing and contact tracing could have prevented SARS-CoV-2 outbreaks from becoming established in these regions."
+  },
+  {
+    "title": "A near full-length HIV-1 genome from 1966 recovered from formalin-fixed paraffin-embedded tissue",
+    "journal": "Proceedings of the National Academy of Sciences",
+    "year": "2020",
+    "authors": "Sophie Gryseels, Thomas D Watts, Jean-Marie Kabongo Mpolesha, Brendan B Larsen, Philippe Lemey, Jean-Jacques Muyembe-Tamfum, Dirk E Teuwen, Michael Worobey",
+    "link": "https://pubmed.ncbi.nlm.nih.gov/32430331/",
+    "abstract": "With very little direct biological data of HIV-1 from before the 1980s, far-reaching evolutionary and epidemiological inferences regarding the long prediscovery phase of this pandemic are based on extrapolations by phylodynamic models of HIV-1 genomic sequences gathered mostly over recent decades. Here, using a very sensitive multiplex RT-PCR assay, we screened 1,645 formalin-fixed paraffin-embedded tissue specimens collected for pathology diagnostics in Central Africa between 1958 and 1966. We report the near-complete viral genome in one HIV-1 positive specimen from Kinshasa, Democratic Republic of Congo (DRC), from 1966 (DRC66)-a nonrecombinant sister lineage to subtype C that constitutes the oldest HIV-1 near full-length genome recovered to date. Root-to-tip plots showed the DRC66 sequence is not an outlier as would be expected if dating estimates from more recent genomes were systematically biased; and inclusion of the DRC66 sequence in tip-dated BEAST analyses did not significantly alter root and internal node age estimates based on post-1978 HIV-1 sequences. There was larger variation in divergence time estimates among datasets that were subsamples of the available HIV-1 genomes from 1978 to 2014, showing the inherent phylogenetic stochasticity across subsets of the real HIV-1 diversity. Our phylogenetic analyses date the origin of the pandemic lineage of HIV-1 to a time period around the turn of the 20th century (1881 to 1918). In conclusion, this unique archival HIV-1 sequence provides direct genomic insight into HIV-1 in 1960s DRC, and, as an ancient-DNA calibrator, it validates our understanding of HIV-1 evolutionary history."
+  },
+  {
+    "title": "Fitness-balanced escape determines resolution of dynamic founder virus escape processes in HIV-1 infection",
+    "journal": "Journal of Virology",
+    "year": "2015",
+    "authors": "Justine E Sunshine, Brendan B Larsen, Brandon Maust, Ellie Casey, Wenje Deng, Lennie Chen, et al.",
+    "link": "https://pubmed.ncbi.nlm.nih.gov/26223634/",
+    "abstract": "To understand the interplay between host cytotoxic T-lymphocyte (CTL) responses and the mechanisms by which HIV-1 evades them, we studied viral evolutionary patterns associated with host CTL responses in six linked transmission pairs. HIV-1 sequences corresponding to full-length p17 and p24 gag were generated by 454 pyrosequencing for all pairs near the time of transmission, and seroconverting partners were followed for a median of 847 days postinfection. T-cell responses were screened by gamma interferon/interleukin-2 (IFN-γ/IL-2) FluoroSpot using autologous peptide sets reflecting any Gag variant present in at least 5% of sequence reads in the individual's viral population. While we found little evidence for the occurrence of CTL reversions, CTL escape processes were found to be highly dynamic, with multiple epitope variants emerging simultaneously. We found a correlation between epitope entropy and the number of epitope variants per response (r = 0.43; P = 0.05). In cases in which multiple escape mutations developed within a targeted epitope, a variant with no fitness cost became fixed in the viral population. When multiple mutations within an epitope achieved fitness-balanced escape, these escape mutants were each maintained in the viral population. Additional mutations found to confer escape but undetected in viral populations incurred high fitness costs, suggesting that functional constraints limit the available sites tolerable to escape mutations. These results further our understanding of the impact of CTL escape and reversion from the founder virus in HIV infection and contribute to the identification of immunogenic Gag regions most vulnerable to a targeted T-cell attack."
+  },
+  {
+    "title": "Dendritic Cells Restore CD8+ T Cell Reactivity to Autologous HIV-1",
+    "journal": "Journal of Virology",
+    "year": "2014",
+    "authors": "Kellie N Smith, Robbie B Mailliard, Brendan B Larsen, Kim Wong, Phalguni Gupta, James I Mullins, Charles R Rinaldo",
+    "link": "https://pubmed.ncbi.nlm.nih.gov/24942586/",
+    "abstract": "Recall T cell responses to HIV-1 antigens are used as a surrogate for endogenous cellular immune responses generated during infection. Current methods of identifying antigen-specific T cell reactivity in HIV-1 infection use bulk peripheral blood mononuclear cells (PBMC) yet ignore professional antigen-presenting cells (APC) that could reveal otherwise hidden responses. In the present study, peptides representing autologous variants of major histocompatibility complex (MHC) class I-restricted epitopes from HIV-1 Gag and Env were used as antigens in gamma interferon (IFN-γ) enzyme-linked immunosorbent spot (ELISpot) and polyfunctional cytokine assays. Here we show that dendritic cells (DC) enhanced T cell reactivity at all stages of disease progression but specifically restored T cell reactivity after combination antiretroviral therapy (cART) to early infection levels. Type 1 cytokine secretion was also enhanced by DC and was most apparent late post-cART. We additionally show that DC reveal polyfunctional T cell responses after many years of treatment, when potential immunotherapies would be implemented. These data underscore the potential efficacy of DC immunotherapy that aims to awaken a dormant, autologous, HIV-1-specific CD8+ T cell response."
+  },
+  {
+    "title": "Proliferation of cells with HIV integrated into cancer genes contributes to persistent infection",
+    "journal": "Science",
+    "year": "2014",
+    "authors": "Thor A Wagner, Sherry McLaughlin, Kavita Garg, Charles YK Cheung, Brendan B Larsen, Sheila Styrchak, et al.",
+    "link": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4230336/",
+    "abstract": "Antiretroviral treatment (ART) of HIV infection suppresses viral replication. Yet if ART is stopped, virus reemerges because of the persistence of infected cells. We evaluated the contribution of infected-cell proliferation and sites of proviral integration to HIV persistence. A total of 534 HIV integration sites (IS) and 63 adjacent HIV env sequences were derived from three study participants over 11.3 to 12.7 years of ART. Each participant had identical viral sequences integrated at the same position in multiple cells, demonstrating infected-cell proliferation. Integrations were overrepresented in genes associated with cancer and favored in 12 genes across multiple participants. Over time on ART, a greater proportion of persisting proviruses were in proliferating cells. HIV integration into specific genes may promote proliferation of HIV-infected cells, slowing viral decay during ART."
+  },
+  {
+    "title": "Indel and Carryforward Correction (ICC): a new analysis approach for processing 454 pyrosequencing data",
+    "journal": "Bioinformatics",
+    "year": "2013",
+    "authors": "Wenjie Deng, Brandon S Maust, Dylan H Westfall, Lennie Chen, Hong Zhao, Brendan B Larsen, et al.",
+    "link": "https://pubmed.ncbi.nlm.nih.gov/23900188/",
+    "abstract": "We developed a new approach, referred to as Indel and Carryforward Correction (ICC), to cluster sequences without substitutions and locally correct only indel and carryforward sequencing errors within clusters to ensure that no rare variants are lost. ICC performs sequence clustering in the order of (i) homopolymer indel patterns only, (ii) indel patterns only and (iii) carryforward errors only, without the requirement of a distance cutoff value. Overall, ICC removed 93-95% of sequencing errors found in control datasets. On pyrosequencing data from a PCR fragment derived from 15 HIV-1 plasmid clones mixed at various frequencies as low as 0.1%, ICC achieved the highest sensitivity and similar specificity compared with other commonly used error correction and variant calling algorithms."
+  },
+  {
+    "title": "Quality Score Based Identification and Correction of Pyrosequencing Errors",
+    "journal": "PLoS One",
+    "year": "2013",
+    "authors": "Shyamala Iyer, Heather Bouzek, Wenjie Deng, Brendan B. Larsen, Eleanor Casey, James I. Mullins",
+    "link": "https://pubmed.ncbi.nlm.nih.gov/24039850/",
+    "abstract": "Massively-parallel DNA sequencing using the 454/pyrosequencing platform allows in-depth probing of diverse sequence populations, such as within an HIV-1 infected individual. Analysis of this sequence data, however, remains challenging due to the shorter read lengths relative to that obtained by Sanger sequencing as well as errors introduced during DNA template amplification and during pyrosequencing. The ability to distinguish real variation from pyrosequencing errors with high sensitivity and specificity is crucial to interpreting sequence data. We introduce a new algorithm, CorQ (Correction through Quality), which utilizes the inherent base quality in a sequence-specific context to correct for homopolymer and non-homopolymer insertion and deletion (indel) errors. CorQ also takes uneven read mapping into account for correcting pyrosequencing miscall errors and it identifies and corrects carry forward errors. We tested the ability of CorQ to correctly call SNPs on a set of pyrosequences derived from ten viral genomes from an HIV-1 infected individual, as well as on six simulated pyrosequencing datasets generated using non-zero error rates to emulate errors introduced by PCR. When combined with the AmpliconNoise error correction method developed to remove ambiguities in signal intensities, we attained a 97% reduction in indel errors, a 98% reduction in carry forward errors, and >97% specificity of SNP detection. When compared to four other error correction methods, AmpliconNoise+CorQ performed at equal or higher SNP identification specificity, but the sensitivity of SNP detection was consistently higher (>98%) than other methods tested. This combined procedure will therefore permit examination of complex genetic populations with improved accuracy."
+  },
+  {
+    "title": "Increased HIV-1 vaccine efficacy against viruses with genetic signatures in Env-V2",
+    "journal": "Nature",
+    "year": "2012",
+    "authors": "Morgane Rolland, Paul T. Edlefsen, Brendan B. Larsen, Sodsai Tovanabutra, Eric Sanders-Buell, et al.",
+    "link": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3551291/",
+    "abstract": "The RV144 trial demonstrated 31% vaccine efficacy at preventing human immunodeficiency virus (HIV)-1 infection. Antibodies against the HIV-1 envelope variable loops 1 and 2 (Env V1 and V2) correlated inversely with infection risk. We proposed that vaccine-induced immune responses against V1/V2 would have a selective effect against, or sieve, HIV-1 breakthrough viruses. A total of 936 HIV-1 genome sequences from 44 vaccine and 66 placebo recipients were examined. We show that vaccine-induced immune responses were associated with two signatures in V2 at amino acid positions 169 and 181. Vaccine efficacy against viruses matching the vaccine at position 169 was 48% (confidence interval 18% to 66%; P = 0.0036), whereas vaccine efficacy against viruses mismatching the vaccine at position 181 was 78% (confidence interval 35% to 93%; P = 0.0028). Residue 169 is in a cationic glycosylated region recognized by broadly neutralizing and RV144-derived antibodies. The predicted distance between the two signature sites (21 ± 7 Å) and their match/mismatch dichotomy indicate that multiple factors may be involved in the protection observed in RV144. Genetic signatures of RV144 vaccination in V2 complement the finding of an association between high V1/V2-binding antibodies and reduced risk of HIV-1 acquisition, and provide evidence that vaccine-induced V2 responses plausibly had a role in the partial protection conferred by the RV144 regimen."
+  }
+]

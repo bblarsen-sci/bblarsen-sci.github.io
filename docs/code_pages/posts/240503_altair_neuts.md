@@ -1,5 +1,5 @@
 ---
-title: Plotting neutralization curves with Altair
+title: Altair neutralization curves
 aside: false
 date: 2024-05-03
 keywords:

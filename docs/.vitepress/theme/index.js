@@ -8,9 +8,11 @@ import CodePosts from './CodePosts.vue';
 import FigureTitle from './FigureHeader.vue';
 import SubtitleHeader from './SubtitleHeader.vue';
 import D3PlotContainer from './D3PlotContainer.vue';
+import Layout from './Layout.vue';
 
 export default {
-  extends: DefaultTheme,
+  Layout,
+  //extends: DefaultTheme,
   enhanceApp({ app, router, siteData }) {
     app.component('Altair', Altair);
     app.component('Figure', Figure);

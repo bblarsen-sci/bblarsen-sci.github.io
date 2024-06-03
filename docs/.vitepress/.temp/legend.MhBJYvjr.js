@@ -1,0 +1,80 @@
+import * as d3 from "d3";
+function Legend(color, {
+  svgRef,
+  title,
+  tickSize = 2,
+  width = 320,
+  height = 40 + tickSize,
+  marginTop = 15,
+  marginRight = 10,
+  marginBottom = 18 + tickSize,
+  marginLeft = 15,
+  ticks = width / 64,
+  tickFormat,
+  tickValues,
+  xcoord = 0,
+  ycoord = 0
+} = {}) {
+  function ramp(color2, n = 256) {
+    const canvas = document.createElement("canvas");
+    canvas.width = n;
+    canvas.height = 1;
+    const context = canvas.getContext("2d");
+    for (let i = 0; i < n; ++i) {
+      context.fillStyle = color2(i / (n - 1));
+      context.fillRect(i, 0, 1, 1);
+    }
+    return canvas;
+  }
+  const svg = d3.select("svg").append("g").attr("transform", `translate(${xcoord}, ${ycoord})`);
+  let tickAdjust = (g) => g.selectAll(".tick line").attr("y1", marginTop + marginBottom - height);
+  let x;
+  if (color.interpolate) {
+    const n = Math.min(color.domain().length, color.range().length);
+    x = color.copy().rangeRound(d3.quantize(d3.interpolate(marginLeft, width - marginRight), n));
+    svg.append("image").attr("x", marginLeft).attr("y", marginTop).attr("width", width - marginLeft - marginRight).attr("height", height - marginTop - marginBottom).attr("preserveAspectRatio", "none").attr(
+      "xlink:href",
+      ramp(color.copy().domain(d3.quantize(d3.interpolate(0, 1), n))).toDataURL()
+    );
+  } else if (color.interpolator) {
+    x = Object.assign(
+      color.copy().interpolator(d3.interpolateRound(marginLeft, width - marginRight)),
+      {
+        range() {
+          return [marginLeft, width - marginRight];
+        }
+      }
+    );
+    svg.append("image").attr("x", marginLeft).attr("y", marginTop).attr("width", width - marginLeft - marginRight).attr("height", height - marginTop - marginBottom).attr("preserveAspectRatio", "none").attr("xlink:href", ramp(color.interpolator()).toDataURL());
+    if (!x.ticks) {
+      if (tickValues === void 0) {
+        const n = Math.round(ticks + 1);
+        tickValues = d3.range(n).map((i) => d3.quantile(color.domain(), i / (n - 1)));
+      }
+      if (typeof tickFormat !== "function") {
+        tickFormat = d3.format(tickFormat === void 0 ? ",f" : tickFormat);
+      }
+    }
+  } else if (color.invertExtent) {
+    const thresholds = color.thresholds ? color.thresholds() : color.quantiles ? color.quantiles() : color.domain();
+    const thresholdFormat = tickFormat === void 0 ? (d) => d : typeof tickFormat === "string" ? d3.format(tickFormat) : tickFormat;
+    x = d3.scaleLinear().domain([-1, color.range().length - 1]).rangeRound([marginLeft, width - marginRight]);
+    svg.append("g").selectAll("rect").data(color.range()).join("rect").attr("x", (d, i) => x(i - 1)).attr("y", marginTop).attr("width", (d, i) => x(i) - x(i - 1)).attr("height", height - marginTop - marginBottom).attr("fill", (d) => d);
+    tickValues = d3.range(thresholds.length);
+    tickFormat = (i) => thresholdFormat(thresholds[i], i);
+  } else {
+    x = d3.scaleBand().domain(color.domain()).rangeRound([marginLeft, width - marginRight]);
+    svg.append("g").selectAll("rect").data(color.domain()).join("rect").attr("x", x).attr("y", marginTop).attr("width", Math.max(0, x.bandwidth() - 1)).attr("height", height - marginTop - marginBottom).attr("fill", color);
+    tickAdjust = () => {
+    };
+  }
+  svg.append("g").attr("transform", `translate(0,${height - marginBottom})`).call(
+    d3.axisBottom(x).ticks(ticks, typeof tickFormat === "string" ? tickFormat : void 0).tickFormat(typeof tickFormat === "function" ? tickFormat : void 0).tickSize(tickSize).tickValues(tickValues)
+  ).call(tickAdjust).call((g) => g.select(".domain").remove()).call(
+    (g) => g.append("text").attr("x", marginLeft).attr("y", marginTop + marginBottom - height - 2).attr("fill", "currentColor").attr("text-anchor", "start").attr("class", "text").text(title)
+  );
+  return svg.node();
+}
+export {
+  Legend as L
+};
