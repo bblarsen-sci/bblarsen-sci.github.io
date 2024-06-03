@@ -1,84 +1,94 @@
 <script setup>
-    import { ref, computed, watch } from 'vue';
-    import { useData, useRoute } from 'vitepress';
-    import VPNavBarAppearance from './VPNavBarAppearance.vue'
-    
-    const isMenuOpen = ref(false);
-    const route = useRoute();
-    
-    // Computed property for menu items
-    const menuItems = computed(() => [
-      { text: 'About', href: '/about/' },
-      { text: 'Publications', href: '/publications/' },
-      { text: 'Visualizations', href: '/code_pages/code_index/' },
-    ]);
-    
-    // Toggle the menu state
-    const toggleMenu = () => {
-      isMenuOpen.value = !isMenuOpen.value;
-    };
-    
-    // Close the menu
-    const closeMenu = () => {
-      isMenuOpen.value = false;
-    };
-    
-    // Watch the menu state and update the body class to disable scrolling when the menu is open
-    watch(isMenuOpen, (newValue) => {
-      const body = document.body;
-      if (newValue) {
-        body.classList.add('disable-scroll');
-      } else {
-        body.classList.remove('disable-scroll');
-      }
-    });
-    
-    // Handle menu item click event
-    const handleItemClick = () => {
-      closeMenu();
-    };
-    </script>
+import { computed, inject, ref } from 'vue';
+import { useData, useRoute } from 'vitepress';
+import SunIcon from './icons/VPIconSun.vue'
+import MoonIcon from './icons/VPIconMoon.vue'
+import GithubIcon from './icons/GithubIcon.vue'
+import HamburgerIcon from './icons/Hamburger.vue';
+import InformationIcon from './icons/InformationIcon.vue';
+import PubsIcon from './icons/PubsIcon.vue';
+import VizIcon from './icons/VizIcon.vue';
+
+const route = useRoute();
+
+const { isDark, theme } = useData()
+const toggleAppearance = inject('toggle-appearance', () => {
+  isDark.value = !isDark.value
+})
+const switchTitle = computed(() => {
+  return isDark.value
+    ? theme.value.lightModeSwitchTitle || 'Switch to light theme'
+    : theme.value.darkModeSwitchTitle || 'Switch to dark theme'
+})
+
+// Computed property for menu items
+const menuItems = computed(() => [
+  { text: 'About', href: '/about/', icon: InformationIcon },
+  { text: 'Publications', href: '/publications/', icon: PubsIcon },
+  { text: 'Visualizations', href: '/visualizations/', icon: VizIcon },
+]);
+
+
+const isDropdownOpen = ref(false);
+
+function toggleDropdown() {
+  isDropdownOpen.value = !isDropdownOpen.value;
+}
+</script>
+
+
 
 <template>
-    <nav class="p-4">
-        <div class="flex justify-between items-center w-full px-4 select-none">
-            <a href="/" class="flex items-center no-underline">
-              <span class="title text-md font-semibold z-20 tracking-tight collapse sm:visible">Brendan Larsen</span>
-            </a>
-            <div
-              class="bg-custom-soft backdrop-blur-md md:backdrop-blur-none flex-col md:flex-row bg-opacity-75 md:bg-transparent md:flex md:items-center md:px-0 px-3 md:pb-0 pb-10 md:static absolute md:w-auto w-full md:h-auto h-full md:pt-0 pt-10 top-14 z-50"
-              :class="`md:flex ${isMenuOpen ? 'flex' : 'hidden'} ${isMenuOpen ? 'left-0' : 'left-[-100%]'}`"
-            >
-              <div class="flex flex-col md:flex-row">
-                <div
-                  v-for="item in menuItems"
-                  :key="item.text"
-                  :item="item"
-                  @click="handleItemClick"
-                >
-                  <a
-                    :href="item.href"
-                    :class="{ 'text-red-400': route.path === item.href, 'text-gray-600': route.path !== item.href }"
-                    class="px-4 py-4 flex flex-col items-center justify-center hover:text-red-400"
-                  >
-                    {{ item.text }}
-                  </a>
-                </div>
-              </div>
-            </div>
-            <button class="flex flex-col md:hidden text-gray-600" @click="toggleMenu">
-              <span :class="isMenuOpen ? 'i-x h-6 w-6' : 'i-menu h-6 w-6'"></span>
-            </button>
-            <VPNavBarAppearance class="appearance" />
-          </div>
-    </nav>
+  <div class="container mx-auto max-w-screen-xl">
+    <div class="relative flex items-center justify-between px-6 h-16">
+      <a href="/" class="inline-block rounded-full font-semibold text-base tracking-tight">Brendan Larsen</a>
+
+      <!-- Regular menu items (hidden on small screens) -->
+      <div class="hidden md:flex flex-row items-center gap-4">
+        <div v-for="item in menuItems" :key="item.text" :item="item" @click="handleItemClick">
+          <a :href="item.href" :class="{
+            'bg-slate-200 bg-opacity-50 rounded-lg p-2': route.path === item.href,
+            'rounded-lg p-2': route.path !== item.href,
+          }" class="items-center justify-center tracking-tight text-base fill-current">
+            {{ item.text }}
+          </a>
+        </div>
+        <div class="cursor-pointer" @click="toggleAppearance">
+          <SunIcon v-if="!isDark" key="sun" class="w-5" :title="switchTitle" />
+          <MoonIcon v-else key="moon" class="w-5" :title="switchTitle" />
+        </div>
+      </div>
+
+      <!-- Dropdown menu toggle button (only visible on small screens) -->
+      <button @click="toggleDropdown" class="md:hidden">
+        <HamburgerIcon />
+      </button>
+    </div>
+
+    <!-- Dropdown menu (only visible on small screens) -->
+    <div v-if="isDropdownOpen" class="md:hidden absolute  top-12 right-0  text-sm shadow-md rounded-lg gap-2">
+      <a v-for="item in menuItems" :key="item.text" :href="item.href" class="flex flex-row px-4 py-2"
+        @click="toggleDropdown">
+        <component :is="item.icon" class="w-4 h-4 mr-2" />
+        {{ item.text }}
+      </a>
+      <div class="flex flex-row align-middle px-4 py-2 gap-2 cursor-pointer" @click="toggleAppearance">
+        <SunIcon v-if="!isDark" key="sun" class="w-4" :title="switchTitle" />
+        <MoonIcon v-else key="moon" class="w-4" :title="switchTitle" />
+        <p>Light</p>
+      </div>
+      <a href="https://github.com/bblarsen-sci/bblarsen-sci.github.io"
+        class="flex flex-row align-middle px-4 py-2 gap-2">
+        <GithubIcon class="w-4" />
+        <p>GitHub</p>
+      </a>
+    </div>
+  </div>
 </template>
 
 <style>
-    .disable-scroll {
-      overflow: hidden;
-    }
-    a {
-      text-decoration: none;
-    }
-    </style>
+a {
+  text-decoration: none;
+}
+
+</style>

@@ -1,16 +1,16 @@
 // posts.data.js
 import { createContentLoader } from 'vitepress';
 
-export default createContentLoader('/code_pages/posts/**.md', {
+export default createContentLoader('visualizations/posts/*.md', {
   transform: (raw) => {
     return raw
       .map(({ url, frontmatter, subtext }) => ({
         title: frontmatter.title,
-        url,
         subtext: frontmatter.subtext,
         keywords: frontmatter.keywords,
         date: frontmatter.date,
         thumbnail: frontmatter.thumbnail,
+        url,
       }))
       .sort((a, b) => new Date(b.date) - new Date(a.date));
   },
