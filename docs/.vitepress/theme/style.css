@@ -5,17 +5,16 @@
 @tailwind utilities;
 
 :root {
-  --bg: theme('colors.slate.100');
+  --bg: theme('colors.white');
   --bg-dark: #121212; /*theme('colors.slate.950');*/
   --bg-dark-accent: theme('colors.slate.700');
-  --text: theme('colors.slate.700');
+  --text: theme('colors.slate.800');
   --text-strong: theme('colors.slate.900');
   --text-dark: theme('colors.slate.300');
   --text-dark-strong: theme('colors.slate.100');
 
   --vp-c-text-highlight: theme('colors.red.500');
 }
-
 body {
   font-family: var(--primary-font-family);
   text-rendering: optimizeLegibility;
@@ -24,18 +23,13 @@ body {
   background-color: var(--bg);
   color: var(--text);
 }
-
 .dark body {
   background-color: var(--bg-dark);
   color: var(--text-dark);
 }
-
-
-
 .vp-code span {
   color: var(--shiki-light, inherit);
 }
-
 span.lang {
   position: absolute;
   right: 0.5em;
@@ -45,24 +39,19 @@ span.lang {
     'Courier New', monospace;
 }
 
-.prose code {
-  @apply rounded bg-slate-100 text-sm;
-}
-
-.prose pre {
-  @apply rounded bg-slate-100 p-4 text-sm;
-}
-
+/* NORMAL */
 h1 {
   font-size: 2.25em;
+  margin-top: 0em;
+  margin-bottom: 0.88em;
+  line-height: 2.5rem;
   letter-spacing: -0.025em;
-  margin-bottom: 1.25em;
   font-weight: 800;
 }
 h2 {
-  font-size: 1.5em;
+  font-size: 2em;
   letter-spacing: -0.025em;
-  font-weight: 600;
+  font-weight: 800;
   margin-bottom: 1.25em;
 }
 h3 {
@@ -70,14 +59,16 @@ h3 {
   letter-spacing: -0.025em;
   line-height: 1.4;
   font-weight: 600;
-  margin-bottom: 1em;
-  margin-top: 2.4em
+  margin-bottom: 1.25em;
+  margin-top: 1.25em
 }
 p {
+  font-size: 0.875rem;
   margin-bottom: 1.25em;
-  line-height: 1.6;
+  margin-top: 1.25em;
+  line-height: 1.71;
   font-weight: 500;
-  line-height: 1.6;
+
 }
 figcaption {
   font-size: 0.875em;
@@ -96,29 +87,24 @@ a:hover {
   text-decoration: underline;
   color: var(--vp-c-text-highlight);
 }
-
+/* PROSE */
 .prose {
   color: var(--text);
 }
-
 .prose h1,
 .prose h2,
 .prose h3 {
   letter-spacing: -0.025em;
 }
 .prose h1 {
-  font-size: 2.25em;
   font-weight: 800;
-  margin-bottom: 2em;
-  margin-top: 2em;
 }
 .prose h2 {
   font-size: 1.5em;
   font-weight: 600;
-  margin-bottom: 2.5em;
-  margin-top: 0;
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
 }
-
 .prose h3 {
   font-size: 1.125em;
   line-height: 1.4;
@@ -126,7 +112,12 @@ a:hover {
   margin-bottom: 0em;
   margin-top: 3em
 }
-
+.prose code {
+  @apply rounded bg-slate-100 text-sm;
+}
+.prose pre {
+  @apply rounded bg-slate-100 p-4 text-sm;
+}
 .prose a {
   font-weight: theme('fontWeight.semibold');
   text-decoration: none;
@@ -156,7 +147,14 @@ a:hover {
 
 .dark .prose a {
   color: theme('colors.white');
+  font-weight: theme('fontWeight.semibold');
+  text-decoration: none;
+  border-bottom: 1px solid var(--vp-c-text-highlight);
+}
+
+.dark .prose a:hover {
   border-bottom-color: var(--vp-c-text-highlight);
+  border-bottom-width: 2px;
 }
 
 .dark .prose strong {

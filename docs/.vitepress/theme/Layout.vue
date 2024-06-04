@@ -1,5 +1,5 @@
 <script setup>
-import { Content, useData } from 'vitepress'
+import { useData } from 'vitepress'
 import Nav from './components/Nav.vue'
 import Home from './components/Home.vue'
 import About from './components/About.vue'
@@ -11,14 +11,14 @@ const { frontmatter } = useData()
 </script>
     
 <template>
-    <div id="app" class="flex flex-col min-h-screen ">
-        <Nav class=""></Nav>
-        <main class="">
+    <div id="app" class="flex flex-col min-h-screen">
+        <Nav></Nav>
+        <main>
             <Home v-if="frontmatter.home" />
-            <About class="max-w-screen-md mx-auto" v-else-if="frontmatter.about" />
-            <Publications class="max-w-screen-md mx-auto" v-else-if="frontmatter.publications" />
-            <Visualizations class="max-w-screen-md mx-auto" v-else-if="frontmatter.visualizations" />
-            <ContentPage class="-mt-10 max-w-screen-lg mx-auto" v-else />
+            <About v-else-if="frontmatter.about" />
+            <Publications v-else-if="frontmatter.publications" />
+            <Visualizations v-else-if="frontmatter.visualizations" />
+            <ContentPage v-else />
         </main>
     </div>
 </template>

@@ -1,7 +1,7 @@
 <template>
-    <div class="prose dark:prose-invert dark:prose-dark">
-        <h1>About</h1>
-        <lines />
+    <div class="mx-auto px-4 lg:px-6 prose dark:prose-dark max-w-screen-xl">
+        <h1 class="py-16">About</h1>
+        <lines class="pb-16" />
         <p>
             I am a postdoctoral fellow at the
             <a class="" href="https://www.fredhutch.org/en.html">Fred Hutch Cancer Center</a> in Seattle,
@@ -26,8 +26,8 @@
             lab at the University of Washington. During this time, I contributed to projects involving the
             sequencing of HIV genomes from breakthrough infections in vaccine trials and early infection.
         </p>
-        <div class="my-10">
-            <div class="flex flex-row justify-evenly font-semibold items-center">
+        <div class="my-16">
+            <div class="flex flex-row justify-between font-semibold items-center">
                 <div class="flex flex-col items-center gap-2">
                     <VirusIcon class="w-12 h-12" />
                     <p class="text-center">Virus Evolution</p>

@@ -1,107 +1,69 @@
-<script>
-export default {
-    data() {
-        return {
-            publications: [],
-            coauthor: [],
-            preprints: []
-        };
-    },
-    mounted() {
-        console.log('mounted')
-        fetch('../papersFirst.json')
-            .then(response => response.json())
-            .then(data => {
-                this.publications = data;
-            });
-        fetch('../papersSecond.json')
-            .then(response => response.json())
-            .then(data => {
-                this.coauthor = data;
-            });
-        fetch('../preprints.json')
-            .then(response => response.json())
-            .then(data => {
-                this.preprints = data;
-            });
-    },
-};
-</script>
-
 <template>
-    <div class="prose dark:prose-dark dark:prose-invert">
-        <h1 class="pb-16">Publications</h1>
-        <div class="flex flex-row pb-4 text-sm md:text-md tracking-wider uppercase">
-            <a class="inline-flex flex-1 justify-center dark:text-slate-300 text-slate-600 hover:text-red-400"
-                href="#section-1">Preprints</a>
-            <a class="inline-flex flex-1 justify-center dark:text-slate-300 text-slate-600 hover:text-red-400"
-                href="#section-2">First author </a>
-            <a class="inline-flex flex-1 justify-center dark:text-slate-300 text-slate-600 hover:text-red-400"
-                href="#section-3">Co-authored</a>
+    <div class=" mx-auto px-4 lg:px-6 prose dark:prose-dark max-w-screen-xl">
+        <h1 class="py-16">Publications</h1>
+        <div class="flex flex-row pb-2 text-sm uppercase tracking-wider">
+            <a v-for="section in sections" :key="section.id"
+                class="inline-flex flex-1 justify-center border-none hover:text-red-500" :href="`#${section.id}`">
+                {{ section.title }}
+            </a>
         </div>
-    </div>
-    <div class="prose dark:prose-dark dark:prose-invert">
-        <div class="h-1 bg-black dark:bg-white"></div>
-        <h2 class="py-8 text-2xl font-semibold tracking-tight">Preprints</h2>
-        <div id="section-1" class="not-prose grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            <div v-for="paper in preprints" :key="paper.title"
-                class="card block h-full max-w-sm rounded-lg border border-slate-200 shadow  dark:border-slate-700 hover:border-slate-400">
-                <a :href="paper.link">
-                    <div class="p-5">
-                        <h2 class="mb-2 text-xl font-bold tracking-tight text-slate-900 dark:text-white">{{ paper.title
-                            }}</h2>
-                        <img :src="paper.image" class="mx-auto object-contain aspect-square max-h-36 ">
-                        <div class="text-center text-sm my-2">{{ paper.journal }}, {{ paper.year }}</div>
-                        <p class="font-light text-xs line-clamp-3">{{ paper.abstract }}</p>
+        <div class="">
+            <div class="h-1 bg-slate-800 dark:bg-slate-300"></div>
+            <div v-for="section in sections" :key="section.id">
+                <h2 :id="section.id" class="py-16">{{ section.title }}</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10">
+                    <div v-for="paper in section.data" :key="paper.title"
+                        class="block h-full max-w-sm rounded-lg border border-slate-200 shadow hover:shadow-lg transition duration-300 hover:border-slate-400 dark:border-slate-700 dark:hover:border-slate-400 text-start p-4 mx-auto">
+                        <a class="" :href="paper.link">
+                            <div class="flex flex-col justify-evenly">
+                                <strong class="">{{ paper.title }}</strong>
+                                <img v-if="paper.image" :src="paper.image"
+                                    class="aspect-square max-h-36 object-cover mx-auto border shadow-md" />
+                                <p class=" text-center text-sm">
+                                    {{ paper.journal }}, {{ paper.year }}
+                                </p>
+                                <p class="line-clamp-3 text-xs font-light">{{ paper.abstract }}</p>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-        </div>
-        <div class="mt-8 h-1 bg-black dark:bg-white"></div>
-        <h2 class="py-8 text-2xl font-semibold tracking-tight">First author publications</h2>
-        <div id="section-2" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 not-prose">
-            <div v-for="paper in publications" :key="paper.title"
-                class="card block h-full max-w-sm rounded-lg border border-slate-200 shadow  dark:border-slate-700 hover:border-slate-400">
-                <a :href="paper.link">
-                    <div class="p-5">
-                        <h2 class="mb-2 text-xl font-bold tracking-tight text-slate-900 dark:text-white">{{ paper.title
-                            }}</h2>
-                        <img :src="paper.image" class="mx-auto object-contain aspect-square max-h-36 ">
-                        <div class="text-center text-sm my-2">{{ paper.journal }}, {{ paper.year }}</div>
-                        <p class="font-light text-xs line-clamp-3">{{ paper.abstract }}</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="mt-8 h-1 bg-black dark:bg-white"></div>
-        <h2 class="py-8 text-2xl font-semibold tracking-tight">Co-authored Publications</h2>
-        <div id="section-3" class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 not-prose">
-            <div v-for="paper in coauthor" :key="paper.title"
-                class="card block h-full max-w-sm rounded-lg border border-slate-200 shadow  dark:border-slate-700 hover:border-slate-400">
-                <a :href="paper.link">
-                    <div class="p-5">
-                        <h2 class="mb-2 text-xl font-bold tracking-tight text-slate-900 dark:text-white">{{ paper.title
-                            }}</h2>
-                        <div class="text-center text-sm my-2">{{ paper.journal }}, {{ paper.year }}</div>
-                        <p class="font-light text-xs line-clamp-3">{{ paper.abstract }}</p>
-                    </div>
-                </a>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
+<script>
+export default {
+  data() {
+    return {
+      sections: [
+        { id: 'section-1', title: 'Preprints', data: [] },
+        { id: 'section-2', title: 'First Author Publications', data: [] },
+        { id: 'section-3', title: 'Co-authored Publications', data: [] },
+      ],
+    };
+  },
+  mounted() {
+    fetch('../preprints.json')
+      .then((response) => response.json())
+      .then((data) => {
+        this.sections[0].data = data;
+      });
+    fetch('../papersFirst.json')
+      .then((response) => response.json())
+      .then((data) => {
+        this.sections[1].data = data;
+      });
+    fetch('../papersSecond.json')
+      .then((response) => response.json())
+      .then((data) => {
+        this.sections[2].data = data;
+      });
+  },
+};
+</script>
+
 <style scoped>
-a {
-    text-decoration: none;
-    border: none;
-}
 
-.card {
-    transition: transform 0.3s ease;
-}
 
-.card:hover {
-    transform: translateY(-5px);
-}
 </style>
