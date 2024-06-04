@@ -161,6 +161,7 @@ const colorRegions = computed(() => {
     //  .text('Mean Cell Entry');
 
     Legend(d3.scaleDiverging([d3.min(dataset.value, d=>d.entry), 0, d3.max(dataset.value, d=>d.entry) + 1], d3.interpolateRdBu).clamp(true), {
+      svgRef: svgContainer.value,
       width: 100,
       title: 'Mean Cell Entry',
       tickValues: [d3.min(dataset.value, d=>d.entry), 0, d3.max(dataset.value, d=>d.entry) + 1],

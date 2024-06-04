@@ -34,7 +34,7 @@ export function Legend(
   }
 
   const svg = d3
-    .select('svg')
+    .select(svgRef)
     //.attr("width", width)
     //.attr("height", height)
     //.attr("viewBox", [0, 0, width, height])

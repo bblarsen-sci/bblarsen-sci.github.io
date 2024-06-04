@@ -8,11 +8,11 @@ subtext: How to make a simple interactive plot with Altair
 thumbnail: /thumbnails/altair_letter_scatter.png
 ---
 
-# {{$frontmatter.title}}
+<div class='prose dark:prose-dark dark:prose-invert'>
+<h1>{{$frontmatter.title}}</h1>
 
-{{$frontmatter.subtext}}
+<h2>{{$frontmatter.subtext}}</h2>
 
-## Interactive plot with slider to move between sites.
 
 For the Nipah receptor binding protein deep mutational scanning project, it was sometimes necessary to plot the effects of mutations between two conditions. For example, to compare the effect of mutations on entry in CHO-bEFNB2 or CHO-bEFNB3 cells.
 
@@ -87,3 +87,5 @@ hline = alt.Chart(pd.DataFrame({'y': [0]})).mark_rule(color='gray',opacity=0.5,s
 final_chart = vline + hline + chart
 final_chart.display()
 ```
+
+</div>

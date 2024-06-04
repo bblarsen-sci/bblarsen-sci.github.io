@@ -29,14 +29,14 @@ export default {
 </script>
 
 <template>
-    <div class="container mx-auto prose dark:prose-dark dark:prose-invert">
-        <h1 class="py-10">Publications</h1>
-        <div class="flex flex-row mb-4 text-sm md:text-md tracking-wider uppercase">
-            <a class="inline-flex flex-1 justify-center dark:text-slate-300 text-slate-600 hover:text-red-600"
+    <div class="prose dark:prose-dark dark:prose-invert">
+        <h1 class="pb-16">Publications</h1>
+        <div class="flex flex-row pb-4 text-sm md:text-md tracking-wider uppercase">
+            <a class="inline-flex flex-1 justify-center dark:text-slate-300 text-slate-600 hover:text-red-400"
                 href="#section-1">Preprints</a>
-            <a class="inline-flex flex-1 justify-center dark:text-slate-300 text-slate-600 hover:text-red-600"
+            <a class="inline-flex flex-1 justify-center dark:text-slate-300 text-slate-600 hover:text-red-400"
                 href="#section-2">First author </a>
-            <a class="inline-flex flex-1 justify-center dark:text-slate-300 text-slate-600 hover:text-red-600"
+            <a class="inline-flex flex-1 justify-center dark:text-slate-300 text-slate-600 hover:text-red-400"
                 href="#section-3">Co-authored</a>
         </div>
     </div>
@@ -88,7 +88,6 @@ export default {
                 </a>
             </div>
         </div>
-        <br></br>
     </div>
 </template>
 

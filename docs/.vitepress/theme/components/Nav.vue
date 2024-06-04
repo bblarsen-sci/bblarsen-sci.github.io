@@ -1,9 +1,9 @@
 <script setup>
 import { computed, inject, ref } from 'vue';
 import { useData, useRoute } from 'vitepress';
-import SunIcon from './icons/VPIconSun.vue'
-import MoonIcon from './icons/VPIconMoon.vue'
-import GithubIcon from './icons/GithubIcon.vue'
+import SunIcon from './icons/VPIconSun.vue';
+import MoonIcon from './icons/VPIconMoon.vue';
+import GithubIcon from './icons/GithubIcon.vue';
 import HamburgerIcon from './icons/Hamburger.vue';
 import InformationIcon from './icons/InformationIcon.vue';
 import PubsIcon from './icons/PubsIcon.vue';
@@ -11,15 +11,15 @@ import VizIcon from './icons/VizIcon.vue';
 
 const route = useRoute();
 
-const { isDark, theme } = useData()
+const { isDark, theme } = useData();
 const toggleAppearance = inject('toggle-appearance', () => {
-  isDark.value = !isDark.value
-})
+  isDark.value = !isDark.value;
+});
 const switchTitle = computed(() => {
   return isDark.value
     ? theme.value.lightModeSwitchTitle || 'Switch to light theme'
-    : theme.value.darkModeSwitchTitle || 'Switch to dark theme'
-})
+    : theme.value.darkModeSwitchTitle || 'Switch to dark theme';
+});
 
 // Computed property for menu items
 const menuItems = computed(() => [
@@ -28,7 +28,6 @@ const menuItems = computed(() => [
   { text: 'Visualizations', href: '/visualizations/', icon: VizIcon },
 ]);
 
-
 const isDropdownOpen = ref(false);
 
 function toggleDropdown() {
@@ -36,20 +35,24 @@ function toggleDropdown() {
 }
 </script>
 
-
-
 <template>
-  <div class="container mx-auto max-w-screen-xl">
-    <div class="relative flex items-center justify-between px-6 h-16">
-      <a href="/" class="inline-block rounded-full font-semibold text-base tracking-tight">Brendan Larsen</a>
+  <div class="mx-auto w-full border-b px-4 lg:px-6">
+    <div class="relative flex h-16 items-center justify-between">
+      <a href="/" class="inline-block rounded-full text-base font-semibold tracking-tight"
+        >Brendan Larsen</a
+      >
 
       <!-- Regular menu items (hidden on small screens) -->
-      <div class="hidden md:flex flex-row items-center gap-4">
+      <div class="hidden flex-row items-center gap-4 md:flex ">
         <div v-for="item in menuItems" :key="item.text" :item="item" @click="handleItemClick">
-          <a :href="item.href" :class="{
-            'bg-slate-200 bg-opacity-50 rounded-lg p-2': route.path === item.href,
-            'rounded-lg p-2': route.path !== item.href,
-          }" class="items-center justify-center tracking-tight text-base fill-current">
+          <a
+            :href="item.href"
+            :class="{
+              'rounded-lg bg-slate-200 bg-opacity-50 p-2': route.path === item.href,
+              '': route.path !== item.href,
+            }"
+            class="items-center justify-center fill-current  text-sm hover:text-red-500"
+          >
             {{ item.text }}
           </a>
         </div>
@@ -60,25 +63,38 @@ function toggleDropdown() {
       </div>
 
       <!-- Dropdown menu toggle button (only visible on small screens) -->
-      <button @click="toggleDropdown" class="md:hidden">
+      <button @click="toggleDropdown" class="md:hidden ">
         <HamburgerIcon />
       </button>
     </div>
 
     <!-- Dropdown menu (only visible on small screens) -->
-    <div v-if="isDropdownOpen" class="md:hidden absolute  top-12 right-0  text-sm shadow-md rounded-lg gap-2">
-      <a v-for="item in menuItems" :key="item.text" :href="item.href" class="flex flex-row px-4 py-2"
-        @click="toggleDropdown">
-        <component :is="item.icon" class="w-4 h-4 mr-2" />
+    <div
+      v-if="isDropdownOpen"
+      class="z-90 absolute bg-slate-800 right-4 top-12 gap-2 rounded-lg text-sm shadow-md md:hidden"
+    >
+      <a
+        v-for="item in menuItems"
+        :key="item.text"
+        :href="item.href"
+        class="flex flex-row px-4 py-2 hover:text-red-400 z-50"
+        @click="toggleDropdown"
+      >
+        <component :is="item.icon" class="flex-shrink-0 mr-2 w-4" />
         {{ item.text }}
       </a>
-      <div class="flex flex-row align-middle px-4 py-2 gap-2 cursor-pointer" @click="toggleAppearance">
+      <div
+        class="flex cursor-pointer flex-row gap-2 px-4 py-2 align-middle"
+        @click="toggleAppearance"
+      >
         <SunIcon v-if="!isDark" key="sun" class="w-4" :title="switchTitle" />
         <MoonIcon v-else key="moon" class="w-4" :title="switchTitle" />
         <p>Light</p>
       </div>
-      <a href="https://github.com/bblarsen-sci/bblarsen-sci.github.io"
-        class="flex flex-row align-middle px-4 py-2 gap-2">
+      <a
+        href="https://github.com/bblarsen-sci/bblarsen-sci.github.io"
+        class="flex flex-row gap-2 px-4 py-2 align-middle"
+      >
         <GithubIcon class="w-4" />
         <p>GitHub</p>
       </a>
@@ -90,5 +106,4 @@ function toggleDropdown() {
 a {
   text-decoration: none;
 }
-
 </style>

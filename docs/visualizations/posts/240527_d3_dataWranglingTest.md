@@ -12,10 +12,10 @@ thumbnail: /thumbnails/data_wrangling.png
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-  <div class='flex flex-wrap items-start justify-start'>
+  <div class='flex flex-wrap items-start justify-start not-pr'>
   <form class="max-w-xs pb-4">
   <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option:</label>
-  <select class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" v-model="selectedDataset" @change="changeDataset">
+  <select class="bg-gray-50 border border-slate-300 text-gray-900 text-sm rounded-lg focus:ring-red-400 focus:border-red-500 block w-full p-2.5 dark:bg-slate-700 dark:border-slate-600 dark:placeholder-gray-400 dark:focus:ring-red-500 dark:focus:border-red-500" v-model="selectedDataset" @change="changeDataset">
     <option value="bEFNB2_entry">bEFNB2 Entry</option>
     <option value="bEFNB3_entry">bEFNB3 Entry</option>
     <option value="bEFNB2_binding">bEFNB2 Binding</option>

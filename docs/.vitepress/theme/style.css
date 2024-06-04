@@ -1,20 +1,170 @@
-@import "fonts.css";
-@import "vars.css";
-
+@import 'fonts.css';
+@import 'vars.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg: theme('colors.slate.100');
+  --bg-dark: #121212; /*theme('colors.slate.950');*/
+  --bg-dark-accent: theme('colors.slate.700');
+  --text: theme('colors.slate.700');
+  --text-strong: theme('colors.slate.900');
+  --text-dark: theme('colors.slate.300');
+  --text-dark-strong: theme('colors.slate.100');
 
+  --vp-c-text-highlight: theme('colors.red.500');
+}
 
 body {
-    font-family: var(--primary-font-family);
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  font-family: var(--primary-font-family);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--bg);
+  color: var(--text);
 }
+
+.dark body {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+
 
 .vp-code span {
-    color: var(--shiki-light, inherit);
+  color: var(--shiki-light, inherit);
 }
 
+span.lang {
+  position: absolute;
+  right: 0.5em;
+  font-size: 0.75em;
+  color: #999;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+    'Courier New', monospace;
+}
+
+.prose code {
+  @apply rounded bg-slate-100 text-sm;
+}
+
+.prose pre {
+  @apply rounded bg-slate-100 p-4 text-sm;
+}
+
+h1 {
+  font-size: 2.25em;
+  letter-spacing: -0.025em;
+  margin-bottom: 1.25em;
+  font-weight: 800;
+}
+h2 {
+  font-size: 1.5em;
+  letter-spacing: -0.025em;
+  font-weight: 600;
+  margin-bottom: 1.25em;
+}
+h3 {
+  font-size: 1.25em;
+  letter-spacing: -0.025em;
+  line-height: 1.4;
+  font-weight: 600;
+  margin-bottom: 1em;
+  margin-top: 2.4em
+}
+p {
+  margin-bottom: 1.25em;
+  line-height: 1.6;
+  font-weight: 500;
+  line-height: 1.6;
+}
+figcaption {
+  font-size: 0.875em;
+  margin-top: 0.25em;
+  margin-bottom: 1em;
+  font-style: italic;
+}
+.home-image {
+  @apply rounded-lg object-contain max-w-80;
+}
+
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  color: var(--vp-c-text-highlight);
+}
+
+.prose {
+  color: var(--text);
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  letter-spacing: -0.025em;
+}
+.prose h1 {
+  font-size: 2.25em;
+  font-weight: 800;
+  margin-bottom: 2em;
+  margin-top: 2em;
+}
+.prose h2 {
+  font-size: 1.5em;
+  font-weight: 600;
+  margin-bottom: 2.5em;
+  margin-top: 0;
+}
+
+.prose h3 {
+  font-size: 1.125em;
+  line-height: 1.4;
+  font-weight: 600;
+  margin-bottom: 0em;
+  margin-top: 3em
+}
+
+.prose a {
+  font-weight: theme('fontWeight.semibold');
+  text-decoration: none;
+  border-bottom: 1px solid var(--vp-c-text-highlight);
+}
+
+.prose a:hover {
+  border-bottom-color: var(--vp-c-text-highlight);
+  border-bottom-width: 2px;
+}
+
+.prose strong {
+  color: var(--text-strong);
+  font-weight: theme('fontWeight.semibold');
+}
+
+.prose figure, 
+.prose figurecaption {
+  text-align: center;
+  font-style: italic;
+}
+
+
+.dark .prose {
+  color: var(--text-dark);
+}
+
+.dark .prose a {
+  color: theme('colors.white');
+  border-bottom-color: var(--vp-c-text-highlight);
+}
+
+.dark .prose strong {
+  color: var(--text-dark-strong);
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3 {
+  color: var(--text-dark);
+}

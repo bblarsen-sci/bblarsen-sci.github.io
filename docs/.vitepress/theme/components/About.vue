@@ -1,6 +1,6 @@
 <template>
     <div class="prose dark:prose-invert dark:prose-dark">
-        <h1 class="pt-10">About</h1>
+        <h1>About</h1>
         <lines />
         <p>
             I am a postdoctoral fellow at the
@@ -27,7 +27,7 @@
             sequencing of HIV genomes from breakthrough infections in vaccine trials and early infection.
         </p>
         <div class="my-10">
-            <div class="not-prose flex flex-row justify-evenly font-semibold items-center">
+            <div class="flex flex-row justify-evenly font-semibold items-center">
                 <div class="flex flex-col items-center gap-2">
                     <VirusIcon class="w-12 h-12" />
                     <p class="text-center">Virus Evolution</p>

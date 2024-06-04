@@ -1,6 +1,6 @@
 <template>
-  <div class="!prose !prose-dark dark:!prose-invert">
-    <h1 class="!pt-0">
+  <div class="prose prose-dark dark:prose-invert">
+    <h1>
       <slot></slot>
     </h1>
   </div>

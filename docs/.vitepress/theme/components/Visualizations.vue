@@ -1,7 +1,6 @@
 <template>
-    <div class="mx-auto prose dark:prose-dark dark:prose-invert justify-between ">
+    <div class="prose dark:prose-dark dark:prose-invert">
         <h1 class="">Visualizing Biological Data</h1>
-        <img src="/images/nipah.jpg" class="max-w-60 rounded-lg shadow-md mx-auto">
         <h2>Overview</h2>
         <p>This section hosts different visualizations, primarily of deep mutational scanning data from the <a
                 href="https://dms-vep.github.io/Nipah_Malaysia_RBP_DMS/">Nipah virus RBP project</a>. Deep mutational
@@ -27,7 +26,7 @@
     <div class="container mx-auto">
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 mb-10">
             <div v-for="(post, index) in posts" :key="index"
-                class="card container block max-w-sm rounded-lg border border-slate-200 shadow hover:border-slate-400 dark:border-slate-700">
+                class="card block max-w-sm rounded-lg border border-slate-200 shadow hover:border-slate-400 dark:border-slate-700">
                 <a :href="post.url" class="flex h-full flex-col">
                     <div class="h-36" v-if="post.thumbnail">
                         <img :src="post.thumbnail" class="h-full w-full rounded-t-lg object-cover" />

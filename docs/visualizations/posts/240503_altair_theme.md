@@ -21,8 +21,8 @@ When using Altair to make plots, it is often useful to use consistent themes wit
 Here is what my theme.py file looks like, where I specify all the theme values I want to be consistently applied.
 </p>
 
-<pre>
 
+```python
 import altair as alt
 def main_theme():
     # Define Typography
@@ -107,18 +107,18 @@ def main_theme():
         	}
         }
     }
-</pre>
+```
 
 <p>To use the theme, we import into the python script with this code:</p>
 
-<pre>
+```python
 import sys
 #import altair themes from /data/custom_analyses_data/theme.py and enable
 sys.path.append('data/custom_analyses_data/')
 import theme
 alt.themes.register('main_theme', theme.main_theme)
 alt.themes.enable('main_theme')
-</pre>
+```
 
 <p>
 And now all altair plots will have that theme consistently applied!
