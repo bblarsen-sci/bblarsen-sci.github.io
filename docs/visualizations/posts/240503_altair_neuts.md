@@ -47,7 +47,7 @@ The data we have are:
 
 Import packages.
 
-<pre>
+```python
 from IPython.display import display, HTML, SVG
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -60,18 +60,18 @@ import yaml
 import altair as alt
 import re
 print(f"Using `neutcurve` version {neutcurve.__version__}")
-</pre>
+```
 
 Read in the data as a `.csv`. Here, I slightly adjust the names of some of the data.
 
-<pre>
+```python
 # First, load in the neut data
 df = pd.read_csv(ephrin_binding_neuts_file)
-</pre>
+```
 
-Ok, so now that we have our data, lets fit the curves. I do this in a loop to extract curves for each 'serum' and 'virus', then concatante them all into a single dataframe. In order to get bars for the measurements, we have to do some calculations and assign them back to the `curve` dataframe. The function 'get_neutcurve' does all of this so we call it and assign it to 'neutcurve_df'.
+Ok, so now that we have our data, lets fit the curves. I do this in a loop to extract curves for each 'serum' and 'virus', then concatante them all into a single dataframe. In order to get bars for the measurements, we have to do some calculations and assign them back to the ```curve``` dataframe. The function 'get_neutcurve' does all of this so we call it and assign it to 'neutcurve_df'.
 
-<pre>
+```python
 def get_neutcurve(df, replicate="average"):
     #estimate fits
     fits = neutcurve.curvefits.CurveFits(
@@ -110,7 +110,7 @@ def get_neutcurve(df, replicate="average"):
 
 
 neutcurve_df = get_neutcurve(df)
-</pre>
+```
 
 Now we have a pandas dataframe called `neutcurve_df` that contains all the data needed for plotting. Lets go ahead and plot these data with altair. We need to make three separate plots, then combine them together at the end.
 
@@ -118,7 +118,7 @@ Now we have a pandas dataframe called `neutcurve_df` that contains all the data 
 - A circle plot that contains the actual data we collected.
 - Std deviation bars on each point.
 
-<pre>
+```python
 def plot_neut_curve(df):
     chart = (
         alt.Chart(df)
@@ -176,7 +176,7 @@ def plot_neut_curve(df):
 
 ephrin_curve = plot_neut_curve(neutcurve_df)
 ephrin_curve.display()
-</pre>
+```
 
 Running that, we get the following nice looking neut curve plot that was made with Altair. If you choose to run, you will likely see something slightly different, as I am applying a custom [theme](/visualizations/posts/240503_altair_theme) to the altair figure.
 

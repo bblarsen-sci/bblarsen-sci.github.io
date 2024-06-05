@@ -1,5 +1,5 @@
 <template>
-    <div class="mx-auto px-4 lg:px-6 prose dark:prose-dark max-w-screen-xl">
+    <div class="mx-auto px-4 lg:px-6 max-w-screen-md ">
         <h1 class="py-16">About</h1>
         <lines class="pb-16" />
         <p>
@@ -30,19 +30,19 @@
             <div class="flex flex-row justify-between font-semibold items-center">
                 <div class="flex flex-col items-center gap-2">
                     <VirusIcon class="w-12 h-12" />
-                    <p class="text-center">Virus Evolution</p>
+                    <strong class="text-center">Virus Evolution</strong>
                 </div>
                 <div class="flex flex-col items-center gap-2 ">
                     <MammalIcon class="w-12 h-12" />
-                    <p class="text-center">Mammal Biodiversity</p>
+                    <strong class="text-center">Mammal Biodiversity</strong>
                 </div>
                 <div class="flex flex-col items-center gap-2">
                     <HostVirusIcon class="w-12 h-12" />
-                    <p class="text-center">Host/Virus Coevolution</p>
+                    <strong class="text-center">Host/Virus Coevolution</strong>
                 </div>
                 <div class="flex flex-col items-center gap-2">
                     <PhylogeneticsIcon class="w-12 h-12" />
-                    <p class="text-center">Phylogenetics</p>
+                    <strong class="text-center">Phylogenetics</strong>
                 </div>
             </div>
         </div>
@@ -56,3 +56,9 @@ import PhylogeneticsIcon from './icons/PhylogeneticsIcon.vue';
 import MammalIcon from './icons/MammalIcon.vue';
 import HostVirusIcon from './icons/HostVirusIcon.vue';
 </script>
+
+<style scoped>
+    p {
+        margin-bottom: 1.5rem;
+    }
+</style>

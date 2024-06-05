@@ -1,6 +1,6 @@
 <template>
   <div
-    class="not-prose rounded-lg p-4 font-light md:shadow-lg"
+    class="rounded-lg p-4 font-light md:shadow-lg"
   >
     <slot></slot>
   </div>

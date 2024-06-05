@@ -26,8 +26,8 @@ thumbnail: /thumbnails/gradientStripes.png
   const width = 500;
   const height = 150;
   const marginTop = 40;
-  const marginRight = 60;
-  const marginBottom = 60;
+  const marginRight = 20;
+  const marginBottom = 80;
   const marginLeft = 20;
 
   const circleRadius = 4;
@@ -165,8 +165,8 @@ const colorRegions = computed(() => {
       width: 100,
       title: 'Mean Cell Entry',
       tickValues: [d3.min(dataset.value, d=>d.entry), 0, d3.max(dataset.value, d=>d.entry) + 1],
-      xcoord: width-150,
-      ycoord: height-40,
+      xcoord: width-110,
+      ycoord: height-35,
     })
   }
 

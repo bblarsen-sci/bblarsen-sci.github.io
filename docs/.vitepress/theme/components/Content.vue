@@ -1,12 +1,12 @@
 <template>
-  <div class="w-full h-full px-2 lg:px-6">
+  <div class="pt-6 w-full h-full px-2 lg:px-6">
     <div class="flex flex-col md:flex-row">
-      <main class="w-full px-2 md:w-5/6">
+      <main class="w-full px-2 md:w-5/6 mx-auto max-w-screen-md">
         <Content />
       </main>
       <button
         @click="toggleSidebar"
-        class="fixed right-0 top-12 rounded-full p-2 focus:outline-none"
+        class="fixed right-1 top-16 rounded-full p-2 focus:outline-none"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -23,18 +23,18 @@
       </button>
       <aside
         v-if="isSidebarOpen"
-        class="fixed bottom-0 right-0 top-20 h-screen z-40 w-1/6 border md:block ">
-        <div class="h-full overflow-y-auto px-3 py-4 bg-slate-200">
-          <span class="mb-4 font-semibold">Other posts</span>
-            <ul class="space-y-2  text-xs">
+        class="fixed h-1/2 right-0 top-20 z-40 w-1/6 border md:block ">
+        <div class="h-full overflow-y-auto p-2 bg-slate-100">
+          <strong class="mb-4">Other posts</strong>
+            <ul class="space-y-2 text-xs">
               <li v-for="(post, index) in filteredPosts" :key="index">
                 <a
                   :href="post.url"
                   :class="{
-                    'text-red-400': route.path === post.url,
+                    'text-red-500': route.path === post.url,
                     '': route.path !== post.url,
                   }"
-                  class="flex items-center p-0"
+                  class="flex items-center p-0 border-none"
                 >
                   {{ post.title }}
                 </a>

@@ -1,5 +1,5 @@
 <template>
-  <div class="prose prose-dark dark:prose-invert">
+  <div class="">
     <h1>
       <slot></slot>
     </h1>

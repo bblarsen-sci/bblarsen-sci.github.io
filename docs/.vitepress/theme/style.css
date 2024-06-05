@@ -13,7 +13,7 @@
   --text-dark: theme('colors.slate.300');
   --text-dark-strong: theme('colors.slate.100');
 
-  --vp-c-text-highlight: theme('colors.red.500');
+  --link-highlight: theme('colors.red.500');
 }
 body {
   font-family: var(--primary-font-family);
@@ -23,12 +23,8 @@ body {
   background-color: var(--bg);
   color: var(--text);
 }
-.dark body {
-  background-color: var(--bg-dark);
-  color: var(--text-dark);
-}
 .vp-code span {
-  color: var(--shiki-light, inherit);
+  color: var(--shiki-dark);
 }
 span.lang {
   position: absolute;
@@ -38,37 +34,38 @@ span.lang {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
     'Courier New', monospace;
 }
-
+.dark body {
+  background-color: var(--bg-dark);
+  color: var(--text-dark);
+}
 /* NORMAL */
 h1 {
   font-size: 2.25em;
-  margin-top: 0em;
-  margin-bottom: 0.88em;
   line-height: 2.5rem;
   letter-spacing: -0.025em;
   font-weight: 800;
+  color: var(--text-strong)
+}
+.dark h1 {
+  color: var(--text-dark-strong);
+}
+.dark h2 {
+  color: var(--text-dark-strong);
 }
 h2 {
   font-size: 2em;
   letter-spacing: -0.025em;
-  font-weight: 800;
-  margin-bottom: 1.25em;
+  font-weight: 700;
+  color: var(--text-strong)
 }
 h3 {
   font-size: 1.25em;
   letter-spacing: -0.025em;
-  line-height: 1.4;
   font-weight: 600;
-  margin-bottom: 1.25em;
-  margin-top: 1.25em
 }
 p {
-  font-size: 0.875rem;
-  margin-bottom: 1.25em;
-  margin-top: 1.25em;
-  line-height: 1.71;
-  font-weight: 500;
-
+  font-size: 1rem;
+  font-weight: 400;
 }
 figcaption {
   font-size: 0.875em;
@@ -76,16 +73,23 @@ figcaption {
   margin-bottom: 1em;
   font-style: italic;
 }
+strong {
+  font-weight: 700;
+}
+
 .home-image {
   @apply rounded-lg object-contain max-w-80;
 }
 
 a {
-  text-decoration: none;
+  @apply font-semibold border-b border-b-red-500;
+}
+
+.dark a {
+  @apply text-white font-semibold border-b border-b-red-500; 
 }
 a:hover {
-  text-decoration: underline;
-  color: var(--vp-c-text-highlight);
+  @apply border-b-2;
 }
 /* PROSE */
 .prose {
@@ -113,10 +117,10 @@ a:hover {
   margin-top: 3em
 }
 .prose code {
-  @apply rounded bg-slate-100 text-sm;
+  @apply rounded  text-sm;
 }
 .prose pre {
-  @apply rounded bg-slate-100 p-4 text-sm;
+  @apply rounded  p-4 text-sm;
 }
 .prose a {
   font-weight: theme('fontWeight.semibold');

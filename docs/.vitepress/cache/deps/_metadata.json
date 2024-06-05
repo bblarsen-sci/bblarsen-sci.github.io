@@ -1,61 +1,67 @@
 {
-  "hash": "d3fccab7",
-  "configHash": "1e2cb65f",
-  "lockfileHash": "d6034115",
-  "browserHash": "bb974c75",
+  "hash": "b4523369",
+  "configHash": "2f267fac",
+  "lockfileHash": "7eec0a7c",
+  "browserHash": "6f49168a",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "0e09e43c",
+      "fileHash": "fbfea89b",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "5ee7a03f",
+      "fileHash": "26b513e4",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "692aae53",
+      "fileHash": "d207934f",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "6397ba8c",
+      "fileHash": "5dc42bd4",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "5d23bf9b",
+      "fileHash": "289f5add",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "22b4ad40",
+      "fileHash": "1fcf24d4",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "88bcfbbb",
+      "fileHash": "1845e322",
+      "needsInterop": false
+    },
+    "@shikijs/vitepress-twoslash/client": {
+      "src": "../../../../node_modules/@shikijs/vitepress-twoslash/dist/client.mjs",
+      "file": "@shikijs_vitepress-twoslash_client.js",
+      "fileHash": "375b9597",
       "needsInterop": false
     }
   },
   "chunks": {
-    "chunk-RY5ODQAQ": {
-      "file": "chunk-RY5ODQAQ.js"
-    },
     "chunk-AUTOGC5R": {
       "file": "chunk-AUTOGC5R.js"
     },
     "chunk-HUQGSQ4Q": {
       "file": "chunk-HUQGSQ4Q.js"
+    },
+    "chunk-RY5ODQAQ": {
+      "file": "chunk-RY5ODQAQ.js"
     },
     "chunk-NTP5MXPO": {
       "file": "chunk-NTP5MXPO.js"

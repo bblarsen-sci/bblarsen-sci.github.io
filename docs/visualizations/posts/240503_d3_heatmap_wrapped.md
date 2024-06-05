@@ -88,57 +88,53 @@ const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_D
   // Function to download the image
   async function downloadImage() {
     try {
-      const plotContainer = svgContainer.value;
+      const plotContainer = d3.select(svgContainer.value);
 
       if (!plotContainer) {
         console.error('SVG element not found');
         return;
       }
+      const img = new Image();
+      const serializer = new XMLSerializer();
+      const svgString = serializer.serializeToString(plotContainer.node());
 
-      const clone = plotContainer.cloneNode(true);
-      const dpi = 200; // Desired DPI
-      const scaleFactor = dpi / 96; // Assume the browser is set to 96 DPI (typical browser setting)
+      img.src = "data:image/svg+xml;utf8," + svgString;
 
-      // Scale the cloned plot container
-      clone.style.transform = `scale(${scaleFactor})`;
-      clone.style.transformOrigin = "top right";
+      const canvas = document.createElement('canvas');
+      document.body.appendChild(canvas);
+      
+      canvas.width = 600;
+      canvas.height = 400;
+      // Wait for the image to load before drawing it on the canvas
+    await new Promise((resolve) => {
+      img.onload = resolve;
+    });
 
-      // Append the cloned container to the body, offscreen
-      clone.style.position = "fixed";
-      clone.style.top = "-10000px";
-      document.body.appendChild(clone);
+    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
 
-      // Render the cloned plot as a canvas element
-      const canvas = await html2canvas(clone, {
-        scale: scaleFactor,
-        useCORS: true,
-        logging: true,
-      });
+    // Convert canvas to data URL
+    const dataURL = canvas.toDataURL('image/png');
 
-      // Remove the cloned plot container
-      document.body.removeChild(clone);
+    // Create a download link
+    const link = document.createElement('a');
+    link.href = dataURL;
+    link.download = 'image.png';
 
-      // Convert the canvas to a blob
-      const blob = await new Promise((resolve) =>
-        canvas.toBlob(resolve, "image/png")
-      );
+    // Programmatically trigger the download
+    link.click();
 
-      // Create a link to download the image
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = `heatmap.png`;
-      link.click();
-
-      // Remove the link
-      link.remove();
-    } catch (error) {
-      console.error('Error downloading image:', error);
-    }
+    // Clean up
+    document.body.removeChild(canvas);
+  } catch (error) {
+    console.error('Error downloading image:', error);
   }
+}
+
+
 
   // Function to download the SVG
   function downloadSVG() {
-    const svgElement = document.querySelector('svg');
+    const svgElement = svgContainer.value;
     const serializer = new XMLSerializer();
     const svgBlob = new Blob([serializer.serializeToString(svgElement)], { type: 'image/svg+xml' });
     const url = URL.createObjectURL(svgBlob);
@@ -376,7 +372,7 @@ const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_D
 
 
     Legend(d3.scaleDiverging([min.value, 0, max.value], d3[selectedColorScale.value]).clamp(true), {
-      //svgRef: legend.value,
+      svgRef: svgContainer.value,
       title: "Cell Entry",
       width: 150,
       tickValues: [min.value, 0, max.value],

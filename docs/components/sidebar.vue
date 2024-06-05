@@ -2,7 +2,7 @@
 
 <template>
   <div
-    class="sticky top-0 inline-block w-full items-center justify-center overflow-hidden border-2 p-4"
+    class="sticky top-0 bg-slate-200 inline-block w-full items-center justify-center overflow-hidden border-2 p-4"
   >
     <div class="flex flex-col gap-4 text-xs">
       <div class="text-xl font-bold">Heatmap Options</div>
@@ -105,14 +105,14 @@ const heatmapOptions = defineProps({
 
 <style scoped>
 .form-input {
-  @apply rounded-md p-1 ring-1 ring-slate-400;
+  @apply rounded-md p-1 ring-1 ring-red-400;
 }
 
 .form-select {
-  @apply rounded-md p-1 ring-1 ring-slate-400;
+  @apply rounded-md p-1 ring-1 ring-red-400;
 }
 
 .btn-primary {
-  @apply rounded-md bg-sky-500 p-1 text-white hover:bg-sky-600;
+  @apply rounded-md bg-red-500 p-1 text-white hover:bg-red-700 shadow-md;
 }
 </style>
