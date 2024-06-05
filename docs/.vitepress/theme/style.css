@@ -8,7 +8,7 @@
   --bg: theme('colors.white');
   --bg-dark: #121212; /*theme('colors.slate.950');*/
   --bg-dark-accent: theme('colors.slate.700');
-  --text:  #000000; /*theme('colors.slate.800');*/
+  --text:  theme('colors.slate.800');
   --text-strong: theme('colors.slate.900');
   --text-dark: theme('colors.slate.300');
   --text-dark-strong: theme('colors.slate.100');

@@ -23,8 +23,9 @@ export default {
       backgroundImage: {
         'sky-light': 'linear-gradient(150deg, #1E293B, #0C4A6E)', //slate-800 to sky-900
         'sky-dark': 'linear-gradient(220deg, #0C4A6E, #1E293B)', //sky-900 to slate-800
-        nipah: "url('/images/nipah.png')",
-        red: 'linear-gradient(120deg, #1e293b, #450a0a)',
+        'nipah': "url('/images/nipah.jpg')",
+        'blurry': "url('/images/backgrounds/bbblurry.svg')",
+        'red': 'linear-gradient(120deg, #1e293b, #450a0a)',
       },
     },
   },
