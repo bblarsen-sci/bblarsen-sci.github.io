@@ -14,11 +14,16 @@ thumbnail: /thumbnails/d3_neutCurve_static.png
 <D3PlotContainer>
 <svg ref='svgContainer'></svg>
 </D3PlotContainer>
+<button class='btn-primary' @click=downloadPNGHandler>Save PNG</button>
 
 <script setup>
     import { ref, onMounted, computed, watch } from 'vue';
     import * as d3 from 'd3';
 
+    import downloadPNG from '/components/downloadPNG.js'
+    function downloadPNGHandler() {
+    downloadPNG(svgContainer.value)
+    }
     const dataFile = '/data/ephrin_neutcurve_df.csv'
 
     const svgContainer = ref(null);

@@ -16,7 +16,9 @@ thumbnail: /thumbnails/altair_letter_scatter.png
 
 For the Nipah receptor binding protein deep mutational scanning project, it was sometimes necessary to plot the effects of mutations between two conditions. For example, to compare the effect of mutations on entry in CHO-bEFNB2 or CHO-bEFNB3 cells.
 
+
 <Altair :showShadow="false" :spec-url="'/htmls/entry_letter_plot_slider.html'"></Altair>
+
 
 ## Making plot
 
@@ -87,5 +89,6 @@ hline = alt.Chart(pd.DataFrame({'y': [0]})).mark_rule(color='gray',opacity=0.5,s
 final_chart = vline + hline + chart
 final_chart.display()
 ```
+
 
 </div>

@@ -1,12 +1,10 @@
 import { h } from 'vue';
-import Altair from './Altair.vue';
-import Figure from './Figure.vue';
+import Altair from './components/Altair.vue';
+import Figure from './components/Figure.vue';
 import './style.css';
-import TwoslashFloatingVue from '@shikijs/vitepress-twoslash/client'
-import '@shikijs/vitepress-twoslash/style.css'
-import FigureTitle from './FigureHeader.vue';
-import SubtitleHeader from './SubtitleHeader.vue';
-import D3PlotContainer from './D3PlotContainer.vue';
+import FigureTitle from './components/FigureHeader.vue';
+import SubtitleHeader from './components/SubtitleHeader.vue';
+import D3PlotContainer from './components/D3PlotContainer.vue';
 import Layout from './Layout.vue';
 
 export default {
@@ -17,7 +15,6 @@ export default {
     app.component('Figure', Figure);
     app.component('FigureTitle', FigureTitle);
     app.component('D3PlotContainer', D3PlotContainer);
-    app.component('SubtitleHeader', SubtitleHeader);
-    app.component('TwoslashFloatingVue', TwoslashFloatingVue)
+    app.component('SubtitleHeader', SubtitleHeader)
   },
 };

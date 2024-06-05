@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import { data as posts } from '../posts.data.js';
+import { data as posts } from './posts.data.js';
 import { useData } from 'vitepress';
 
 export default {

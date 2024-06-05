@@ -1,7 +1,7 @@
 <template>
   <div class="pt-6 w-full h-full px-2 lg:px-6">
     <div class="flex flex-col md:flex-row">
-      <main class="w-full px-2 md:w-5/6 mx-auto max-w-screen-md">
+      <main class="w-full px-2 md:w-5/6 mx-auto ">
         <Content />
       </main>
       <button
@@ -23,8 +23,8 @@
       </button>
       <aside
         v-if="isSidebarOpen"
-        class="fixed h-1/2 right-0 top-20 z-40 w-1/6 border md:block ">
-        <div class="h-full overflow-y-auto p-2 bg-slate-100">
+        class="fixed h-1/2 right-0 top-24 z-40 w-32 border md:block ">
+        <div class="h-full overflow-y-auto p-2 bg-slate-200 dark:bg-slate-800">
           <strong class="mb-4">Other posts</strong>
             <ul class="space-y-2 text-xs">
               <li v-for="(post, index) in filteredPosts" :key="index">
@@ -48,7 +48,7 @@
 
 <script setup>
 import { computed, ref } from 'vue';
-import { data as posts } from '../posts.data.js';
+import { data as posts } from './posts.data.js';
 import { useData, useRoute } from 'vitepress';
 
 const route = useRoute();

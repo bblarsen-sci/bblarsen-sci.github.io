@@ -8,7 +8,7 @@
   --bg: theme('colors.white');
   --bg-dark: #121212; /*theme('colors.slate.950');*/
   --bg-dark-accent: theme('colors.slate.700');
-  --text: theme('colors.slate.800');
+  --text:  #000000; /*theme('colors.slate.800');*/
   --text-strong: theme('colors.slate.900');
   --text-dark: theme('colors.slate.300');
   --text-dark-strong: theme('colors.slate.100');
@@ -17,6 +17,7 @@
 }
 body {
   font-family: var(--primary-font-family);
+  font-optical-sizing: auto;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -26,6 +27,21 @@ body {
 .vp-code span {
   color: var(--shiki-dark);
 }
+
+.btn-primary {
+  @apply rounded-md bg-slate-200 dark:bg-slate-500 p-1 hover:bg-slate-600 shadow-md;
+}
+
+.download-btn {
+  background-image: url('./components/icons/Download.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px 20px;
+  /* Adjust the size as needed */
+  padding-left: 30px;
+  /* Adjust the padding to accommodate the icon */
+}
+
 span.lang {
   position: absolute;
   right: 0.5em;

@@ -14,11 +14,19 @@ thumbnail: /thumbnails/gradientStripes.png
 <D3PlotContainer>
 <svg ref='svgContainer'></svg>
 </D3PlotContainer>
+<button class='download-btn w-12 h-12 ' @click=downloadPNGHandler></button>
+
 
 <script setup>
   import { ref, computed, watch, onMounted, watchEffect } from 'vue';
   import * as d3 from 'd3';
   import { Legend } from '/components/legend.js';
+
+
+import downloadPNG from '/components/downloadPNG.js'
+function downloadPNGHandler() {
+  downloadPNG(svgContainer.value)
+}
 
   const dataset = ref(null);
   const svgContainer = ref(null);

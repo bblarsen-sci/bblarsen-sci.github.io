@@ -20,7 +20,7 @@ thumbnail: /thumbnails/d3_heatmap_wrapped.png
           :paddingOptions="paddingOptions" :strokeOptions="strokeOptions" :parseSites="parseSites"
           :selectedSites="selectedSites" :siteInputValue="siteInputValue"
           @update:siteInputValue="siteInputValue = $event" @update:selectedSites="selectedSites = $event"
-          @downloadSVG="downloadSVG" @downloadImage="downloadImage" />
+          @downloadSVG="downloadSVGHandler" @downloadImage="downloadPNGHandler" />
       </aside>
       <main class="w-full sm:w-3/4 md:w-5/6 px-2">
         <svg ref='svgContainer'></svg>
@@ -35,6 +35,9 @@ thumbnail: /thumbnails/d3_heatmap_wrapped.png
   import * as d3 from 'd3';
   import { Legend } from '/components/legend.js';
   import Tooltip from '/components/tooltip.vue';
+  import downloadSVG from '/components/downloadSVG.js';
+  import downloadPNG from '/components/downloadPNG.js';
+  
 
 const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB3.csv';
 
@@ -64,7 +67,7 @@ const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_D
     'interpolatePuOr',
     'interpolateSpectral',
   ]
-
+  
   const rowOptions = [1, 2, 3, 4, 5, 6];
 
   const paddingOptions = [0, 0.05, 0.1,0.15, 0.2];
@@ -84,68 +87,14 @@ const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_D
   const squareSize = 9; // size of each square in the heatmap
 
 
-  // DEFINE NORMAL FUNCTIONS
-  // Function to download the image
-  async function downloadImage() {
-    try {
-      const plotContainer = d3.select(svgContainer.value);
-
-      if (!plotContainer) {
-        console.error('SVG element not found');
-        return;
-      }
-      const img = new Image();
-      const serializer = new XMLSerializer();
-      const svgString = serializer.serializeToString(plotContainer.node());
-
-      img.src = "data:image/svg+xml;utf8," + svgString;
-
-      const canvas = document.createElement('canvas');
-      document.body.appendChild(canvas);
-      
-      canvas.width = 600;
-      canvas.height = 400;
-      // Wait for the image to load before drawing it on the canvas
-    await new Promise((resolve) => {
-      img.onload = resolve;
-    });
-
-    canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
-
-    // Convert canvas to data URL
-    const dataURL = canvas.toDataURL('image/png');
-
-    // Create a download link
-    const link = document.createElement('a');
-    link.href = dataURL;
-    link.download = 'image.png';
-
-    // Programmatically trigger the download
-    link.click();
-
-    // Clean up
-    document.body.removeChild(canvas);
-  } catch (error) {
-    console.error('Error downloading image:', error);
+  function downloadPNGHandler() {
+    downloadPNG(svgContainer.value)
   }
-}
 
+  function downloadSVGHandler() {
+    downloadSVG(svgContainer.value)
+  }
 
-
-  // Function to download the SVG
-  function downloadSVG() {
-    const svgElement = svgContainer.value;
-    const serializer = new XMLSerializer();
-    const svgBlob = new Blob([serializer.serializeToString(svgElement)], { type: 'image/svg+xml' });
-    const url = URL.createObjectURL(svgBlob);
-    const downloadLink = document.createElement('a');
-    downloadLink.href = url;
-    downloadLink.download = 'heatmap.svg';
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-    URL.revokeObjectURL(url);
-  };
 
 
   // Function to parse sites entered by the user
@@ -329,6 +278,10 @@ const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_D
         .attr('class', `wildtype-row`)
         .attr('x', d => xScale.value(siteRow.indexOf(+d.site)) + xScale.value.bandwidth() / 2)
         .attr('y', d => yScale.value(d.wildtype) + (yScale.value.range()[1] + rowPadding) * rowIndex + yScale.value.bandwidth() / 2 + 3)
+        .attr('font-size', '8px')
+        .attr('text-anchor', 'middle')
+        .attr('text-align', 'center')
+        .attr('font-weight', 'light')
         .text('X');
 
       // Add the site numbers to the x-axis, only plotting every 10 sites
@@ -360,6 +313,10 @@ const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_D
         .attr('class', 'axis-title-x')
         .attr('x', innerWidth.value / 2)
         .attr('y', innerHeight.value)
+        .attr('font-size','14px')
+        .attr('text-anchor', 'middle')
+        .attr('text-align', 'center')
+        .attr('fill', 'currentColor')
         .text('Site');
 
       // Add the column title
@@ -367,6 +324,10 @@ const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_D
         .attr('class', 'axis-title-y')
         .attr('x', -innerHeight.value / 2 + 20)
         .attr('y', 0 - 30)
+        .attr('font-size', '14px')
+        .attr('text-anchor', 'middle')
+        .attr('transform', 'rotate(-90)')
+        .attr('fill', 'currentColor')
         .text('Amino Acid');
     });
 
@@ -405,24 +366,5 @@ const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_D
 </script>
 
 <style>
-  .axis-title-y {
-    font-size: 14px;
-    text-anchor: middle;
-    transform: rotate(-90deg);
-    fill: currentColor;
-  }
 
-  .axis-title-x {
-    font-size: 14px;
-    text-anchor: middle;
-    text-align: center;
-    fill: currentColor;
-  }
-
-  .wildtype-row {
-    font-size: 8px;
-    text-anchor: middle;
-    text-align: center;
-    font-weight: light;
-  }
 </style>

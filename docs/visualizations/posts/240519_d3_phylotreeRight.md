@@ -1,11 +1,11 @@
 ---
 layout: doc
-title: PhyloTree Animated
+title: PhyloTree with taxa names
 aside: false
 date: 2024-05-19
 keywords:
   - D3
-subtext: Messing with transitions and animations in D3 on a phylogenetic tree.
+subtext: Messing around with putting names on tree
 thumbnail: /thumbnails/phylogenyAnimated.png
 ---
 
@@ -14,17 +14,25 @@ thumbnail: /thumbnails/phylogenyAnimated.png
 <D3PlotContainer>
 <svg ref='svgContainer'></svg>
 </D3PlotContainer>
+<button class='download-btn w-12 h-12 ' @click=downloadPNGHandler></button>
+
 
 <script setup>
 import * as d3 from 'd3';
 import { onMounted, ref, computed, watchEffect } from 'vue';
 import { parseNewick, projection, diagonal, scaleBranchLengths } from '/components/treeUtilities.js';
+import downloadPNG from '/components/downloadPNG.js'
 
 const dataset = ref(null);
 const svgContainer = ref(null)
 
-const margin = { top: 20, right: 20, bottom: 20, left: 20 };
-const width = 600;
+function downloadPNGHandler() {
+    downloadPNG(svgContainer.value)
+}
+
+
+const margin = { top: 20, right: 20, bottom: 40, left: 20 };
+const width = 1000;
 const height = 700;
 let svg = null;
 
@@ -77,7 +85,7 @@ function makeFigure() {
     .attr('fill', 'none')
     .attr('stroke', 'currentColor')
     .attr('stroke-width', 1)
-    .attr('stroke-opacity', 0.5)
+    .attr('stroke-opacity', 1)
 
   links.selectAll('path')
     .data(root.value.links())
@@ -92,7 +100,7 @@ function makeFigure() {
   const nodes = svg.append('g')
     .attr('class', 'nodes')
     .attr('stroke-linejoin', 'round')
-    .attr('stroke-width', 0.5)
+    .attr('stroke-width', 1.25)
     .attr('stroke', 'currentColor')
 
   nodes.selectAll('circle')
@@ -118,9 +126,10 @@ function makeFigure() {
     .attr('dy', '3px')
     .attr('dx', '6px')
     .attr('transform', d => `translate(${d.y},${d.x})`)
-    .text(d => d.data.name.replace(/'/g, ""))
-    .attr('font-size', '6px')
+    .text(d => d.data.name.replace(/['\.]/g, ""))
+    .attr('font-size', '8px')
     .attr('text-anchor', 'start')
+    .attr('fill', 'currentColor')
     .attr('text-align')
 
   const legendGroup = svg.append('g')
@@ -137,7 +146,7 @@ function makeFigure() {
     .attr('r', 4)
     .attr('stroke', 'currentColor')
     .attr('stroke-width', 0.5)
-    .attr('filter', d => `drop-shadow(0 0 6px ${colorScale.value(d)})`)
+    //.attr('filter', d => `drop-shadow(0 0 6px ${colorScale.value(d)})`)
     .attr('fill', colorScale.value)
     
 
