@@ -21,7 +21,7 @@ thumbnail: /thumbnails/d3_neutCurves.png
 
     const svgContainer = ref(null);
     const dataset = ref(null);
-    const width = 600;
+    const width = 500;
     const height = 400;
     const marginTop = 50;
     const marginRight = 10;
@@ -58,8 +58,8 @@ thumbnail: /thumbnails/d3_neutCurves.png
     // Create the SVG element
     function createSvg() {
         const svg = d3.select(svgContainer.value).append('svg')
-            .attr('width', width)
-            .attr('height', height)
+            //.attr('width', width)
+            //.attr('height', height)
             .attr('preserveAspectRatio', "xMinYMin meet")
             .attr("viewBox", [0, 0, width, height]);
         return svg;

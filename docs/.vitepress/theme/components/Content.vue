@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-6 w-full h-full px-2 lg:px-6">
+  <div class="pt-6 w-full h-full px-2 lg:px-6 py-6">
     <div class="flex flex-col md:flex-row">
       <main class="w-full px-2 md:w-5/6 mx-auto ">
         <Content />

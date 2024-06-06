@@ -6,7 +6,7 @@
           <h1 class="bg-gradient-to-r from-red-700 via-slate-300 to-sky-700 bg-clip-text text-transparent">
             Viral Evolution and Diversity
           </h1>
-          <div class="flex flex-row justify-evenly gap-12 uppercase tracking-wider">
+          <div class="flex flex-row justify-around gap-12 uppercase tracking-wider">
             <a class="inline-flex flex-1 border-none hover:text-red-500" href="/about">About</a>
             <a class="inline-flex flex-1 border-none hover:text-red-500" href="/publications">Pubs</a>
             <a class="inline-flex flex-1 border-none hover:text-red-500" href="/visualizations">Visuals</a>

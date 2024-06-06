@@ -34,14 +34,16 @@ body {
 
 .download-btn {
   background-image: url('./components/icons/Download.svg');
+  background-size: 100% 100%;
+  background-color: transparent;
   background-repeat: no-repeat;
-  background-position: center;
-  background-size: 20px 20px;
-  /* Adjust the size as needed */
-  padding-left: 30px;
-  /* Adjust the padding to accommodate the icon */
+  width: 1.5em;
+  height: 1.5em;
+  margin-top: 2em;
 }
-
+.download-btn:hover {
+  stroke:red
+}
 span.lang {
   position: absolute;
   right: 0.5em;

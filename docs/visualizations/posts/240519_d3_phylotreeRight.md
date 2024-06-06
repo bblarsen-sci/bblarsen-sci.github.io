@@ -14,7 +14,7 @@ thumbnail: /thumbnails/phylogenyAnimated.png
 <D3PlotContainer>
 <svg ref='svgContainer'></svg>
 </D3PlotContainer>
-<button class='download-btn w-12 h-12 ' @click=downloadPNGHandler></button>
+<button class='download-btn' @click=downloadPNGHandler></button>
 
 
 <script setup>

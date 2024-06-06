@@ -1,65 +1,62 @@
 {
-  "hash": "8321f4e2",
-  "configHash": "1e2cb65f",
-  "lockfileHash": "f7645450",
-  "browserHash": "9efc0119",
+  "hash": "bb2fb599",
+  "configHash": "2f267fac",
+  "lockfileHash": "0a3b6726",
+  "browserHash": "32759162",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "a7e5bd45",
+      "fileHash": "83175ca4",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "7ee792f2",
+      "fileHash": "f9ffea2a",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "e7f03bb5",
+      "fileHash": "d6235667",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "0a8c1cf6",
+      "fileHash": "1456ae79",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "40464398",
+      "fileHash": "03f1a89f",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "8eef2288",
+      "fileHash": "c03eddac",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "3b40cf0b",
+      "fileHash": "c393908b",
       "needsInterop": false
     },
     "html2canvas": {
       "src": "../../../../node_modules/html2canvas/dist/html2canvas.esm.js",
       "file": "html2canvas.js",
-      "fileHash": "1da9b6d6",
+      "fileHash": "c03519e4",
       "needsInterop": false
-    },
-    "file-saver": {
-      "src": "../../../../node_modules/file-saver/dist/FileSaver.min.js",
-      "file": "file-saver.js",
-      "fileHash": "3f9d1a2b",
-      "needsInterop": true
     }
   },
   "chunks": {
+    "chunk-RY5ODQAQ": {
+      "file": "chunk-RY5ODQAQ.js"
+    },
     "chunk-AUTOGC5R": {
       "file": "chunk-AUTOGC5R.js"
     },
@@ -68,9 +65,6 @@
     },
     "chunk-NTP5MXPO": {
       "file": "chunk-NTP5MXPO.js"
-    },
-    "chunk-RY5ODQAQ": {
-      "file": "chunk-RY5ODQAQ.js"
     },
     "chunk-ZS7NZCD4": {
       "file": "chunk-ZS7NZCD4.js"
