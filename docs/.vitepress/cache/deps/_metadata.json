@@ -1,55 +1,55 @@
 {
-  "hash": "bb2fb599",
-  "configHash": "2f267fac",
+  "hash": "1f697b7f",
+  "configHash": "1e2cb65f",
   "lockfileHash": "0a3b6726",
-  "browserHash": "32759162",
+  "browserHash": "8c8bb1c9",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "83175ca4",
+      "fileHash": "bcb0dd10",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "f9ffea2a",
+      "fileHash": "86a1ab65",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "d6235667",
+      "fileHash": "fd56cd33",
       "needsInterop": false
     },
     "vega": {
       "src": "../../../../node_modules/vega/build/vega.module.js",
       "file": "vega.js",
-      "fileHash": "1456ae79",
+      "fileHash": "e9a00462",
       "needsInterop": false
     },
     "vega-lite": {
       "src": "../../../../node_modules/vega-lite/build/src/index.js",
       "file": "vega-lite.js",
-      "fileHash": "03f1a89f",
+      "fileHash": "67342518",
       "needsInterop": false
     },
     "vega-embed": {
       "src": "../../../../node_modules/vega-embed/build/vega-embed.module.js",
       "file": "vega-embed.js",
-      "fileHash": "c03eddac",
+      "fileHash": "1735bdb3",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "c393908b",
+      "fileHash": "a1776a93",
       "needsInterop": false
     },
     "html2canvas": {
       "src": "../../../../node_modules/html2canvas/dist/html2canvas.esm.js",
       "file": "html2canvas.js",
-      "fileHash": "c03519e4",
+      "fileHash": "39c1587f",
       "needsInterop": false
     }
   },

@@ -62,8 +62,8 @@ export function scaleBranchLengths(nodes, w) {
     }
   }
   visitPreOrder(nodes[0], function (node) {
-    if (node.value < 0) node.value = -1 * node.value;
-    node.rootDist = (node.parent ? node.parent.rootDist : 0) + (node.value || 0);
+    if (node.time < 0) node.time = -1 * node.time;
+    node.rootDist = (node.parent ? node.parent.rootDist : 0) + (node.time || 0);
   });
 
   var rootDists = Array.from(nodes, function (n) {
