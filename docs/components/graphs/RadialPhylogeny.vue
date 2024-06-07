@@ -116,7 +116,8 @@ function drawChart(data) {
     .data(root.links())
     .join('path')
     .attr('d', linkConstant)
-    .attr('stroke-width', 1.5);
+    .attr('stroke-width', 1.5)
+    .attr('stroke', 'currentColor');
 
   svg
     .append('g')
@@ -191,12 +192,3 @@ onMounted(() => {
 });
 </script>
 
-<style scoped>
-.circle {
-  @apply stroke-white stroke-1 dark:stroke-slate-200;
-}
-
-.stroke {
-  @apply stroke-current;
-}
-</style>

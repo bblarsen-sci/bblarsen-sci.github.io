@@ -16,6 +16,7 @@ const dataFile = '/data/ephrin_neutcurve_df.csv';
 
 const svgContainer = ref(null);
 const dataset = ref(null);
+
 const width = 500;
 const height = 300;
 const marginTop = 20;
@@ -68,7 +69,7 @@ function makePlot(svg) {
 
   const yScale = d3.scaleLinear().domain([0, 1]).range([innerHeight, 0]).nice();
 
-  const lines = bounds
+  bounds
     .selectAll('path')
     .data(serumGroups)
     .enter()
@@ -84,7 +85,7 @@ function makePlot(svg) {
     });
 
   // Draw the circles
-  const circles = bounds
+  bounds
     .selectAll('circle')
     .data(dataset.value.filter((d) => d.measurement))
     .enter()
@@ -93,10 +94,9 @@ function makePlot(svg) {
     .attr('cx', (d) => xScale(d.concentration))
     .attr('cy', (d) => yScale(d.measurement))
     .attr('r', 4);
-  //.style('opacity', d => d.measurement ? 1 : 0)
 
   // Draw the error lines
-  const errorLines = bounds
+  bounds
     .selectAll('.error-line')
     .data(dataset.value.filter((d) => d.measurement && d.lower && d.upper))
     .enter()
@@ -118,13 +118,14 @@ function makePlot(svg) {
     .tickFormat((d) => `${d * 1000}`)
     .tickSizeOuter(0);
 
+  // Add the x-axis
   const xAxis = bounds
     .append('g')
     .call(xAxisGenerator)
     .attr('transform', `translate(0, ${innerHeight})`);
-  //.call(d => d.select(".domain").remove())
 
-  const xAxisLabel = xAxis
+  // Add the x-axis label
+  xAxis
     .append('text')
     .attr('x', innerWidth / 2)
     .attr('y', marginBottom - 5)
@@ -139,9 +140,11 @@ function makePlot(svg) {
     .ticks(4)
     .tickFormat((d) => `${d * 100}`);
 
-  const yAxis = bounds.append('g').call(yAxisGenerator).attr('transform', `translate(0,0)`);
+  // Add the y-axis
+  bounds.append('g').call(yAxisGenerator).attr('transform', `translate(0,0)`);
 
-  const yAxisLabel = bounds
+  // Add the y-axis label
+  bounds
     .append('text')
     .attr('transform', 'rotate(-90)')
     .attr('x', -innerHeight / 2)
@@ -151,6 +154,7 @@ function makePlot(svg) {
     .attr('text-anchor', 'middle')
     .html('Infectivity (%)');
 
+  // Add the legend
   const legend = svg
     .append('g')
     .attr('class', 'legend')

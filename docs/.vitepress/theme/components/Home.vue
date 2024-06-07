@@ -6,7 +6,7 @@
  * The script sets up the observer on component mount and disconnects it on component unmount.
  */
 <script setup>
-import phylogeneticTreeRadial from '/components/graphs/phylogeneticTreeRadial.vue';
+import RadialPhylogeny from '/components/graphs/RadialPhylogeny.vue';
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 
 const observer = ref(null);
@@ -46,22 +46,16 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="mx-auto h-screen w-full px-2">
-    <div
-      class="items-left flex flex-row justify-center gap-6 overflow-hidden text-start align-middle"
-    >
+    <div class="items-left flex flex-row justify-center gap-6 overflow-hidden text-start align-middle">
       <div class="flex h-screen flex-col justify-center gap-4 align-middle">
         <h1 class="">Brendan Larsen</h1>
-        <h1
-          class="bg-gradient-to-r from-red-700 via-slate-300 to-sky-700 bg-clip-text text-transparent"
-        >
+        <h1 class="bg-gradient-to-r from-red-700 via-slate-300 to-sky-700 bg-clip-text text-transparent">
           Viral Evolution and Diversity
         </h1>
         <div class="flex flex-row justify-around gap-12 uppercase tracking-wider">
           <a class="inline-flex flex-1 border-none hover:text-red-500" href="/about">About</a>
           <a class="inline-flex flex-1 border-none hover:text-red-500" href="/publications">Pubs</a>
-          <a class="inline-flex flex-1 border-none hover:text-red-500" href="/visualizations"
-            >Visuals</a
-          >
+          <a class="inline-flex flex-1 border-none hover:text-red-500" href="/visualizations">Visuals</a>
         </div>
       </div>
       <div class="flex w-1/2"></div>
@@ -69,12 +63,8 @@ onBeforeUnmount(() => {
   </div>
   <div class="px-0 md:px-4 lg:px-10 xl:px-24">
     <div class="flex items-center justify-between gap-2 pb-4 uppercase tracking-wider">
-      <a class="inline-flex flex-1 justify-center border-none hover:text-red-500" href="#section-1"
-        >Current Projects</a
-      >
-      <a class="inline-flex flex-1 justify-center border-none hover:text-red-500" href="#section-2"
-        >Past Projects</a
-      >
+      <a class="inline-flex flex-1 justify-center border-none hover:text-red-500" href="#section-1">Current Projects</a>
+      <a class="inline-flex flex-1 justify-center border-none hover:text-red-500" href="#section-2">Past Projects</a>
     </div>
     <div class="mx-auto bg-sky-dark bg-no-repeat p-6 text-slate-300 sm:rounded-lg">
       <div class="col-span-12 col-start-1 lg:col-span-10">
@@ -91,7 +81,7 @@ onBeforeUnmount(() => {
             severe disease with high fatality rates. Currently, there are no approved vaccines or
             therapeutics available for the prevention or treatment of Nipah virus infection.
           </p>
-          <phylogeneticTreeRadial class="container mx-auto max-w-[550px]" />
+          <RadialPhylogeny class="container mx-auto max-w-[550px]" />
           <figcaption class="text-center">Phylogenetic tree of Nipah viruses</figcaption>
           <h3 class="pt-12 text-sky-400">Receptor Binding Protein</h3>
           <p class="">
@@ -104,10 +94,7 @@ onBeforeUnmount(() => {
             effects of all mutations on cell entry, receptor binding, and antibody escape using a
             BSL-2 pseudovirus platform.
           </p>
-          <img
-            src="/images/entry_tetramer_better.png"
-            class="element-hidden container mx-auto w-80 lg:w-96"
-          />
+          <img src="/images/entry_tetramer_better.png" class="element-hidden container mx-auto w-80 lg:w-96 pt-10" />
           <figcaption class="text-center text-slate-300">
             Structure of the tetrameric receptor binding protein colored by the mean effect of
             mutations on cell entry. Darker red indicates sites with low tolerance for mutations.
@@ -124,22 +111,15 @@ onBeforeUnmount(() => {
             <figcaption class="text-slate-300">Sites of antibody escape.</figcaption>
           </div>
           <h3
-            class="bg-gradient-to-r from-slate-200 to-sky-400 bg-clip-text py-12 text-center tracking-tight text-transparent"
-          >
+            class="bg-gradient-to-r from-slate-200 to-sky-400 bg-clip-text py-12 text-center tracking-tight text-transparent">
             These data aid in the development of vaccines and antibody therapies, in addition to
             improving basic understanding of the function of the receptor binding protein.
           </h3>
           <div class="flex items-center justify-between pb-4 text-center uppercase tracking-wider">
-            <a
-              class="0 inline-flex flex-1 justify-center border-none"
-              href="https://dms-vep.org/Nipah_Malaysia_RBP_DMS/"
-              >Link to project website</a
-            >
-            <a
-              class="inline-flex flex-1 justify-center border-none"
-              href="https://www.biorxiv.org/content/10.1101/2024.04.17.589977v1"
-              >Link to preprint</a
-            >
+            <a class="0 inline-flex flex-1 justify-center border-none"
+              href="https://dms-vep.org/Nipah_Malaysia_RBP_DMS/">Link to project website</a>
+            <a class="inline-flex flex-1 justify-center border-none"
+              href="https://www.biorxiv.org/content/10.1101/2024.04.17.589977v1">Link to preprint</a>
           </div>
         </div>
       </div>
@@ -163,14 +143,8 @@ onBeforeUnmount(() => {
             55 new viral sequences, including some nearly full-length genomes.
           </p>
           <div class="flex flex-wrap items-center justify-evenly py-6 align-middle">
-            <img
-              src="/images/pallid.jpg"
-              class="aspect-square max-h-60 rounded-full object-cover shadow-md"
-            />
-            <img
-              src="/images/peromyscus.png"
-              class="aspect-square max-h-60 rounded-full object-cover shadow-md"
-            />
+            <img src="/images/pallid.jpg" class="aspect-square max-h-60 rounded-full object-cover shadow-md" />
+            <img src="/images/peromyscus.png" class="aspect-square max-h-60 rounded-full object-cover shadow-md" />
           </div>
           <h3 class="pt-12 text-red-400">Evolution</h3>
           <p>
@@ -183,10 +157,7 @@ onBeforeUnmount(() => {
             <img class="rounded-md" src="/images/pmv_co_phylogeny.jpg" />
           </div>
           <nav class="flex justify-center pb-4 pt-14 text-center uppercase tracking-wider">
-            <a
-              class="inline-flex flex-1 justify-center border-none"
-              href="https://pubmed.ncbi.nlm.nih.gov/34668771/"
-            >
+            <a class="inline-flex flex-1 justify-center border-none" href="https://pubmed.ncbi.nlm.nih.gov/34668771/">
               <p>Link to paper</p>
             </a>
           </nav>
@@ -204,9 +175,9 @@ onBeforeUnmount(() => {
           </p>
           <h3 class="pt-12 text-red-400">SARS-CoV-2 in Arizona</h3>
           <p class="">
-            <a href="https://pubmed.ncbi.nlm.nih.gov/32887735/" class=""
-              >In a collaboration with scientists across Arizona (UA, ASU, NAU, TGen)</a
-            >, we sequenced many of the earliest COVID-19 cases identified in March 2020. Our
+            <a href="https://pubmed.ncbi.nlm.nih.gov/32887735/" class="">In a collaboration with scientists across
+              Arizona (UA, ASU, NAU, TGen)</a>, we sequenced many of the earliest COVID-19 cases identified in March
+            2020. Our
             analysis focused on determining the number of distinct introductions during this period.
           </p>
           <div class="flex flex-row items-center justify-center pt-10">
@@ -215,9 +186,7 @@ onBeforeUnmount(() => {
           <h3 class="pt-12 text-red-400">Phylogenetic Patterns of Spread</h3>
           <p class="">
             I also contributed to a
-            <a href="https://pubmed.ncbi.nlm.nih.gov/32912998/" class=""
-              >study published in Science</a
-            >
+            <a href="https://pubmed.ncbi.nlm.nih.gov/32912998/" class="">study published in Science</a>
             that investigated various phylogenetic hypotheses regarding the initial introductions
             into the United States and Europe.
           </p>
@@ -227,11 +196,8 @@ onBeforeUnmount(() => {
           <h3 class="pt-12 text-red-400">Alpha Variant</h3>
           <p class="">
             By examining publicly released sequences on GISAID,
-            <a
-              href="https://virological.org/t/phylogenetic-evidence-that-b-1-1-7-has-been-circulating-in-the-united-states-since-early-to-mid-november/598"
-              class=""
-              >we were able to estimate</a
-            >
+            <a href="https://virological.org/t/phylogenetic-evidence-that-b-1-1-7-has-been-circulating-in-the-united-states-since-early-to-mid-november/598"
+              class="">we were able to estimate</a>
             when the alpha variant, B.1.1.7, entered the United States.
           </p>
           <div class="flex items-center justify-center pt-10">

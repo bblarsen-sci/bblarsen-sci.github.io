@@ -4,11 +4,10 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, watchEffect } from 'vue';
+import { ref, computed, onMounted, watchEffect } from 'vue';
 import * as d3 from 'd3';
-
-
 import downloadPNG from '/components/downloadPNG.js';
+
 function downloadPNGHandler() {
   downloadPNG(svgContainer.value);
 }
@@ -23,32 +22,39 @@ const marginRight = 40;
 const marginBottom = 60;
 const marginLeft = 60;
 
-const innerWidth = width - marginLeft - marginRight;
-const innerHeight = height - marginTop - marginBottom;
-
 const dataFile = ref(
   'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_antibody_escape.csv'
 );
 
+
 async function fetchData() {
+  // Load the CSV file using D3.js
   const csv = await d3.csv(dataFile.value);
+
+  // Transform the CSV data into an array of objects
   const array = csv.map((d) => ({
-    site: +d.site,
+    site: +d.site, // Convert site to a number
     wildtype: d.wildtype,
     mutant: d.mutant,
-    escape: Math.max(0, +d.escape_mean),
+    escape: Math.max(0, +d.escape_mean), // Convert escape_mean to a number and ensure it's non-negative
     antibody: d.antibody,
   }));
+
+  // Group the data by antibody and site, summing the escape values
   const groups = d3.rollup(
     array,
-    (v) => d3.sum(v, (d) => d.escape),
-    (d) => d.antibody,
-    (d) => d.site
+    (v) => d3.sum(v, (d) => d.escape), // Sum the escape values for each group
+    (d) => d.antibody, // Group by antibody
+    (d) => d.site // Group by site
   );
+
+  // Convert the grouped data into an array of objects
   const antibodyData = Array.from(groups, ([antibody, siteData]) => ({
     antibody,
     sites: Array.from(siteData, ([site, escape]) => ({ site, escape })),
   }));
+
+  // Assign the antibodyData to the dataset variable
   dataset.value = antibodyData;
 }
 
@@ -97,18 +103,6 @@ onMounted(() => {
   svg = d3.select(svgContainer.value).attr('viewBox', `0 0 ${width} ${height}`);
 });
 
-//const antibodyColors = {
-//  'HENV-103': "rgb(82,239,153)",
-//  'HENV-117': "rgb(94,42,150)",
-//  'HENV-26': "rgb(161,197,77)",
-//  'm102.4': "rgb(47,91,177)",
-//  'nAH1.3': "rgb(115,195,230)",
-//  'HENV-32': "rgb(20,90,106)"}
-//
-//const colorScale = d3.scaleOrdinal()
-//.domain(Object.keys(antibodyColors))
-//.range(Object.values(antibodyColors));
-
 //from https://carbondesignsystem.com/data-visualization/color-palettes/
 const colorScale = d3
   .scaleOrdinal()
@@ -136,14 +130,14 @@ function makeColorChart() {
     .attr('font-size', '15px')
     .call((g) => g.selectAll('.domain').remove())
     .call((g) =>
-      g
+      g //grid lines
         .selectAll('.tick line')
         .clone()
         .attr('y2', -height + marginBottom)
         .attr('stroke-opacity', 0.1)
     )
     .call((g) =>
-      g
+      g //x-axis title
         .append('text')
         .attr('x', width / 2)
         .attr('y', marginBottom - 20)
@@ -161,7 +155,7 @@ function makeColorChart() {
     .attr('font-size', '15px')
     .call((d) => d.selectAll('.domain').remove())
     .call((g) =>
-      g
+      g //y-axis title
         .append('text')
         .attr('x', -height / 2)
         .attr('y', -marginLeft + 20)
@@ -172,6 +166,7 @@ function makeColorChart() {
         .text('Summed Escape')
     );
 
+  //setup tooltip
   const dot = svg.append('g').attr('display', 'none');
 
   dot.append('circle').attr('r', 3).attr('fill', 'currentColor');

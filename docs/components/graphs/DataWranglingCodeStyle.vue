@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col items-center font-light" ref="svgContainer"></div>
+  <div class="flex flex-col items-center font-light"></div>
   <div class="flex flex-col items-center">
     <svg :width="width" :height="height">
       <g :transform="`translate(${marginLeft}, ${marginTop})`">

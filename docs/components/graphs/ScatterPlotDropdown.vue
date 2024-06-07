@@ -1,11 +1,9 @@
 <template>
-  <div class="not-pr flex flex-wrap items-start justify-start">
-    <form class="max-w-xs pb-4">
-      <label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"
+    <form class="">
+      <label class="mb-2 block text-sm text-slate-900 dark:text-white"
         >Select an option:</label
       >
       <select
-        class="block w-full rounded-lg border border-slate-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-red-500 focus:ring-red-400 dark:border-slate-600 dark:bg-slate-700 dark:placeholder-gray-400 dark:focus:border-red-500 dark:focus:ring-red-500"
         v-model="selectedDataset"
         @change="changeDataset"
       >
@@ -15,10 +13,7 @@
         <option value="bEFNB3_binding">bEFNB3 Binding</option>
       </select>
     </form>
-  </div>
-  <div class="font-ultralight flex flex-col items-center">
     <svg ref="svgContainer"></svg>
-  </div>
   <Tooltip ref="tooltip" />
 </template>
 
@@ -136,6 +131,7 @@ watch(
     renderChart();
   }
 );
+
 //determine x scale
 const xScale = computed(() => {
   return d3
@@ -144,6 +140,7 @@ const xScale = computed(() => {
     .range([0, innerWidth])
     .nice();
 });
+
 //determine y scale
 const yScale = computed(() => {
   return d3
@@ -152,10 +149,12 @@ const yScale = computed(() => {
     .range([innerHeight, 0])
     .nice();
 });
+
 //determine x axis
 const xAxisGenerator = computed(() => {
   return d3.axisBottom().scale(xScale.value).tickSizeOuter(0);
 });
+
 //determine y axis
 const yAxisGenerator = computed(() => {
   return d3.axisLeft(yScale.value).tickSizeOuter(0);
@@ -181,10 +180,10 @@ function renderChart() {
   const circleColor = colorScale(selectedDataset.value);
 
   // how long to transition for
-  const t = 1000;
+  const t = 1500;
 
   //make and update circles. Add tooltips.
-  const circles = svg
+  svg
     .selectAll('circle')
     .data(dataset.value, (d) => d.site)
     .join(

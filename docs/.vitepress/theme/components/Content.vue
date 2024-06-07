@@ -21,7 +21,7 @@ function toggleSidebar() {
 </script>
 
 <template>
-  <div class="h-full w-full px-2 py-4 md:px-16 lg:px-32 2xl:px-80">
+  <div class="h-full w-full px-2 py-4 ">
     <div class="flex flex-col md:flex-row">
       <main class="mx-auto w-full px-2 md:w-5/6">
         <Content />

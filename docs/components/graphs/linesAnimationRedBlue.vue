@@ -11,7 +11,6 @@ const svgContainer = ref(null);
 const width = 1000;
 const height = 250;
 
-
 // Function to generate data points
 function generateData(start, stop, numPoints) {
   const step = (stop - start) / (numPoints - 1);
@@ -21,10 +20,7 @@ function generateData(start, stop, numPoints) {
   }));
 }
 
-// Generate initial data points
-let data = generateData(0, width, 3);
 // Generate initial data points for multiple lines
-
 const numLines = 10;
 let datasets = Array.from({ length: numLines }, () => generateData(0, width, 10));
 
@@ -49,7 +45,6 @@ function createSvg() {
   const svg = d3.select(svgContainer.value)
     .attr('preserveAspectRatio', 'xMinYMin meet')
     .attr('viewBox', [0, 0, width, height])
-
 
   const defs = svg.append('defs');
 

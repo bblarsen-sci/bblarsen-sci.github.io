@@ -4,6 +4,7 @@ date: 2024-06-07
 keywords:
   - D3
 subtext: Comparing effects of mutations
+thumbnail: /thumbnails/scatterplot.png
 ---
 
 <script setup>

@@ -17,3 +17,10 @@ thumbnail: /thumbnails/data_wrangling.png
   <ScatterPlotDropdown/>
 </D3PlotContainer>
 
+<div class='py-24 prose dark:prose-dark dark:prose-invert prose-sm text-xs'>
+
+# Code
+
+<<< @/components/graphs/ScatterPlotDropdown.vue
+
+</div>

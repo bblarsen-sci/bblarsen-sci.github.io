@@ -4,9 +4,58 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watchEffect } from 'vue';
+import { ref, computed, onMounted, watchEffect, watch } from 'vue';
 import * as d3 from 'd3';
 import downloadPNG from '/components/downloadPNG.js';
+import { useFetch } from '/components/useFetch.js';
+
+// Fetch the data from the URL using composable
+const { data, error } = useFetch(
+  'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/entry/e2_e3_entry_filter_merged.csv'
+);
+
+//process data
+watch(data, (newData) => {
+  if (newData) {
+    console.log('data loaded');
+    const array = newData
+      .map((d) => ({
+        site: +d.site,
+        wildtype: d.wildtype,
+        mutant: d.mutant,
+        effect_E2: +d.effect_E2,
+        effect_E3: +d.effect_E3,
+        wt_type: d.wt_type_E2,
+      }))
+      .filter((d) => d.effect_E2 !== 0 && d.effect_E3 !== 0); //remove values less than zero
+
+    // Group the data by site and calculate the mean values
+    const groupedData = d3.rollup(
+      array,
+      (v) => ({
+        effect_E2: d3.mean(v, (d) => d.effect_E2),
+        effect_E3: d3.mean(v, (d) => d.effect_E3),
+        wt_type: v[0].wt_type, // Assuming wt_type is the same for all data points with the same site
+      }),
+      (d) => d.site
+    );
+
+    // Convert the grouped data back to an array
+    const aggregatedData = Array.from(groupedData, ([site, values]) => ({
+      site,
+      ...values,
+    }));
+    // Set the reactive variable to the processed data
+    dataset.value = aggregatedData;
+  }
+});
+
+watch(error, (newError) => {
+  if (newError) {
+    console.error(newError);
+  }
+});
+
 
 //download png
 function downloadPNGHandler() {
@@ -28,44 +77,7 @@ const marginLeft = 100;
 const dataFile =
   'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/entry/e2_e3_entry_filter_merged.csv';
 
-// Fetch the data from the CSV file
-async function fetchData() {
-  // Fetch the CSV data
-  const csv = await d3.csv(dataFile);
 
-  // Process the CSV data into an array of objects
-  const array = csv
-    .map((d) => ({
-      site: +d.site,
-      wildtype: d.wildtype,
-      mutant: d.mutant,
-      effect_E2: +d.effect_E2,
-      effect_E3: +d.effect_E3,
-      wt_type: d.wt_type_E2,
-    }))
-    .filter((d) => d.effect_E2 !== 0 && d.effect_E3 !== 0); //remove values less than zero
-
-  // Group the data by site and calculate the mean values
-  const groupedData = d3.rollup(
-    array,
-    (v) => ({
-      effect_E2: d3.mean(v, (d) => d.effect_E2),
-      effect_E3: d3.mean(v, (d) => d.effect_E3),
-      wt_type: v[0].wt_type, // Assuming wt_type is the same for all data points with the same site
-    }),
-    (d) => d.site
-  );
-
-  // Convert the grouped data back to an array
-  const aggregatedData = Array.from(groupedData, ([site, values]) => ({
-    site,
-    ...values,
-  }));
-  // Set the reactive variable to the processed data
-  dataset.value = aggregatedData;
-}
-// Call the fetchData function to fetch and process the data
-fetchData();
 
 //determine x scale
 const xScale = computed(() => {
@@ -108,6 +120,7 @@ let svg; // SVG container for the scatter plot
  */
 onMounted(() => {
   svg = d3.select(svgContainer.value).attr('viewBox', `0 0 ${width} ${height}`);
+
 });
 
 function makeColorChart() {
