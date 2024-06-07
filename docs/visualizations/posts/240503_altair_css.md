@@ -7,9 +7,11 @@ keywords:
 subtext: How to inject custom CSS into Altair plots.
 ---
 
-# {{$frontmatter.title}}
 
-{{$frontmatter.subtext}}
+<div class="prose dark:prose-dark dark:prose-invert">
+<h1> {{$frontmatter.title}} </h1>
+
+<h2>{{$frontmatter.subtext}}</h2>
 
 Although Altair offers incredible customization, there may be cases where you want to modify the appearance of the plots when embedding into a web page. I show how to do that here, using CSS.
 
@@ -135,4 +137,6 @@ for specific_file in specific_files:
 
 Now, when we open the file, we find the figure has been centered on the page, the tooltip stylings have changed, and there is a nice fade-in animation of the altair heatmap. The possibilities are endless!
 
-[Click here](/htmls/E3_entry_heatmap.html){target="\_self"} to see the custom CSS in action. Note-does not work for mobile devices.
+[Click here](/htmls/E3_entry_heatmap.html){target="_self"} to see the custom CSS in action. Note-does not work for mobile devices.
+
+</div>

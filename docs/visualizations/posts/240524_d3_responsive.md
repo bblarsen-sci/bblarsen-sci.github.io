@@ -1,7 +1,5 @@
 ---
-layout: doc
 title: Responsive breakpoints
-aside: false
 date: 2024-05-24
 keywords:
   - D3
@@ -167,5 +165,4 @@ thumbnail: /thumbnails/responsive.png
   }
 </script>
 
-<style scoped>
-</style>
+

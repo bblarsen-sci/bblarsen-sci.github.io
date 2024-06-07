@@ -1,20 +1,10 @@
 @import 'fonts.css';
 @import 'vars.css';
+@import 'icons.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --bg: theme('colors.white');
-  --bg-dark: #121212; /*theme('colors.slate.950');*/
-  --bg-dark-accent: theme('colors.slate.700');
-  --text:  theme('colors.slate.800');
-  --text-strong: theme('colors.slate.900');
-  --text-dark: theme('colors.slate.300');
-  --text-dark-strong: theme('colors.slate.100');
-
-  --link-highlight: theme('colors.red.500');
-}
 body {
   font-family: var(--primary-font-family);
   font-optical-sizing: auto;
@@ -24,79 +14,68 @@ body {
   background-color: var(--bg);
   color: var(--text);
 }
-.vp-code span {
-  color: var(--shiki-dark);
-}
 
-.btn-primary {
-  @apply rounded-md bg-slate-200 dark:bg-slate-500 p-1 hover:bg-slate-600 shadow-md;
-}
-
-.download-btn {
-  background-image: url('./components/icons/Download.svg');
-  background-size: 100% 100%;
-  background-color: transparent;
-  background-repeat: no-repeat;
-  width: 1.5em;
-  height: 1.5em;
-  margin-top: 2em;
-}
-.download-btn:hover {
-  stroke:red
-}
-span.lang {
-  position: absolute;
-  right: 0.5em;
-  font-size: 0.75em;
-  color: #999;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-    'Courier New', monospace;
-}
 .dark body {
   background-color: var(--bg-dark);
   color: var(--text-dark);
 }
-/* NORMAL */
+
+/* Buttons and specifics */
+.btn-primary {
+  @apply rounded-md bg-slate-200 dark:bg-slate-500 p-1 hover:bg-slate-600 shadow-md;
+}
+
+.home-image {
+  @apply rounded-lg object-contain max-w-80;
+}
+
+/* General */
 h1 {
   font-size: 2.25em;
   line-height: 2.5rem;
-  letter-spacing: -0.025em;
   font-weight: 800;
-  color: var(--text-strong)
 }
-.dark h1 {
-  color: var(--text-dark-strong);
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.025em;
 }
+
+h1,
+h2 {
+  color: var(--text-strong);
+}
+
+.dark h1,
 .dark h2 {
   color: var(--text-dark-strong);
 }
+
 h2 {
   font-size: 2em;
-  letter-spacing: -0.025em;
   font-weight: 700;
-  color: var(--text-strong)
 }
+
 h3 {
   font-size: 1.25em;
-  letter-spacing: -0.025em;
   font-weight: 600;
 }
+
 p {
   font-size: 1rem;
   font-weight: 400;
 }
+
 figcaption {
   font-size: 0.875em;
   margin-top: 0.25em;
   margin-bottom: 1em;
   font-style: italic;
 }
+
 strong {
   font-weight: 700;
-}
-
-.home-image {
-  @apply rounded-lg object-contain max-w-80;
 }
 
 a {
@@ -106,9 +85,14 @@ a {
 .dark a {
   @apply text-white font-semibold border-b border-b-red-500; 
 }
+
 a:hover {
   @apply border-b-2;
 }
+
+
+
+
 /* PROSE */
 .prose {
   color: var(--text);
@@ -134,12 +118,15 @@ a:hover {
   margin-bottom: 0em;
   margin-top: 3em
 }
+
 .prose code {
-  @apply rounded  text-sm;
+  @apply rounded text-xs;
 }
+
 .prose pre {
-  @apply rounded  p-4 text-sm;
+  @apply rounded p-2;
 }
+
 .prose a {
   font-weight: theme('fontWeight.semibold');
   text-decoration: none;
@@ -161,7 +148,6 @@ a:hover {
   text-align: center;
   font-style: italic;
 }
-
 
 .dark .prose {
   color: var(--text-dark);

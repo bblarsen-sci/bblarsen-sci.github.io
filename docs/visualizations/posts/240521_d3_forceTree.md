@@ -1,7 +1,5 @@
 ---
-layout: doc
 title: Force phylogenetic tree
-aside: false
 date: 2024-05-21
 keywords:
   - D3
@@ -147,6 +145,4 @@ async function fetchData() {
 }
 </script>
 
-<style>
 
-</style>

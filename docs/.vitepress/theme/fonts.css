@@ -1,24 +1,9 @@
-/* Use Inter Fonts from https: //github.com/rsms/inter */
+/* Use Inter Fonts from https://github.com/rsms/inter */
 
 html body {
     font-synthesis: style;
 }
 
-@font-face {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 100;
-    font-display: swap;
-    src: url("fonts/Inter-Thin.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "Inter";
-    font-style: italic;
-    font-weight: 100;
-    font-display: swap;
-    src: url("fonts/Inter-ThinItalic.woff2") format("woff2");
-}
 
 @font-face {
     font-family: "Inter";
@@ -110,26 +95,10 @@ html body {
 
 @font-face {
     font-family: "Inter";
-    font-style: italic;
-    font-weight: 700;
-    font-display: swap;
-    src: url("fonts/Inter-BoldItalic.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "Inter";
     font-style: normal;
     font-weight: 800;
     font-display: swap;
     src: url("fonts/Inter-ExtraBold.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "Inter";
-    font-style: italic;
-    font-weight: 800;
-    font-display: swap;
-    src: url("fonts/Inter-ExtraBoldItalic.woff2") format("woff2");
 }
 
 @font-face {
@@ -140,10 +109,3 @@ html body {
     src: url("fonts/Inter-Black.woff2") format("woff2");
 }
 
-@font-face {
-    font-family: "Inter";
-    font-style: italic;
-    font-weight: 900;
-    font-display: swap;
-    src: url("fonts/Inter-BlackItalic.woff2") format("woff2");
-}

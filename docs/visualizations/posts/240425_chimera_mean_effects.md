@@ -16,9 +16,8 @@ thumbnail: /thumbnails/chimera_mean_effects.png
     <img src="/images/entry_tetramer_better.png" class="sm:w-1/6 md:w-1/4 lg:w-1/2"/>
 </div>
 
-<figcaption style="text-align: center; color: grey; font-size: smaller">Structure of the Nipah receptor binding protein colored by the average effects of mutations.</figcaption>
 
-<p>To map effects of DMS onto a protein in ChimeraX, you need a `.defattr` file in this format:</p>
+To map effects of DMS onto a protein in ChimeraX, you need a `.defattr` file in this format:
 
 ```tsv
 attribute: entry
@@ -32,8 +31,8 @@ recipient: residues
     ...
 ```
 
-<p>
-Where the attribute is the **name** of what you are mapping, which will be called in ChimeraX, the match mode is how to match the residues, and the recipient is the residues. This is followed by the site number and the effect. Since the DMS data is in a `.csv` file, I wrote a Python script to aggregate the mean effects of mutations by site and then writes them to a `.defattr` file.</p>
+
+Where the attribute is the **name** of what you are mapping, which will be called in ChimeraX, the match mode is how to match the residues, and the recipient is the residues. This is followed by the site number and the effect. Since the DMS data is in a `.csv` file, I wrote a Python script to aggregate the mean effects of mutations by site and then writes them to a `.defattr` file.
 
 
 ```python
@@ -68,7 +67,7 @@ aggregate_entry_mean(E2_func_infile,'E2_entry_mean',E2_func_output)
 aggregate_entry_mean(E3_func_infile,'E3_entry_mean',E3_func_output)
 ```
 
-<p>Now that we have a file in the correct .defattr format, I load everything into ChimeraX using a `.cxc` file that can be interpreted by ChimeraX. Note, most of these parameters are highly flexible, this is just an example. It is possible to run these commands one at a time in ChimeraX, however I prefer to have most things automated. I will usually comment out the `save` command at the end to get the view I want, then run that command at the end once I'm ready to make a nice image.</p>
+Now that we have a file in the correct .defattr format, I load everything into ChimeraX using a `.cxc` file that can be interpreted by ChimeraX. Note, most of these parameters are highly flexible, this is just an example. It is possible to run these commands one at a time in ChimeraX, however I prefer to have most things automated. I will usually comment out the `save` command at the end to get the view I want, then run that command at the end once I'm ready to make a nice image.
 
 ```tsv
 # open PDB file
@@ -109,8 +108,8 @@ color byattr entry palette -4,#AA2531:0,white:2,#134B85
 save output.png supersample 3 transparentBackground true height 3000 width 3000
 ```
 
-<p>
-If you want to label certain amino acids, you can select them, then use the label command with custom formatting (i.e. V444 or S555).</p>
+
+If you want to label certain amino acids, you can select them, then use the label command with custom formatting (i.e. V444 or S555).
 
 ```tsv
 sel :119-139,162-180,198-217,251-272,317-334,579-592

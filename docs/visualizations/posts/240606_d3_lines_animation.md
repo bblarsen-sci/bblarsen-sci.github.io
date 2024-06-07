@@ -1,10 +1,9 @@
 ---
 title: Antibody escape line plot animation
-aside: false
 date: 2024-06-06
 keywords:
   - D3
-subtext: Animate between the different antibodies with
+subtext: Animate between the different antibodies with transition
 ---
 
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
@@ -17,9 +16,8 @@ subtext: Animate between the different antibodies with
 <script setup>
   import { ref, computed, watch, onMounted, watchEffect } from 'vue';
   import * as d3 from 'd3';
-  import { Legend } from '/components/legend.js';
-
   import downloadPNG from '/components/downloadPNG.js';
+  
   function downloadPNGHandler() {
     downloadPNG(svgContainer.value);
   }

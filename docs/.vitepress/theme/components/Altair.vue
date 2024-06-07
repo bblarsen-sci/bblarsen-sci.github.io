@@ -100,7 +100,7 @@ export default {
   </div>
 </template>
 
-<style>
+<style scoped>
 .vega-chart-container {
   width: 100%;
   height: auto;

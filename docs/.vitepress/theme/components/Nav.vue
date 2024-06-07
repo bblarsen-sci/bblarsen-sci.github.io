@@ -38,12 +38,13 @@ function toggleDropdown() {
 <template>
   <div class="mx-auto w-full border-b px-4 lg:px-6">
     <div class="relative flex h-16 items-center justify-between">
-      <a href="/" class="border-none inline-block rounded-full text-base font-semibold tracking-tight"
+      <a
+        href="/"
+        class="inline-block rounded-full border-none text-base font-semibold tracking-tight"
         >Brendan Larsen</a
       >
-
       <!-- Regular menu items (hidden on small screens) -->
-      <div class="hidden flex-row items-center gap-4 md:flex ">
+      <div class="hidden flex-row items-center gap-4 md:flex">
         <div v-for="item in menuItems" :key="item.text" :item="item" @click="handleItemClick">
           <a
             :href="item.href"
@@ -51,7 +52,7 @@ function toggleDropdown() {
               'rounded-lg bg-slate-200 bg-opacity-50 p-2 ': route.path === item.href,
               '': route.path !== item.href,
             }"
-            class="items-center justify-center fill-current border-none text-sm hover:text-red-500"
+            class="items-center justify-center border-none fill-current text-sm hover:text-red-500"
           >
             {{ item.text }}
           </a>
@@ -63,7 +64,7 @@ function toggleDropdown() {
       </div>
 
       <!-- Dropdown menu toggle button (only visible on small screens) -->
-      <button @click="toggleDropdown" class="md:hidden border-none">
+      <button @click="toggleDropdown" class="border-none md:hidden">
         <HamburgerIcon />
       </button>
     </div>
@@ -71,20 +72,20 @@ function toggleDropdown() {
     <!-- Dropdown menu (only visible on small screens) -->
     <div
       v-if="isDropdownOpen"
-      class="z-90  border-none absolute bg-slate-800 text-slate-200 right-4 top-12 gap-2 rounded-lg text-sm shadow-md md:hidden"
+      class="z-90 absolute right-4 top-12 gap-2 rounded-lg border-none bg-slate-800 text-sm text-slate-200 shadow-md md:hidden"
     >
       <a
         v-for="item in menuItems"
         :key="item.text"
         :href="item.href"
-        class="flex flex-row px-4 py-2 hover:text-red-500 border-none z-50"
+        class="z-50 flex flex-row border-none px-4 py-2 hover:text-red-500"
         @click="toggleDropdown"
       >
-        <component :is="item.icon" class="flex-shrink-0 mr-2 w-4 " />
+        <component :is="item.icon" class="mr-2 w-4 flex-shrink-0" />
         {{ item.text }}
       </a>
       <div
-        class="flex cursor-pointer flex-row gap-2 px-4 py-2 align-middle border-none"
+        class="flex cursor-pointer flex-row gap-2 border-none px-4 py-2 align-middle"
         @click="toggleAppearance"
       >
         <SunIcon v-if="!isDark" key="sun" class="w-4" :title="switchTitle" />
@@ -93,14 +94,13 @@ function toggleDropdown() {
       </div>
       <a
         href="https://github.com/bblarsen-sci/bblarsen-sci.github.io"
-        class="flex flex-row gap-2 px-4 py-2 align-middle border-none"
+        class="flex flex-row gap-2 border-none px-4 py-2 align-middle"
       >
         <GithubIcon class="w-4" />
-        <a class="hover:text-red-500 border-none">GitHub</a>
+        <a class="border-none hover:text-red-500">GitHub</a>
       </a>
     </div>
   </div>
 </template>
 
-<style>
-</style>
+<style></style>

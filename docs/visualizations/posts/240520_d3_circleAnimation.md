@@ -1,7 +1,5 @@
 ---
-layout: doc
 title: Circle animation Test
-aside: false
 date: 2024-05-20
 keywords:
   - D3

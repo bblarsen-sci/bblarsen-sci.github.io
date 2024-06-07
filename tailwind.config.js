@@ -5,8 +5,8 @@ export default {
   content: [
     './docs/.vitepress/**/*.{vue,js,html,md}',
     './docs/components/**/*.vue',
-    './docs/code_pages/*.md',
-    './docs/code_pages/posts/*.md',
+    './docs/visualizations/*.md',
+    './docs/visualizations/posts/*.md',
     './docs/**.md',
   ],
   darkMode: 'class',
@@ -21,10 +21,7 @@ export default {
         },
       }),
       backgroundImage: {
-        'sky-light': 'linear-gradient(150deg, #1E293B, #0C4A6E)', //slate-800 to sky-900
         'sky-dark': 'linear-gradient(220deg, #0C4A6E, #1E293B)', //sky-900 to slate-800
-        'nipah': "url('/images/nipah.jpg')",
-        'blurry': "url('/images/backgrounds/bbblurry.svg')",
         'red': 'linear-gradient(120deg, #1e293b, #450a0a)',
       },
     },

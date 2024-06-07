@@ -1,7 +1,5 @@
 ---
-layout: doc
 title: Lines animation
-aside: false
 date: 2024-05-19
 keywords:
   - D3
