@@ -1,7 +1,7 @@
 // Data loader composable
-
+// https://vuejs.org/guide/reusability/composables
 // DataLoader.js
-import { ref, onMounted } from 'vue';
+import { ref, watchEffect, toValue } from 'vue';
 import * as d3 from 'd3';
 
 export function useFetch(url) {
@@ -9,6 +9,8 @@ export function useFetch(url) {
   const error = ref(null);
 
   const fetchData = async () => {
+    data.value = null
+    error.value = null
     try {
       const res = await fetch(url);
       const text = await res.text();
@@ -19,7 +21,9 @@ export function useFetch(url) {
     }
   };
 
-  onMounted(fetchData);
+  watchEffect(() => {
+    fetchData();
+  });
 
   return { data, error };
 }

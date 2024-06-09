@@ -9,44 +9,50 @@ import * as d3 from 'd3';
 import downloadPNG from '/components/downloadPNG.js';
 import { useFetch } from '/components/useFetch.js';
 
+//setup reactive variables
+const processedData = ref(null);
+const svgContainer = ref(null);
+
 // Fetch the data from the URL using composable
 const { data, error } = useFetch(
   'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/entry/e2_e3_entry_filter_merged.csv'
 );
 
 //process data
-watch(data, (newData) => {
-  if (newData) {
-    console.log('data loaded');
-    const array = newData
-      .map((d) => ({
-        site: +d.site,
-        wildtype: d.wildtype,
-        mutant: d.mutant,
-        effect_E2: +d.effect_E2,
-        effect_E3: +d.effect_E3,
-        wt_type: d.wt_type_E2,
-      }))
-      .filter((d) => d.effect_E2 !== 0 && d.effect_E3 !== 0); //remove values less than zero
+function processData() {
+  // Parse the data and filter out values less than zero
+  const array = data.value.map((d) => ({
+    site: +d.site,
+    wildtype: d.wildtype,
+    mutant: d.mutant,
+    effect_E2: +d.effect_E2,
+    effect_E3: +d.effect_E3,
+    wt_type: d.wt_type_E2,
+  }));
 
-    // Group the data by site and calculate the mean values
-    const groupedData = d3.rollup(
-      array,
-      (v) => ({
-        effect_E2: d3.mean(v, (d) => d.effect_E2),
-        effect_E3: d3.mean(v, (d) => d.effect_E3),
-        wt_type: v[0].wt_type, // Assuming wt_type is the same for all data points with the same site
-      }),
-      (d) => d.site
-    );
+  // Group the data by site and calculate the mean values
+  const groupedData = d3.rollup(
+    array,
+    (v) => ({
+      effect_E2: d3.mean(v, (d) => d.effect_E2),
+      effect_E3: d3.mean(v, (d) => d.effect_E3),
+      wt_type: v[0].wt_type, // Assuming wt_type is the same for all data points with the same site
+    }),
+    (d) => d.site
+  );
 
-    // Convert the grouped data back to an array
-    const aggregatedData = Array.from(groupedData, ([site, values]) => ({
-      site,
-      ...values,
-    }));
-    // Set the reactive variable to the processed data
-    dataset.value = aggregatedData;
+  // Convert the grouped data back to an array
+  const aggregatedData = Array.from(groupedData, ([site, values]) => ({
+    site,
+    ...values,
+  }));
+  // Set the reactive variable to the processed data
+  processedData.value = aggregatedData;
+}
+
+watchEffect(() => {
+  if (data.value) {
+    processData();
   }
 });
 
@@ -56,15 +62,10 @@ watch(error, (newError) => {
   }
 });
 
-
 //download png
 function downloadPNGHandler() {
   downloadPNG(svgContainer.value);
 }
-
-//setup reactive variables
-const dataset = ref(null);
-const svgContainer = ref(null);
 
 //dimensions
 const width = 800;
@@ -74,16 +75,11 @@ const marginRight = 40;
 const marginBottom = 100;
 const marginLeft = 100;
 
-const dataFile =
-  'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/entry/e2_e3_entry_filter_merged.csv';
-
-
-
 //determine x scale
 const xScale = computed(() => {
   return d3
     .scaleLinear()
-    .domain(d3.extent(dataset.value, (d) => d.effect_E2))
+    .domain(d3.extent(processedData.value, (d) => d.effect_E2))
     .range([marginLeft, width - marginRight]);
 });
 
@@ -96,7 +92,7 @@ const xAxisGenerator = computed(() => {
 const yScale = computed(() => {
   return d3
     .scaleLinear()
-    .domain(d3.extent(dataset.value, (d) => d.effect_E3))
+    .domain(d3.extent(processedData.value, (d) => d.effect_E3))
     .range([height - marginBottom, marginTop]);
 });
 
@@ -108,7 +104,7 @@ const yAxisGenerator = computed(() => {
 //determine color scale
 const colorScale = computed(() => {
   return d3.scaleOrdinal(
-    dataset.value.map((d) => d.wt_type),
+    processedData.value.map((d) => d.wt_type),
     d3.schemePaired
   );
 });
@@ -120,7 +116,6 @@ let svg; // SVG container for the scatter plot
  */
 onMounted(() => {
   svg = d3.select(svgContainer.value).attr('viewBox', `0 0 ${width} ${height}`);
-
 });
 
 function makeColorChart() {
@@ -138,9 +133,9 @@ function makeColorChart() {
   // Add x-axis line at y=0
   svg
     .append('line')
-    .attr('x1', xScale.value(d3.min(dataset.value, (d) => d.effect_E2)))
+    .attr('x1', xScale.value(d3.min(processedData.value, (d) => d.effect_E2)))
     .attr('y1', yScale.value(0))
-    .attr('x2', xScale.value(d3.max(dataset.value, (d) => d.effect_E2)))
+    .attr('x2', xScale.value(d3.max(processedData.value, (d) => d.effect_E2)))
     .attr('y2', yScale.value(0))
     .attr('stroke', 'lightgray')
     .attr('stroke-width', 1.5);
@@ -149,9 +144,9 @@ function makeColorChart() {
   svg
     .append('line')
     .attr('x1', xScale.value(0))
-    .attr('y1', yScale.value(d3.min(dataset.value, (d) => d.effect_E3)))
+    .attr('y1', yScale.value(d3.min(processedData.value, (d) => d.effect_E3)))
     .attr('x2', xScale.value(0))
-    .attr('y2', yScale.value(d3.max(dataset.value, (d) => d.effect_E3)))
+    .attr('y2', yScale.value(d3.max(processedData.value, (d) => d.effect_E3)))
     .attr('stroke', 'lightgray')
     .attr('stroke-width', 1.5);
 
@@ -159,7 +154,7 @@ function makeColorChart() {
   svg
     .append('g')
     .selectAll('circle')
-    .data(dataset.value)
+    .data(processedData.value)
     .join('circle')
     .attr('cx', (d) => xScale.value(d.effect_E2))
     .attr('cy', (d) => yScale.value(d.effect_E3))
@@ -261,7 +256,7 @@ function makeColorChart() {
 
 // Watch for changes in the dataset and update the chart
 watchEffect(() => {
-  if (dataset.value) {
+  if (processedData.value) {
     makeColorChart();
   }
 });

@@ -1,27 +1,57 @@
 <template>
-    <svg ref='svgContainer'></svg>
+  <svg ref="svgContainer"></svg>
 </template>
 
-
 <script setup>
-import { ref, watch, onUnmounted, computed, shallowRef } from 'vue';
+import { ref, watch, onUnmounted, computed, onMounted } from 'vue';
 import * as d3 from 'd3';
 import { Legend } from '/components/legend.js';
+import { useFetch } from '/components/useFetch.js';
 
 const amino_acids = [
-  "R", "K", "H", "D", "E", "Q", "N", "S", "T", "Y",
-  "W", "F", "A", "I", "L", "M", "V", "G", "P", "C"
+  'R',
+  'K',
+  'H',
+  'D',
+  'E',
+  'Q',
+  'N',
+  'S',
+  'T',
+  'Y',
+  'W',
+  'F',
+  'A',
+  'I',
+  'L',
+  'M',
+  'V',
+  'G',
+  'P',
+  'C',
 ];
 
-const svgContainer = shallowRef(null);
-const data = shallowRef(null);
-const currentIndex = ref(0);
-const easingRef = ref('easeCubicInOut');
-const delayByIndex = ref(5);
-const intervalId = ref(null);
-const sitesPerView = 20;
+const svgContainer = ref(null);
 
-const dataFile = 'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB2.csv'
+const currentIndex = ref(0);
+const easingRef = 'easeCubicInOut';
+const delayByIndex = 5;
+const sitesPerView = 20;
+let intervalId;
+let svg;
+let allSites;
+let totalPages;
+
+const { data, error } = useFetch(
+  'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB2.csv'
+);
+
+watch(error, (newError) => {
+  if (newError) {
+    console.error('Error fetching data:', newError);
+  }
+});
+
 const height = 300;
 const margin = { top: 10, right: 50, bottom: 90, left: 40 };
 const innerHeight = height - margin.top - margin.bottom;
@@ -30,18 +60,29 @@ const innerWidth = squareSize * sitesPerView; // Define the inner width based on
 const width = innerWidth + margin.left + margin.right; // Define the total width based on the inner width and margins
 
 
-const allSites = computed(() => {
-  return Array.from(new Set(data.value.map(d => +d.site)));
-});
-
-const colorScale = computed(() => {
-  return d3.scaleDiverging(d3.interpolateRdBu)
-    .domain([-4, 0, 4]);
+watch(data, (newData) => {
+  if (newData) {
+    allSites = Array.from(new Set(newData.map((d) => +d.site)));
+    const totalSites = allSites.length;
+    totalPages = Math.ceil(totalSites / sitesPerView);
+    //console.log(allSites)
+    updateHeatmap();
+  }
 });
 
 const visibleSites = computed(() => {
-  return allSites.value.slice(currentIndex.value * sitesPerView, (currentIndex.value + 1) * sitesPerView);
+  return allSites.slice(currentIndex.value * sitesPerView, (currentIndex.value + 1) * sitesPerView);
 });
+
+const allCombinations = computed(() => {
+  return visibleSites.value.flatMap((site) => amino_acids.map((mutant) => ({ site, mutant })));
+});
+
+const filteredData = computed(() => {
+  return data.value.filter((d) => visibleSites.value.includes(+d.site));
+});
+
+const colorScale = d3.scaleDiverging(d3.interpolateRdBu).domain([-4, 0, 4]);
 
 const dataLookup = computed(() => {
   return data.value.reduce((lookup, dataPoint) => {
@@ -57,99 +98,93 @@ const wildtypeLookup = computed(() => {
   }, {});
 });
 
-const allCombinations = computed(() => {
-  return visibleSites.value.flatMap(site => amino_acids.map(mutant => ({ site, mutant })));
-});
-
-const filteredData = computed(() => {
-  return data.value.filter(d => visibleSites.value.includes(+d.site));
-});
-
 const getFillColor = computed(() => {
   return (site, mutant) => {
     const key = `${site}-${mutant}`;
     if (dataLookup.value[key]) {
-      return colorScale.value(+dataLookup.value[key].entry_CHO_bEFNB2);
+      return colorScale(+dataLookup.value[key].entry_CHO_bEFNB2);
     } else {
       return wildtypeLookup.value[site] === mutant ? 'white' : 'lightgray';
     }
   };
 });
 
-const yScale = computed(() => {
-  return d3.scaleBand()
-    .domain(amino_acids)
-    .range([0, innerHeight])
-    .padding(0.1);
-});
+const yScale = d3.scaleBand().domain(amino_acids).range([0, innerHeight]).padding(0.1);
 
 const xScale = computed(() => {
-  return d3.scaleBand()
-    .domain(visibleSites.value)
-    .range([0, innerWidth])
-    .padding(0.1);
+  return d3.scaleBand().domain(visibleSites.value).range([0, innerWidth]).padding(0.1);
 });
 
-function createSvg() {
-  const svgElement = d3.select(svgContainer.value)
+onMounted(() => {
+  svg = d3
+    .select(svgContainer.value)
     .attr('width', width)
     .attr('height', height)
     .append('g')
     .attr('transform', `translate(${margin.left}, ${margin.top})`);
-  return svgElement;
-}
-
-function createAxes(svgElement) {
 
   //make ticks for x-axis
-  const xAxisGroup = svgElement.append('g')
+  const xAxisGroup = svg
+    .append('g')
     .attr('class', 'x-axis')
     .attr('transform', `translate(0, ${innerHeight})`);
 
   //make title for x-axis
-  svgElement.append('g')
-    .call(d => d.append('text')
+  svg.append('g').call((d) =>
+    d
+      .append('text')
       .attr('x', innerWidth / 2)
-      .attr('y', height - margin.bottom + 35 )
+      .attr('y', height - margin.bottom + 35)
       .attr('text-anchor', 'end')
       .attr('fill', 'currentColor')
       .attr('font-size', '13px')
       .text('Site')
-    );
+  );
+
+  // Create the y-axis group and store it in a variable
+  const yAxisGroup = svg.append('g').attr('class', 'y-axis');
 
   yAxisGroup
-    .call(d3.axisLeft(yScale.value).tickSizeOuter(0))
+    .call(d3.axisLeft(yScale).tickSizeOuter(0))
     .attr('font-size', '11px')
-    .call(d => d.select(".domain").remove())
-    //.call(d => d.select('text').remove()) // Remove the existing text element
-    .call(d => d.append('text')
-      .attr('transform', 'rotate(-90)')
-      .attr('x', -innerHeight / 2)
-      .attr('y', -margin.left)
-      .attr('dy', '1em')
-      .attr('text-anchor', 'middle')
-      .attr('fill', 'currentColor')
-      .attr('font-size', '13px')
-      .text('Amino Acid')
+    .call((d) => d.select('.domain').remove())
+    .call((d) =>
+      d
+        .append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('x', -innerHeight / 2)
+        .attr('y', -margin.left)
+        .attr('dy', '1em')
+        .attr('text-anchor', 'middle')
+        .attr('fill', 'currentColor')
+        .attr('font-size', '13px')
+        .text('Amino Acid')
     );
-}
 
-function updateHeatmap(svgElement) {
-  
-  const totalSites = allSites.value.length;
-  const totalPages = Math.ceil(totalSites / sitesPerView);
-  intervalId.value = currentIndex.value = (currentIndex.value + 1) % totalPages;
+  Legend(d3.scaleDiverging([-4, 0, 4], d3.interpolateRdBu), {
+    svgRef: svgContainer.value,
+    title: 'Cell Entry',
+    width: 150,
+    tickValues: [-4, -2, 0, 2, 4],
+    xcoord: innerWidth - 70,
+    ycoord: innerHeight + 60,
+  });
+});
 
-  const t = svgElement.transition().duration(750);
+function updateHeatmap() {
+  intervalId = currentIndex.value = (currentIndex.value + 1) % totalPages;
 
-  const gx = svgElement.select('.x-axis')
+  const gx = svg
+    .select('.x-axis')
     .call(d3.axisBottom(xScale.value).tickSizeOuter(0))
     .attr('transform', `translate(1000,${innerHeight})`)
     .attr('font-size', '11px')
-    .call(d => d.select(".domain").remove())
-    
+    .call((d) => d.select('.domain').remove());
 
-  gx.transition(t).delay(100)
+  gx.transition()
+    .duration(1000)
+    .delay((d, i) => i * delayByIndex * Math.random())
+    .ease(d3[easingRef])
     .ease(d3.easeCubicInOut)
     .attr('transform', `translate(0,${innerHeight})`)
     .selectAll('text')
@@ -157,107 +192,77 @@ function updateHeatmap(svgElement) {
     .attr('text-anchor', 'end')
     .attr('alignment-baseline', 'middle')
     .attr('dy', '-0.7em')
-    .attr('dx', '-0.7em')
-  
-  
-  svgElement.selectAll('rect')
-    .data(allCombinations.value, d => `${d.site}-${d.mutant}`)
-    .join(
-      enter => enter.append('rect')
-        .attr('fill', d => getFillColor.value(d.site, d.mutant))
-        .attr('opacity', 0)
-        .attr('x', width)
-        .attr('y', d => yScale.value(d.mutant))
-        .attr('width', xScale.value.bandwidth())
-        .attr('height', yScale.value.bandwidth())
-        .call(enter => enter.transition(t).delay((d, i) => i * delayByIndex.value * Math.random()).ease(d3[easingRef.value])
-          .attr('x', d => xScale.value(d.site))
-          .attr('opacity', 1)
-        ),
-      update => update,
-      exit => exit
-        .call(exit => exit.transition(t)
-          //.attr('y', -height)
-          .attr('opacity', 0)
-          .remove())
-    )
+    .attr('dx', '-0.7em');
 
+  svg
+    .selectAll('rect')
+    .data(allCombinations.value, (d) => `${d.site}-${d.mutant}`)
+    .join(
+      (enter) =>
+        enter
+          .append('rect')
+          .attr('fill', (d) => getFillColor.value(d.site, d.mutant))
+          .attr('opacity', 0)
+          .attr('x', width)
+          .attr('y', (d) => yScale(d.mutant))
+          .attr('width', xScale.value.bandwidth())
+          .attr('height', yScale.bandwidth())
+          .transition()
+          .duration(1000)
+          .delay((d, i) => i * delayByIndex * Math.random())
+          .ease(d3[easingRef])
+          .attr('x', (d) => xScale.value(d.site))
+          .attr('opacity', 1),
+      (update) => update,
+      (exit) => exit
+        .transition()
+        .duration(500)
+        .attr('opacity', 0)
+        .remove());
 
   const uniqueWildtypes = new Map();
-  filteredData.value.forEach(d => {
+  filteredData.value.forEach((d) => {
     if (!uniqueWildtypes.has(+d.site)) {
       uniqueWildtypes.set(+d.site, d);
     }
   });
 
-  svgElement.selectAll('.wildtype')
-    .data(Array.from(uniqueWildtypes.values()), d => d.site)
+  svg
+    .selectAll('.wildtype')
+    .data(Array.from(uniqueWildtypes.values()), (d) => d.site)
     .join(
-      enter => enter.append('text')
-        .attr('class', 'wildtype')
-        .attr('x', d => xScale.value(+d.site) + xScale.value.bandwidth() * 10)
-        .attr('y', d => yScale.value(d.wildtype) + yScale.value.bandwidth() / 2)
-        .attr('text-anchor', 'middle')
-        .attr('opacity', 0)
-        .attr('dominant-baseline', 'middle')
-        .attr('dy', '0.05em')
-        .attr('font-size', '10px')
-        //.attr('font-weight', '100')
-        .text('X')
-        .call(enter => enter.transition(t).delay((d, i) => i * delayByIndex.value * Math.random()).ease(d3[easingRef.value])
-          .attr('x', d => xScale.value(+d.site) + xScale.value.bandwidth() / 2)
-          .attr('fill', 'black')
-          .attr('opacity', 1)
-        ),
-      update => update,
-      exit => exit
-        .call(exit => exit.transition(t)
-          //.attr('y', height)
+      (enter) =>
+        enter
+          .append('text')
+          .attr('class', 'wildtype')
+          .attr('x', (d) => xScale.value(+d.site) + xScale.value.bandwidth() * 10)
+          .attr('y', (d) => yScale(d.wildtype) + yScale.bandwidth() / 2)
+          .attr('text-anchor', 'middle')
           .attr('opacity', 0)
-          .remove())
-    );
-
-  
+          .attr('dominant-baseline', 'middle')
+          .attr('dy', '0.05em')
+          .attr('font-size', '10px')
+          .text('X')
+          .transition()
+          .duration(1000)
+          .delay((d, i) => i * delayByIndex * Math.random())
+          .ease(d3[easingRef])
+          .attr('x', (d) => xScale.value(+d.site) + xScale.value.bandwidth() / 2)
+          .attr('fill', 'black')
+          .attr('opacity', 1),
+      (update) => update,
+      (exit) => exit
+      .transition()
+      .duration(500)
+      .attr('opacity', 0)
+      .remove());
 
   setTimeout(() => {
-    //createAxes(svgElement);
-    updateHeatmap(svgElement);
+    updateHeatmap();
   }, 5000);
 }
 
-
-let yAxisGroup;
-
-watch(data, () => {
-  
-  const svgElement = createSvg();
-
-  // Create the y-axis group and store it in a variable
-  yAxisGroup = svgElement.append('g')
-    .attr('class', 'y-axis');
-
-  Legend(d3.scaleDiverging([-4, 0, 4], d3.interpolateRdBu), {
-    //svgRef: svgContainer.value,
-    title: "Cell Entry",
-    width: 150,
-    tickValues: [-4, -2, 0, 2, 4],
-    xcoord: innerWidth - 70,
-    ycoord: innerHeight + 60,
-  })
-  
-  createAxes(svgElement);
-  updateHeatmap(svgElement);
-});
-
 onUnmounted(() => {
-  clearInterval(intervalId.value);
+  clearInterval(intervalId);
 });
-
-fetchData();
-async function fetchData() {
-  const csv = await d3.csv(dataFile);
-  data.value = csv;
-}
-
-
 </script>

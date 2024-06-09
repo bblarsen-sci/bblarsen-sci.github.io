@@ -7,12 +7,13 @@
 import { ref, computed, watch, onMounted, watchEffect } from 'vue';
 import * as d3 from 'd3';
 import downloadPNG from '/components/downloadPNG.js';
+import { useFetch } from '/components/useFetch.js';
+
 
 function downloadPNGHandler() {
     downloadPNG(svgContainer.value);
 }
 
-const dataset = ref(null);
 const svgContainer = ref(null);
 
 const width = 800;
@@ -22,21 +23,19 @@ const marginRight = 40;
 const marginBottom = 60;
 const marginLeft = 60;
 
-const innerWidth = width - marginLeft - marginRight;
-const innerHeight = height - marginTop - marginBottom;
+const { data, error } = useFetch(
+  'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_antibody_escape.csv'
+);
 
-const dataFile = ref('https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_antibody_escape.csv');
+watch(error, (newError) => {
+    if (newError) {
+        console.error('Error fetching data:', newError);
+    }
+});
 
-/**
- * Asynchronously fetches data from a CSV file and processes it to create a dataset for visualization.
- * @returns {void}
- */
-async function fetchData() {
-    // Fetch the CSV data
-    const csv = await d3.csv(dataFile.value);
-
-    // Process the CSV data into an array of objects
-    const array = csv.map((d) => ({
+const dataset = computed(() => {  
+    if (data.value) {// Process the CSV data into an array of objects
+    const array = data.value.map((d) => ({
         site: +d.site,
         wildtype: d.wildtype,
         mutant: d.mutant,
@@ -52,13 +51,12 @@ async function fetchData() {
         antibody,
         sites: Array.from(siteData, ([site, escape]) => ({ site, escape })),
     }));
-
+    
     // Set the dataset value to the processed data
-    dataset.value = antibodyData;
-}
+    return antibodyData;
+}});
 
-// Call the fetchData function to fetch and process the data
-fetchData();
+
 
 /**
  * Computed property for the x-scale of the visualization.
