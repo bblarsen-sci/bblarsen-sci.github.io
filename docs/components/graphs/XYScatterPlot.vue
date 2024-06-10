@@ -7,9 +7,9 @@
 <script setup>
 import { ref, computed, onMounted, watchEffect, watch } from 'vue';
 import * as d3 from 'd3';
-import downloadPNG from '/components/downloadPNG.js';
-import { useFetch } from '/components/useFetch.js';
-import Tooltip from '/components/simpleTooltip.vue';
+import downloadPNG from '/components/utilities/downloadPNG.js';
+import { useFetch } from '/components/composables/useFetch.js';
+import Tooltip from '/components/components/simpleTooltip.vue';
 
 //setup reactive variables
 const processedData = ref(null);

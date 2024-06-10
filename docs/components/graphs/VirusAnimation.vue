@@ -5,7 +5,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import * as d3 from 'd3';
-import simpleTooltip from '/components/simpleTooltip.vue';
+import simpleTooltip from '/components/components/simpleTooltip.vue';
 
 onMounted(() => {
   const width = 600;

@@ -27,7 +27,7 @@
 <script setup>
 import { ref, computed, watchEffect } from 'vue';
 import * as d3 from 'd3';
-import { useFetch } from '/components/useFetch.js';
+import { useFetch } from '/components/composables/useFetch.js';
 
 
 const currentDataFrame = ref('data1');

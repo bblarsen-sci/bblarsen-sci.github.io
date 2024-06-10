@@ -20,7 +20,7 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue';
 import * as d3 from 'd3';
-import Tooltip from '/components/tooltip.vue';
+import Tooltip from '/components/components/tooltip.vue';
 
 const dataset = ref(null); //reactive variable to store the dataset
 const svgContainer = ref(null); //reactive variable to store the svg container

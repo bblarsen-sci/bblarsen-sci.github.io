@@ -11,7 +11,7 @@
 <script setup>
 import { ref, onMounted, watch } from 'vue';
 import * as d3 from 'd3';
-import CustomSlider from '/components/CustomSlider.vue';
+import CustomSlider from '/components/components/CustomSlider.vue';
 
 // DEFINE VARIABLES
 let circle = null;

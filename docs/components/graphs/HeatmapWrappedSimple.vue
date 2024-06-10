@@ -3,9 +3,9 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watch, watchEffect, shallowRef } from 'vue';
+import { ref, computed, watch, shallowRef } from 'vue';
 import * as d3 from 'd3';
-import { Legend } from '/components/legend.js';
+import { Legend } from '/components/utilities/legend.js';
 
 // DEFINE VARIABLES
 const svgContainer = ref(null);

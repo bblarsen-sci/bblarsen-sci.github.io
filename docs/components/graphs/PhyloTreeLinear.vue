@@ -8,8 +8,8 @@
 <script setup>
 import * as d3 from 'd3';
 import { onMounted, ref, computed, watchEffect } from 'vue';
-import { parseNewick, projection, diagonal, scaleBranchLengths } from '/components/treeUtilities.js';
-import downloadPNG from '/components/downloadPNG.js'
+import { parseNewick, projection, diagonal, scaleBranchLengths } from '/components/utilities/treeUtilities.js';
+import downloadPNG from '/components/utilities/downloadPNG.js'
 
 const dataset = ref(null);
 const svgContainer = ref(null)

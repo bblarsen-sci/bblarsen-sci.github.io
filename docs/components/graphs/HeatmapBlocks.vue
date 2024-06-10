@@ -5,8 +5,8 @@
 <script setup>
 import { ref, watch, onUnmounted, computed, onMounted } from 'vue';
 import * as d3 from 'd3';
-import { Legend } from '/components/legend.js';
-import { useFetch } from '/components/useFetch.js';
+import { Legend } from '/components/utilities/legend.js';
+import { useFetch } from '/components/composables/useFetch.js';
 
 const amino_acids = [
   'R',

@@ -6,7 +6,7 @@
 <script setup>
 import { ref, computed, onMounted, watchEffect } from 'vue';
 import * as d3 from 'd3';
-import downloadPNG from '/components/downloadPNG.js';
+import downloadPNG from '/components/utilities/downloadPNG.js';
 
 function downloadPNGHandler() {
   downloadPNG(svgContainer.value);

@@ -28,12 +28,12 @@
 
 <script setup>
 import { ref, watch, computed, shallowRef } from 'vue';
-import sidebar from '/components/sidebar.vue';
+import sidebar from '/components/components/sidebar.vue';
 import * as d3 from 'd3';
-import { Legend } from '/components/legend.js';
-import Tooltip from '/components/tooltip.vue';
-import downloadSVG from '/components/downloadSVG.js';
-import downloadPNG from '/components/downloadPNG.js';
+import { Legend } from '/components/utilities/legend.js';
+import Tooltip from '/components/components/tooltip.vue';
+import downloadSVG from '/components/utilities/downloadSVG.js';
+import downloadPNG from '/components/utilities/downloadPNG.js';
 
 const dataFile =
   'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB3.csv';

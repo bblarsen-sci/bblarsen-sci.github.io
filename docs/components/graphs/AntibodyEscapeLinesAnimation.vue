@@ -6,8 +6,8 @@
 <script setup>
 import { ref, computed, watch, onMounted, watchEffect } from 'vue';
 import * as d3 from 'd3';
-import downloadPNG from '/components/downloadPNG.js';
-import { useFetch } from '/components/useFetch.js';
+import downloadPNG from '/components/utilities/downloadPNG.js';
+import { useFetch } from '/components/composables/useFetch.js';
 
 
 function downloadPNGHandler() {

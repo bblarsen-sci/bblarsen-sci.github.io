@@ -6,8 +6,8 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue';
 import * as d3 from 'd3';
-import { makeData } from '/components/useRandomData.js';
-import Tooltip from '/components/simpleTooltip.vue';
+import { makeData } from '/components/composables/useRandomData.js';
+import Tooltip from '/components/components/simpleTooltip.vue';
 
 const data = ref(null);
 
