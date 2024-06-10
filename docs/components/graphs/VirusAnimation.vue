@@ -1,9 +1,11 @@
 <template>
+  <simpleTooltip greeting-message="HelloWorld!" />
   <svg id="svgContainer"></svg>
 </template>
 <script setup>
 import { onMounted } from 'vue';
 import * as d3 from 'd3';
+import simpleTooltip from '/components/simpleTooltip.vue';
 
 onMounted(() => {
   const width = 600;

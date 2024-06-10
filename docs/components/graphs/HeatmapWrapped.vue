@@ -1,7 +1,6 @@
 <template>
-  <div class="w-full px-2 lg:px-6">
-    <div class="flex flex-row py-4">
-      <aside class="w-full sm:w-1/4 md:w-1/6">
+    <div class="flex flex-row">
+      <div class="md:max-w-xs my-4">
         <sidebar
           v-model:rows="rows"
           v-model:selectedColorScale="selectedColorScale"
@@ -19,13 +18,12 @@
           @downloadSVG="downloadSVGHandler"
           @downloadImage="downloadPNGHandler"
         />
-      </aside>
-      <main class="w-full px-2 sm:w-3/4 md:w-5/6">
+      </div>
+      <main class="px-2">
         <svg ref="svgContainer"></svg>
       </main>
     </div>
     <Tooltip ref="tooltip" />
-  </div>
 </template>
 
 <script setup>

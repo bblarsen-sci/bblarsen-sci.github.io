@@ -1,19 +1,19 @@
 ---
-title: Random D3 Scratch
+title: Virus Animation
 date: 2024-06-08
 keywords:
   - D3
-subtext: fja;fjaio;
+subtext: Make a simple virus moving animation 
 ---
 
 <script setup>
-  import test from '/components/graphs/scratch.vue';
+  import VirusAnimation from '/components/graphs/VirusAnimation.vue';
 </script>
 
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-<test/>
+<VirusAnimation/>
 </D3PlotContainer>
 
 
@@ -21,6 +21,6 @@ subtext: fja;fjaio;
 
 # Code
 
-<<< @/components/graphs/scratch.vue
+<<< @/components/graphs/VirusAnimation.vue
 
 </div>

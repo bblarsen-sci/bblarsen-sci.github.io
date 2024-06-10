@@ -1,19 +1,19 @@
 ---
-title: Virus Animation
+title: Circle Color Spread
 date: 2024-06-08
 keywords:
   - D3
-subtext: Testing virus animation 
+subtext: Testing simulation where colors randomly appear and spread
 ---
 
 <script setup>
-  import test from '/components/graphs/test.vue';
+  import ColorSpread from '/components/graphs/ColorSpread.vue';
 </script>
 
 <FigureTitle>{{$frontmatter.title}}</FigureTitle>
 <SubtitleHeader>{{$frontmatter.subtext}}</SubtitleHeader>
 <D3PlotContainer>
-<test/>
+<ColorSpread/>
 </D3PlotContainer>
 
 
@@ -21,6 +21,6 @@ subtext: Testing virus animation
 
 # Code
 
-<<< @/components/graphs/test.vue
+<<< @/components/graphs/ColorSpread.vue
 
 </div>

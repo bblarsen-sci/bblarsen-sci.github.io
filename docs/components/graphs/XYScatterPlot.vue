@@ -1,6 +1,7 @@
 <template>
   <svg ref="svgContainer"></svg>
   <button class="download-btn" @click="downloadPNGHandler"></button>
+  <Tooltip ref="tooltip" :data="tooltipData" />
 </template>
 
 <script setup>
@@ -8,10 +9,13 @@ import { ref, computed, onMounted, watchEffect, watch } from 'vue';
 import * as d3 from 'd3';
 import downloadPNG from '/components/downloadPNG.js';
 import { useFetch } from '/components/useFetch.js';
+import Tooltip from '/components/simpleTooltip.vue';
 
 //setup reactive variables
 const processedData = ref(null);
 const svgContainer = ref(null);
+const tooltip = ref(null);
+const tooltipData = ref([]);
 
 // Fetch the data from the URL using composable
 const { data, error } = useFetch(
@@ -169,6 +173,18 @@ function makeColorChart() {
       } else {
         return '#b8b0ac';
       }
+    })
+    .on('mouseover', (event, d) => {
+      tooltip.value.showTooltip(event);
+      tooltipData.value = [
+        { label: 'Site', value: d.site },
+        { label: 'Effect E2', value: parseFloat(d.effect_E2.toFixed(2)) },
+        { label: 'Effect E3', value: parseFloat(d.effect_E3.toFixed(2)) },
+      ];
+    })
+    .on('mouseout', () => {
+      tooltip.value.hideTooltip();
+      tooltipData.value = [];
     });
 
   // Add x-axis
