@@ -1,31 +1,42 @@
 <template>
   <svg ref="svgContainer"></svg>
+  <Tooltip ref="tooltip" :data="tooltipData" />
 </template>
 
 <script setup>
-import { ref, computed, watch, shallowRef } from 'vue';
+import { ref, computed, watch } from 'vue';
 import * as d3 from 'd3';
 import { Legend } from '/components/utilities/legend.js';
+import { useFetch } from '/components/composables/useFetch.js';
+import Tooltip from '/components/components/simpleTooltip.vue';
+
 
 // DEFINE VARIABLES
 const svgContainer = ref(null);
-const data = shallowRef([]);
+const processedData = ref(null);
+const tooltip = ref(null);
+const tooltipData = ref([]);
 
-const dataFile =
-  'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB3.csv';
-//const dataFile = '/data/default_heatmap.csv'
+// Fetch the data from the URL using composable
+const { data } = useFetch(
+  'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB3.csv'
+);
 
-async function fetchData() {
-  const csv = await d3.csv(dataFile);
-  const array = csv.map((d) => ({
+function processData() {
+  const array = data.value.map((d) => ({
     site: +d.site,
     wildtype: d.wildtype,
     mutant: d.mutant,
     effect: +d.entry_CHO_bEFNB3,
   }));
-  data.value = array;
+  processedData.value = array;
 }
-fetchData();
+
+watch(data, (newData) => {
+   if (newData) {
+    processData();
+  }
+});
 
 const amino_acids = [
   'R',
@@ -58,13 +69,13 @@ let paddingValue = 0.1; // padding between the squares in the heatmap
 const squareSize = 10;
 const color = 'interpolateRdBu';
 const min = -4;
-const max = 4;
+const max = 2;
 
 function colorScale(effect) {
   return d3.scaleDiverging(d3[color]).domain([min, 0, max])(effect);
 }
 
-const sites = computed(() => Array.from(new Set(data.value.map((d) => +d.site))));
+const sites = computed(() => Array.from(new Set(processedData.value.map((d) => +d.site))));
 
 const sitesPerRow = computed(() => Math.ceil(sites.value.length / rows));
 
@@ -92,14 +103,14 @@ const height = computed(
 const innerHeight = computed(() => height.value - margin.top - margin.bottom);
 
 const dataLookup = computed(() =>
-  data.value.reduce((lookup, dataPoint) => {
+  processedData.value.reduce((lookup, dataPoint) => {
     lookup[`${dataPoint.site}-${dataPoint.mutant}`] = dataPoint;
     return lookup;
   }, {})
 );
 
 const wildtypeLookup = computed(() =>
-  data.value.reduce((lookup, dataPoint) => {
+  processedData.value.reduce((lookup, dataPoint) => {
     lookup[dataPoint.site] = dataPoint.wildtype;
     return lookup;
   }, {})
@@ -107,7 +118,7 @@ const wildtypeLookup = computed(() =>
 
 const uniqueWildtypes = computed(() => {
   const map = new Map();
-  data.value.forEach((d) => {
+  processedData.value.forEach((d) => {
     if (!map.has(+d.site)) {
       map.set(+d.site, d);
     }
@@ -166,6 +177,19 @@ function updateHeatmap() {
         } else {
           return wildtypeLookup.value[d.site] === d.mutant ? 'white' : 'lightgray';
         }
+      })
+      .on('mouseover', (event, d) => {
+        tooltip.value.showTooltip(event);
+        tooltipData.value = [
+          { label: 'Site', value: d.site },
+          { label: 'Wildtype', value: wildtypeLookup.value[d.site] },
+          { label: 'Mutant', value: d.mutant },
+          { label: 'Effect', value: parseFloat(dataLookup.value[`${d.site}-${d.mutant}`].effect.toFixed(2)) },
+        ];
+      })
+      .on('mouseout', () => {
+        tooltip.value.hideTooltip();
+        tooltipData.value = [];
       });
 
     // Add the wildtype 'X' text to the boxes
@@ -185,7 +209,6 @@ function updateHeatmap() {
           3
       )
       .attr('text-anchor', 'middle')
-      //.attr('alignment-baseline', 'middle')
       .attr('font-size', '8px')
       .attr('fill', 'black')
       .text('X');
@@ -245,16 +268,17 @@ function updateHeatmap() {
     .text('Amino Acid');
 
   Legend(d3.scaleDiverging([min, 0, max], d3[color]).clamp(true), {
-    //svgRef: svgContainer.value,
+    svgRef: svgContainer.value,
     title: 'Cell Entry',
-    width: 200,
+    width: 150,
     tickValues: [min, 0, max],
-    xcoord: 0,
+    xcoord: 50,
     ycoord: height.value - 50,
+    fontSize: 18,
   });
 }
 
-watch(data, () => {
+watch(processedData, () => {
   updateHeatmap();
 });
 </script>

@@ -135,15 +135,3 @@ function toggleDataFrame() {
 }
 </script>
 
-<style scoped>
-.rect-enter-active,
-.rect-leave-active {
-  transition: all 0.5s ease;
-}
-
-.rect-enter-from,
-.rect-leave-to {
-  opacity: 0;
-  transform: translateY(30px);
-}
-</style>

@@ -6,8 +6,8 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import * as d3 from 'd3';
-
 import downloadPNG from '/components/utilities/downloadPNG.js';
+
 
 function downloadPNGHandler() {
   downloadPNG(svgContainer.value);

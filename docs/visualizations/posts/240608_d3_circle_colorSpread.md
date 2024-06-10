@@ -4,6 +4,7 @@ date: 2024-06-08
 keywords:
   - D3
 subtext: Testing simulation where colors randomly appear and spread
+thumbnail: /thumbnails/colorSpread.png
 ---
 
 <script setup>

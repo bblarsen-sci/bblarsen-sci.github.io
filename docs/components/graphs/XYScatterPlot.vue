@@ -54,8 +54,8 @@ function processData() {
   processedData.value = aggregatedData;
 }
 
-watchEffect(() => {
-  if (data.value) {
+watch(data, (newData) => {
+  if (newData) {
     processData();
   }
 });

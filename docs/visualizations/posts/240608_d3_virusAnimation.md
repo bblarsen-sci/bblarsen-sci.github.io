@@ -4,6 +4,7 @@ date: 2024-06-08
 keywords:
   - D3
 subtext: Make a simple virus moving animation 
+thumbnail: /thumbnails/virusAnimation.png
 ---
 
 <script setup>

@@ -4,6 +4,7 @@ date: 2024-06-09
 keywords:
   - D3
 subtext: Make some gradients with Vue
+thumbnail: /thumbnails/gradientStripesToggle.png
 ---
 
 <script setup>

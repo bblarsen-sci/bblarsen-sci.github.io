@@ -37,6 +37,8 @@ const currentIndex = ref(0);
 const easingRef = 'easeCubicInOut';
 const delayByIndex = 5;
 const sitesPerView = 20;
+const minColor = -4;
+const maxColor = 2;
 let intervalId;
 let svg;
 let allSites;
@@ -53,7 +55,7 @@ watch(error, (newError) => {
 });
 
 const height = 300;
-const margin = { top: 10, right: 50, bottom: 90, left: 40 };
+const margin = { top: 10, right: 40, bottom: 100, left: 40 };
 const innerHeight = height - margin.top - margin.bottom;
 const squareSize = Math.min(innerHeight / amino_acids.length, 20); // Define the square size based on the height and number of amino acids
 const innerWidth = squareSize * sitesPerView; // Define the inner width based on the square size and number of visible sites
@@ -65,7 +67,6 @@ watch(data, (newData) => {
     allSites = Array.from(new Set(newData.map((d) => +d.site)));
     const totalSites = allSites.length;
     totalPages = Math.ceil(totalSites / sitesPerView);
-    //console.log(allSites)
     updateHeatmap();
   }
 });
@@ -82,7 +83,7 @@ const filteredData = computed(() => {
   return data.value.filter((d) => visibleSites.value.includes(+d.site));
 });
 
-const colorScale = d3.scaleDiverging(d3.interpolateRdBu).domain([-4, 0, 4]);
+const colorScale = d3.scaleDiverging(d3.interpolateRdBu).domain([minColor, 0, maxColor]);
 
 const dataLookup = computed(() => {
   return data.value.reduce((lookup, dataPoint) => {
@@ -161,13 +162,14 @@ onMounted(() => {
         .text('Amino Acid')
     );
 
-  Legend(d3.scaleDiverging([-4, 0, 4], d3.interpolateRdBu), {
+  Legend(d3.scaleDiverging([minColor, 0, maxColor], d3.interpolateRdBu), {
     svgRef: svgContainer.value,
     title: 'Cell Entry',
     width: 150,
-    tickValues: [-4, -2, 0, 2, 4],
+    tickValues: [minColor, 0, maxColor],
     xcoord: innerWidth - 70,
     ycoord: innerHeight + 60,
+    fontSize: 12,
   });
 });
 
@@ -252,10 +254,10 @@ function updateHeatmap() {
           .attr('opacity', 1),
       (update) => update,
       (exit) => exit
-      .transition()
-      .duration(500)
-      .attr('opacity', 0)
-      .remove());
+        .transition()
+        .duration(500)
+        .attr('opacity', 0)
+        .remove());
 
   setTimeout(() => {
     updateHeatmap();

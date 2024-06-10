@@ -7,18 +7,19 @@ export function Legend(
   {
     svgRef,
     title,
-    tickSize = 2,
+    tickSize = 6,
     width = 320,
-    height = 40 + tickSize,
+    height = 44 + tickSize,
     marginTop = 15,
     marginRight = 10,
     marginBottom = 18 + tickSize,
-    marginLeft = 15,
+    marginLeft = 0,
     ticks = width / 64,
     tickFormat,
     tickValues,
     xcoord = 0,
     ycoord = 0,
+    fontSize = '1em'
   } = {}
 ) {
   function ramp(color, n = 256) {
@@ -33,15 +34,7 @@ export function Legend(
     return canvas;
   }
 
-  const svg = d3
-    .select(svgRef)
-    //.attr("width", width)
-    //.attr("height", height)
-    //.attr("viewBox", [0, 0, width, height])
-    //.style("overflow", "visible")
-    //.style("display", "block")
-    .append('g')
-    .attr('transform', `translate(${xcoord}, ${ycoord})`);
+  const svg = d3.select(svgRef).append('g').attr('transform', `translate(${xcoord}, ${ycoord})`);
 
   let tickAdjust = (g) => g.selectAll('.tick line').attr('y1', marginTop + marginBottom - height);
   let x;
@@ -166,14 +159,16 @@ export function Legend(
     )
     .call(tickAdjust)
     .call((g) => g.select('.domain').remove())
+    .call((g) => g.selectAll('.tick text').attr('font-size', fontSize))
     .call((g) =>
       g
         .append('text')
         .attr('x', marginLeft)
-        .attr('y', marginTop + marginBottom - height -2)
+        .attr('y', marginTop + marginBottom - height - 2)
         .attr('fill', 'currentColor')
         .attr('text-anchor', 'start')
-        //.attr("font-weight", "bold")
+        //.attr('font-weight', 'bold')
+        .attr('font-size', fontSize)
         .attr('class', 'text')
         .text(title)
     );
