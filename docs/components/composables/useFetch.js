@@ -1,11 +1,11 @@
 // Data loader composable
 // https://vuejs.org/guide/reusability/composables
 // DataLoader.js
-import { ref, watchEffect, toValue } from 'vue';
+import { ref, watchEffect, shallowRef } from 'vue';
 import * as d3 from 'd3';
 
 export function useFetch(url) {
-  const data = ref(null);
+  const data = shallowRef(null);
   const error = ref(null);
 
   const fetchData = async () => {

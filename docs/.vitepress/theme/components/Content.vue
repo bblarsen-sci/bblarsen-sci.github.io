@@ -43,7 +43,7 @@ function toggleSidebar() {
           />
         </svg>
       </button>
-      <aside v-if="isSidebarOpen" class="fixed right-0 top-24 z-40 h-1/2 w-32 border md:block">
+      <aside v-if="isSidebarOpen" class="fixed right-0 top-24 z-50 h-1/2 w-32 border md:block">
         <div class="h-full overflow-y-auto bg-slate-200 p-2 dark:bg-slate-800">
           <strong class="mb-4">Other posts</strong>
           <ul class="space-y-2 text-xs">

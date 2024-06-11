@@ -5,24 +5,35 @@
         <template #title>Heatmap Options</template>
         <template #content>
           <!-- Add the sidebar content here -->
-          <label class="">Enter Specific Sites:</label>
+          <label class="label-select">Enter Specific Sites:</label>
           <input class="form-input" @input="siteInputValue = $event.target.value" placeholder="e.g., 1-12,15" />
           <button class="btn-primary" @click="selectedSites = parseSites(siteInputValue)">Update Sites</button>
-          <label class="">Select Padding:</label>
+          <label class="label-select">Select Padding:</label>
           <select class="form-select" v-model="paddingValue">
             <option v-for="option in paddingOptions" :value="option" :key="option">{{ option }}</option>
           </select>
-          <label class="">Select Stroke Width:</label>
+          <label class="label-select">Select Stroke Width:</label>
           <select class="form-select" v-model="strokeWidthValue">
             <option v-for="option in strokeOptions" :value="option" :key="option">{{ option }}</option>
           </select>
-          <label class="">Select Color Scale:</label>
+          <label class="label-select">Select Color Scale:</label>
           <select class="form-select" v-model="selectedColorScale">
             <option v-for="option in colorOptions" :value="option" :key="option">{{ option }}</option>
           </select>
-          <label class="">Select Number of Rows:</label>
+          <label class="label-select">Select Number of Rows:</label>
           <select class="form-select" v-model="rows">
             <option v-for="option in rowOptions" :value="option" :key="option">{{ option }}</option>
+          </select>
+          <label class="label-select">Select WT Amino Acid:</label>
+          <select class="form-select" v-model="selectedAminoAcid">
+            <option value="">All</option>
+            <option v-for="acid in amino_acids" :value="acid" :key="acid">{{ acid }}</option>
+          </select>
+          <label class="label-select">Select Effect Filter:</label>
+          <select class="form-select" v-model="selectedEffectFilter">
+            <option value="">All</option>
+            <option value="negative">Negative Effects Only</option>
+            <option value="positive">Negative Effects Only</option>
           </select>
         </template>
       </sidebar>
@@ -49,6 +60,7 @@ const processedData = shallowRef(null);
 const svgContainer = shallowRef(null);
 const tooltip = ref(null);
 const tooltipData = ref([]);
+const selectedAminoAcid = ref('');
 
 const paddingValue = ref(0.1);
 const strokeWidthValue = ref(0.0);
@@ -56,9 +68,10 @@ const rows = ref(4);
 const selectedColorScale = ref('interpolateRdBu');
 const siteInputValue = ref('');
 const selectedSites = ref([]);
+const selectedEffectFilter = ref('');
+const minColor = ref(-4)
+const maxColor = ref(4)
 
-const min = -4;
-const max = 4;
 const margin = { top: 20, right: 20, bottom: 50, left: 50 }; // margin for the SVG
 const rowPadding = 30; // amount of padding between the rows
 const squareSize = 9; // size of each square in the heatmap
@@ -144,17 +157,44 @@ function parseSites(input) {
   return sites;
 }
 
-// COMPUTED PROPERTIES
-const sites = computed(() => {
+
+
+
+const filteredSites = computed(() => {
   if (!processedData.value) return []; // Return an empty array if processedData is null
 
-  if (selectedSites.value.length > 0) {
-    return Array.from(new Set(processedData.value.map((d) => +d.site))).filter((site) =>
-      selectedSites.value.includes(site)
-    );
-  } else {
-    return Array.from(new Set(processedData.value.map((d) => +d.site)));
+  let filtered = Array.from(new Set(processedData.value.map((d) => +d.site)));
+
+  if (selectedAminoAcid.value) {
+    filtered = filtered.filter((site) => wildtypeLookup.value[site] === selectedAminoAcid.value);
   }
+
+  if (selectedEffectFilter.value === 'negative') {
+    filtered = filtered.filter((site) => {
+      const siteEffects = processedData.value.filter((d) => +d.site === site).map((d) => +d.effect);
+      return siteEffects.every((effect) => effect < 0);
+    });
+  }
+
+  if (selectedEffectFilter.value === 'positive') {
+    filtered = filtered.filter((site) => {
+      const siteEffects = processedData.value.filter((d) => +d.site === site).map((d) => +d.effect);
+      return siteEffects.every((effect) => effect > 0);
+    });
+  }
+
+  return filtered;
+});
+
+
+const sites = computed(() => {
+  let result = filteredSites.value;
+
+  if (selectedSites.value.length > 0) {
+    result = result.filter((site) => selectedSites.value.includes(site));
+  }
+
+  return result;
 });
 
 function sitesPerRow() {
@@ -162,7 +202,11 @@ function sitesPerRow() {
 }
 
 const siteRows = computed(() => {
-  if (selectedSites.value.length > 0) {
+  if (sites.value.length === 0) {
+    return [];
+  } else if (selectedAminoAcid.value || selectedEffectFilter.value) {
+    return [sites.value];
+  } else if (selectedSites.value.length > 0) {
     return [sites.value];
   } else {
     return Array.from({ length: rows.value }, (_, i) =>
@@ -172,7 +216,11 @@ const siteRows = computed(() => {
 });
 
 function maxSitesInRow() {
-  if (selectedSites.value.length > 0) {
+  if (sites.value.length === 0) {
+    return 0;
+  } else if (selectedAminoAcid.value || selectedEffectFilter.value) {
+    return sites.value.length;
+  } else if (selectedSites.value.length > 0) {
     return selectedSites.value.length;
   } else {
     return Math.max(...siteRows.value.map((row) => row.length));
@@ -188,7 +236,7 @@ function width() {
 }
 
 function height() {
-  if (selectedSites.value.length > 0) {
+  if (selectedAminoAcid.value || selectedSites.value.length > 0) {
     return squareSize * amino_acids.length + margin.top + margin.bottom + margin.bottom;
   } else {
     return (
@@ -247,7 +295,7 @@ const yScale = computed(() => {
 
 ////////////// UPDATING FUNCTIONS ////////////////////////
 const colorScale = computed(() => {
-  return d3.scaleDiverging(d3[selectedColorScale.value]).domain([min, 0, max]);
+  return d3.scaleDiverging(d3[selectedColorScale.value]).domain([minColor.value, 0, maxColor.value]);
 });
 
 ///WATCH
@@ -259,7 +307,7 @@ watch([processedData, xScale, rows, selectedSites, strokeWidthValue, colorScale]
 function updateHeatmap() {
   const svg = d3.select(svgContainer.value); // Select the SVG container
   svg.selectAll('*').remove(); // Clear the SVG container. This is necessary to update the plot when the data changes.
-
+  console.log(minColor.value)
   const svgElement = d3
     .select(svgContainer.value)
     .attr('width', width())
@@ -380,11 +428,11 @@ function updateHeatmap() {
       .text('Amino Acid');
   });
 
-  Legend(d3.scaleDiverging([min, 0, max], d3[selectedColorScale.value]).clamp(true), {
+  Legend(d3.scaleDiverging([minColor.value, 0, maxColor.value], d3[selectedColorScale.value]).clamp(true), {
     svgRef: '#svgContainer',
     title: 'Cell Entry',
     width: 150,
-    tickValues: [min, 0, max],
+    tickValues: [minColor.value, 0, maxColor.value],
     xcoord: margin.left,
     ycoord: innerHeight() + 20,
     fontSize: 14,
@@ -392,3 +440,6 @@ function updateHeatmap() {
   });
 }
 </script>
+
+<style scoped>
+</style>
