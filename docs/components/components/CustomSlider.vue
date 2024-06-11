@@ -1,4 +1,11 @@
 <!-- ./src/components/CustomSlider.vue -->
+<template>
+  <div class="custom-slider">
+    <input ref="slider" :value="sliderValue" @input="({ target }) => (sliderValue = parseFloat(target.value))"
+      type="range" :min="min" :max="max" :step="step" class="slider" />
+  </div>
+</template>
+
 <script setup>
 import { ref, watchEffect } from 'vue';
 
@@ -6,7 +13,7 @@ import { ref, watchEffect } from 'vue';
 const { id, min, max, step, modelValue } = defineProps({
   id: {
     type: String,
-    required: true,
+    //required: true,
   },
   min: {
     type: Number,
@@ -60,20 +67,6 @@ watchEffect(() => {
   }
 });
 </script>
-<template>
-  <div class="custom-slider">
-    <input
-      ref="slider"
-      :value="sliderValue"
-      @input="({ target }) => (sliderValue = parseFloat(target.value))"
-      type="range"
-      :min="min"
-      :max="max"
-      :step="step"
-      class="slider"
-    />
-  </div>
-</template>
 
 <style scoped>
 .custom-slider {
@@ -96,8 +89,8 @@ watchEffect(() => {
   position: absolute;
   width: var(--ProgressPercent, 100%);
   height: 100%;
-  background: #075985;
-  /* z-index: -1; */
+  background: #B91C1C;
+   z-index: -1; 
   pointer-events: none;
   border-radius: 999px;
 }
@@ -105,7 +98,7 @@ watchEffect(() => {
 /* `::-webkit-slider-runnable-track` targets the track (background) of a range slider in chrome and safari browsers. */
 .custom-slider input[type='range']::-webkit-slider-runnable-track {
   appearance: none;
-  background: #082f49;
+  background: #450A0A;
   height: var(--trackHeight);
   border-radius: 999px;
 }
@@ -113,7 +106,7 @@ watchEffect(() => {
 /* `::-moz-range-track` targets the track (background) of a range slider in Mozilla Firefox. */
 .custom-slider input[type='range']::-moz-range-track {
   appearance: none;
-  background: #082f49;
+  background: #450A0A;
   height: var(--trackHeight);
   border-radius: 999px;
 }
@@ -123,7 +116,7 @@ watchEffect(() => {
   width: var(--thumbRadius);
   height: var(--thumbRadius);
   margin-top: calc((var(--trackHeight) - var(--thumbRadius)) / 2);
-  background: #0ea5e9;
+  background: #f44336;
   border-radius: 999px;
   pointer-events: all;
   appearance: none;

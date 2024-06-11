@@ -33,7 +33,6 @@
           <select class="form-select" v-model="selectedEffectFilter">
             <option value="">All</option>
             <option value="negative">Negative Effects Only</option>
-            <option value="positive">Negative Effects Only</option>
           </select>
         </template>
       </sidebar>
@@ -157,9 +156,6 @@ function parseSites(input) {
   return sites;
 }
 
-
-
-
 const filteredSites = computed(() => {
   if (!processedData.value) return []; // Return an empty array if processedData is null
 
@@ -175,14 +171,6 @@ const filteredSites = computed(() => {
       return siteEffects.every((effect) => effect < 0);
     });
   }
-
-  if (selectedEffectFilter.value === 'positive') {
-    filtered = filtered.filter((site) => {
-      const siteEffects = processedData.value.filter((d) => +d.site === site).map((d) => +d.effect);
-      return siteEffects.every((effect) => effect > 0);
-    });
-  }
-
   return filtered;
 });
 
@@ -236,7 +224,7 @@ function width() {
 }
 
 function height() {
-  if (selectedAminoAcid.value || selectedSites.value.length > 0) {
+  if (selectedAminoAcid.value || selectedSites.value.length > 0 || selectedEffectFilter.value) {
     return squareSize * amino_acids.length + margin.top + margin.bottom + margin.bottom;
   } else {
     return (

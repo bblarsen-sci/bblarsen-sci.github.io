@@ -18,13 +18,13 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, watch, onMounted, shallowRef } from 'vue';
 import * as d3 from 'd3';
 import Tooltip from '/components/components/tooltip.vue';
 
-const dataset = ref(null); //reactive variable to store the dataset
-const svgContainer = ref(null); //reactive variable to store the svg container
-const processedData = ref({}); //reactive variable to store the processed data
+const dataset = shallowRef(null); //reactive variable to store the dataset
+const svgContainer = shallowRef(null); //reactive variable to store the svg container
+const processedData = shallowRef({}); //reactive variable to store the processed data
 const tooltip = ref(null); //reactive variable to store the tooltip
 
 const width = 600;
