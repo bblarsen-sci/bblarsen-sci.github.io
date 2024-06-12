@@ -67,18 +67,24 @@ h2 {
 }
 
 h2 {
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: 700;
 }
 
 h3 {
   font-size: 1.25em;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--text-light)
+}
+
+.dark h3 {
+  color: var(--text-dark-light);
 }
 
 p {
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 400;
+  line-height: 1.75;
 }
 
 figcaption {
@@ -89,7 +95,11 @@ figcaption {
 }
 
 strong {
-  font-weight: 700;
+  font-weight: 600;
+  color: var(--text-strong);
+}
+.dark strong {
+  color: var(--text-dark-strong);
 }
 
 a {
@@ -134,7 +144,7 @@ a:hover {
 }
 
 .prose code {
-  @apply rounded text-xs;
+  @apply rounded-lg text-sm;
 }
 
 .prose pre {

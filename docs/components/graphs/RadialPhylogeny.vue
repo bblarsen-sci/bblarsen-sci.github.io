@@ -126,7 +126,8 @@ function drawChart(data) {
     .join('circle')
     .attr('transform', (d) => `rotate(${d.x - 90}) translate(${innerRadius + 4},0)`)
     .attr('r', 6)
-    .attr('class', 'circle')
+    .attr('stroke', 'currentColor')
+    .attr('stroke-width', 1.5)
     .attr('fill', (d) => {
       const countryColors = {
         India: '#ff7f0e',

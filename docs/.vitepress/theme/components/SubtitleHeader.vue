@@ -1,6 +1,6 @@
 <template>
-  <div class="">
-    <h3 class="opacity-60 ">
+  <div class="pb-10">
+    <h3>
       <slot></slot>
     </h3>
   </div>

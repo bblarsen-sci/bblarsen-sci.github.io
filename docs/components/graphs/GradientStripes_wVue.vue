@@ -1,5 +1,4 @@
 <template>
-  <div>
     <svg :viewBox="[0, 0, width, height]">
       <g :transform="`translate(${marginLeft}, ${marginTop})`">
         <g :transform="`translate(0, -2)`">
@@ -12,25 +11,24 @@
           :y="0"
           :width="colorWidth"
           :height="innerHeight"
-          :fill="divergingColorScale(dataPoint.entry)"
+          :fill="entryColorScale(dataPoint.entry)"
         />
         <g ref="xAxisGroup" :transform="`translate(0, ${innerHeight})`"></g>
         <g :transform="`translate(${innerWidth / 2}, ${innerHeight + marginBottom -5})`">
-          <text fill="currentColor" text-anchor="middle" font-size="14">Site</text>
+          <text fill="currentColor" text-anchor="middle" font-size="12" font-weight="bold">Site</text>
         </g>
       </g>
     </svg>
     <button class="btn-primary" @click="toggleDataFrame">Toggle Data</button>
-  </div>
 </template>
 
 <script setup>
-import { ref, computed, watchEffect } from 'vue';
+import { ref, computed, watch } from 'vue';
 import * as d3 from 'd3';
 import { useFetch } from '/components/composables/useFetch.js';
 
 
-const currentDataFrame = ref('data1');
+const currentDataFrame = ref('data2');
 const processedData1 = ref(null);
 const processedData2 = ref(null);
 const xAxisGroup = ref(null);
@@ -52,12 +50,6 @@ const { data: data2 } = useFetch(
   'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB2.csv'
 );
 
-function processData(data1, data2) {
-  const meanData1 = processDataset(data1);
-  const meanData2 = processDataset(data2);
-  return [meanData1, meanData2];
-}
-
 function processDataset(data) {
   const array = data.map((d) => ({
     site: +d.site,
@@ -73,14 +65,21 @@ function processDataset(data) {
   return meanData;
 }
 
-watchEffect(() => {
-  if (data.value && data2.value) {
-    [processedData1.value, processedData2.value] = processData(data.value, data2.value);
-  }
+watch(data, () => {
+    processedData1.value = processDataset(data.value);
+});
+
+watch(data2, () => {
+    processedData2.value = processDataset(data2.value);
 });
 
 const currentProcessedData = computed(() => {
   return currentDataFrame.value === 'data1' ? processedData1.value : processedData2.value;
+});
+
+watch(currentProcessedData, () => {
+    d3.select(xAxisGroup.value)
+      .call(xAxisGenerator.value);
 });
 
 const xScale = computed(() => {
@@ -110,7 +109,7 @@ const colorMax = computed(() => {
   return d3.max(currentProcessedData.value, (d) => d.entry);
 });
 
-const divergingColorScale = computed(() => {
+const entryColorScale = computed(() => {
   return d3
     .scaleDiverging(d3.interpolateRdBu)
     .domain([colorMin.value, 0, colorMax.value + 0.5]);
@@ -118,16 +117,6 @@ const divergingColorScale = computed(() => {
 
 const colorWidth = computed(() => {
   return innerWidth / currentProcessedData.value.length;
-});
-
-watchEffect(() => {
-  if (currentProcessedData.value) {
-    d3.select(xAxisGroup.value)
-      .transition()
-      .duration(2000)
-      .ease(d3.easeLinear)
-      .call(xAxisGenerator.value);
-  }
 });
 
 function toggleDataFrame() {

@@ -44,17 +44,13 @@ let svg;
 let allSites;
 let totalPages;
 
-const { data, error } = useFetch(
+const { data } = useFetch(
   'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB2.csv'
 );
 
-watch(error, (newError) => {
-  if (newError) {
-    console.error('Error fetching data:', newError);
-  }
-});
 
-const height = 300;
+
+const height = 400;
 const margin = { top: 10, right: 40, bottom: 100, left: 40 };
 const innerHeight = height - margin.top - margin.bottom;
 const squareSize = Math.min(innerHeight / amino_acids.length, 20); // Define the square size based on the height and number of amino acids
@@ -62,58 +58,80 @@ const innerWidth = squareSize * sitesPerView; // Define the inner width based on
 const width = innerWidth + margin.left + margin.right; // Define the total width based on the inner width and margins
 
 
-watch(data, (newData) => {
-  if (newData) {
-    allSites = Array.from(new Set(newData.map((d) => +d.site)));
-    const totalSites = allSites.length;
-    totalPages = Math.ceil(totalSites / sitesPerView);
-    updateHeatmap();
-  }
-});
+let dataLookup = {};
+let wildtypeLookup = {};
+let allCombinationsLookup = {};
 
-const visibleSites = computed(() => {
+watch(data, () => {
+  allSites = Array.from(new Set(data.value.map((d) => +d.site)));
+  
+  // Precompute all combinations for each site
+ allCombinationsLookup = allSites.reduce((lookup, site) => {
+  lookup[site] = amino_acids.map((mutant) => ({ site, mutant }));
+  return lookup;
+}, {});
+
+  const totalSites = allSites.length;
+  totalPages = Math.ceil(totalSites / sitesPerView);
+
+  // Create dataLookup and wildtypeLookup once
+  dataLookup = data.value.reduce((lookup, dataPoint) => {
+    lookup[`${dataPoint.site}-${dataPoint.mutant}`] = dataPoint;
+    return lookup;
+  }, {});
+
+  wildtypeLookup = data.value.reduce((lookup, dataPoint) => {
+    lookup[dataPoint.site] = dataPoint.wildtype;
+    return lookup;
+  }, {});
+
+  updateHeatmap();
+});
+// Define getFillColor function separately
+function getFillColor(site, mutant) {
+  const key = `${site}-${mutant}`;
+  if (dataLookup[key]) {
+    return colorScale(+dataLookup[key].entry_CHO_bEFNB2);
+  } else {
+    return wildtypeLookup[site] === mutant ? 'white' : 'lightgray';
+  }
+}
+
+const sitesInWindow = computed(() => {
   return allSites.slice(currentIndex.value * sitesPerView, (currentIndex.value + 1) * sitesPerView);
 });
 
+
 const allCombinations = computed(() => {
-  return visibleSites.value.flatMap((site) => amino_acids.map((mutant) => ({ site, mutant })));
+  return sitesInWindow.value.flatMap((site) => allCombinationsLookup[site]);
 });
 
-const filteredData = computed(() => {
-  return data.value.filter((d) => visibleSites.value.includes(+d.site));
+const uniqueWildtypes = computed(() => {
+  const wildtypesMap = new Map();
+  sitesInView.value.forEach((d) => {
+    if (!wildtypesMap.has(+d.site)) {
+      wildtypesMap.set(+d.site, d);
+    }
+  });
+  return Array.from(wildtypesMap.values());
+});
+
+
+
+
+
+const sitesInView = computed(() => {
+  return data.value.filter((d) => sitesInWindow.value.includes(+d.site));
 });
 
 const colorScale = d3.scaleDiverging(d3.interpolateRdBu).domain([minColor, 0, maxColor]);
 
-const dataLookup = computed(() => {
-  return data.value.reduce((lookup, dataPoint) => {
-    lookup[`${dataPoint.site}-${dataPoint.mutant}`] = dataPoint;
-    return lookup;
-  }, {});
-});
 
-const wildtypeLookup = computed(() => {
-  return data.value.reduce((lookup, dataPoint) => {
-    lookup[dataPoint.site] = dataPoint.wildtype;
-    return lookup;
-  }, {});
-});
-
-const getFillColor = computed(() => {
-  return (site, mutant) => {
-    const key = `${site}-${mutant}`;
-    if (dataLookup.value[key]) {
-      return colorScale(+dataLookup.value[key].entry_CHO_bEFNB2);
-    } else {
-      return wildtypeLookup.value[site] === mutant ? 'white' : 'lightgray';
-    }
-  };
-});
 
 const yScale = d3.scaleBand().domain(amino_acids).range([0, innerHeight]).padding(0.1);
 
 const xScale = computed(() => {
-  return d3.scaleBand().domain(visibleSites.value).range([0, innerWidth]).padding(0.1);
+  return d3.scaleBand().domain(sitesInWindow.value).range([0, innerWidth]).padding(0.1);
 });
 
 onMounted(() => {
@@ -196,6 +214,7 @@ function updateHeatmap() {
     .attr('dy', '-0.7em')
     .attr('dx', '-0.7em');
 
+    console.log('allCombinations', allCombinations.value)
   svg
     .selectAll('rect')
     .data(allCombinations.value, (d) => `${d.site}-${d.mutant}`)
@@ -203,7 +222,7 @@ function updateHeatmap() {
       (enter) =>
         enter
           .append('rect')
-          .attr('fill', (d) => getFillColor.value(d.site, d.mutant))
+          .attr('fill', (d) => getFillColor(d.site, d.mutant))
           .attr('opacity', 0)
           .attr('x', width)
           .attr('y', (d) => yScale(d.mutant))
@@ -222,16 +241,11 @@ function updateHeatmap() {
         .attr('opacity', 0)
         .remove());
 
-  const uniqueWildtypes = new Map();
-  filteredData.value.forEach((d) => {
-    if (!uniqueWildtypes.has(+d.site)) {
-      uniqueWildtypes.set(+d.site, d);
-    }
-  });
+
 
   svg
     .selectAll('.wildtype')
-    .data(Array.from(uniqueWildtypes.values()), (d) => d.site)
+    .data(Array.from(uniqueWildtypes.value.values()), (d) => d.site)
     .join(
       (enter) =>
         enter

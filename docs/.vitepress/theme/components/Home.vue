@@ -1,10 +1,3 @@
-/**
- * This file contains the script setup for the Home.vue component.
- * It imports the phylogeneticTreeRadial component and necessary Vue functions.
- * It also initializes an IntersectionObserver to track the visibility of elements.
- * The observer adds or removes CSS classes based on whether an element is intersecting the viewport.
- * The script sets up the observer on component mount and disconnects it on component unmount.
- */
 <script setup>
 import RadialPhylogeny from '/components/graphs/RadialPhylogeny.vue';
 import { ref, onMounted, onBeforeUnmount } from 'vue';

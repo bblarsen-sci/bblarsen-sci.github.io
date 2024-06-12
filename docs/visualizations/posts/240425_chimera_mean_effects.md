@@ -17,7 +17,7 @@ thumbnail: /thumbnails/chimera_mean_effects.png
 </div>
 
 
-To map effects of DMS onto a protein in ChimeraX, you need a `.defattr` file in this format:
+To map effects of DMS onto a protein in ChimeraX, you need a <code>.defattr</code> file in this format:
 
 ```tsv
 attribute: entry

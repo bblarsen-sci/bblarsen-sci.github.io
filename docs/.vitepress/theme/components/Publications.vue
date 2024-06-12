@@ -52,10 +52,10 @@ export default {
             :key="paper.title"
             class="rounded-lg border border-slate-200 p-4 shadow hover:border-slate-400 hover:shadow-lg dark:border-slate-700 dark:hover:border-slate-400"
           >
-            <a class="flex h-full flex-col gap-2 border-none" :href="paper.link">
+            <a class="flex h-full flex-col gap-2 border-none text-inherit" :href="paper.link">
               <strong class="mb-2">{{ paper.title }}</strong>
               <p class="mb-4 text-center">{{ paper.journal }}, {{ paper.year }}</p>
-              <p class="line-clamp-3 flex-grow opacity-70">{{ paper.abstract }}</p>
+              <p class="line-clamp-3 text-sm opacity-70">{{ paper.abstract }}</p>
             </a>
           </div>
         </div>
