@@ -381,6 +381,7 @@ function updateHeatmap() {
       .call(xAxis)
       .selectAll('text')
       .attr('dx', '-7px')
+      .attr('font-size', '12px')
       .attr('transform', 'rotate(-90)')
       .attr('text-anchor', 'end')
       .attr('dy', '-5px');
@@ -389,7 +390,7 @@ function updateHeatmap() {
     svgElement
       .append('g')
       .attr('transform', `translate(0, ${(yScale.value.range()[1] + rowPadding) * rowIndex})`)
-      .call(d3.axisLeft(yScale.value).tickSizeOuter(0));
+      .call(d3.axisLeft(yScale.value).tickSizeOuter(0)).attr('font-size', '10px');
 
     // Add the row title
     svgElement
@@ -397,7 +398,8 @@ function updateHeatmap() {
       .attr('class', 'axis-title-x')
       .attr('x', calculateInnerWidth() / 2)
       .attr('y', innerHeight())
-      .attr('font-size', '14px')
+      .attr('font-size', '18px')
+      .attr('font-weight', 'bold')
       .attr('text-anchor', 'middle')
       .attr('text-align', 'center')
       .attr('fill', 'currentColor')
@@ -409,7 +411,8 @@ function updateHeatmap() {
       .attr('class', 'axis-title-y')
       .attr('x', -innerHeight() / 2 + 20)
       .attr('y', 0 - 30)
-      .attr('font-size', '14px')
+      .attr('font-size', '18px')
+      .attr('font-weight', 'bold')
       .attr('text-anchor', 'middle')
       .attr('transform', 'rotate(-90)')
       .attr('fill', 'currentColor')
