@@ -73,7 +73,7 @@ let domains = [
 const regions = computed(() => Array.from(new Set(domains.map((d) => d.name))).filter(Boolean));
 
 const colorRegions = computed(() => {
-  return d3.scaleOrdinal().domain(regions.value).range(d3.schemeTableau10);
+  return d3.scaleOrdinal().domain(regions.value).range(d3.schemePaired);
 });
 
 let svg;
@@ -109,51 +109,46 @@ function makeColorChart() {
       (exit) => exit.remove()
     );
 
-  //svg.selectAll('.other-rect')
-  //  .data(domains)
-  //  .enter()
-  //  .append('rect')
-  //  .attr('class', 'other-rect')
-  //  .attr('x', d => xScale.value(d.start))
-  //  .attr('y', -15)
-  //  .attr('width', d => xScale.value(d.stop) - xScale.value(d.start))
-  //  .attr('height', 5)
-  //  .attr('fill', d=> colorRegions.value(d.name))
+  svg.selectAll('.other-rect')
+    .data(domains)
+    .enter()
+    .append('rect')
+    .attr('class', 'other-rect')
+    .attr('x', d => xScale.value(d.start))
+    .attr('y', -15)
+    .attr('width', d => xScale.value(d.stop) - xScale.value(d.start))
+    .attr('height', 5)
+    .attr('fill', d=> colorRegions.value(d.name))
 
-  //svg.selectAll('.domain-text').append('g')
-  //  .data(domains)
-  //  .enter()
-  //  .append('text')
-  //  .attr('class', 'domain-text')
-  //  .attr('x', d => xScale.value((d.start + d.stop) / 2))
-  //  .attr('y', -16)
-  //  .attr('text-anchor', 'middle')
-  //  .attr('font-size', '11px')
-  //  .text(d => d.name)
+  svg.selectAll('.domain-text').append('g')
+    .data(domains)
+    .enter()
+    .append('text')
+    .attr('class', 'domain-text')
+    .attr('x', d => xScale.value((d.start + d.stop) / 2))
+    .attr('y', -16)
+    .attr('text-anchor', 'middle')
+    .attr('fill', 'currentColor')
+    .attr('font-size', '0.4em')
+    .text(d => d.name)
 
   const xAxis = svg
     .append('g')
     .attr('transform', `translate(0, ${innerHeight})`)
     .call(xAxisGenerator.value)
-    .attr('font-size', '12px');
+    .attr('font-size', '0.5em');
 
   xAxis
     .append('text')
     .attr('class', 'text')
     .attr('x', innerWidth / 2)
-    .attr('y', 40)
+    .attr('y', 30)
     .attr('fill', 'currentColor')
     .attr('text-anchor', 'middle')
-    .attr('font-size', '14px')
+    .attr('font-size', '1.5em')
     .text('Site');
 
-  //svg.append('text')
-  //  .attr('x', 0)
-  //  .attr('y', -5)
-  //  .attr('fill', 'currentColor')
-  //  .attr('text-anchor', 'start')
-  //  .attr('font-size', '14px')
-  //  .text('Mean Cell Entry');
+
 
   Legend(
     d3
@@ -172,7 +167,8 @@ function makeColorChart() {
         d3.max(dataset.value, (d) => d.entry) + 1,
       ],
       xcoord: width - 110,
-      ycoord: height - 35,
+      ycoord: height - 50,
+      fontSize: 8,
     }
   );
 }

@@ -28,7 +28,7 @@ function toggleSidebar() {
       </main>
       <button
         @click="toggleSidebar"
-        class="fixed right-1 top-12 rounded-full p-2 focus:outline-none z-40 hover:text-red-500"
+        class="fixed right-0 top-16 rounded-full p-2 focus:outline-none z-40 hover:text-red-500"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +42,7 @@ function toggleSidebar() {
           />
         </svg>
       </button>
-      <aside v-if="isSidebarOpen" class="fixed right-0 top-20 z-40 h-3/4 w-32 md:block">
+      <aside v-if="isSidebarOpen" class="fixed right-0 top-32 z-40 h-3/4 w-32 md:block">
         <div class="h-full overflow-y-auto bg-slate-200 p-2 dark:bg-slate-800 rounded-md">
           <strong class="mb-6">Other posts</strong>
           <ul class="space-y-3 text-xs pt-4">

@@ -18,7 +18,7 @@ thumbnail: /thumbnails/scatterplot.png
 </D3PlotContainer>
 
 
-<div class='py-24 prose dark:prose-dark dark:prose-invert prose-sm text-xs'>
+<div class='code-below-figure'>
 
 # Code
 

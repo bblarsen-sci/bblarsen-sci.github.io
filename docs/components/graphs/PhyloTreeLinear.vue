@@ -14,13 +14,14 @@ import downloadPNG from '/components/utilities/downloadPNG.js'
 const dataset = ref(null);
 const svgContainer = ref(null)
 const showNames = ref(false);
+const radius = 4;
 
 function downloadPNGHandler() {
     downloadPNG(svgContainer.value)
 }
 
 const margin = { top: 20, right: 20, bottom: 40, left: 20 };
-const width = 800;
+const width = 500;
 const height = 500;
 let svg = null;
 
@@ -81,7 +82,7 @@ function makeFigure() {
                 .append('circle')
                 .attr("fill", d => colorScale.value(d.data.country))
                 .attr('transform', d => `translate(${d.y},${d.x})`)
-                .attr('r', 3),
+                .attr('r', radius),
             update => update,
             exit => exit.remove()
         );
@@ -122,12 +123,12 @@ function makeFigure() {
         .data(colorScale.value.domain())
         .join('g')
         .attr('class', 'legend-item')
-        .attr('transform', (d, i) => `translate(100, ${i * 20})`);
+        .attr('transform', (d, i) => `translate(10, ${i * 20})`);
 
     legendItems.append('circle')
-        .attr('r', 4)
+        .attr('r', radius)
         .attr('stroke', 'currentColor')
-        .attr('stroke-width', 0.5)
+        .attr('stroke-width', 1.25)
         .attr('fill', colorScale.value)
 
     legendItems.append('text')
@@ -138,6 +139,27 @@ function makeFigure() {
         .attr('fill', 'currentColor')
         .attr('font-size', '12px')
         .text(d => d);
+
+    const scaleBarLength = 0.1; // Adjust the length of the scale bar as needed
+    const scaleBarGroup = svg.append('g')
+        .attr('class', 'scale-bar')
+        .attr('transform', `translate(${width - 150}, ${height-70})`);
+
+    scaleBarGroup.append('line')
+        .attr('x1', 0)
+        .attr('y1', 0)
+        .attr('x2', scaleBarLength * (width - margin.right - margin.left))
+        .attr('y2', 0)
+        .attr('stroke', 'currentColor')
+        .attr('stroke-width', 1.25);
+
+    scaleBarGroup.append('text')
+        .attr('x', scaleBarLength * (width - margin.right - margin.left) / 2)
+        .attr('y', 15)
+        .attr('text-anchor', 'middle')
+        .attr('fill', 'currentColor')
+        .attr('font-size', '12px')
+        .text(`${scaleBarLength} substitutions per site`);
 }
 
 onMounted(() => {

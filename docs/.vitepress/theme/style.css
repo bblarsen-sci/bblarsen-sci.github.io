@@ -32,7 +32,7 @@ body {
 }
 
 .form-select {
-  @apply block appearance-none w-full outline-none hover:shadow-md focus:outline-offset-0 focus:outline-red-500 rounded-md p-1 ring-1 ring-slate-300 text-black bg-white dark:bg-slate-200;
+  @apply block appearance-none outline-none hover:shadow-md focus:outline-offset-0 focus:outline-red-500 rounded-md p-1 ring-1 ring-slate-300 text-black bg-white dark:bg-slate-200;
 }
 
 .label-select {
@@ -41,6 +41,10 @@ body {
 
 .home-image {
   @apply rounded-lg object-contain max-w-80;
+}
+
+.code-below-figure {
+  @apply pt-96 prose text-xs;
 }
 
 /* General */
@@ -152,14 +156,11 @@ a:hover {
 }
 
 .prose a {
-  font-weight: theme('fontWeight.semibold');
-  text-decoration: none;
-  border-bottom: 1px solid var(--vp-c-text-highlight);
+    @apply no-underline font-semibold border-b border-b-red-500;
 }
 
 .prose a:hover {
-  border-bottom-color: var(--vp-c-text-highlight);
-  border-bottom-width: 2px;
+  @apply border-b-2;
 }
 
 .prose strong {
@@ -178,10 +179,7 @@ a:hover {
 }
 
 .dark .prose a {
-  color: theme('colors.white');
-  font-weight: theme('fontWeight.semibold');
-  text-decoration: none;
-  border-bottom: 1px solid var(--vp-c-text-highlight);
+  @apply no-underline text-white font-semibold border-b border-b-red-500;
 }
 
 .dark .prose a:hover {
@@ -198,3 +196,4 @@ a:hover {
 .dark .prose h3 {
   color: var(--text-dark);
 }
+

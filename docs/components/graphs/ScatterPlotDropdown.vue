@@ -1,11 +1,12 @@
 <template>
     <form class="">
-      <label class="mb-2 block text-sm text-slate-900 dark:text-white"
+      <label class="label-select"
         >Select an option:</label
       >
       <select
         v-model="selectedDataset"
         @change="changeDataset"
+        class="form-select"
       >
         <option value="bEFNB2_entry">bEFNB2 Entry</option>
         <option value="bEFNB3_entry">bEFNB3 Entry</option>

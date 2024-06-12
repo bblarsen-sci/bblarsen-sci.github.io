@@ -1,7 +1,5 @@
 ---
-layout: doc
 title: Heatmap windows + animation
-aside: false
 date: 2024-05-01
 keywords:
   - D3
@@ -19,3 +17,10 @@ import HeatmapBlocks from '/components/graphs/HeatmapBlocks.vue';
 <HeatmapBlocks />
 </D3PlotContainer>
 
+<div class='code-below-figure'>
+
+# Code
+
+<<< @/components/graphs/HeatmapBlocks.vue
+
+</div>

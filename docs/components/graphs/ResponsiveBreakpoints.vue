@@ -20,8 +20,8 @@ const dimensions = ref({
     margin: {
         top: 15,
         right: 15,
-        bottom: 40,
-        left: 40,
+        bottom:60,
+        left: 60,
     },
 });
 
@@ -30,10 +30,10 @@ let wrapper;
 //data
 const data = [
     { x: 10, y: 20 },
-    { x: 40, y: 90 },
-    { x: 80, y: 50 },
-    { x: 160, y: 100 },
-    { x: 200, y: 150 },
+    { x: 20, y: 10 },
+    { x: 50, y: 70 },
+    { x: 40, y: 85 },
+    { x: 70, y: 80 },
 ];
 
 //watch for resize
@@ -91,7 +91,7 @@ function makePlot() {
     const colorScale = d3
         .scaleLinear()
         .domain(d3.extent(data, colorAccessor))
-        .range(['skyblue', 'darkslategrey']);
+        .range(['steelblue', 'indianred']);
 
     //create svg
     wrapper = d3
@@ -120,28 +120,31 @@ function makePlot() {
     const xAxis = bounds
         .append('g')
         .call(xAxisGenerator)
+        .attr('font-size', '14px')
         .attr('transform', `translate(0, ${innerHeight.value})`);
 
     //create x axis label
     xAxis
         .append('text')
         .attr('x', innerWidth.value / 2)
-        .attr('y', dimensions.value.margin.bottom - 10)
+        .attr('y', dimensions.value.margin.bottom - 20)
         .attr('fill', 'currentColor')
-        .style('font-size', '1.4em')
+        .style('font-size', '16px')
+        .attr('font-weight', 'bold')
         .html('Dew point (&deg;F)');
 
     //create y axis
     const yAxisGenerator = d3.axisLeft().scale(yScale.value);
-    const yAxis = bounds.append('g').call(yAxisGenerator);
+    const yAxis = bounds.append('g').call(yAxisGenerator).attr('font-size', '14px');
 
     yAxis
         .append('text')
         .attr('x', -innerHeight.value / 2)
-        .attr('y', -dimensions.value.margin.left + 10)
+        .attr('y', -dimensions.value.margin.left + 20)
         .attr('transform', 'rotate(-90)')
         .attr('fill', 'currentColor')
-        .style('font-size', '1.4em')
+        .style('font-size', '16px')
+        .attr('font-weight', 'bold')
         .html('Temp (&deg;F)');
 }
 </script>

@@ -17,7 +17,7 @@ thumbnail: /thumbnails/d3_lines_redblue.png
 <LinesAnimationRedBlue/>
 </D3PlotContainer>
 
-<div class='py-24 prose dark:prose-dark dark:prose-invert prose-sm text-xs'>
+<div class='code-below-figure'>
 
 # Code
 

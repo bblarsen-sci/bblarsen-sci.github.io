@@ -18,7 +18,7 @@ thumbnail: /thumbnails/virusAnimation.png
 </D3PlotContainer>
 
 
-<div class='py-60 prose dark:prose-dark dark:prose-invert prose-sm text-xs'>
+<div class='code-below-figure'>
 
 # Code
 
