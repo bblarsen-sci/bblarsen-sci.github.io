@@ -4,12 +4,15 @@
 
 import * as d3 from 'd3';
 
-export function makeData(width,height,dispersion) {
-  const randomX = d3.randomNormal(width / 2, dispersion);
-  //const randomX = d3.randomUniform(20, width-50);
-  const randomY = d3.randomNormal(height / 2, dispersion);
-  //const randomY = d3.randomUniform(20, height-50);
-  const data = Array.from({ length: 100 }, () => [randomX(), randomY()]);
+export function makeData(width, height, dispersion, dataPoints, type = 'normal') {
+  const randomX = type === 'uniform'
+    ? d3.randomUniform(20, width - 10)
+    : d3.randomNormal(width / 2, dispersion);
 
+  const randomY = type === 'uniform'
+    ? d3.randomUniform(20, height - 10)
+    : d3.randomNormal(height / 2, dispersion);
+
+  const data = Array.from({ length: dataPoints }, () => [randomX(), randomY()]);
   return { data };
 }

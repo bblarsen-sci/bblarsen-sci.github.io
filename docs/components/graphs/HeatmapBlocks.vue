@@ -48,7 +48,7 @@ const { data } = useFetch(
   'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB2.csv'
 );
 
-const height = 500;
+const height = 400;
 const margin = { top: 10, right: 30, bottom: 100, left: 50 };
 const innerHeight = height - margin.top - margin.bottom;
 const squareSize = Math.min(innerHeight / amino_acids.length, 20); // Define the square size based on the height and number of amino acids

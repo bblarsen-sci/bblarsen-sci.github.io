@@ -34,11 +34,17 @@ const amino_acids = [
 const svgContainer = ref(null);
 const currentIndex = ref(4);
 
+const wildtypetextsize = '14px';
+const ticktextsize = '14px';
+const axisTitleSize = '16px';
+const colorofmissing = 'lightgray';
 const easingRef = 'easePolyInOut';
 const delayByIndex = 5;
 const sitesPerView = 20;
 const minColor = -4;
-const maxColor = 2;
+const maxColor = 4;
+
+
 let intervalId;
 let svg;
 let allSites;
@@ -48,7 +54,7 @@ const { data } = useFetch(
     'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_bEFNB2_binding.csv'
 );
 
-const height = 500;
+const height = 400;
 const margin = { top: 10, right: 30, bottom: 100, left: 50 };
 const innerHeight = height - margin.top - margin.bottom;
 const squareSize = Math.min(innerHeight / amino_acids.length, 20); // Define the square size based on the height and number of amino acids
@@ -94,7 +100,7 @@ function getFillColor(site, mutant) {
     if (dataLookup[key]) {
         return colorScale(+dataLookup[key].bEFNB2_binding);
     } else {
-        return wildtypeLookup[site] === mutant ? 'white' : 'lightgray';
+        return wildtypeLookup[site] === mutant ? 'white' : colorofmissing;
     }
 }
 
@@ -158,7 +164,7 @@ onMounted(() => {
             .attr('text-anchor', 'end')
             .attr('fill', 'currentColor')
             .attr('font-weight', 'bold')
-            .attr('font-size', '16px')
+            .attr('font-size', axisTitleSize)
             .text('Site')
     );
 
@@ -167,7 +173,7 @@ onMounted(() => {
 
     yAxisGroup
         .call(d3.axisLeft(yScale).tickSizeOuter(0))
-        .attr('font-size', '14px')
+        .attr('font-size', ticktextsize)
         .call((d) => d.select('.domain').remove())
         .call((d) =>
             d
@@ -179,7 +185,7 @@ onMounted(() => {
                 .attr('font-weight', 'bold')
                 .attr('text-anchor', 'middle')
                 .attr('fill', 'currentColor')
-                .attr('font-size', '16px')
+                .attr('font-size', axisTitleSize)
                 .text('Amino Acid')
         );
 
@@ -211,7 +217,7 @@ function updateHeatmap() {
         .attr('transform', `translate(0,${innerHeight})`)
         .selectAll('text')
         .attr('transform', 'rotate(-90)')
-        .attr('font-size', '14px')
+        .attr('font-size', ticktextsize)
         .attr('text-anchor', 'end')
         .attr('alignment-baseline', 'middle')
         .attr('dy', '-0.7em')
@@ -257,7 +263,7 @@ function updateHeatmap() {
                     .attr('opacity', 0)
                     .attr('dominant-baseline', 'middle')
                     .attr('dy', '0.1em')
-                    .attr('font-size', '16px')
+                    .attr('font-size', wildtypetextsize)
                     .attr('font-weight', 300)
                     .text('X')
                     .transition()

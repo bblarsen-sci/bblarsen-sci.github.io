@@ -23,7 +23,7 @@ function toggleSidebar() {
 <template>
   <div class="h-full w-full px-2 py-4 ">
     <div class="flex flex-col md:flex-row">
-      <main class="mx-auto w-full px-2 md:w-5/6 text-black dark:text-white">
+      <main class="mx-auto w-full px-2 md:w-5/6 ">
         <Content />
       </main>
       <button

@@ -1,9 +1,9 @@
 ---
-title: Circle Color Spread
+title: Gradient interpolation
 date: 2024-06-08
 keywords:
   - D3
-subtext: Testing simulation where colors randomly appear and spread
+subtext: Testing random data generation and gradient interpolation
 thumbnail: /thumbnails/colorSpread.png
 ---
 
