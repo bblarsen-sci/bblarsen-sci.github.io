@@ -1,18 +1,15 @@
 <template>
     <svg ref='svgContainer'></svg>
-    <button class='download-btn ' @click=downloadPNGHandler></button>
+    <button class='download-btn ' @click=downloadPNG(svgContainer)></button>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, watchEffect } from 'vue';
+import { ref, computed, watch } from 'vue';
 import * as d3 from 'd3';
 import downloadPNG from '/components/utilities/downloadPNG.js';
 import { useFetch } from '/components/composables/useFetch.js';
 
 
-function downloadPNGHandler() {
-    downloadPNG(svgContainer.value);
-}
 
 const svgContainer = ref(null);
 
@@ -23,15 +20,9 @@ const marginRight = 40;
 const marginBottom = 60;
 const marginLeft = 60;
 
-const { data, error } = useFetch(
+const { data } = useFetch(
   'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_antibody_escape.csv'
 );
-
-watch(error, (newError) => {
-    if (newError) {
-        console.error('Error fetching data:', newError);
-    }
-});
 
 const dataset = computed(() => {  
     if (data.value) {// Process the CSV data into an array of objects
@@ -56,78 +47,47 @@ const dataset = computed(() => {
     return antibodyData;
 }});
 
-
-
-/**
- * Computed property for the x-scale of the visualization.
- * @returns {d3.scaleLinear} The x-scale function.
- */
 const xScale = computed(() => {
     return d3.scaleLinear()
         .domain(d3.extent(dataset.value[0].sites, (d) => d.site))
         .range([marginLeft, width - marginRight]);
 });
 
-/**
- * Computed property for the x-axis generator of the visualization.
- * @returns {d3.axisBottom} The x-axis generator.
- */
 const xAxisGenerator = computed(() => {
     return d3.axisBottom().scale(xScale.value).tickSizeOuter(0);
 });
 
-/**
- * Computed property for the y-scale of the visualization.
- * @returns {d3.scaleLinear} The y-scale function.
- */
 const yScale = computed(() => {
     return d3.scaleLinear()
         .domain([d3.min(dataset.value, (d) => d3.min(d.sites, (s) => s.escape)), d3.max(dataset.value, (d) => d3.max(d.sites, (s) => s.escape))])
         .range([height - marginBottom, marginTop]);
 });
 
-/**
- * Computed property for the y-axis generator of the visualization.
- * @returns {d3.axisLeft} The y-axis generator.
- */
 const yAxisGenerator = computed(() => {
     return d3.axisLeft().scale(yScale.value).ticks(6).tickSizeOuter(0);
 });
 
-/**
- * Computed property for the line generator of the visualization.
- * @returns {d3.line} The line generator.
- */
 const lineGenerator = computed(() => {
     return d3.line()
         .x(d => xScale.value(d.site))
         .y(d => yScale.value(d.escape));
 });
 
-/**
- * Computed property for the array of points to be plotted in the visualization.
- * @returns {Array} The array of points, each represented as [x, y, antibody].
- */
-const points = computed(() => {
-    return dataset.value.flatMap(d => d.sites.map(s => [xScale.value(s.site), yScale.value(s.escape), d.antibody]));
-});
-
-let svg;
 let path;
 let antibodies;
 let currentAntibodyIndex = -1;
 const loopInterval = 2000; // Adjust the interval duration as needed
 let antibodyText;
 
-onMounted(() => {
-    svg = d3.select(svgContainer.value)
-        .attr('viewBox', `0 0 ${width} ${height}`)
+watch(dataset, () => {
+    makeColorChart();
 });
-
 
 const colorScale = d3.scaleOrdinal().range(d3.schemeTableau10);
 
 function makeColorChart() {
+    const svg = d3.select(svgContainer.value)
+    .attr('viewBox', `0 0 ${width} ${height}`)
     path = svg.append('g')
         .attr('fill', 'none')
         .attr('stroke-width', 1.75)
@@ -145,14 +105,15 @@ function makeColorChart() {
         .call(xAxisGenerator.value)
         .attr('font-size', '15px')
         .call(g => g.selectAll('.domain').remove())
-        .call(g => g.selectAll('.tick line').clone()
-            .attr('y2', -height + marginBottom)
-            .attr('stroke-opacity', 0.1))
+        //.call(g => g.selectAll('.tick line').clone()
+            //.attr('y2', -height + marginBottom)
+            //.attr('stroke-opacity', 0.1))
         .call(g => g.append('text')
             .attr('x', width / 2)
             .attr('y', marginBottom - 20)
             .attr('font-size', '18px')
             .attr('fill', 'currentColor')
+            .attr('font-weight', 'bold')
             .attr('text-anchor', 'middle')
             .text('Site'));
 
@@ -167,6 +128,7 @@ function makeColorChart() {
             .attr('font-size', '18px')
             .attr('transform', 'rotate(-90)')
             .attr('fill', 'currentColor')
+            .attr('font-weight', 'bold')
             .attr('text-anchor', 'middle')
             .text('Mean Escape'));
 
@@ -199,11 +161,11 @@ function startLoop() {
 function updateColors() {
     if (currentAntibodyIndex === 0) {
         path.style("stroke", d => colorScale(d.antibody))
-            .attr("stroke-width", 1.75);
+            .attr("stroke-width", 1.5);
     } else {
         const currentAntibody = antibodies[currentAntibodyIndex - 1];
         path.style("stroke", ({ antibody: a }) => a === currentAntibody ? colorScale(a) : "#ddd")
-            .attr("stroke-width", d => d.antibody === currentAntibody ? 2 : 1.75)
+            .attr("stroke-width", d => d.antibody === currentAntibody ? 2 : 1)
             .filter(({ antibody: a }) => a === currentAntibody)
             .raise();
     }
@@ -216,9 +178,5 @@ function updateColors() {
     }
 }
 
-watchEffect(() => {
-    if (dataset.value) {
-        makeColorChart();
-    }
-});
+
 </script>

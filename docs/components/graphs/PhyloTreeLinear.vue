@@ -2,24 +2,20 @@
     <input type="checkbox" id="toggleNames" v-model="showNames" />
     <label class="ml-2 align-middle" for="toggleNames">Show Taxa Names</label>
     <svg ref='svgContainer'></svg>
-    <button class='download-btn' @click=downloadPNGHandler></button>
+    <button class='download-btn' @click=downloadPNG(svgContainer)></button>
 </template>
 
 <script setup>
 import * as d3 from 'd3';
-import { onMounted, ref, computed, watchEffect } from 'vue';
+import { onMounted, ref, computed, watchEffect,watch } from 'vue';
 import { parseNewick, projection, diagonal, scaleBranchLengths } from '/components/utilities/treeUtilities.js';
 import downloadPNG from '/components/utilities/downloadPNG.js'
 
 const dataset = ref(null);
 const svgContainer = ref(null)
 const showNames = ref(false);
+
 const radius = 4;
-
-function downloadPNGHandler() {
-    downloadPNG(svgContainer.value)
-}
-
 const margin = { top: 20, right: 20, bottom: 40, left: 20 };
 const width = 500;
 const height = 500;
@@ -169,10 +165,8 @@ onMounted(() => {
         .attr("transform", `translate(${margin.left - 200}, ${margin.top})`);
 });
 
-watchEffect(() => {
-    if (dataset.value) {
+watch(dataset,() => {
         makeFigure()
-    }
 });
 
 fetchData()

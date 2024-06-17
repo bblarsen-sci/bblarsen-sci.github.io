@@ -1,17 +1,13 @@
 <template>
   <svg ref="svgContainer"></svg>
-  <button class="download-btn" @click="downloadPNGHandler"></button>
+  <button class="download-btn" @click="downloadPNG(svgContainer)"></button>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import * as d3 from 'd3';
 import downloadPNG from '/components/utilities/downloadPNG.js';
 
-
-function downloadPNGHandler() {
-  downloadPNG(svgContainer.value);
-}
 const dataFile = '/data/ephrin_neutcurve_df.csv';
 
 const svgContainer = ref(null);
@@ -38,18 +34,14 @@ function formatFile(data) {
     .filter((d) => !isNaN(d.concentration) && !isNaN(d.fit));
 }
 
-// Create the SVG element
-function createSvg() {
+// Draw the plot
+function makePlot() {
+  
   const svg = d3
     .select(svgContainer.value)
     .attr('preserveAspectRatio', 'xMinYMin meet')
     .attr('viewBox', [0, 0, width, height]);
 
-  return svg;
-}
-
-// Draw the plot
-function makePlot(svg) {
   const serumGroups = d3.group(dataset.value, (d) => d.serum);
   const serumDomain = Array.from(serumGroups.keys());
 
@@ -182,14 +174,16 @@ function makePlot(svg) {
     .text((d) => d);
 }
 
+watch(dataset, () => {
+  makePlot();
+});
+
 const fetchData = async () => {
   try {
     const response = await fetch(dataFile);
     const result = await response.text();
     const csv = d3.csvParse(result);
     dataset.value = formatFile(csv);
-    const svg = createSvg();
-    makePlot(svg);
   } catch (error) {
     console.error(error);
   }

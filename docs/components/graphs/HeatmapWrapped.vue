@@ -69,7 +69,7 @@ const siteInputValue = ref('');
 const selectedSites = ref([]);
 const selectedEffectFilter = ref('');
 const minColor = ref(-4)
-const maxColor = ref(4)
+const maxColor = ref(3)
 
 const margin = { top: 20, right: 20, bottom: 50, left: 50 }; // margin for the SVG
 const rowPadding = 30; // amount of padding between the rows
@@ -114,7 +114,8 @@ const amino_acids = [
   'P',
   'C',
 ];
-
+//https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_bEFNB2_binding.csv
+//https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB3.csv
 // Fetch the data from the URL using composable
 const { data } = useFetch(
   'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/public_filtered/RBP_mutation_effects_cell_entry_CHO-bEFNB3.csv'
@@ -364,7 +365,7 @@ function updateHeatmap() {
 
     // Add the site numbers to the x-axis, only plotting every 10 sites
     const xAxis = d3.axisBottom(xScale.value).tickSizeOuter(0);
-    if (siteRow.length <= 50) {
+    if (siteRow.length <= 20) {
       xAxis.tickFormat((d) => siteRow[d]);
     } else {
       xAxis.tickFormat((d, i) => (i % 10 === 0 ? siteRow[d] : ''));
@@ -421,7 +422,7 @@ function updateHeatmap() {
 
   Legend(d3.scaleDiverging([minColor.value, 0, maxColor.value], d3[selectedColorScale.value]).clamp(true), {
     svgRef: '#svgContainer',
-    title: 'Cell Entry',
+    title: 'Ephrin-B2 Binding',
     width: 150,
     tickValues: [minColor.value, 0, maxColor.value],
     xcoord: margin.left,

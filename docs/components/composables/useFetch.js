@@ -1,11 +1,13 @@
 // Data loader composable
 // https://vuejs.org/guide/reusability/composables
 // DataLoader.js
+
+
 import { ref, watchEffect, shallowRef } from 'vue';
-import * as d3 from 'd3';
+import { csvParse } from 'd3';
 
 export function useFetch(url) {
-  const data = shallowRef(null);
+  const data = shallowRef(null); 
   const error = ref(null);
 
   const fetchData = async () => {
@@ -14,7 +16,7 @@ export function useFetch(url) {
     try {
       const res = await fetch(url);
       const text = await res.text();
-      const csv = d3.csvParse(text);
+      const csv = csvParse(text);
       data.value = csv;
     } catch (err) {
       error.value = err;

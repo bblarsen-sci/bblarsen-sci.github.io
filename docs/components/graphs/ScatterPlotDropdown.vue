@@ -1,20 +1,14 @@
 <template>
-    <form class="">
-      <label class="label-select"
-        >Select an option:</label
-      >
-      <select
-        v-model="selectedDataset"
-        @change="changeDataset"
-        class="form-select"
-      >
-        <option value="bEFNB2_entry">bEFNB2 Entry</option>
-        <option value="bEFNB3_entry">bEFNB3 Entry</option>
-        <option value="bEFNB2_binding">bEFNB2 Binding</option>
-        <option value="bEFNB3_binding">bEFNB3 Binding</option>
-      </select>
-    </form>
-    <svg ref="svgContainer"></svg>
+  <form class="">
+    <label class="label-select">Select an option:</label>
+    <select v-model="selectedDataset" @change="changeDataset" class="form-select">
+      <option value="bEFNB2_entry">bEFNB2 Entry</option>
+      <option value="bEFNB3_entry">bEFNB3 Entry</option>
+      <option value="bEFNB2_binding">bEFNB2 Binding</option>
+      <option value="bEFNB3_binding">bEFNB3 Binding</option>
+    </select>
+  </form>
+  <svg ref="svgContainer"></svg>
   <Tooltip ref="tooltip" />
 </template>
 
@@ -160,7 +154,6 @@ const xAxisGenerator = computed(() => {
 const yAxisGenerator = computed(() => {
   return d3.axisLeft(yScale.value).tickSizeOuter(0);
 });
-
 
 let svg;
 // Create the SVG element

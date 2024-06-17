@@ -1,11 +1,11 @@
 <template>
   <svg ref="svgContainer"></svg>
-  <button class="download-btn" @click="downloadPNGHandler"></button>
+  <button class="download-btn" @click="downloadPNG(svgContainer)"></button>
   <Tooltip ref="tooltip" :data="tooltipData" />
 </template>
 
 <script setup>
-import { ref, computed, onMounted, watchEffect, watch } from 'vue';
+import { ref, computed, watch } from 'vue';
 import * as d3 from 'd3';
 import downloadPNG from '/components/utilities/downloadPNG.js';
 import { useFetch } from '/components/composables/useFetch.js';
@@ -17,14 +17,20 @@ const svgContainer = ref(null);
 const tooltip = ref(null);
 const tooltipData = ref([]);
 
+const axisTitleFontSize = '18px';
+const axisFontSize = '16px';
+const colorDistant = '#b8b0ac';
+const colorContact = '#5778a4';
+const colorClose = '#e49444';
+
 // Fetch the data from the URL using composable
-const { data, error } = useFetch(
+const { data } = useFetch(
   'https://raw.githubusercontent.com/dms-vep/Nipah_Malaysia_RBP_DMS/master/results/filtered_data/entry/e2_e3_entry_filter_merged.csv'
 );
 
 //process data
 function processData() {
-  // Parse the data and filter out values less than zero
+  // Convert the data to an array of objects
   const array = data.value.map((d) => ({
     site: +d.site,
     wildtype: d.wildtype,
@@ -34,13 +40,13 @@ function processData() {
     wt_type: d.wt_type_E2,
   }));
 
-  // Group the data by site and calculate the mean values
+  // Group the data by site
   const groupedData = d3.rollup(
     array,
     (v) => ({
       effect_E2: d3.mean(v, (d) => d.effect_E2),
       effect_E3: d3.mean(v, (d) => d.effect_E3),
-      wt_type: v[0].wt_type, // Assuming wt_type is the same for all data points with the same site
+      wt_type: v[0].wt_type,
     }),
     (d) => d.site
   );
@@ -52,24 +58,12 @@ function processData() {
   }));
   // Set the reactive variable to the processed data
   processedData.value = aggregatedData;
+  makeColorChart();
 }
 
-watch(data, (newData) => {
-  if (newData) {
-    processData();
-  }
+watch(data, () => {
+  processData();
 });
-
-watch(error, (newError) => {
-  if (newError) {
-    console.error(newError);
-  }
-});
-
-//download png
-function downloadPNGHandler() {
-  downloadPNG(svgContainer.value);
-}
 
 //dimensions
 const width = 800;
@@ -105,24 +99,11 @@ const yAxisGenerator = computed(() => {
   return d3.axisLeft().scale(yScale.value).ticks(6).tickSizeOuter(0);
 });
 
-//determine color scale
-const colorScale = computed(() => {
-  return d3.scaleOrdinal(
-    processedData.value.map((d) => d.wt_type),
-    d3.schemePaired
-  );
-});
 
-let svg; // SVG container for the scatter plot
-
-/**
- * Sets up the SVG container for the scatter plot on component mount.
- */
-onMounted(() => {
-  svg = d3.select(svgContainer.value).attr('viewBox', `0 0 ${width} ${height}`);
-});
 
 function makeColorChart() {
+  
+  const svg = d3.select(svgContainer.value).attr('viewBox', `0 0 ${width} ${height}`);
   //define different types of sites
   const contactSites = [
     239, 240, 241, 242, 305, 388, 389, 401, 402, 458, 488, 489, 490, 491, 492, 501, 504, 505, 506,
@@ -141,8 +122,8 @@ function makeColorChart() {
     .attr('y1', yScale.value(0))
     .attr('x2', xScale.value(d3.max(processedData.value, (d) => d.effect_E2)))
     .attr('y2', yScale.value(0))
-    .attr('stroke', 'lightgray')
-    .attr('stroke-width', 1.5);
+    .attr('stroke', 'currentColor')
+    .attr('stroke-width', 1);
 
   // Add y-axis line at x=0
   svg
@@ -151,8 +132,8 @@ function makeColorChart() {
     .attr('y1', yScale.value(d3.min(processedData.value, (d) => d.effect_E3)))
     .attr('x2', xScale.value(0))
     .attr('y2', yScale.value(d3.max(processedData.value, (d) => d.effect_E3)))
-    .attr('stroke', 'lightgray')
-    .attr('stroke-width', 1.5);
+    .attr('stroke', 'currentColor')
+    .attr('stroke-width', 1);
 
   // Add circles to the scatter plot
   svg
@@ -162,16 +143,16 @@ function makeColorChart() {
     .join('circle')
     .attr('cx', (d) => xScale.value(d.effect_E2))
     .attr('cy', (d) => yScale.value(d.effect_E3))
-    .attr('r', 6)
+    .attr('r', 7)
     .attr('stroke', 'currentColor')
-    .attr('stroke-width', 2)
+    .attr('stroke-width', 1.5)
     .attr('fill', (d) => {
       if (contactSites.includes(d.site)) {
-        return '#5778a4';
+        return colorContact;
       } else if (closeSites.includes(d.site)) {
-        return '#e49444';
+        return colorClose;
       } else {
-        return '#b8b0ac';
+        return colorDistant;
       }
     })
     .on('mouseover', (event, d) => {
@@ -192,15 +173,16 @@ function makeColorChart() {
     .append('g')
     .attr('transform', `translate(0, ${height - marginBottom})`)
     .call(xAxisGenerator.value) //call x-axis generator
-    .attr('font-size', '14px')
+    .attr('font-size', axisFontSize)
     .call((g) =>
       g //add x-axis title
         .append('text')
         .attr('x', width / 2 + 50)
         .attr('y', marginBottom - 30)
-        .attr('font-size', '20px')
+        .attr('font-size', axisTitleFontSize)
         .attr('fill', 'currentColor')
         .attr('text-anchor', 'middle')
+        .attr('font-weight', 'bold')
         .text('Entry in CHO-bEFNB2')
     );
 
@@ -209,24 +191,25 @@ function makeColorChart() {
     .append('g')
     .attr('transform', `translate(${marginLeft}, 0)`)
     .call(yAxisGenerator.value) //call y-axis generator
-    .attr('font-size', '14px')
+    .attr('font-size', axisFontSize)
     .call((g) =>
       g //add y-axis title
         .append('text')
         .attr('x', -height / 2 + 40)
         .attr('y', -marginLeft + 30)
-        .attr('font-size', '20px')
+        .attr('font-size', axisTitleFontSize)
         .attr('transform', 'rotate(-90)')
         .attr('fill', 'currentColor')
         .attr('text-anchor', 'middle')
+        .attr('font-weight', 'bold')
         .text('Entry in CHO-bEFNB3')
     );
 
   // Define legend data
   const legendData = [
-    { color: '#b8b0ac', label: 'Distant' },
-    { color: '#5778a4', label: 'Contact' },
-    { color: '#e49444', label: 'Close' },
+    { color: colorDistant, label: 'Distant' },
+    { color: colorClose, label: 'Close' },
+    { color: colorContact, label: 'Contact' },
   ];
 
   // Create legend group
@@ -237,7 +220,7 @@ function makeColorChart() {
     .append('text')
     .attr('x', 10)
     .attr('y', 75)
-    .attr('font-size', '24px')
+    .attr('font-size', axisTitleFontSize)
     .attr('font-weight', 'bold')
     .attr('fill', 'currentColor')
     .text('Receptor Distance');
@@ -265,15 +248,8 @@ function makeColorChart() {
     .append('text')
     .attr('x', 35)
     .attr('y', 106)
-    .attr('font-size', '20px')
+    .attr('font-size', axisTitleFontSize)
     .attr('fill', 'currentColor')
     .text((d) => d.label);
 }
-
-// Watch for changes in the dataset and update the chart
-watchEffect(() => {
-  if (processedData.value) {
-    makeColorChart();
-  }
-});
 </script>
