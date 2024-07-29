@@ -422,7 +422,7 @@ function updateHeatmap() {
 
   Legend(d3.scaleDiverging([minColor.value, 0, maxColor.value], d3[selectedColorScale.value]).clamp(true), {
     svgRef: '#svgContainer',
-    title: 'Ephrin-B2 Binding',
+    title: 'Ephrin-B3 Entry',
     width: 150,
     tickValues: [minColor.value, 0, maxColor.value],
     xcoord: margin.left,
