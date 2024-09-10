@@ -1,37 +1,31 @@
 {
-  "hash": "e65940e3",
-  "configHash": "1e2cb65f",
+  "hash": "1a7f1e5f",
+  "configHash": "04b7189f",
   "lockfileHash": "c9d1b7c5",
-  "browserHash": "450557d1",
+  "browserHash": "c1ea8b10",
   "optimized": {
     "vue": {
       "src": "../../../../node_modules/vue/dist/vue.runtime.esm-bundler.js",
       "file": "vue.js",
-      "fileHash": "61ee1d55",
+      "fileHash": "06425c96",
       "needsInterop": false
     },
     "vitepress > @vue/devtools-api": {
       "src": "../../../../node_modules/@vue/devtools-api/dist/index.js",
       "file": "vitepress___@vue_devtools-api.js",
-      "fileHash": "98bd2b06",
+      "fileHash": "43639def",
       "needsInterop": false
     },
     "vitepress > @vueuse/core": {
       "src": "../../../../node_modules/@vueuse/core/index.mjs",
       "file": "vitepress___@vueuse_core.js",
-      "fileHash": "e3cb38cd",
+      "fileHash": "69725071",
       "needsInterop": false
     },
     "d3": {
       "src": "../../../../node_modules/d3/src/index.js",
       "file": "d3.js",
-      "fileHash": "ecafb335",
-      "needsInterop": false
-    },
-    "html2canvas": {
-      "src": "../../../../node_modules/html2canvas/dist/html2canvas.esm.js",
-      "file": "html2canvas.js",
-      "fileHash": "ed85e9da",
+      "fileHash": "d7d0d25d",
       "needsInterop": false
     }
   },
