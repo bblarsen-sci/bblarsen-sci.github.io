@@ -74,8 +74,10 @@ onBeforeUnmount(() => {
             severe disease with high fatality rates. Currently, there are no approved vaccines or
             therapeutics available for the prevention or treatment of Nipah virus infection.
           </p>
-          <RadialPhylogeny class="container mx-auto max-w-[550px]" />
-          <figcaption class="text-center">Phylogenetic tree of Nipah viruses</figcaption>
+          <figure>
+            <RadialPhylogeny class="container mx-auto max-w-[550px]" />
+            <figcaption class="text-center">Phylogenetic tree of Nipah viruses</figcaption>
+          </figure>
           <h3 class="pt-12 text-sky-400">Receptor Binding Protein</h3>
           <p class="">
             Nipah virus expresses two surface proteins: the receptor binding protein and the fusion
@@ -87,11 +89,13 @@ onBeforeUnmount(() => {
             effects of all mutations on cell entry, receptor binding, and antibody escape using a
             BSL-2 pseudovirus platform.
           </p>
-          <img src="/images/entry_tetramer_better.png" class="element-hidden container mx-auto w-80 lg:w-96 pt-10" />
-          <figcaption class="text-center text-slate-300">
-            Structure of the tetrameric receptor binding protein colored by the mean effect of
-            mutations on cell entry. Darker red indicates sites with low tolerance for mutations.
-          </figcaption>
+          <figure>
+            <img src="/images/entry_tetramer_better.png" class="element-hidden container mx-auto w-80 lg:w-96 pt-10" />
+            <figcaption class="text-center text-slate-300">
+              Structure of the tetrameric receptor binding protein colored by the mean effect of
+              mutations on cell entry. Darker red indicates sites with low tolerance for mutations.
+            </figcaption>
+          </figure>
           <h3 class="pt-12 text-sky-400">Antibody Escape</h3>
           <p class="">
             The receptor binding protein is also an important target for neutralizing antibodies,
@@ -100,8 +104,10 @@ onBeforeUnmount(() => {
             for six antibodies.
           </p>
           <div class="flex flex-row items-center justify-center gap-4 pt-10 text-center">
-            <img src="/images/antibody_escape-01.jpg" class="max-h-80 rounded-lg bg-slate-200" />
-            <figcaption class="text-slate-300">Sites of antibody escape.</figcaption>
+            <figure>
+              <img src="/images/antibody_escape-01.jpg" class="max-h-80 rounded-lg bg-slate-200" />
+              <figcaption class="text-slate-300">Sites of antibody escape.</figcaption>
+            </figure>
           </div>
           <h3
             class="bg-gradient-to-r from-slate-200 to-sky-400 bg-clip-text py-12 text-center tracking-tight text-transparent">
