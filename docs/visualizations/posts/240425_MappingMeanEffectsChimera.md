@@ -31,7 +31,6 @@ recipient: residues
     ...
 ```
 
-
 Where the attribute is the **name** of what you are mapping, which will be called in ChimeraX, the match mode is how to match the residues, and the recipient is the residues. This is followed by the site number and the effect. Since the DMS data is in a `.csv` file, I wrote a Python script to aggregate the mean effects of mutations by site and then writes them to a `.defattr` file.
 
 

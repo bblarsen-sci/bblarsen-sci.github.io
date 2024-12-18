@@ -21,7 +21,7 @@ export default {
         },
       }),
       backgroundImage: {
-        'sky-dark': 'linear-gradient(220deg, #0C4A6E, #1E293B)', //sky-900 to slate-800
+        'sky-dark': 'linear-gradient(220deg, #0C4A6E, #1E293B)', 
         'red': 'linear-gradient(120deg, #1e293b, #450a0a)',
       },
     },

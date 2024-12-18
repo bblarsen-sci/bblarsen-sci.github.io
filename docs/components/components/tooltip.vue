@@ -1,11 +1,8 @@
 <!-- Tooltip.vue -->
 <template>
   <div class="tooltip-wrapper">
-    <div
-      class="tooltip"
-      :style="{ top: `${y}px`, left: `${x}px`, background: color, color: textColor }"
-      v-if="visible && data"
-    >
+    <div class="tooltip" :style="{ top: `${y}px`, left: `${x}px`, background: color, color: textColor }"
+      v-if="visible && data">
       <p>Site: {{ data.site }}</p>
       <p>Wildtype: {{ data.wildtype }}</p>
       <p>Mutant: {{ data.mutant }}</p>

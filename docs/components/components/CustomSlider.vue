@@ -13,7 +13,6 @@ import { ref, watchEffect } from 'vue';
 const { id, min, max, step, modelValue } = defineProps({
   id: {
     type: String,
-    //required: true,
   },
   min: {
     type: Number,
@@ -78,7 +77,6 @@ watchEffect(() => {
 .custom-slider input[type='range'] {
   position: relative;
   appearance: none;
-  /* pointer-events: none; */
   border-radius: 999px;
   z-index: 0;
 }
